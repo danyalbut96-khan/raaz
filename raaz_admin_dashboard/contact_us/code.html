@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us | RAAZ Anonymous</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d8e2ff",
+                    "outline": "#737686",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface": "#f9f9ff",
+                    "on-primary-container": "#eeefff",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#d3daef",
+                    "tertiary-fixed": "#d4e3ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#141b2b",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-surface-variant": "#434655",
+                    "inverse-surface": "#293040",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "secondary-container": "#2170e4",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface-container-low": "#f1f3ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-background": "#141b2b",
+                    "on-secondary-fixed": "#001a42",
+                    "tertiary": "#00569c",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#196fc0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#b4c5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "16px",
+                    "xl": "24px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "container-margin": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .glass-nav { backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .card-shadow { box-shadow: 0px 2px 4px rgba(17, 24, 39, 0.05); }
+        .card-shadow-hover { box-shadow: 0px 4px 12px rgba(17, 24, 39, 0.08); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .success-state { display: none; }
+        .success-state.active { display: flex; animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .ripple-btn { position: relative; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<nav class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="flex items-center gap-md">
+<span class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</span>
+</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Blog</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Careers</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-title-md text-title-md active:scale-95 transform transition-all shadow-sm hover:bg-primary/90">
+                    Download App
+                </button>
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="pt-32 pb-24 px-container-margin">
+<div class="max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-xl text-center md:text-left">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface mb-md">Get in Touch</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    Whether you have a question about our privacy features, need technical support, or just want to say hi, our team is here to help you stay anonymous and secure.
+                </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-start">
+<!-- Contact Form Section -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-lowest rounded-xl p-lg md:p-xl card-shadow border border-outline-variant/10 relative overflow-hidden">
+<!-- Form State -->
+<form class="space-y-lg" id="contactForm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant" for="name">Full Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-md text-on-surface focus:ring-2 focus:ring-primary transition-all duration-200 placeholder:text-outline/50" id="name" placeholder="John Doe" required="" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant" for="email">Email Address</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-md text-on-surface focus:ring-2 focus:ring-primary transition-all duration-200 placeholder:text-outline/50" id="email" placeholder="john@example.com" required="" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant" for="subject">Subject</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-md text-on-surface focus:ring-2 focus:ring-primary transition-all duration-200" id="subject">
+<option>General Inquiry</option>
+<option>Technical Support</option>
+<option>Partnership</option>
+<option>Bug Report</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant" for="message">Your Message</label>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg p-md text-on-surface focus:ring-2 focus:ring-primary transition-all duration-200 placeholder:text-outline/50 resize-none" id="message" placeholder="Tell us how we can help..." required="" rows="5"></textarea>
+</div>
+<button class="ripple-btn w-full bg-primary text-on-primary py-lg rounded-lg font-title-md text-title-md flex items-center justify-center gap-sm active:scale-[0.98] transition-all duration-200 group" type="submit">
+<span>Send Message</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">send</span>
+</button>
+</form>
+<!-- Success State (Hidden by default) -->
+<div class="success-state flex-col items-center justify-center text-center py-xl" id="successState">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Message Sent!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl">Thanks for reaching out. We'll get back to you within 24 hours.</p>
+<button class="text-primary font-title-md text-title-md hover:underline" onclick="resetForm()">Send another message</button>
+</div>
+</div>
+</div>
+<!-- Info Section -->
+<div class="lg:col-span-5 space-y-lg">
+<!-- Contact Cards -->
+<div class="grid grid-cols-1 gap-lg">
+<!-- Email Card -->
+<div class="bg-surface-container-low rounded-xl p-lg flex gap-lg items-start card-shadow group hover:card-shadow-hover transition-all duration-300">
+<div class="bg-primary-container text-on-primary-container p-sm rounded-lg">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Email Us</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-sm">Our friendly team is here to help.</p>
+<a class="font-title-md text-title-md text-primary hover:underline" href="mailto:support@raaz.io">support@raaz.io</a>
+</div>
+</div>
+<!-- Location Card -->
+<div class="bg-surface-container-low rounded-xl p-lg flex gap-lg items-start card-shadow group hover:card-shadow-hover transition-all duration-300">
+<div class="bg-secondary-container text-on-secondary-container p-sm rounded-lg">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Office Location</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">123 Privacy Plaza, Tech District, San Francisco, CA 94103</p>
+<div class="w-full h-32 bg-surface-container-highest rounded-lg relative overflow-hidden border border-outline-variant/30">
+<div class="absolute inset-0 grayscale opacity-40 hover:opacity-100 transition-opacity duration-700" data-alt="A clean, minimalist vector map of San Francisco showing city blocks and a single blue location pin highlighting the Tech District. The aesthetic is corporate and modern with soft blue and grey tones to match the RAAZ branding." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDhP-0aFJhm-sZ5gSXHyLRYjXiMknp8F83fsYDoAwoR56Mev58vsI8F3DtR2uTYd8pI57ioLIRv1VufmhoaLDV2funoZem9fJi77Yw28mTCI8Ue6r748YhRMT_MV3Alf1VGh9n8WoRXRZKhKmLTaJ7n4l5Gq_DsEuyjfmvAWmULg4oDGgDMPxyxmKWnCYM5aFIVmMquMlncsgsEjn2E-b0Plr1hC3NtfwFxKJFIrCXUVule4IldGAT_vRm5Vmw9ugUp9UrVvJONyDpy')"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center animate-bounce shadow-lg">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Social Links Card -->
+<div class="bg-surface-container-low rounded-xl p-lg card-shadow">
+<h3 class="font-title-md text-title-md text-on-surface mb-md">Follow Our Journey</h3>
+<div class="flex gap-md">
+<a class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full rounded-t-xl bg-surface-container-low border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<span class="font-title-lg text-title-lg font-bold text-on-surface mb-md block">RAAZ</span>
+<p class="font-body-md text-body-md text-on-surface-variant pr-md">
+                    The world's most advanced anonymous communication layer for the modern enterprise.
+                </p>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary mb-md">Platform</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-2 underline-offset-4 decoration-transparent hover:decoration-primary" href="#">Features</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-2 underline-offset-4 decoration-transparent hover:decoration-primary" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-2 underline-offset-4 decoration-transparent hover:decoration-primary" href="#">Terms &amp; Conditions</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary mb-md">Support</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-2 underline-offset-4 decoration-transparent hover:decoration-primary" href="#">FAQ</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-2 underline-offset-4 decoration-transparent hover:decoration-primary" href="#">Contact Us</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-2 underline-offset-4 decoration-transparent hover:decoration-primary" href="#">Release Notes</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary mb-md">Stay Connected</h4>
+<div class="flex gap-sm">
+<button class="bg-surface-container-highest p-sm rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined text-sm">chat</span>
+</button>
+<button class="bg-surface-container-highest p-sm rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined text-sm">rss_feed</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-lg py-md border-t border-outline-variant/10">
+<p class="font-body-md text-body-md text-on-surface-variant text-center md:text-left">
+                © 2024 RAAZ Anonymous. Built for privacy.
+            </p>
+</div>
+</footer>
+<script>
+        const contactForm = document.getElementById('contactForm');
+        const successState = document.getElementById('successState');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Interaction: Loading state on button
+            const btn = contactForm.querySelector('button');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                contactForm.style.display = 'none';
+                successState.classList.add('active');
+            }, 1200);
+        });
+
+        function resetForm() {
+            contactForm.reset();
+            const btn = contactForm.querySelector('button');
+            btn.innerHTML = '<span>Send Message</span><span class="material-symbols-outlined transition-transform group-hover:translate-x-1">send</span>';
+            btn.disabled = false;
+            
+            successState.classList.remove('active');
+            contactForm.style.display = 'block';
+        }
+
+        // Ripple Effect
+        document.querySelectorAll('.ripple-btn').forEach(button => {
+            button.addEventListener('mousedown', function(e) {
+                const circle = document.createElement('span');
+                const diameter = Math.max(this.clientWidth, this.clientHeight);
+                const radius = diameter / 2;
+
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${e.clientX - this.offsetLeft - radius}px`;
+                circle.style.top = `${e.clientY - this.offsetTop - radius}px`;
+                circle.classList.add('ripple');
+
+                const ripple = this.getElementsByClassName('ripple')[0];
+                if (ripple) { ripple.remove(); }
+                this.appendChild(circle);
+            });
+        });
+    </script>
+</body></html>

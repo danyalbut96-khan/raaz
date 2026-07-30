@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trending Details - RAAZ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'wght' 200, 'FILL' 0;
+            font-size: 24px;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-low": "#f1f3ff",
+                        "outline": "#737686",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#2170e4",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-bright": "#f9f9ff",
+                        "primary-fixed": "#dbe1ff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#dce2f7",
+                        "surface-container-highest": "#dce2f7",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-container": "#ebf1ff",
+                        "on-background": "#141b2b",
+                        "primary": "#004ac6",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface": "#f9f9ff",
+                        "on-secondary-container": "#fefcff",
+                        "tertiary-container": "#196fc0",
+                        "surface-container": "#e9edff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "background": "#f9f9ff",
+                        "inverse-surface": "#293040",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-dim": "#d3daef",
+                        "on-surface-variant": "#434655",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "tertiary": "#00569c",
+                        "surface-container-high": "#e1e8fd",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary": "#0058be",
+                        "surface-tint": "#0053db",
+                        "on-tertiary-fixed": "#001c39",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface": "#141b2b",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-tablet": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "2xl": "48px",
+                        "margin-desktop": "auto"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 hover:opacity-80 transition-opacity text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">#WorkLife</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="active:scale-95 duration-200 hover:opacity-80 transition-opacity text-on-surface-variant">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="active:scale-95 duration-200 hover:opacity-80 transition-opacity text-on-surface-variant">
+<span class="material-symbols-outlined">security</span>
+</button>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile max-w-2xl mx-auto space-y-6">
+<!-- Hero Header / Metric -->
+<section class="mt-4">
+<div class="glass-card rounded-xl p-lg shadow-[0_4px_12px_rgba(17,24,39,0.04)] overflow-hidden relative">
+<!-- Abstract Growth Background -->
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-10 flex items-end justify-end pointer-events-none">
+<span class="material-symbols-outlined text-[120px] translate-y-8 translate-x-8">trending_up</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded-full font-label-sm text-label-sm">Hot Today</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">+42% Growth</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md mb-2">Work-Life Balance Realities</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mb-4">Discussing the unspoken truths of corporate culture, remote burnout, and reclaiming personal time.</p>
+<div class="flex items-center gap-6">
+<div>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Posts</p>
+<p class="font-title-lg text-title-lg text-primary">12.4K</p>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Anonymous Contributors</p>
+<p class="font-title-lg text-title-lg text-primary">8.2K</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Growth Metrics Bento -->
+<section class="grid grid-cols-2 gap-4">
+<div class="glass-card rounded-xl p-md shadow-[0_4px_12px_rgba(17,24,39,0.04)] flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary mb-2">timeline</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Peak Time</p>
+<p class="font-title-md text-title-md">11:00 PM EST</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-md shadow-[0_4px_12px_rgba(17,24,39,0.04)] flex flex-col justify-between">
+<span class="material-symbols-outlined text-tertiary mb-2">sentiment_neutral</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Sentiment</p>
+<p class="font-title-md text-title-md">Contemplative</p>
+</div>
+</div>
+</section>
+<!-- Top Posts Feed -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg">Top Shares</h3>
+<div class="flex gap-2">
+<button class="bg-surface-container-high px-3 py-1 rounded-full font-label-lg text-label-lg">Top</button>
+<button class="text-on-surface-variant px-3 py-1 rounded-full font-label-lg text-label-lg">Recent</button>
+</div>
+</div>
+<!-- Post Card 1 -->
+<article class="bg-white rounded-xl p-lg shadow-[0_4px_12px_rgba(17,24,39,0.04)] hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg">Anonymous Project Lead</p>
+<p class="text-[10px] text-on-surface-variant">2 hours ago</p>
+</div>
+</div>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed">
+                    My boss just sent a "quick sync" request at 8 PM on a Friday. I've realized that setting boundaries doesn't make you a bad employee; it makes you a human who values their health. Is it worth the burnout for a promotion that might never happen?
+                </p>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">favorite</span>
+<span class="font-label-lg text-label-lg">1.4K</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+<span class="font-label-lg text-label-lg">248</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors ml-auto">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+</button>
+</div>
+</article>
+<!-- Post Card 2 (With Image) -->
+<article class="bg-white rounded-xl p-lg shadow-[0_4px_12px_rgba(17,24,39,0.04)] hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">cloud</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg">Software Engineer</p>
+<p class="text-[10px] text-on-surface-variant">5 hours ago</p>
+</div>
+</div>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed">
+                    Finally took a walk during lunch today. No phone, no slack notifications, just the sun. Why did I stop doing this?
+                </p>
+<div class="mb-4 rounded-lg overflow-hidden h-48 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A tranquil, sun-drenched city park during the golden hour. Tall green trees cast long, soft shadows over a winding pebble path. The lighting is warm and ethereal, creating a peaceful, light-mode atmosphere that emphasizes serenity and mental well-being. Professional photography style with a shallow depth of field." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACBx3RhqMfgAzEKISISoDUN8CSCGyPh_bkEaD24CCNHiITLkynVFdRhVHmDNuZrICpa2ZRG3eROj73CqHdnAH9M4FGEmPvP8bTVeLrbYQQWwj6MisIoKF5Pod-p7rD_OZ7yXUlNWCf8LveKrFdeXHduzxfjMQCEbI3pNLqUsyq_TDAdIuz9nxtWPU6AdrzRADR9BALtm2R_yvrsCm5p2IaGX_nwM7hpuIOI0nQNO83MOWCMLJ_QRiaRPO-KDgR-oaep7Qy9z0gH6Ni')"></div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">favorite</span>
+<span class="font-label-lg text-label-lg">892</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+<span class="font-label-lg text-label-lg">45</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors ml-auto">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+</button>
+</div>
+</article>
+<!-- Post Card 3 -->
+<article class="bg-white rounded-xl p-lg shadow-[0_4px_12px_rgba(17,24,39,0.04)] hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] transition-all duration-300 border-l-4 border-primary">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg">Corporate Refugee</p>
+<p class="text-[10px] text-on-surface-variant">12 hours ago</p>
+</div>
+</div>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed font-medium">
+                    "Flexible hours" often just means you're expected to be flexible enough to work whenever the company needs you. Discuss.
+                </p>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">favorite</span>
+<span class="font-label-lg text-label-lg">2.1K</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+<span class="font-label-lg text-label-lg">562</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors ml-auto">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+</button>
+</div>
+</article>
+</section>
+</main>
+<!-- FAB for Creating Post in this Topic -->
+<button class="fixed right-6 bottom-24 bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform duration-150 z-50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 400, 'FILL' 0;">edit</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for following/liking
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const heart = this.querySelector('[data-icon="favorite"]');
+                if (heart) {
+                    this.classList.toggle('text-primary');
+                    const isFilled = this.querySelector('span').style.fontVariationSettings.includes("'FILL' 1");
+                    this.querySelector('span').style.fontVariationSettings = isFilled ? "'FILL' 0" : "'FILL' 1";
+                }
+            });
+        });
+    </script>
+</body></html>

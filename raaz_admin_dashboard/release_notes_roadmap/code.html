@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ | Release Notes &amp; Roadmap</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .roadmap-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 4px,
+                #cbd5e1 4px,
+                #cbd5e1 8px
+            );
+        }
+        @media (min-width: 768px) {
+            .roadmap-line::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#d8e2ff",
+                      "outline": "#737686",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#2563eb",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#fefcff",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-primary-fixed": "#00174b",
+                      "surface": "#f9f9ff",
+                      "on-primary-container": "#eeefff",
+                      "surface-container": "#e9edff",
+                      "background": "#f9f9ff",
+                      "on-primary": "#ffffff",
+                      "secondary": "#0058be",
+                      "primary": "#004ac6",
+                      "surface-container-highest": "#dce2f7",
+                      "surface-container-high": "#e1e8fd",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-dim": "#d3daef",
+                      "tertiary-fixed": "#d4e3ff",
+                      "outline-variant": "#c3c6d7",
+                      "on-surface": "#141b2b",
+                      "surface-tint": "#0053db",
+                      "on-tertiary-container": "#ebf1ff",
+                      "on-surface-variant": "#434655",
+                      "inverse-surface": "#293040",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "secondary-container": "#2170e4",
+                      "on-secondary-fixed-variant": "#004395",
+                      "surface-container-low": "#f1f3ff",
+                      "surface-variant": "#dce2f7",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f9f9ff",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-background": "#141b2b",
+                      "on-secondary-fixed": "#001a42",
+                      "tertiary": "#00569c",
+                      "on-error": "#ffffff",
+                      "tertiary-container": "#196fc0",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#b4c5ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "container-margin": "24px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "title-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<div class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="flex items-center gap-md">
+<span class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</span>
+</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors" href="#">Features</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors" href="#">Blog</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors" href="#">Careers</a>
+<a class="font-title-md text-title-md text-primary font-semibold border-b-2 border-primary" href="#">Release Notes</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-title-md active:scale-95 transition-all shadow-md">
+                Download App
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="pt-32 pb-16 px-container-margin max-w-7xl mx-auto text-center relative overflow-hidden">
+
+<div class="relative z-10">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-md">Our Journey</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Tracking our progress as we build the world's most secure, anonymous communication platform. Transparent updates, ambitious goals.
+            </p>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-container-margin pb-xl">
+<!-- Tab Navigation -->
+<div class="flex justify-center mb-xl">
+<div class="bg-surface-container-high p-1 rounded-xl flex">
+<button class="px-xl py-md rounded-lg font-title-md transition-all bg-primary text-on-primary shadow-sm" id="roadmap-btn" onclick="toggleView('roadmap')">
+                    Roadmap
+                </button>
+<button class="px-xl py-md rounded-lg font-title-md transition-all text-on-surface-variant hover:bg-surface-container-highest" id="releases-btn" onclick="toggleView('releases')">
+                    Release Notes
+                </button>
+</div>
+</div>
+<!-- Roadmap View -->
+<section class="space-y-xl" id="roadmap-view">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/30 text-center">
+<span class="text-primary font-bold text-headline-lg">12</span>
+<p class="text-label-lg text-outline">Features Released</p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/30 text-center">
+<span class="text-secondary font-bold text-headline-lg">4</span>
+<p class="text-label-lg text-outline">In Active Development</p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/30 text-center">
+<span class="text-tertiary font-bold text-headline-lg">18</span>
+<p class="text-label-lg text-outline">Planned Items</p>
+</div>
+</div>
+<div class="relative roadmap-line pb-xl">
+<!-- Current Quarter -->
+<div class="relative grid grid-cols-1 md:grid-cols-2 gap-xl md:gap-32 mb-24">
+<div class="md:text-right">
+<div class="inline-block px-md py-xs bg-secondary-container text-on-secondary-container rounded-full text-label-lg mb-sm">
+                            In Progress
+                        </div>
+<h3 class="font-headline-lg text-headline-lg mb-sm">Q4 2024: The Privacy Update</h3>
+<p class="text-on-surface-variant font-body-md">Focusing on zero-knowledge architecture and decentralized metadata.</p>
+</div>
+<div class="relative">
+<!-- Connector point -->
+<div class="absolute left-[-20px] md:left-[-116px] top-4 w-10 h-10 bg-secondary rounded-full border-4 border-surface shadow-md z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary text-sm">rocket_launch</span>
+</div>
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/20 hover:shadow-md transition-all group">
+<ul class="space-y-md">
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary mt-1">check_circle</span>
+<div>
+<p class="font-title-md text-title-md">Encrypted Group Meta-Data</p>
+<p class="text-body-md text-on-surface-variant">Obfuscating group membership and activity logs at the protocol level.</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary mt-1">sync</span>
+<div>
+<p class="font-title-md text-title-md">Self-Sovereign Identity (SSI)</p>
+<p class="text-body-md text-on-surface-variant">Integration with decentralized ID providers for passwordless login.</p>
+</div>
+</li>
+<li class="flex items-start gap-md opacity-60">
+<span class="material-symbols-outlined text-outline mt-1">pending</span>
+<div>
+<p class="font-title-md text-title-md">Anonymous Wallet Integration</p>
+<p class="text-body-md text-on-surface-variant">Peer-to-peer crypto payments directly within chat threads.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Next Quarter -->
+<div class="relative grid grid-cols-1 md:grid-cols-2 gap-xl md:gap-32 mb-24">
+<div class="md:order-last">
+<div class="inline-block px-md py-xs bg-tertiary-container text-on-tertiary-container rounded-full text-label-lg mb-sm">
+                            Planned
+                        </div>
+<h3 class="font-headline-lg text-headline-lg mb-sm">Q1 2025: Global Scale</h3>
+<p class="text-on-surface-variant font-body-md">Optimizing for global connectivity and high-latency mesh networks.</p>
+</div>
+<div class="relative md:text-right">
+<!-- Connector point -->
+<div class="absolute right-auto left-[-20px] md:left-auto md:right-[-116px] top-4 w-10 h-10 bg-tertiary rounded-full border-4 border-surface shadow-md z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary text-sm">public</span>
+</div>
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/20 hover:shadow-md transition-all">
+<ul class="space-y-md">
+<li class="flex items-start md:flex-row-reverse gap-md">
+<span class="material-symbols-outlined text-outline mt-1">radio</span>
+<div>
+<p class="font-title-md text-title-md">Mesh-Network Mode</p>
+<p class="text-body-md text-on-surface-variant">Bluetooth-based local communication for areas without internet.</p>
+</div>
+</li>
+<li class="flex items-start md:flex-row-reverse gap-md">
+<span class="material-symbols-outlined text-outline mt-1">speed</span>
+<div>
+<p class="font-title-md text-title-md">RAAZ Relay V2</p>
+<p class="text-body-md text-on-surface-variant">300% faster relay nodes with reduced battery consumption.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Long Term -->
+<div class="relative grid grid-cols-1 md:grid-cols-2 gap-xl md:gap-32">
+<div class="md:text-right">
+<div class="inline-block px-md py-xs bg-surface-container-highest text-outline rounded-full text-label-lg mb-sm">
+                            Visionary
+                        </div>
+<h3 class="font-headline-lg text-headline-lg mb-sm">H2 2025 &amp; Beyond</h3>
+<p class="text-on-surface-variant font-body-md">Exploring the future of human connectivity through RAAZ Protocol.</p>
+</div>
+<div class="relative">
+<!-- Connector point -->
+<div class="absolute left-[-20px] md:left-[-116px] top-4 w-10 h-10 bg-outline rounded-full border-4 border-surface shadow-md z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface text-sm">visibility</span>
+</div>
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/20 hover:shadow-md transition-all">
+<p class="italic text-on-surface-variant mb-md">"Total data sovereignty for every citizen of the web."</p>
+<div class="h-32 rounded-lg bg-surface-container-low overflow-hidden relative">
+<div class="shimmer absolute inset-0"></div>
+<div class="flex items-center justify-center h-full">
+<span class="text-label-lg text-outline">Full Ecosystem Reveal Coming Late 2025</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Release Notes View -->
+<section class="hidden space-y-lg" id="releases-view">
+<!-- Release Card V1.4 -->
+<div class="bg-surface-container-lowest p-xl rounded-xl border border-outline-variant/20 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg">
+<span class="bg-primary/10 text-primary px-md py-xs rounded-full font-title-md text-sm">Latest</span>
+</div>
+<div class="flex flex-col md:flex-row gap-xl">
+<div class="md:w-1/4">
+<h2 class="text-display-lg font-bold text-primary leading-none">v1.4</h2>
+<p class="text-label-lg text-outline mt-sm">Released Oct 24, 2024</p>
+</div>
+<div class="md:w-3/4">
+<h3 class="font-headline-lg text-headline-lg mb-md">The Stealth Update</h3>
+<div class="space-y-xl">
+<div>
+<h4 class="text-label-lg uppercase tracking-wider text-secondary mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">new_releases</span> Features
+                                </h4>
+<ul class="list-disc list-inside text-body-lg text-on-surface-variant space-y-xs ml-2">
+<li>Burn-on-Read: Messages can now be set to auto-destruct immediately after viewing.</li>
+<li>Anti-Screenshot Shield: Native blocking of screen captures on iOS and Android.</li>
+<li>Biometric Decoy: Option to set a 'dummy' PIN that unlocks an empty interface.</li>
+</ul>
+</div>
+<div>
+<h4 class="text-label-lg uppercase tracking-wider text-on-surface-variant mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">build</span> Improvements
+                                </h4>
+<ul class="list-disc list-inside text-body-lg text-on-surface-variant space-y-xs ml-2">
+<li>Reduced app launch time by 40% using optimized binary loading.</li>
+<li>Enhanced dark mode contrast for OLED displays.</li>
+<li>Smoother scrolling in long-thread histories.</li>
+</ul>
+</div>
+<div>
+<h4 class="text-label-lg uppercase tracking-wider text-error mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">bug_report</span> Bug Fixes
+                                </h4>
+<ul class="list-disc list-inside text-body-lg text-on-surface-variant space-y-xs ml-2">
+<li>Fixed an issue where media attachments would sometimes fail on low-bandwidth connections.</li>
+<li>Corrected notification badge counts on desktop clients.</li>
+<li>Resolved a memory leak during heavy file encryption processes.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Release Card V1.3 -->
+<div class="bg-surface-container-lowest p-xl rounded-xl border border-outline-variant/20 shadow-sm">
+<div class="flex flex-col md:flex-row gap-xl opacity-80 hover:opacity-100 transition-opacity">
+<div class="md:w-1/4">
+<h2 class="text-headline-lg font-bold text-on-surface-variant leading-none">v1.3</h2>
+<p class="text-label-lg text-outline mt-sm">Released Aug 12, 2024</p>
+</div>
+<div class="md:w-3/4">
+<h3 class="font-title-lg text-title-lg mb-md">Connectivity Protocol V2</h3>
+<div class="space-y-lg">
+<div>
+<ul class="list-disc list-inside text-body-md text-on-surface-variant space-y-xs ml-2">
+<li>Integration of Onion-routing for all outbound traffic.</li>
+<li>Multi-device synchronization without centralized servers.</li>
+<li>Improved voice call quality with Opus 1.4 codec.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Release Card V1.2 -->
+<div class="bg-surface-container-lowest p-xl rounded-xl border border-outline-variant/20 shadow-sm">
+<div class="flex flex-col md:flex-row gap-xl opacity-60 hover:opacity-100 transition-opacity">
+<div class="md:w-1/4">
+<h2 class="text-headline-lg font-bold text-on-surface-variant leading-none">v1.2</h2>
+<p class="text-label-lg text-outline mt-sm">Released Jun 05, 2024</p>
+</div>
+<div class="md:w-3/4">
+<h3 class="font-title-lg text-title-lg mb-md">The Foundation Build</h3>
+<div class="space-y-lg">
+<div>
+<ul class="list-disc list-inside text-body-md text-on-surface-variant space-y-xs ml-2">
+<li>Initial rollout of E2EE for group chats.</li>
+<li>Custom theme engine implementation.</li>
+<li>Enhanced file encryption for local storage.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter CTA -->
+<div class="mt-xl bg-primary-container p-xl rounded-xl text-center shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-lg text-headline-lg text-on-primary-container mb-sm">Stay Updated</h3>
+<p class="text-body-lg text-on-primary-container/80 mb-lg max-w-md mx-auto">Get notified immediately when new features and security patches are released.</p>
+<form class="flex flex-col sm:flex-row gap-md max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Subscribed!')">
+<input class="flex-grow px-lg py-md rounded-lg border-none focus:ring-2 focus:ring-on-primary-container text-on-surface" placeholder="Enter your email" type="email"/>
+<button class="bg-on-primary-container text-primary-container font-bold px-xl py-md rounded-lg active:scale-95 transition-all">Subscribe</button>
+</form>
+</div>
+<!-- Decorative circle -->
+<div class="absolute -right-16 -bottom-16 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-16 -top-16 w-64 h-64 bg-black/10 rounded-full blur-3xl"></div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-xl bg-surface-container-low mt-xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="font-title-lg text-title-lg font-bold text-on-surface">RAAZ</span>
+<p class="text-body-md text-on-surface-variant mt-md">The future of private communication. Built on the principles of anonymity and user sovereignty.</p>
+</div>
+<div>
+<h4 class="font-title-md text-primary font-medium mb-md">Product</h4>
+<ul class="space-y-sm text-body-md text-on-surface-variant">
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Features</a></li>
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Security</a></li>
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Release Notes</a></li>
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-title-md text-primary font-medium mb-md">Company</h4>
+<ul class="space-y-sm text-body-md text-on-surface-variant">
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">About Us</a></li>
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Careers</a></li>
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Press Kit</a></li>
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-title-md text-primary font-medium mb-md">Legal</h4>
+<ul class="space-y-sm text-body-md text-on-surface-variant">
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary underline decoration-2 underline-offset-4" href="#">Terms &amp; Conditions</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-lg py-md border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="text-body-md text-on-surface-variant">© 2024 RAAZ Anonymous. Built for privacy.</p>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-primary" href="#"><span class="material-symbols-outlined">code</span></a>
+<a class="text-on-surface-variant hover:text-primary" href="#"><span class="material-symbols-outlined">chat</span></a>
+</div>
+</div>
+</footer>
+<script>
+        function toggleView(view) {
+            const roadmapView = document.getElementById('roadmap-view');
+            const releasesView = document.getElementById('releases-view');
+            const roadmapBtn = document.getElementById('roadmap-btn');
+            const releasesBtn = document.getElementById('releases-btn');
+
+            if (view === 'roadmap') {
+                roadmapView.classList.remove('hidden');
+                releasesView.classList.add('hidden');
+                roadmapBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+                roadmapBtn.classList.remove('text-on-surface-variant');
+                releasesBtn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+                releasesBtn.classList.add('text-on-surface-variant');
+            } else {
+                roadmapView.classList.add('hidden');
+                releasesView.classList.remove('hidden');
+                releasesBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+                releasesBtn.classList.remove('text-on-surface-variant');
+                roadmapBtn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+                roadmapBtn.classList.add('text-on-surface-variant');
+            }
+        }
+        
+        // Horizontal scroll animation for roadmap on mobile if needed, or simple appear effects
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.roadmap-line > div').forEach(div => {
+            div.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
+            observer.observe(div);
+        });
+    </script>
+</body></html>

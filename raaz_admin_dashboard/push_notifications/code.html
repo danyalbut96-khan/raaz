@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Admin - Push Notifications Management</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "secondary-container": "#2170e4",
+                    "primary-container": "#2563eb",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-dim": "#d3daef",
+                    "primary-fixed": "#dbe1ff",
+                    "on-primary-container": "#eeefff",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "secondary": "#0058be",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "primary": "#004ac6",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#00569c",
+                    "on-error-container": "#93000a",
+                    "on-background": "#141b2b",
+                    "surface-variant": "#dce2f7",
+                    "on-primary-fixed": "#00174b",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-secondary-container": "#fefcff",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "inverse-surface": "#293040",
+                    "surface-container-low": "#f1f3ff",
+                    "surface-container-high": "#e1e8fd",
+                    "on-surface": "#141b2b",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-surface-variant": "#434655",
+                    "surface-bright": "#f9f9ff",
+                    "outline-variant": "#c3c6d7",
+                    "tertiary-fixed": "#d4e3ff",
+                    "tertiary-container": "#196fc0",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "surface-container-highest": "#dce2f7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#0053db",
+                    "outline": "#737686"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "container-margin": "24px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #dce2f7;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/20">
+<!-- Top Navigation Bar -->
+<nav class="bg-surface/70 dark:bg-inverse-surface/70 backdrop-blur-xl text-primary font-title-md text-title-md docked full-width top-0 sticky z-40 border-b border-white/20 shadow-sm flex justify-between items-center w-full px-lg py-md max-w-[1440px] mx-auto">
+<div class="flex items-center gap-xl">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">RAAZ Phase 8</span>
+<div class="relative hidden md:block w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary/20 text-body-md transition-all" placeholder="Search operations..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<button class="flex items-center gap-sm bg-primary text-on-primary px-md py-1.5 rounded-lg text-label-lg font-bold hover:bg-primary-container transition-colors">
+                Quick Actions
+            </button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a high-level female tech administrator in a modern corporate setting. She is wearing sleek glasses and professional attire, against a background of a brightly lit, minimalist office with clean white walls and subtle blue glass accents. The lighting is soft and even, highlighting her focused expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAztWu3VDivfPr_UWixBaXpAx_z0NfXMU6YNkIUgFP6GS4ItOuoe9_YnXPGB_Xf2grkqysGmpRY-rFU2jJvxvkhAMGKJKRCVKw7kDuP0B0HXppg6MWJNJzQkIMAtVDDhbV8j5C-6xlUL1VR2i2GVSdHCYvG7UN1cBDPQ4JVqXYmvs5fZdR3OKDTX4FNH4mIQ2IYbza9iCkgBbNJi_HPB-JtslJhNH1haA3Ooc9MaPE1C0Tq7oWAW-4p2JeE4ZyVEZtCwUWcRMFuNzTk"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation Bar -->
+<aside class="bg-surface/70 dark:bg-inverse-surface/70 backdrop-blur-xl text-on-surface-variant font-label-lg text-label-lg fixed left-0 top-0 h-screen w-[280px] z-50 border-r border-white/20 shadow-lg hidden md:flex flex-col h-full p-md space-y-xs">
+<div class="mb-xl px-md py-lg">
+<h2 class="font-headline-lg text-headline-lg font-black text-primary">RAAZ Admin</h2>
+<p class="text-on-surface-variant opacity-70">Phase 8 Moderation</p>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
+<!-- Active state: Notifications -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="article">article</span>
+<span>Posts</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg bg-primary/10 text-primary border-l-4 border-primary font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span>Notifications</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="comment">comment</span>
+<span>Comments</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+<span>Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span>Categories</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-md border-t border-outline-variant pt-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Super Admin</p>
+<p class="text-xs text-on-surface-variant">v8.4.2 stable</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-[280px] min-h-screen p-lg max-w-[1440px]">
+<!-- Header Section -->
+<header class="mb-xl">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Push Notifications</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">Manage your user engagement strategies by broadcasting targeted messages across all devices and analyzing real-time performance metrics.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+<!-- Message Composer Card -->
+<div class="lg:col-span-7 glass-card rounded-xl shadow-sm p-lg">
+<div class="flex items-center gap-sm mb-lg border-b border-outline-variant pb-md">
+<span class="material-symbols-outlined text-primary" data-icon="campaign">campaign</span>
+<h2 class="font-title-lg text-title-lg">Broadcast Message Composer</h2>
+</div>
+<form class="space-y-lg">
+<!-- Target Audience -->
+<div>
+<label class="block font-label-lg text-label-lg mb-sm text-on-surface-variant">Target Audience Segment</label>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+<button class="flex flex-col items-center justify-center p-md rounded-lg border-2 border-primary bg-primary/5 text-primary" type="button">
+<span class="material-symbols-outlined mb-1" data-icon="groups">groups</span>
+<span class="text-label-sm font-bold">All Users</span>
+</button>
+<button class="flex flex-col items-center justify-center p-md rounded-lg border-2 border-outline-variant hover:border-primary/50 transition-colors text-on-surface-variant" type="button">
+<span class="material-symbols-outlined mb-1" data-icon="bolt">bolt</span>
+<span class="text-label-sm font-bold">Active</span>
+</button>
+<button class="flex flex-col items-center justify-center p-md rounded-lg border-2 border-outline-variant hover:border-primary/50 transition-colors text-on-surface-variant" type="button">
+<span class="material-symbols-outlined mb-1" data-icon="person_add">person_add</span>
+<span class="text-label-sm font-bold">New</span>
+</button>
+<button class="flex flex-col items-center justify-center p-md rounded-lg border-2 border-outline-variant hover:border-primary/50 transition-colors text-on-surface-variant" type="button">
+<span class="material-symbols-outlined mb-1" data-icon="block">block</span>
+<span class="text-label-sm font-bold">Inactive</span>
+</button>
+</div>
+</div>
+<!-- Input Fields -->
+<div class="space-y-md">
+<div>
+<label class="block font-label-lg text-label-lg mb-sm text-on-surface-variant">Notification Title</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-md focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. New Feature Release!" type="text"/>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg mb-sm text-on-surface-variant">Message Body</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-md focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none" placeholder="Craft a compelling message to engage your users..." rows="4"></textarea>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg mb-sm text-on-surface-variant">Deep Link URL (Optional)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="link">link</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 p-md focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="raaz://app/feature/new-dashboard" type="text"/>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-md pt-lg border-t border-outline-variant">
+<button class="px-xl py-md text-primary font-bold hover:bg-primary/5 rounded-lg transition-colors" type="button">
+                            Save as Draft
+                        </button>
+<button class="px-xl py-md bg-primary text-on-primary font-bold rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-sm" type="submit">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+                            Send Broadcast Now
+                        </button>
+</div>
+</form>
+</div>
+<!-- Preview & Real-time Stats -->
+<div class="lg:col-span-5 space-y-lg">
+<!-- Mobile Mockup Preview -->
+<div class="glass-card rounded-xl shadow-sm p-lg overflow-hidden relative">
+<h3 class="font-title-md text-title-md mb-lg">Real-time Preview</h3>
+<div class="mx-auto w-[240px] h-[480px] border-[8px] border-inverse-surface rounded-[40px] p-2 relative overflow-hidden bg-black">
+<!-- Phone Notch -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-inverse-surface rounded-b-2xl z-10"></div>
+<!-- Wallpaper Placeholder -->
+<div class="absolute inset-0 w-full h-full opacity-40">
+<img class="w-full h-full object-cover" data-alt="A vertical abstract digital wallpaper featuring fluid, swirling patterns of deep navy blue and bright electric blue. The light appears to glow from within the waves, creating a sophisticated and calming atmosphere suitable for a premium smartphone background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTpF5gVRUWgyEtEAmyLFBuhNzrQt6CzxUovGRNXSsvjYCihUjCv8KsTtD3KEDMZdf086omgGisxKzeC_ccksNiCaTcB-7zH1dBFYX8sFYjbqCs9FLkpvmBoj4hZE1YsA2txouPqQT7jLp4iHL7zaRbSI5nY31NVTnUsH5V9OZeE_2hO9lGcFq_EDsZwyx1zqie6mG5yQMPwilrXPrpVlcJ9McYXExlCNsGbZ0S26iMgL1nfDcRZ_O_XWUWawg4GsVDx9toG3NWHx8e"/>
+</div>
+<!-- Notification Toast -->
+<div class="relative z-10 mt-12 bg-white/90 backdrop-blur-md rounded-2xl p-3 shadow-lg transform scale-90 origin-top">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-5 h-5 rounded bg-primary flex items-center justify-center text-[10px] text-white font-black">R</div>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">RAAZ Phase 8</span>
+<span class="text-[10px] text-on-surface-variant ml-auto">now</span>
+</div>
+<p class="text-xs font-bold text-on-surface">Your Title Appears Here</p>
+<p class="text-[10px] text-on-surface-variant leading-tight mt-0.5">This is how your message body will look when it arrives on a user's mobile device. Keep it concise for better engagement.</p>
+</div>
+</div>
+</div>
+<!-- Stats Summary -->
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface-container-high rounded-xl p-md">
+<p class="text-label-sm text-on-surface-variant">Active Target</p>
+<p class="text-title-lg font-bold text-primary">142.8k</p>
+</div>
+<div class="bg-surface-container-high rounded-xl p-md">
+<p class="text-label-sm text-on-surface-variant">Estimated Delivery</p>
+<p class="text-title-lg font-bold text-secondary">98.4%</p>
+</div>
+</div>
+</div>
+<!-- History Table Card -->
+<div class="lg:col-span-12 glass-card rounded-xl shadow-sm overflow-hidden">
+<div class="px-lg py-md flex items-center justify-between border-b border-outline-variant bg-surface-container-low">
+<h2 class="font-title-lg text-title-lg">Notification History</h2>
+<div class="flex gap-sm">
+<button class="flex items-center gap-sm px-md py-1.5 border border-outline-variant rounded-lg text-label-lg hover:bg-surface transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_alt">filter_alt</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-sm px-md py-1.5 border border-outline-variant rounded-lg text-label-lg hover:bg-surface transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                            Export CSV
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-label-lg text-on-surface-variant border-b border-outline-variant">
+<th class="px-lg py-md font-bold uppercase tracking-wider">Date &amp; Time</th>
+<th class="px-lg py-md font-bold uppercase tracking-wider">Message Content</th>
+<th class="px-lg py-md font-bold uppercase tracking-wider text-center">Status</th>
+<th class="px-lg py-md font-bold uppercase tracking-wider text-center">Open Rate</th>
+<th class="px-lg py-md font-bold uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-lg py-md">
+<div class="text-on-surface font-bold">Oct 24, 2023</div>
+<div class="text-xs text-on-surface-variant">14:30 PM</div>
+</td>
+<td class="px-lg py-md max-w-xs">
+<div class="text-on-surface font-bold truncate">Flash Sale: 50% Off Moderation Tools</div>
+<div class="text-xs text-on-surface-variant truncate">Grab your limited time offer before it expires tonight...</div>
+</td>
+<td class="px-lg py-md text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#10B981]/10 text-[#059669] text-xs font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+                                        Sent
+                                    </span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center justify-center gap-md">
+<span class="text-body-md font-bold">12.4%</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 12.4%"></div>
+</div>
+</div>
+</td>
+<td class="px-lg py-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-primary/10">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-lg py-md">
+<div class="text-on-surface font-bold">Oct 26, 2023</div>
+<div class="text-xs text-on-surface-variant">09:00 AM</div>
+</td>
+<td class="px-lg py-md max-w-xs">
+<div class="text-on-surface font-bold truncate">Weekly Analytics Report Ready</div>
+<div class="text-xs text-on-surface-variant truncate">Your moderation team's performance for the last week is in...</div>
+</td>
+<td class="px-lg py-md text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                                        Scheduled
+                                    </span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center justify-center gap-md">
+<span class="text-body-md font-bold text-on-surface-variant">--</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full"></div>
+</div>
+</td>
+<td class="px-lg py-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-primary/10">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-lg py-md">
+<div class="text-on-surface font-bold">Oct 27, 2023</div>
+<div class="text-xs text-on-surface-variant">Not set</div>
+</td>
+<td class="px-lg py-md max-w-xs">
+<div class="text-on-surface font-bold truncate">[DRAFT] New Policy Update</div>
+<div class="text-xs text-on-surface-variant truncate">Please review the updated community guidelines starting next month...</div>
+</td>
+<td class="px-lg py-md text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-on-surface-variant/10 text-on-surface-variant text-xs font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></span>
+                                        Draft
+                                    </span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center justify-center gap-md">
+<span class="text-body-md font-bold text-on-surface-variant">--</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full"></div>
+</div>
+</td>
+<td class="px-lg py-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-primary/10">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-lg py-md">
+<div class="text-on-surface font-bold">Oct 20, 2023</div>
+<div class="text-xs text-on-surface-variant">10:15 AM</div>
+</td>
+<td class="px-lg py-md max-w-xs">
+<div class="text-on-surface font-bold truncate">Server Maintenance Notice</div>
+<div class="text-xs text-on-surface-variant truncate">Scheduled downtime for Phase 8 servers tonight at 00:00 UTC...</div>
+</td>
+<td class="px-lg py-md text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#10B981]/10 text-[#059669] text-xs font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+                                        Sent
+                                    </span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center justify-center gap-md">
+<span class="text-body-md font-bold">24.8%</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 24.8%"></div>
+</div>
+</div>
+</td>
+<td class="px-lg py-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-primary/10">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-lg py-md border-t border-outline-variant flex items-center justify-between bg-surface-container-low text-label-lg">
+<span class="text-on-surface-variant">Showing 1 to 10 of 42 notifications</span>
+<div class="flex gap-xs">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ripple effect logic
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    let ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    this.appendChild(ripple);
+                    let d = Math.max(this.clientWidth, this.clientHeight);
+                    ripple.style.width = ripple.style.height = d + 'px';
+                    let x = e.pageX - this.offsetLeft - d / 2;
+                    let y = e.pageY - this.offsetTop - d / 2;
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('run');
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // Target Segment Picker Logic
+            const segmentButtons = document.querySelectorAll('[type="button"].md\\:grid-cols-4 > button');
+            segmentButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    segmentButtons.forEach(b => {
+                        b.classList.remove('border-primary', 'bg-primary/5', 'text-primary');
+                        b.classList.add('border-outline-variant', 'text-on-surface-variant');
+                    });
+                    btn.classList.add('border-primary', 'bg-primary/5', 'text-primary');
+                    btn.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                });
+            });
+
+            // Interactive Search Focus
+            const searchInput = document.querySelector('input[type="text"]');
+            if(searchInput) {
+                searchInput.addEventListener('focus', () => {
+                    searchInput.parentElement.classList.add('w-96');
+                    searchInput.parentElement.classList.remove('w-72');
+                });
+                searchInput.addEventListener('blur', () => {
+                    searchInput.parentElement.classList.add('w-72');
+                    searchInput.parentElement.classList.remove('w-96');
+                });
+            }
+        });
+    </script>
+<style>
+        .ripple {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: scale(0);
+            pointer-events: none;
+        }
+        .ripple.run {
+            animation: ripple 0.6s linear;
+        }
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</body></html>

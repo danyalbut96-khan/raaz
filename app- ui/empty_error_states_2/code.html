@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ | Quiet Moments</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary-fixed": "#00174b",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-highest": "#dce2f7",
+                    "outline": "#737686",
+                    "surface-variant": "#dce2f7",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-background": "#141b2b",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary": "#0058be",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary-container": "#fefcff",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#b4c5ff",
+                    "surface-container-high": "#e1e8fd",
+                    "surface-container-low": "#f1f3ff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-container": "#eeefff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#2170e4",
+                    "primary": "#004ac6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#434655",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#196fc0",
+                    "primary-container": "#2563eb",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "on-surface": "#141b2b",
+                    "inverse-surface": "#293040"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "base": "4px",
+                    "margin-tablet": "32px",
+                    "margin-desktop": "auto",
+                    "lg": "24px",
+                    "md": "16px",
+                    "2xl": "48px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .empty-state-content {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-20">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full backdrop-blur-xl bg-surface/85 z-50 shadow-sm flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+<h1 class="font-headline-md text-headline-md-mobile font-bold tracking-tight text-primary">RAAZ</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<main class="pt-20 px-margin-mobile max-w-xl mx-auto">
+<!-- Section Tabs -->
+<nav class="flex items-center justify-between bg-surface-container-low p-1.5 rounded-2xl mb-8 relative">
+<button class="tab-trigger relative z-10 flex-1 py-2 font-label-lg text-label-lg transition-colors text-primary font-bold" id="btn-posts" onclick="switchTab('posts')">
+                Feed
+            </button>
+<button class="tab-trigger relative z-10 flex-1 py-2 font-label-lg text-label-lg transition-colors text-on-surface-variant" id="btn-bookmarks" onclick="switchTab('bookmarks')">
+                Vault
+            </button>
+<button class="tab-trigger relative z-10 flex-1 py-2 font-label-lg text-label-lg transition-colors text-on-surface-variant" id="btn-search" onclick="switchTab('search')">
+                Search
+            </button>
+<button class="tab-trigger relative z-10 flex-1 py-2 font-label-lg text-label-lg transition-colors text-on-surface-variant" id="btn-alerts" onclick="switchTab('alerts')">
+                Alerts
+            </button>
+<!-- Moving Indicator -->
+<div class="absolute h-[calc(100%-12px)] top-[6px] left-[6px] w-[calc(25%-9px)] bg-surface-container-lowest shadow-sm rounded-xl transition-all duration-300 active-tab-indicator" id="tab-indicator"></div>
+</nav>
+<!-- Content Canvas -->
+<div class="min-h-[442px] flex flex-col items-center justify-center text-center py-12" id="empty-state-container">
+<!-- Dynamic States -->
+<div class="empty-state-content space-y-8" id="state-posts">
+<div class="relative flex justify-center">
+<div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full scale-150"></div>
+<div class="w-64 h-64 rounded-full glass-panel border border-outline-variant/20 flex items-center justify-center relative overflow-hidden shadow-sm">
+<img class="w-48 h-48 object-contain" data-alt="A minimalist, premium 3D illustration of a floating, translucent white glass envelope with a soft blue neon glow around its edges. The envelope is empty and slightly open, suspended in a serene, high-key light mode environment with a clean white background. The aesthetic is sophisticated and airy, emphasizing silence and digital tranquility with very soft, diffused shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRLKHyC5uWf70-5cxbM3gGFrGwXrQXZcqk3CHVULph1_CmCSyILlNFw-_6xHDY9_6y3KBPUu2phVD2pdF26ShWEBRYIATJ2o2LmfkODzHljbymW6YNIHFh1wJaFxrlbaLONcNo66IkLGjkA7d7qEJrr7mU-CJ1MzFHN7yTP7OJvtD9-TlEL_bdA_hL7jLyRSSyjKgo-EVIyfBOMyhbk4dZvqDaF64xlVQVW7MLJPVLRafR4Y5w4J4RlveX3fYuILqJycW1arpDS9Pf"/>
+</div>
+</div>
+<div class="space-y-3">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">No Posts</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">The secret you seek hasn't been shared yet. Be the first to break the silence.</p>
+</div>
+</div>
+<div class="empty-state-content hidden space-y-8" id="state-bookmarks">
+<div class="relative flex justify-center">
+<div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full scale-150"></div>
+<div class="w-64 h-64 rounded-full glass-panel border border-outline-variant/20 flex items-center justify-center relative overflow-hidden shadow-sm">
+<img class="w-48 h-48 object-contain" data-alt="A sophisticated digital artwork of a translucent crystalline bookmark with a subtle diagonal slash through it, symbolizing an empty vault. The bookmark floats in a bright, minimalist space filled with soft, multi-layered glass panels. The lighting is pure and editorial, using a palette of white, silver, and the brand's signature primary blue accents. High-fidelity glassmorphism style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhm148nDwYSt5j3SlfAIQUBic1fj6XyFwsoEdVQu6hxx6TWrtBmuWLweC6oDspOEgdN9BnLADKDOnTqc81plYgwjoC74JIB5qgpqTUZBcPHyorqlV-yWMUxMET2yX0bosINfWJIzm03Jid3bA5WrEXk4mXZZa75CT8f51ulkXd_j0AoTmT2a1xKWl2vz4aNStqCtt_iv_nAQ9d3QClj-wUjGceXkx1mk3hFpynbbSEF7EiAPD2xPYPt6Tr6EtLL0HLj3gm6LWEZbqs"/>
+</div>
+</div>
+<div class="space-y-3">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Empty Vault</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">Your vault is quiet today. Save secrets here to keep them close and protected.</p>
+</div>
+</div>
+<div class="empty-state-content hidden space-y-8" id="state-search">
+<div class="relative flex justify-center">
+<div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full scale-150"></div>
+<div class="w-64 h-64 rounded-full glass-panel border border-outline-variant/20 flex items-center justify-center relative overflow-hidden shadow-sm">
+<img class="w-48 h-48 object-contain" data-alt="A high-end 3D rendering of a premium glass magnifying glass with a frosted lens, reflecting a clean and empty digital void. The handle is finished in a sleek metallic matte white. The object is centered in a brightly lit, ethereal gallery space. The mood is inquisitive but calm, with soft blue caustic reflections on the pristine white floor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBZjohG01jVvXk5PjjMuVmgEfhkoXZQa-yF2lRIQ4iWmCaLOZrMhLIZJxhAcTUgXpCrZvzIHSLtPqFYK2jl-4DhJrozve7bIpoxB-u2R8fQlykYHN27E1ZmVV2NrPc1pAEZJJ22t8N4g2lqaVmsjZPP15tzKY_ppyBgz9h4rmHekMfZUwuz7QgGwLb_7j6Tk7lucvG9QNXkQVfbgTXAgAE83khr_XvD2yc2SAplwxgOz2Irl6gW20r1a2ic0DQjounFjpz_m2sins-"/>
+</div>
+</div>
+<div class="space-y-3">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">No Results</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">We couldn't find any whispers matching that. Try a different alias or keyword.</p>
+</div>
+</div>
+<div class="empty-state-content hidden space-y-8" id="state-alerts">
+<div class="relative flex justify-center">
+<div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full scale-150"></div>
+<div class="w-64 h-64 rounded-full glass-panel border border-outline-variant/20 flex items-center justify-center relative overflow-hidden shadow-sm">
+<img class="w-48 h-48 object-contain" data-alt="An elegant digital illustration of a glass notification bell that is perfectly still, resting on a soft white cushion of light. There are no badges or indicators, conveying a sense of total peace. The aesthetic is ultra-modern and minimal, using transparency and soft depth to create a premium feel in a bright light-mode setting. Subtle blue glow effects." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbLE3EYSDIvxlO9SyqbeNFOXlAeGLK5u8LRLQStpzIZBOU-AbxkNnNr23kT7kY2LTJafljCZdmkUs1Y9jnJB7FasoSl-pBd1cZ_ZxgKZAvq7p_4ITgxJnMRqhZxWNpQLL8i7VPf-O4GS70sP1VLYuiNbAPiZvDkr3Ids8MK1wZA2mNrRptuIOvhIziTniPHgQm-oXMOGqL-J3wWc8dwX8iNTWuXggv5JW04n-Pmi9-W0Lgkw2tHZjbmQTwOB93fCGgMB5Ez84ABv4l"/>
+</div>
+</div>
+<div class="space-y-3">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">All Quiet</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">Peace and quiet. No new notifications have landed in your anonymous inbox.</p>
+</div>
+</div>
+<!-- Global CTA -->
+<div class="mt-12 pt-4">
+<button class="bg-primary text-on-primary font-label-lg text-label-lg px-8 py-3.5 rounded-full shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all">
+                    Explore Trending
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 h-20 bg-surface/85 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_12px_rgba(0,0,0,0.04)]">
+<a class="flex flex-col items-center justify-center gap-1 text-primary bg-primary-container/20 rounded-xl px-3 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-sm text-label-sm">Post</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-sm text-label-sm">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">lock</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+</nav>
+<script>
+        function switchTab(target) {
+            const tabs = ['posts', 'bookmarks', 'search', 'alerts'];
+            const indicator = document.getElementById('tab-indicator');
+            const index = tabs.indexOf(target);
+            
+            // Move Indicator
+            indicator.style.transform = `translateX(${index * 100}%)`;
+            if(index > 0) {
+                indicator.style.left = `${6 + (index * 4)}px`; // Adjust for spacing/padding
+            } else {
+                indicator.style.left = '6px';
+            }
+
+            // Toggle Content
+            tabs.forEach(tab => {
+                const element = document.getElementById(`state-${tab}`);
+                const btn = document.getElementById(`btn-${tab}`);
+                if (tab === target) {
+                    element.classList.remove('hidden');
+                    btn.classList.add('text-primary', 'font-bold');
+                    btn.classList.remove('text-on-surface-variant');
+                } else {
+                    element.classList.add('hidden');
+                    btn.classList.remove('text-primary', 'font-bold');
+                    btn.classList.add('text-on-surface-variant');
+                }
+            });
+        }
+        
+        // Correct Indicator positioning calculation on resize/init
+        window.addEventListener('resize', () => {
+            // Recalculate if needed for complex responsiveness
+        });
+    </script>
+</body></html>

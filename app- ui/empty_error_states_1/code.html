@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System States - RAAZ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .state-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-low": "#f1f3ff",
+                        "outline": "#737686",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#2170e4",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-bright": "#f9f9ff",
+                        "primary-fixed": "#dbe1ff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#dce2f7",
+                        "surface-container-highest": "#dce2f7",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-container": "#ebf1ff",
+                        "on-background": "#141b2b",
+                        "primary": "#004ac6",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface": "#f9f9ff",
+                        "on-secondary-container": "#fefcff",
+                        "tertiary-container": "#196fc0",
+                        "surface-container": "#e9edff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "background": "#f9f9ff",
+                        "inverse-surface": "#293040",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-dim": "#d3daef",
+                        "on-surface-variant": "#434655",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "tertiary": "#00569c",
+                        "surface-container-high": "#e1e8fd",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary": "#0058be",
+                        "surface-tint": "#0053db",
+                        "on-tertiary-fixed": "#001c39",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface": "#141b2b",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-error-container": "#93000a"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="text-on-surface-variant font-label-lg">System States</div>
+<div class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">more_vert</span>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto space-y-12">
+<!-- Section Title -->
+<div class="text-center space-y-2">
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Experience Continuity</h2>
+<p class="text-on-surface-variant font-body-md px-8">Maintaining a premium feel even when data is unavailable or connections fail.</p>
+</div>
+<!-- 1. Empty State: No Messages -->
+<section class="state-transition relative overflow-hidden rounded-xl bg-surface-container-lowest p-8 shadow-[0_4px_12px_rgba(17,24,39,0.04)] text-center border border-outline-variant/30">
+<div class="flex flex-col items-center">
+<!-- Illustration Wrapper -->
+<div class="relative w-48 h-48 mb-6 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/5 rounded-full animate-pulse"></div>
+<img class="w-32 h-32 object-contain relative z-10" data-alt="A minimalist digital illustration for a mobile app empty state. A soft-focus, translucent 3D glass envelope floats in a bright, white, airy space. The lighting is ethereal and high-key, using a palette of soft blues and crisp whites. The aesthetic is modern minimalism, conveying a sense of quiet and calm in a professional sharing platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpwNZgfLzbka09O5789XSu465qdB5R24oHaQaW06t4YDNU_fkv8CV9gLnmwUMKZ2LlBkGxvl2IfTpUDVtg6_9Bw1g1r1nkOP3AtdJbneaVP7fzL51jPh0DqOltBI-VXnEJ8Ky3CVwWlynned6NdbqH_JHU7iRuWLuyeWrq-yHL8PxThqioPikLunmLSDiumBVJaGFfrhzC_a9cyi63xYRscLZh7Uwa7q9VbNhsTd6ACAzY5RwL2X-vgQoV5Pt0ZPeEqKAKTcLs47WU"/>
+</div>
+<h3 class="font-title-lg text-on-surface mb-2">No messages yet</h3>
+<p class="font-body-md text-on-surface-variant max-w-xs mb-8">
+                    Your inbox is currently silent. When you start sharing anonymously, your conversations will appear here.
+                </p>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full font-label-lg flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Start a Conversation
+                </button>
+</div>
+</section>
+<!-- 2. Error State: No Internet -->
+<section class="state-transition relative overflow-hidden rounded-xl bg-surface-container-lowest p-8 shadow-[0_4px_12px_rgba(17,24,39,0.04)] text-center border border-error/10">
+<div class="flex flex-col items-center">
+<!-- Illustration Wrapper -->
+<div class="relative w-48 h-48 mb-6 flex items-center justify-center">
+<div class="absolute inset-0 bg-error/5 rounded-full"></div>
+<img class="w-32 h-32 object-contain relative z-10" data-alt="A high-end digital illustration of a disconnected network cable with a stylized, glowing red pulse at the tip. The background is a clean, minimalist gradient of soft grays and off-whites. The lighting is focused and dramatic, highlighting the sleek, metallic texture of the cable. The overall mood is sophisticated yet clearly indicates a technical error state." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5SzMLaXVq1nwsHCul0oPJw330_Sa6Q-u0ZLwTgOKna-1nK4QdTANiZlSfpp4vsVJGXpOKALd1WNyGiJXaBV28LRj1RGD33GYMvmoyEUffXPOCMu0K-MrXsh5OCX5Negdslvw9GEWm5HvQ-gWEQY9TBIlTkeI4HB0UOiaz5OVkioBD31V5EEs9h8-B-uJEMZXllOw-A9h-WRRVxNcEOQmypfeAJihFpLULfPmR43PS-m6tkikgXU3xHvHbhtOdSEAKDg5ZrSOCuKrK"/>
+<!-- Atmospheric Micro-interaction: Floating Error Particles -->
+<div class="absolute top-0 right-0 w-4 h-4 bg-error/20 rounded-full blur-sm animate-bounce" style="animation-delay: 0.2s"></div>
+<div class="absolute bottom-4 left-2 w-3 h-3 bg-error/10 rounded-full blur-sm animate-pulse"></div>
+</div>
+<h3 class="font-title-lg text-error mb-2">Connection Lost</h3>
+<p class="font-body-md text-on-surface-variant max-w-xs mb-8">
+                    We can't reach the RAAZ servers right now. Please check your internet connection and try again.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+<button class="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-label-lg flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all" id="retryButton">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+                        Retry Connection
+                    </button>
+<button class="border border-outline-variant text-on-surface-variant px-8 py-3 rounded-full font-label-lg flex items-center justify-center hover:bg-surface-variant/30 transition-all">
+                        Settings
+                    </button>
+</div>
+</div>
+</section>
+<!-- Guest Mode Banner Integration -->
+<div class="bg-surface-container-high rounded-lg p-4 flex items-center gap-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">info</span>
+<div class="flex-1">
+<p class="font-label-lg text-on-surface">Browsing as Guest</p>
+<p class="font-body-md text-on-surface-variant">Sign in to sync your messages across devices.</p>
+</div>
+<button class="text-primary font-label-lg px-4 py-2 hover:bg-primary/5 rounded-lg transition-colors">Sign In</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-sm text-label-sm mt-1">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for the retry button
+        const retryBtn = document.getElementById('retryButton');
+        retryBtn.addEventListener('click', () => {
+            const icon = retryBtn.querySelector('.material-symbols-outlined');
+            icon.classList.add('animate-spin');
+            retryBtn.classList.add('opacity-50', 'pointer-events-none');
+            
+            // Simulate network check
+            setTimeout(() => {
+                icon.classList.remove('animate-spin');
+                retryBtn.classList.remove('opacity-50', 'pointer-events-none');
+                alert('Still unable to connect. Please check your Wi-Fi or Data.');
+            }, 2000);
+        });
+
+        // Add glassmorphism hover effect to navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.classList.add('backdrop-blur-sm');
+            });
+        });
+    </script>
+</body></html>

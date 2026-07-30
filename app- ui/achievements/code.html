@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Achievements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        body {
+            background-color: #f9f9ff;
+            color: #141b2b;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .progress-bar-glow {
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-container-highest": "#dce2f7",
+                            "outline-variant": "#c3c6d7",
+                            "inverse-on-surface": "#edf0ff",
+                            "on-tertiary": "#ffffff",
+                            "primary-fixed": "#dbe1ff",
+                            "on-surface-variant": "#434655",
+                            "surface-dim": "#d3daef",
+                            "secondary-fixed-dim": "#adc6ff",
+                            "primary-fixed-dim": "#b4c5ff",
+                            "tertiary-fixed": "#d4e3ff",
+                            "on-primary-container": "#eeefff",
+                            "on-primary": "#ffffff",
+                            "secondary": "#0058be",
+                            "on-surface": "#141b2b",
+                            "on-primary-fixed-variant": "#003ea8",
+                            "on-tertiary-fixed-variant": "#004883",
+                            "on-secondary": "#ffffff",
+                            "error": "#ba1a1a",
+                            "tertiary": "#00569c",
+                            "on-primary-fixed": "#00174b",
+                            "on-background": "#141b2b",
+                            "secondary-fixed": "#d8e2ff",
+                            "tertiary-container": "#196fc0",
+                            "on-error": "#ffffff",
+                            "surface-container": "#e9edff",
+                            "secondary-container": "#2170e4",
+                            "surface-container-lowest": "#ffffff",
+                            "tertiary-fixed-dim": "#a4c9ff",
+                            "on-tertiary-container": "#ebf1ff",
+                            "surface-container-high": "#e1e8fd",
+                            "on-secondary-container": "#fefcff",
+                            "inverse-surface": "#293040",
+                            "inverse-primary": "#b4c5ff",
+                            "on-secondary-fixed-variant": "#004395",
+                            "error-container": "#ffdad6",
+                            "primary-container": "#2563eb",
+                            "on-secondary-fixed": "#001a42",
+                            "surface-bright": "#f9f9ff",
+                            "surface-tint": "#0053db",
+                            "on-tertiary-fixed": "#001c39",
+                            "primary": "#004ac6",
+                            "surface-variant": "#dce2f7",
+                            "outline": "#737686",
+                            "surface": "#f9f9ff",
+                            "on-error-container": "#93000a",
+                            "surface-container-low": "#f1f3ff",
+                            "background": "#f9f9ff"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "sm": "8px",
+                            "margin-desktop": "auto",
+                            "margin-tablet": "32px",
+                            "2xl": "48px",
+                            "xl": "32px",
+                            "gutter": "16px",
+                            "lg": "24px",
+                            "base": "4px",
+                            "margin-mobile": "16px",
+                            "xs": "4px",
+                            "md": "16px"
+                    },
+                    "fontFamily": {
+                            "headline-lg-mobile": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "display-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "title-lg": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "title-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                            "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                            "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                            "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                            "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                            "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                            "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16 transition-opacity">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-label-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a futuristic digital avatar, featuring glowing blue circuitry patterns on a smooth metallic skin. The background is a clean, minimal white void with soft, diffused cinematic lighting that highlights the intricate details of the avatar's design, embodying a high-end, secure identity aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqRAPJtq2JcDT3SfaFdU3RHbJ2nWbFE-WALwLfJJpZ3CB7Pm58rrvktRsPCZeKgCFV4imzKoDIyGX7dFl9T7RLWoWqTGRYQtgy3zhF1QXELP7L1FNabHXKeJYqHsPq_2KQY-96GAtJuEHoetWGZq1nYzmll26imGBezFAumgeAj8RLLhgu_36Qlc-qad9oM5pK4tzcva1--yDlKT1uCexQnqEz9dhUUW00kqAytUfmpdAC0fX7SEIjQnTZYjG-qLNZkBVfOF7agM_Q"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- Hero Progress Section -->
+<section class="mb-8">
+<div class="glass-card rounded-xl p-6 border border-white/40 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Your Journey</h2>
+<p class="font-body-md text-on-surface-variant">Level 12 • Guardian of Secrets</p>
+</div>
+<div class="bg-primary/10 px-3 py-1 rounded-full">
+<span class="font-label-lg text-primary">2,450 XP</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden mb-2">
+<div class="bg-primary h-full w-[72%] progress-bar-glow transition-all duration-1000 ease-out" style="width: 72%;"></div>
+</div>
+<div class="flex justify-between font-label-sm text-outline">
+<span>72% to Level 13</span>
+<span>550 XP remaining</span>
+</div>
+</div>
+</section>
+<!-- Unlocked Badges (Bento Style) -->
+<section class="mb-10">
+<h3 class="font-title-lg text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+                Achievements
+            </h3>
+<div class="grid grid-cols-2 gap-4">
+<!-- Explorer Badge -->
+<div class="glass-card rounded-xl p-5 border border-white/40 flex flex-col items-center text-center group hover:shadow-md transition-all">
+<div class="w-16 h-16 rounded-full bg-secondary-container/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+</div>
+<span class="font-title-md text-on-surface">Explorer</span>
+<span class="font-label-sm text-on-surface-variant mt-1">Visited 50 secret circles</span>
+</div>
+<!-- Writer Badge -->
+<div class="glass-card rounded-xl p-5 border border-white/40 flex flex-col items-center text-center group hover:shadow-md transition-all">
+<div class="w-16 h-16 rounded-full bg-primary-container/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="edit_note" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+</div>
+<span class="font-title-md text-on-surface">Writer</span>
+<span class="font-label-sm text-on-surface-variant mt-1">Shared 100 deep thoughts</span>
+</div>
+<!-- Supporter Badge -->
+<div class="glass-card rounded-xl p-5 border border-white/40 flex flex-col items-center text-center group hover:shadow-md transition-all">
+<div class="w-16 h-16 rounded-full bg-tertiary-fixed/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-tertiary text-4xl" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="font-title-md text-on-surface">Supporter</span>
+<span class="font-label-sm text-on-surface-variant mt-1">Gave 500 digital hugs</span>
+</div>
+<!-- Kind Soul Badge -->
+<div class="glass-card rounded-xl p-5 border border-white/40 flex flex-col items-center text-center group hover:shadow-md transition-all">
+<div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-green-600 text-4xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<span class="font-title-md text-on-surface">Kind Soul</span>
+<span class="font-label-sm text-on-surface-variant mt-1">Reported 0 violations</span>
+</div>
+</div>
+</section>
+<!-- Locked Badges -->
+<section class="mb-10">
+<h3 class="font-title-lg text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+                In Progress
+            </h3>
+<div class="space-y-4">
+<!-- Truth Seeker -->
+<div class="glass-card rounded-xl p-4 border border-outline-variant/30 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline text-2xl" data-icon="search_check">search_check</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-md text-on-surface">Truth Seeker</span>
+<span class="font-label-sm text-outline">8/10</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full w-[80%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Night Owl -->
+<div class="glass-card rounded-xl p-4 border border-outline-variant/30 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline text-2xl" data-icon="dark_mode">dark_mode</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-md text-on-surface">Night Owl</span>
+<span class="font-label-sm text-outline">15/30</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full w-[50%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Coming Soon / Hidden Section -->
+<section class="mb-12">
+<h3 class="font-title-lg text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="mystery">mystery</span>
+                Mysterious Rewards
+            </h3>
+<div class="relative rounded-2xl overflow-hidden h-40 group cursor-pointer">
+<div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors z-0"></div>
+<!-- Background decoration -->
+<div class="absolute -right-4 -top-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-4 -bottom-4 w-32 h-32 bg-secondary/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+<div class="animate-float">
+<span class="material-symbols-outlined text-primary-container text-5xl mb-2" data-icon="help_center">help_center</span>
+</div>
+<h4 class="font-title-md text-primary">Hidden Achievement</h4>
+<p class="font-body-md text-on-surface-variant max-w-xs">Continue sharing authentically to reveal this special badge.</p>
+</div>
+<!-- Shiny border effect -->
+<div class="absolute inset-0 border-2 border-primary/20 rounded-2xl"></div>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="mb-12">
+<div class="grid grid-cols-3 gap-4">
+<div class="flex flex-col items-center p-3">
+<span class="font-headline-md text-primary">42</span>
+<span class="font-label-sm text-outline uppercase tracking-wider">Streaks</span>
+</div>
+<div class="flex flex-col items-center p-3 border-x border-outline-variant/30">
+<span class="font-headline-md text-primary">1.2k</span>
+<span class="font-label-sm text-outline uppercase tracking-wider">Karma</span>
+</div>
+<div class="flex flex-col items-center p-3">
+<span class="font-headline-md text-primary">8</span>
+<span class="font-label-sm text-outline uppercase tracking-wider">Badges</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom NavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm mt-1">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+<span class="font-label-sm mt-1">Badges</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm mt-1">Settings</span>
+</a>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple visibility observer for progress bar animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('w-[72%]');
+                }
+            });
+        });
+        
+        const progressBar = document.querySelector('.progress-bar-glow');
+        if (progressBar) observer.observe(progressBar);
+    </script>
+</body></html>

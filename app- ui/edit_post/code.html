@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dce2f7;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#004ac6",
+                        "surface-container": "#e9edff",
+                        "on-secondary-container": "#fefcff",
+                        "secondary": "#0058be",
+                        "inverse-on-surface": "#edf0ff",
+                        "primary-fixed": "#dbe1ff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "inverse-surface": "#293040",
+                        "inverse-primary": "#b4c5ff",
+                        "surface": "#f9f9ff",
+                        "on-surface": "#141b2b",
+                        "on-primary-container": "#eeefff",
+                        "on-primary-fixed": "#00174b",
+                        "surface-variant": "#dce2f7",
+                        "outline": "#737686",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f1f3ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-tint": "#0053db",
+                        "secondary-container": "#2170e4",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e1e8fd",
+                        "tertiary-container": "#196fc0",
+                        "primary-container": "#2563eb",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-tertiary-container": "#ebf1ff",
+                        "surface-container-highest": "#dce2f7",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-background": "#141b2b",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-surface-variant": "#434655",
+                        "tertiary": "#00569c",
+                        "background": "#f9f9ff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d3daef",
+                        "surface-bright": "#f9f9ff",
+                        "outline-variant": "#c3c6d7",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-secondary-fixed": "#001a42",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "2xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "margin-desktop": "auto",
+                        "base": "4px",
+                        "margin-tablet": "32px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "title-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl">
+<div class="flex items-center justify-between px-margin-mobile w-full h-16">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 hover:opacity-80 transition-opacity flex items-center justify-center p-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="close">close</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Edit Post</h1>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-lg hover:opacity-90 active:scale-95 transition-all shadow-sm">
+                Update Post
+            </button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-20 px-margin-mobile max-w-2xl mx-auto space-y-8">
+<!-- Text Editor Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_rgba(17,24,39,0.04)] p-lg space-y-4">
+<label class="block font-title-md text-on-surface-variant">Your Secret Thoughts</label>
+<textarea class="w-full min-h-[160px] bg-transparent border-none focus:ring-0 font-body-lg text-on-surface placeholder:text-outline-variant resize-none" placeholder="Share your thoughts anonymously...">I've always felt like I'm moving at a different speed than everyone else in the office. Sometimes it feels like I'm seeing the code in 4D while they're stuck in a spreadsheet. Is this what they call the "flow state" or am I just overcaffeinated again? ☕️💻</textarea>
+<!-- Character Count -->
+<div class="flex justify-end">
+<span class="text-label-sm text-outline">248 / 500</span>
+</div>
+</section>
+<!-- Category Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-title-md text-on-surface">Category</h2>
+<span class="text-label-sm text-primary">Required</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="work">work</span>
+                    Work Life
+                </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-lg hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite">favorite</span>
+                    Relationships
+                </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-lg hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="lightbulb">lightbulb</span>
+                    Deep Thoughts
+                </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-lg hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="mood">mood</span>
+                    Life Hack
+                </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-outline font-label-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                    More
+                </button>
+</div>
+</section>
+<!-- Mood Selector -->
+<section class="space-y-4">
+<h2 class="font-title-md text-on-surface">Current Mood</h2>
+<div class="bg-surface-container-low rounded-xl p-4 flex justify-between items-center overflow-x-auto gap-4 no-scrollbar">
+<button class="flex flex-col items-center gap-2 min-w-[64px] group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">😊</div>
+<span class="text-label-sm text-on-surface-variant">Happy</span>
+</button>
+<button class="flex flex-col items-center gap-2 min-w-[64px] group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl scale-125 border-2 border-primary bg-primary/10 shadow-sm transition-transform">🤔</div>
+<span class="text-label-sm font-semibold text-primary">Pensive</span>
+</button>
+<button class="flex flex-col items-center gap-2 min-w-[64px] group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔥</div>
+<span class="text-label-sm text-on-surface-variant">Fired Up</span>
+</button>
+<button class="flex flex-col items-center gap-2 min-w-[64px] group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">😴</div>
+<span class="text-label-sm text-on-surface-variant">Tired</span>
+</button>
+<button class="flex flex-col items-center gap-2 min-w-[64px] group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤯</div>
+<span class="text-label-sm text-on-surface-variant">Mind Blown</span>
+</button>
+</div>
+</section>
+<!-- Privacy Toggles -->
+<section class="space-y-4 pb-12">
+<h2 class="font-title-md text-on-surface">Privacy Settings</h2>
+<div class="space-y-1">
+<!-- Toggle 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-t-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chat_bubble">chat_bubble</span>
+<div>
+<p class="font-title-md text-on-surface">Allow Comments</p>
+<p class="text-label-sm text-outline">Let others respond to your secret</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="share">share</span>
+<div>
+<p class="font-title-md text-on-surface">External Sharing</p>
+<p class="text-label-sm text-outline">Allow users to share this outside RAAZ</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle 3 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-b-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="visibility_off">visibility_off</span>
+<div>
+<p class="font-title-md text-on-surface">Ghost Mode</p>
+<p class="text-label-sm text-outline">Your post won't appear in Trending lists</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Dangerous Action Area -->
+<section class="border-t border-outline-variant/30 pt-8 flex justify-center">
+<button class="flex items-center gap-2 text-error font-title-md hover:bg-error-container/20 px-4 py-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+                Delete Post Permanently
+            </button>
+</section>
+</main>
+<!-- Bottom Nav Suppression Logic: User is in a "Back" action sub-page, but based on predicted components we might show it. However, the mandate says to suppress if it's task-focused like 'Edit'. Let's follow the mandate and hide global nav here to focus on the task. -->
+<script>
+        // Micro-interaction for primary button
+        const updateBtn = document.querySelector('button.bg-primary');
+        updateBtn.addEventListener('click', () => {
+            updateBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span>';
+            setTimeout(() => {
+                updateBtn.innerHTML = 'Updated!';
+                updateBtn.classList.replace('bg-primary', 'bg-tertiary');
+                setTimeout(() => {
+                    updateBtn.innerHTML = 'Update Post';
+                    updateBtn.classList.replace('bg-tertiary', 'bg-primary');
+                }, 2000);
+            }, 800);
+        });
+
+        // Category Chip Toggle
+        const chips = document.querySelectorAll('button.rounded-full');
+        chips.forEach(chip => {
+            if (chip.textContent.trim() === 'Work Life' || chip.textContent.trim() === 'Update Post' || chip.textContent.trim() === 'More') return;
+            chip.addEventListener('click', () => {
+                const isActive = chip.classList.contains('bg-primary-container');
+                if (isActive) {
+                    chip.classList.replace('bg-primary-container', 'bg-surface-container-high');
+                    chip.classList.replace('text-on-primary-container', 'text-on-surface-variant');
+                } else {
+                    // Deselect others (simplified)
+                    chips.forEach(c => {
+                        if (c.classList.contains('bg-primary-container') && c.textContent.trim() !== 'Update Post') {
+                            c.classList.replace('bg-primary-container', 'bg-surface-container-high');
+                            c.classList.replace('text-on-primary-container', 'text-on-surface-variant');
+                        }
+                    });
+                    chip.classList.replace('bg-surface-container-high', 'bg-primary-container');
+                    chip.classList.replace('text-on-surface-variant', 'text-on-primary-container');
+                }
+            });
+        });
+    </script>
+</body></html>

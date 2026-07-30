@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Admin Analytics Dashboard</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "secondary-container": "#2170e4",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-dim": "#d3daef",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-container": "#eeefff",
+                        "background": "#f9f9ff",
+                        "on-tertiary-container": "#ebf1ff",
+                        "secondary": "#0058be",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary": "#004ac6",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#00569c",
+                        "on-error-container": "#93000a",
+                        "on-background": "#141b2b",
+                        "surface-variant": "#dce2f7",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-secondary-container": "#fefcff",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e9edff",
+                        "inverse-surface": "#293040",
+                        "surface-container-low": "#f1f3ff",
+                        "surface-container-high": "#e1e8fd",
+                        "on-surface": "#141b2b",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-surface-variant": "#434655",
+                        "surface-bright": "#f9f9ff",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary-fixed": "#d4e3ff",
+                        "tertiary-container": "#196fc0",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-container-highest": "#dce2f7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#0053db",
+                        "outline": "#737686"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "16px",
+                        "xl": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "container-margin": "24px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dce2f7; border-radius: 10px; }
+        .shimmer {
+            background: linear-gradient(90deg, #f1f3ff 25%, #e1e8fd 50%, #f1f3ff 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    </style>
+</head>
+<body class="text-on-background">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] z-50 bg-surface/70 backdrop-blur-xl border-r border-white/20 shadow-lg flex flex-col p-md space-y-xs">
+<div class="px-md py-lg mb-md">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">RAAZ Admin</h1>
+<p class="text-label-sm text-on-surface-variant">Phase 8 Moderation</p>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto custom-scrollbar">
+<!-- Active: Analytics -->
+<a class="flex items-center space-x-md px-md py-sm rounded-lg hover:bg-primary/5 hover:text-primary transition-all text-on-surface-variant font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm rounded-lg hover:bg-primary/5 hover:text-primary transition-all text-on-surface-variant font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">article</span>
+<span>Posts</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm rounded-lg hover:bg-primary/5 hover:text-primary transition-all text-on-surface-variant font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">comment</span>
+<span>Comments</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm rounded-lg hover:bg-primary/5 hover:text-primary transition-all text-on-surface-variant font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">report</span>
+<span>Reports</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm rounded-lg hover:bg-primary/5 hover:text-primary transition-all text-on-surface-variant font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">category</span>
+<span>Categories</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm rounded-lg bg-primary/10 text-primary border-l-4 border-primary font-bold font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm rounded-lg hover:bg-primary/5 hover:text-primary transition-all text-on-surface-variant font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span>Notifications</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm rounded-lg hover:bg-primary/5 hover:text-primary transition-all text-on-surface-variant font-label-lg text-label-lg active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-md bg-surface-container rounded-xl flex items-center space-x-md">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container flex items-center justify-center text-white font-bold">
+                AD
+            </div>
+<div>
+<p class="text-label-lg font-bold">Admin User</p>
+<p class="text-xs text-on-surface-variant">Super Moderator</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 z-40 w-full bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<div class="flex justify-between items-center w-full px-lg py-md max-w-[1440px] mx-auto">
+<div class="flex items-center space-x-lg flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-body-md transition-all" placeholder="Search analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-md">
+<button class="flex items-center space-x-xs px-md py-sm bg-primary text-on-primary rounded-lg font-label-lg hover:bg-primary/90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span>Quick Actions</span>
+</button>
+<div class="flex items-center space-x-sm border-l border-outline-variant pl-md">
+<button class="p-sm rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-sm rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">contrast</span></button>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 p-lg max-w-[1440px] mx-auto w-full space-y-lg">
+<!-- Header Section with Date Range & Export -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Analytics Overview</h2>
+<p class="text-body-lg text-on-surface-variant">Real-time performance metrics and user growth data.</p>
+</div>
+<div class="flex flex-wrap items-center gap-sm">
+<div class="flex items-center bg-white border border-outline-variant rounded-lg p-xs shadow-sm">
+<button class="px-md py-xs rounded-md bg-primary-container text-on-primary-container text-label-lg font-medium">Daily</button>
+<button class="px-md py-xs rounded-md text-on-surface-variant text-label-lg font-medium hover:bg-surface-container transition-colors">Weekly</button>
+<button class="px-md py-xs rounded-md text-on-surface-variant text-label-lg font-medium hover:bg-surface-container transition-colors">Monthly</button>
+</div>
+<div class="flex items-center space-x-sm px-md py-sm bg-white border border-outline-variant rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-outline">calendar_today</span>
+<span class="text-body-md font-medium">Oct 12, 2023 - Nov 11, 2023</span>
+</div>
+<button class="flex items-center space-x-xs px-md py-sm border border-primary text-primary rounded-lg font-label-lg hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Export CSV</span>
+</button>
+</div>
+</section>
+<!-- KPI Cards Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- Card: DAU -->
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30 flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="p-sm bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="flex items-center text-green-600 text-label-sm font-bold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> 12%
+                        </span>
+</div>
+<div class="mt-md">
+<p class="text-on-surface-variant text-label-lg">Daily Active Users</p>
+<h3 class="text-[32px] font-black text-on-surface mt-xs tracking-tight">42,892</h3>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%] transition-all duration-1000"></div>
+</div>
+</div>
+<!-- Card: MAU -->
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30 flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="p-sm bg-secondary/10 rounded-lg text-secondary">
+<span class="material-symbols-outlined">public</span>
+</div>
+<span class="flex items-center text-green-600 text-label-sm font-bold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> 8.4%
+                        </span>
+</div>
+<div class="mt-md">
+<p class="text-on-surface-variant text-label-lg">Monthly Active Users</p>
+<h3 class="text-[32px] font-black text-on-surface mt-xs tracking-tight">1.2M</h3>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[62%] transition-all duration-1000"></div>
+</div>
+</div>
+<!-- Card: Total Posts -->
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30 flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="p-sm bg-tertiary/10 rounded-lg text-tertiary">
+<span class="material-symbols-outlined">article</span>
+</div>
+<span class="flex items-center text-error text-label-sm font-bold">
+<span class="material-symbols-outlined text-[16px]">trending_down</span> 2.1%
+                        </span>
+</div>
+<div class="mt-md">
+<p class="text-on-surface-variant text-label-lg">Total Posts</p>
+<h3 class="text-[32px] font-black text-on-surface mt-xs tracking-tight">8,294</h3>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[45%] transition-all duration-1000"></div>
+</div>
+</div>
+<!-- Card: Comment Volume -->
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30 flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="p-sm bg-orange-100 rounded-lg text-orange-600">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<span class="flex items-center text-green-600 text-label-sm font-bold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> 24%
+                        </span>
+</div>
+<div class="mt-md">
+<p class="text-on-surface-variant text-label-lg">Comment Volume</p>
+<h3 class="text-[32px] font-black text-on-surface mt-xs tracking-tight">128.5k</h3>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 w-[88%] transition-all duration-1000"></div>
+</div>
+</div>
+</section>
+<!-- Primary Analytics Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Large Line Chart: Growth Trends -->
+<div class="lg:col-span-2 bg-white p-xl rounded-xl shadow-sm border border-outline-variant/30 relative overflow-hidden">
+<div class="flex justify-between items-center mb-xl">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Growth Trends</h4>
+<p class="text-body-md text-on-surface-variant">User engagement vs Post creation over 30 days</p>
+</div>
+<div class="flex items-center space-x-md">
+<div class="flex items-center space-x-xs">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-label-sm">Active Users</span>
+</div>
+<div class="flex items-center space-x-xs">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-label-sm">Total Posts</span>
+</div>
+</div>
+</div>
+<!-- SVG Chart Mockup -->
+<div class="h-[300px] w-full flex items-end justify-between relative">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="w-full border-t border-surface-container"></div>
+<div class="w-full border-t border-surface-container"></div>
+<div class="w-full border-t border-surface-container"></div>
+<div class="w-full border-t border-surface-container"></div>
+<div class="w-full border-t border-surface-container"></div>
+</div>
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none" viewbox="0 0 400 100">
+<!-- Curve 1 -->
+<path class="opacity-80" d="M0,80 Q50,70 100,50 T200,60 T300,30 T400,10" fill="none" stroke="var(--primary)" stroke-width="2"></path>
+<path class="opacity-10" d="M0,80 Q50,70 100,50 T200,60 T300,30 T400,10 L400,100 L0,100 Z" fill="url(#grad1)"></path>
+<!-- Curve 2 -->
+<path class="opacity-80" d="M0,90 Q50,85 100,75 T200,80 T300,65 T400,50" fill="none" stroke="var(--secondary)" stroke-width="2"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:var(--primary);stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:var(--primary);stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- X Axis Labels -->
+<div class="absolute -bottom-8 w-full flex justify-between px-md text-label-sm text-outline">
+<span>Oct 12</span>
+<span>Oct 20</span>
+<span>Oct 28</span>
+<span>Nov 05</span>
+<span>Nov 11</span>
+</div>
+</div>
+</div>
+<!-- Trending Categories: Pie Chart -->
+<div class="bg-white p-xl rounded-xl shadow-sm border border-outline-variant/30 flex flex-col">
+<h4 class="font-title-lg text-title-lg text-on-surface mb-md">Trending Categories</h4>
+<p class="text-body-md text-on-surface-variant mb-xl">Most active topics by post volume</p>
+<div class="flex-1 flex flex-col justify-center items-center relative">
+<!-- Simple CSS Pie Chart -->
+<div class="relative w-48 h-48 rounded-full border-[24px] border-surface-container-high" style="background: conic-gradient(#004ac6 0% 35%, #0058be 35% 60%, #00569c 60% 80%, #dce2f7 80% 100%)">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-inner">
+<span class="text-title-md font-black">68%</span>
+<span class="text-[10px] uppercase text-outline">Top 3</span>
+</div>
+</div>
+</div>
+<div class="mt-xl w-full space-y-sm">
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-sm">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-body-md">Personal Development</span>
+</div>
+<span class="text-label-lg font-bold">35%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-sm">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-body-md">Technology</span>
+</div>
+<span class="text-label-lg font-bold">25%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-sm">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span>
+<span class="text-body-md">Lifestyle</span>
+</div>
+<span class="text-label-lg font-bold">20%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-sm">
+<span class="w-3 h-3 rounded-full bg-surface-container-highest"></span>
+<span class="text-body-md">Others</span>
+</div>
+<span class="text-label-lg font-bold">20%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Rankings and Activity -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+<!-- Most Supported Posts Ranking -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+<div class="p-lg border-b border-surface-container-high flex justify-between items-center">
+<h4 class="font-title-lg text-title-lg text-on-surface">Most Supported Posts</h4>
+<button class="text-primary text-label-lg font-bold hover:underline">View All</button>
+</div>
+<div class="p-md">
+<table class="w-full">
+<thead>
+<tr class="text-label-sm text-outline uppercase tracking-wider">
+<th class="text-left py-md px-md">Post Details</th>
+<th class="text-center py-md px-md">Supports</th>
+<th class="text-right py-md px-md">Trend</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-md px-md">
+<div class="flex items-center space-x-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-detail macro shot of a sleek modern workspace with a high-end laptop and a notebook, illuminated by soft golden hour light filtering through a window. The style is professional and corporate with a focus on productivity and minimalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXGC30gSD01jDVTKQJOXuTxhgU0KxUtWoYzIw4yqifBG-RErXB2hwBJjKH26h6eCw9Wj0clBoVWLDbJkrlSNRGjQcJ5A0yd-RZfYHh3GStDcjXX7wRDothO1oAauAe6mLsrI0Wh1eEdM8I46EdwyILapAQOs9cTwZ_7XJ68n46-AQUuzJtbppU1tH5cLQH6v18mvmGZnVtGWLB9rsYMXuYCUsZjTVNImQbnG0nznSkScoejyB02vlIEyOIttGnDr3K2VRJbtZrilyF"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-body-md font-bold truncate">Navigating Remote Work in 2024</p>
+<p class="text-xs text-on-surface-variant">by @tech_guru</p>
+</div>
+</div>
+</td>
+<td class="text-center py-md px-md text-label-lg font-bold">12.4k</td>
+<td class="text-right py-md px-md">
+<span class="bg-green-100 text-green-700 px-sm py-xs rounded-full text-xs font-bold">+18%</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-md px-md">
+<div class="flex items-center space-x-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A serene landscape photography piece showing a misty forest at dawn. The lighting is cool, ethereal, and soft, with layers of trees disappearing into the morning fog. The mood is tranquil and reflective, using a palette of blues, greens, and whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDup9kHRU2dVBAcooXNIv1Nr0TVOspyzHKBG37U-gRFxWicErNxFwiGobTpEyztxcbihxCrGKxFuSmHsdml4BG2WJTVfrsOqF2naNpV_Iul3ZeNl7TNONdN1I3pYlSxh5-rgRE5w3MXSQ7j7IKhvHl7QokI_mwEani0QwD6c_bi3DfGrcOMKz05Hnb4clNihIVnDdgQCU5_EzrdWmZ6DHhnw-Th-bzVu9wQkGlstGJdxHTnH97LvxQ1aPjI7mYMEDVMAtzBBw_JD3U3"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-body-md font-bold truncate">The Art of Mindful Living</p>
+<p class="text-xs text-on-surface-variant">by @zen_master</p>
+</div>
+</div>
+</td>
+<td class="text-center py-md px-md text-label-lg font-bold">9.2k</td>
+<td class="text-right py-md px-md">
+<span class="bg-green-100 text-green-700 px-sm py-xs rounded-full text-xs font-bold">+12%</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-md px-md">
+<div class="flex items-center space-x-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A dynamic, futuristic digital art composition showcasing high-speed fiber optic cables glowing with blue and violet light against a dark, tech-oriented background. The image is sleek, representing high-speed data and connectivity in a modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNbzJ8d9OwNq1b9eA36B23mVMUvwnu1-y9yOZ0VMjf08LfWxXJgFp1w-ZcMpeoFWbqkCNg1n1BvMydzRMHfi06rZdq7CTbkl8UKtcIVVfu8LaAULbrwRskAVHamtq5uEKv3ZG2-7jQINFNetBDzXaAeE65JD0mWxW-nPOoQcs9tJzpepc5ED-MMaGXNzRdgNvXQ6k6v2XiyXArwR5ftzSa_Hq1Gfw-0fJg9GS8uwg32sW-iVo0wOWJQu6JS5r2o1Hom2uovNTbZYrk"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-body-md font-bold truncate">Blockchain: Beyond the Hype</p>
+<p class="text-xs text-on-surface-variant">by @crypto_analyst</p>
+</div>
+</div>
+</td>
+<td class="text-center py-md px-md text-label-lg font-bold">8.7k</td>
+<td class="text-right py-md px-md">
+<span class="bg-surface-container text-on-surface-variant px-sm py-xs rounded-full text-xs font-bold">+4%</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Recent Activity / Logs -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant/30 flex flex-col">
+<div class="p-lg border-b border-surface-container-high">
+<h4 class="font-title-lg text-title-lg text-on-surface">System Activity</h4>
+</div>
+<div class="flex-1 p-lg space-y-lg overflow-y-auto custom-scrollbar max-h-[400px]">
+<!-- Activity Item -->
+<div class="flex space-x-md">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex-1 border-b border-surface-container pb-md">
+<p class="text-body-md text-on-surface"><strong>System</strong> updated moderation algorithms for "Spam" detection.</p>
+<p class="text-label-sm text-outline mt-xs">2 minutes ago</p>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex space-x-md">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+</div>
+<div class="flex-1 border-b border-surface-container pb-md">
+<p class="text-body-md text-on-surface"><strong>Admin Sara</strong> approved 45 pending posts in "Career" category.</p>
+<p class="text-label-sm text-outline mt-xs">15 minutes ago</p>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex space-x-md">
+<div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+</div>
+<div class="flex-1 border-b border-surface-container pb-md">
+<p class="text-body-md text-on-surface"><strong>AutoMod</strong> flagged 12 comments for violating community guidelines.</p>
+<p class="text-label-sm text-outline mt-xs">42 minutes ago</p>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex space-x-md">
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+</div>
+<div class="flex-1 pb-md">
+<p class="text-body-md text-on-surface">New milestone reached: <strong>1,000,000</strong> user interactions this week.</p>
+<p class="text-label-sm text-outline mt-xs">1 hour ago</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="p-lg border-t border-surface-container-high bg-surface-container-lowest mt-auto">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center text-on-surface-variant gap-md">
+<p class="text-body-md">© 2023 RAAZ Phase 8 Admin Portal. Confidential & Internal Use Only.</p>
+<div class="flex items-center space-x-lg text-label-lg font-medium">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">System Health</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Simple Ripple Effect Logic
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.left = `${x - 50}px`;
+                ripple.style.top = `${y - 50}px`;
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add keyframes for ripple
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#dce2f7",
+                    "outline-variant": "#c3c6d7",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#434655",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-primary-container": "#eeefff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "on-surface": "#141b2b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "on-background": "#141b2b",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-container": "#196fc0",
+                    "on-error": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "secondary-container": "#2170e4",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-high": "#e1e8fd",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#2563eb",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-bright": "#f9f9ff",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed": "#001c39",
+                    "primary": "#004ac6",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f1f3ff",
+                    "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-desktop": "auto",
+                    "margin-tablet": "32px",
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+        }
+        .soft-shadow-hover:hover {
+            box-shadow: 0 8px 20px rgba(17, 24, 39, 0.08);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[18px]">person</span>
+</div>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto space-y-8">
+<!-- Today's Question Section -->
+<section class="space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Today's Question</span>
+</div>
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-on-surface leading-tight">
+                What is one thing you are grateful for today?
+            </h2>
+<button class="bg-primary-container text-on-primary-container w-full py-4 rounded-xl font-title-md text-title-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all soft-shadow" id="answerBtn">
+<span class="material-symbols-outlined">edit_square</span>
+                Share your thought
+            </button>
+</section>
+<!-- Quote Card (Bento Style) -->
+<div class="relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-[16/9] flex items-end p-6 soft-shadow group">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A serene and ethereal mountain landscape at dawn with soft, misty atmosphere. The lighting is diffused with hues of pale blue and soft lavender, creating a peaceful and contemplative mood. The overall aesthetic is minimalist, premium, and calm, perfectly matching a high-end mindfulness application's light-mode interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpRdHfeCwm2llDzKcCQHFZac0icRekBzHJKQzpQdV31GNXps1XuUKNqrsPRWJSqc_RBzX5VTv65_xaBGr7AusqdldjnYb8UsxUFJk07ovHqxjWZSxryMi-Zc8kIkr-aAmnGDJ3SaBxmbUK_nf7-uv5YhYEwPLysy0axyvVAIb2lDiq6YdwDUGpC0ryiTx07m9FTcSsyeAwB9eo1EvkhaznYYs-wFnZy9-nUGklTrOsIgXV9rN6gRebUf4081lRRJ9RiUw2bEsQ6WSV')"></div>
+</div>
+<div class="glass-card w-full p-6 rounded-xl border border-white/40 z-10">
+<span class="material-symbols-outlined text-primary mb-2">format_quote</span>
+<p class="font-title-md text-title-md text-on-surface italic leading-relaxed">
+                    "Gratitude turns what we have into enough, and more. It turns denial into acceptance, chaos into order, confusion into clarity."
+                </p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-4 font-bold">— Melody Beattie</p>
+</div>
+</div>
+<!-- Community Answers Header -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">groups</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Community Wisdom</h3>
+</div>
+<button class="text-primary font-label-lg text-label-lg flex items-center gap-1">
+                    See all
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<!-- Anonymous Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl soft-shadow soft-shadow-hover transition-all border border-outline-variant/20 flex flex-col justify-between">
+<p class="font-body-lg text-body-lg text-on-surface mb-6">
+                        I'm grateful for the silence of early morning before the world wakes up. It’s my only time for true reflection.
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-secondary">incognito</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Anonymous • 2h ago</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">favorite</button>
+<span class="font-label-sm text-label-sm">24</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl soft-shadow soft-shadow-hover transition-all border border-outline-variant/20 flex flex-col justify-between">
+<p class="font-body-lg text-body-lg text-on-surface mb-6">
+                        Grateful for a warm cup of coffee and the book I finally started reading today. Small joys are the best ones.
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-tertiary">incognito</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Anonymous • 4h ago</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">favorite</button>
+<span class="font-label-sm text-label-sm">18</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl soft-shadow soft-shadow-hover transition-all border border-outline-variant/20 flex flex-col justify-between">
+<p class="font-body-lg text-body-lg text-on-surface mb-6">
+                        Finally feeling healthy again after a week of being sick. Health is truly a blessing we take for granted.
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-primary">incognito</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Anonymous • 5h ago</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">favorite</button>
+<span class="font-label-sm text-label-sm">42</span>
+</div>
+</div>
+</div>
+<!-- Card 4 (Bento Variation) -->
+<div class="bg-secondary-container text-on-secondary-container p-6 rounded-xl soft-shadow soft-shadow-hover transition-all flex flex-col justify-between">
+<div>
+<div class="bg-white/20 w-fit px-3 py-1 rounded-full mb-4">
+<span class="font-label-sm text-label-sm">Top Reflection</span>
+</div>
+<p class="font-title-md text-title-md leading-relaxed mb-6">
+                            "I'm grateful for the courage to say no to things that no longer serve my peace."
+                        </p>
+</div>
+<div class="flex items-center justify-between opacity-80">
+<span class="font-label-sm text-label-sm">Anonymous • 12h ago</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-sm text-label-sm font-bold">128</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<!-- Trending -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<!-- Search -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<!-- Simple Interactivity -->
+<script>
+        document.getElementById('answerBtn').addEventListener('click', function() {
+            // Mock interaction for the answer button
+            const originalText = this.innerHTML;
+            this.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Posting...';
+            this.classList.add('opacity-70');
+            
+            setTimeout(() => {
+                this.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Shared anonymously';
+                this.classList.remove('bg-primary-container', 'text-on-primary-container');
+                this.classList.add('bg-green-100', 'text-green-800');
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.classList.remove('bg-green-100', 'text-green-800', 'opacity-70');
+                    this.classList.add('bg-primary-container', 'text-on-primary-container');
+                }, 2000);
+            }, 1500);
+        });
+
+        // Add heart animation
+        document.querySelectorAll('.favorite').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('text-error');
+                if(this.classList.contains('text-error')) {
+                    this.style.fontVariationSettings = "'FILL' 1";
+                } else {
+                    this.style.fontVariationSettings = "'FILL' 0";
+                }
+            });
+        });
+    </script>
+</body></html>

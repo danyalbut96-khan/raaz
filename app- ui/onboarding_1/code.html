@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Onboarding</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Rounded -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,200,0,0&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#dce2f7",
+                    "on-background": "#141b2b",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d3daef",
+                    "primary-container": "#2563eb",
+                    "error": "#ba1a1a",
+                    "surface-container": "#e9edff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "background": "#f9f9ff",
+                    "secondary-container": "#2170e4",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#293040",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#0058be",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-surface": "#141b2b",
+                    "outline": "#737686",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#196fc0",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "margin-tablet": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "auto",
+                    "2xl": "48px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+            color: #141b2b;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 20;
+        }
+        .onboarding-shadow {
+            box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+        }
+        .active-dot {
+            width: 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Floating micro-animation for the 3D asset */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-asset {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-screen flex flex-col justify-between">
+<!-- Top Navigation Bar (JSON Anchor Mapping) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-md" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<button class="text-on-surface-variant font-label-lg text-label-lg hover:opacity-80 transition-opacity active:scale-95 duration-200">
+            Skip
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile pt-16 pb-32">
+<!-- Premium Abstract 3D Illustration Container -->
+<div class="relative w-full max-w-sm aspect-square flex items-center justify-center mb-12">
+<!-- Background Soft Glow -->
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl"></div>
+<!-- Hero Illustration Card -->
+<div class="relative w-full h-full p-8 flex items-center justify-center">
+<div class="floating-asset w-full h-full rounded-2xl onboarding-shadow bg-surface-container-lowest overflow-hidden flex items-center justify-center border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A premium 3D abstract sculpture representing anonymity and security. It features fluid, translucent iridescent glass shapes intertwined with soft metallic spheres in primary blue and white. The lighting is high-key and studio-quality, creating soft shadows and realistic refractions against a clean, minimal light-mode background. The overall aesthetic is sophisticated and technologically advanced, evoking a sense of safe, private spaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ76WjRpxyqqOL6E6yX9WAs_PO38DNafv1mAlw35WZkwYtnEcKD3kGDAobUc0ZoTIAVa1GXmsWoe-XIR3d4s0luSzOdsNYXsHZzZjjTpWcoWY8yUr_fqzgzzdGwYIOi64pXJTjPsMVfsxHaj-6upMdhLxaXKrOGA121Ytbe72pPQjYkeexxMucVr929gnkrLw19gfWSxZfyqh_qH8c6uXaHif0uWm3eSakjWtsH4Iw2EIYxSpEyxCIz4C92Z7pD_9V6DlSUwZfjWW2"/>
+</div>
+</div>
+</div>
+<!-- Typography & Headline -->
+<div class="text-center space-y-4 max-w-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-on-background tracking-tight">
+                Speak Your Truth
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                An anonymous space built on trust. Share your thoughts, feelings, and secrets without revealing your identity.
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation & Controls -->
+<footer class="fixed bottom-0 w-full p-margin-mobile bg-gradient-to-t from-surface via-surface to-transparent">
+<div class="max-w-md mx-auto space-y-8">
+<!-- Page Indicators (3 Dots) -->
+<div class="flex justify-center items-center gap-2">
+<div class="active-dot h-2 bg-primary rounded-full"></div>
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div>
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center justify-between gap-4">
+<button class="px-8 py-4 font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-variant/20 transition-colors rounded-xl">
+                    Back
+                </button>
+<button class="flex-grow md:flex-grow-0 md:px-12 py-4 bg-primary text-on-primary font-label-lg text-label-lg rounded-full onboarding-shadow hover:opacity-90 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
+                    Next
+                    <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- Atmosphere Micro-interaction Layer -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-30">
+<div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-primary-container rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-5%] left-[-5%] w-64 h-64 bg-tertiary-fixed-dim rounded-full blur-[100px]"></div>
+</div>
+<script>
+        // Micro-interaction for the "Next" button
+        const nextBtn = document.querySelector('button.bg-primary');
+        nextBtn.addEventListener('mouseenter', () => {
+            const icon = nextBtn.querySelector('.material-symbols-outlined');
+            icon.style.transform = 'translateX(4px)';
+            icon.style.transition = 'transform 0.2s ease-out';
+        });
+        nextBtn.addEventListener('mouseleave', () => {
+            const icon = nextBtn.querySelector('.material-symbols-outlined');
+            icon.style.transform = 'translateX(0px)';
+        });
+    </script>
+</body></html>

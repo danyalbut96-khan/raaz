@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>RAAZ - What's New</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#dce2f7",
+                    "outline-variant": "#c3c6d7",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#434655",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-primary-container": "#eeefff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "on-surface": "#141b2b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "on-background": "#141b2b",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-container": "#196fc0",
+                    "on-error": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "secondary-container": "#2170e4",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-high": "#e1e8fd",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#2563eb",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-bright": "#f9f9ff",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed": "#001c39",
+                    "primary": "#004ac6",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f1f3ff",
+                    "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-desktop": "auto",
+                    "margin-tablet": "32px",
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            color: #141b2b;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .timeline-line {
+            width: 2px;
+            background: repeating-linear-gradient(to bottom, transparent, transparent 4px, #c3c6d7 4px, #c3c6d7 8px);
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #dce2f7; border-radius: 10px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="pt-20 px-margin-mobile max-w-2xl mx-auto">
+<!-- Header Section -->
+<section class="mb-lg">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface mb-xs">What's New</h2>
+<p class="font-body-md text-on-surface-variant">Stay updated with the latest features and security enhancements at RAAZ.</p>
+</section>
+<!-- Coming Next Version (Featured Section) -->
+<section class="mb-xl">
+<div class="glass-card rounded-xl p-md shadow-sm border-l-4 border-primary">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label-lg text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+                        Coming Next Version
+                    </span>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-sm text-[10px]">v2.4.0</span>
+</div>
+<h3 class="font-title-md text-on-surface mb-xs">Encrypted Media Sharing</h3>
+<p class="font-body-md text-on-surface-variant mb-md">Share photos and videos with zero-knowledge encryption, ensuring even we can't see your memories.</p>
+<div class="space-y-sm">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<div>
+<p class="font-title-md text-[14px]">Vanishing Media</p>
+<p class="font-body-md text-on-surface-variant text-[12px]">View-once media that deletes instantly after being seen.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<div>
+<p class="font-title-md text-[14px]">Biometric Lock</p>
+<p class="font-body-md text-on-surface-variant text-[12px]">Extra layer of security using FaceID or Fingerprint.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Roadmap Tabs (Simplified Segmented Button) -->
+<div class="flex bg-surface-container-low p-1 rounded-full mb-lg">
+<button class="flex-1 py-2 rounded-full bg-secondary-container text-on-secondary-container font-label-lg text-center transition-all">Version History</button>
+<button class="flex-1 py-2 rounded-full text-on-surface-variant font-label-lg text-center hover:bg-surface-container-high transition-all">Roadmap</button>
+</div>
+<!-- Version History Timeline -->
+<section class="relative space-y-xl">
+<!-- Timeline Vertical Line -->
+<div class="absolute left-[19px] top-4 bottom-4 timeline-line"></div>
+<!-- v2.3.5 Item -->
+<div class="relative pl-12">
+<!-- Timeline Dot -->
+<div class="absolute left-0 top-1 w-10 h-10 flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-primary ring-4 ring-surface"></div>
+</div>
+<div class="flex items-center justify-between mb-sm">
+<h4 class="font-title-md text-on-surface">v2.3.5</h4>
+<span class="font-label-sm text-outline">Mar 12, 2024</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<span class="inline-block px-2 py-0.5 bg-tertiary-container text-on-tertiary-container rounded text-[10px] font-label-sm uppercase tracking-wider mb-sm">Update</span>
+<ul class="space-y-sm">
+<li class="font-body-md text-on-surface-variant flex gap-2">
+<span class="text-primary font-bold">•</span>
+                            Enhanced ghost mode algorithms for better anonymity.
+                        </li>
+<li class="font-body-md text-on-surface-variant flex gap-2">
+<span class="text-primary font-bold">•</span>
+                            New dark mode optimization for OLED screens.
+                        </li>
+<li class="font-body-md text-on-surface-variant flex gap-2">
+<span class="text-primary font-bold">•</span>
+                            Resolved intermittent notification delay on Android 14.
+                        </li>
+</ul>
+</div>
+</div>
+<!-- v2.2.0 Item -->
+<div class="relative pl-12">
+<!-- Timeline Dot -->
+<div class="absolute left-0 top-1 w-10 h-10 flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-outline-variant ring-4 ring-surface"></div>
+</div>
+<div class="flex items-center justify-between mb-sm">
+<h4 class="font-title-md text-on-surface">v2.2.0</h4>
+<span class="font-label-sm text-outline">Feb 28, 2024</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<span class="inline-block px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded text-[10px] font-label-sm uppercase tracking-wider mb-sm">Major Release</span>
+<p class="font-body-md text-on-surface-variant mb-sm">Introduction of "Interest Circles" and private thread support.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-highest rounded text-[11px] font-label-sm">#AnonymousGroups</span>
+<span class="px-2 py-1 bg-surface-container-highest rounded text-[11px] font-label-sm">#EndToEnd</span>
+</div>
+</div>
+</div>
+<!-- v2.1.8 Item -->
+<div class="relative pl-12">
+<!-- Timeline Dot -->
+<div class="absolute left-0 top-1 w-10 h-10 flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-outline-variant ring-4 ring-surface"></div>
+</div>
+<div class="flex items-center justify-between mb-sm">
+<h4 class="font-title-md text-on-surface">v2.1.8</h4>
+<span class="font-label-sm text-outline">Feb 05, 2024</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<span class="inline-block px-2 py-0.5 bg-error-container text-on-error-container rounded text-[10px] font-label-sm uppercase tracking-wider mb-sm">Security Fix</span>
+<li class="list-none font-body-md text-on-surface-variant">Patched a vulnerability in metadata stripping for uploaded attachments.</li>
+</div>
+</div>
+</section>
+<!-- Bento Grid Roadmap Preview (Asymmetric) -->
+<section class="mt-2xl">
+<h3 class="font-title-lg text-on-surface mb-md">Q3 Roadmap Preview</h3>
+<div class="grid grid-cols-2 gap-md h-[320px]">
+<!-- Item 1 -->
+<div class="bg-primary-container text-on-primary-container p-lg rounded-xl flex flex-col justify-between row-span-2">
+<div>
+<span class="material-symbols-outlined text-[32px] mb-md" data-icon="hub">hub</span>
+<h4 class="font-title-md">Global Hubs</h4>
+</div>
+<p class="font-body-md opacity-90">Localized anonymous sharing across cities worldwide.</p>
+</div>
+<!-- Item 2 -->
+<div class="bg-tertiary p-md rounded-xl text-on-tertiary flex flex-col justify-center text-center">
+<span class="material-symbols-outlined mb-sm" data-icon="verified_user">verified_user</span>
+<h4 class="font-title-md">Trust Score 2.0</h4>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-highest p-md rounded-xl flex flex-col justify-center border border-outline-variant">
+<h4 class="font-title-md text-on-surface-variant">API Access</h4>
+<p class="text-[12px] text-outline">For verified researchers</p>
+</div>
+</div>
+</section>
+<!-- Bottom CTA -->
+<div class="mt-2xl mb-md p-lg bg-surface-variant/30 rounded-2xl text-center border border-dashed border-outline-variant">
+<p class="font-body-md text-on-surface-variant mb-md">Have a feature request or found a bug?</p>
+<button class="bg-primary text-on-primary px-lg py-2 rounded-full font-label-lg shadow-sm active:scale-95 transition-all">
+                Send Feedback
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl flex justify-around items-center h-20 pb-safe px-2 rounded-t-xl shadow-lg md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<!-- Active: Settings (As this relates to info/version/settings context) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab switching simulation
+            const tabs = document.querySelectorAll('button[class*="flex-1"]');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+                        t.classList.add('text-on-surface-variant');
+                    });
+                    tab.classList.add('bg-secondary-container', 'text-on-secondary-container');
+                    tab.classList.remove('text-on-surface-variant');
+                });
+            });
+
+            // Scroll reveal animation simple implementation
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-4');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section > div, section > .relative').forEach(el => {
+                el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+                observer.observe(el);
+            });
+        });
+    </script>
+</body></html>

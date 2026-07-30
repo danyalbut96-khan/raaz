@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Phase 6 Modals &amp; Overlays</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dce2f7",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b4c5ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#eeefff",
+                    "primary-container": "#2563eb",
+                    "on-primary-fixed": "#00174b",
+                    "background": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "surface-tint": "#0053db",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f1f3ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e1e8fd",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-surface": "#141b2b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "surface-container-highest": "#dce2f7",
+                    "outline-variant": "#c3c6d7",
+                    "on-secondary-container": "#fefcff",
+                    "secondary-container": "#2170e4",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "tertiary": "#00569c",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "primary-fixed": "#dbe1ff",
+                    "tertiary-container": "#196fc0",
+                    "outline": "#737686",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#edf0ff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "surface-dim": "#d3daef",
+                    "surface-container": "#e9edff",
+                    "inverse-surface": "#293040",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-surface-variant": "#434655",
+                    "primary": "#004ac6",
+                    "on-tertiary-fixed": "#001c39",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "on-background": "#141b2b",
+                    "secondary-fixed-dim": "#adc6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "2xl": "48px",
+                    "sm": "8px",
+                    "margin-tablet": "32px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "gutter": "16px",
+                    "margin-desktop": "auto",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .modal-backdrop {
+            background-color: rgba(20, 27, 43, 0.4);
+            backdrop-filter: blur(8px);
+        }
+        .bottom-sheet-transition {
+            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #f1f3ff 25%, #e1e8fd 50%, #f1f3ff 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            from { background-position: -200% 0; }
+            to { background-position: 200% 0; }
+        }
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-surface">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-sm h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h1 class="font-display-lg text-display-lg-mobile tracking-tighter text-primary">RAAZ</h1>
+</div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 duration-150">workspace_premium</button>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile max-w-md mx-auto">
+<div class="mb-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Overlay Preview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Developer test-bench for Phase 6 interaction patterns, modals, and sheets.</p>
+</div>
+<!-- Section: Dialogs -->
+<section class="space-y-md mb-2xl">
+<h3 class="font-title-md text-title-md text-primary mb-md">Standard Dialogs</h3>
+<div class="grid grid-cols-1 gap-sm">
+<button class="flex items-center justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 active:scale-[0.98] transition-transform" onclick="toggleModal('modal-notify')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">notifications_active</span>
+<span class="font-body-lg text-body-lg">Notify Me</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 active:scale-[0.98] transition-transform" onclick="toggleModal('modal-premium')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<span class="font-body-lg text-body-lg">Premium Details</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 active:scale-[0.98] transition-transform" onclick="toggleModal('modal-soon')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+<span class="font-body-lg text-body-lg">Coming Soon</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 active:scale-[0.98] transition-transform" onclick="toggleModal('modal-reminder')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span class="font-body-lg text-body-lg">Feature Reminder</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 active:scale-[0.98] transition-transform" onclick="toggleModal('modal-error')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-error">wifi_off</span>
+<span class="font-body-lg text-body-lg">Network Error</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Section: Bottom Sheets -->
+<section class="space-y-md">
+<h3 class="font-title-md text-title-md text-primary mb-md">Bottom Sheets</h3>
+<div class="grid grid-cols-1 gap-sm">
+<button class="flex items-center justify-between p-md bg-primary/5 rounded-xl border border-primary/20 active:scale-[0.98] transition-transform" onclick="openSheet('sheet-premium')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-body-lg text-body-lg text-primary font-medium">Premium Features</span>
+</div>
+<span class="material-symbols-outlined text-primary">expand_less</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 active:scale-[0.98] transition-transform" onclick="openSheet('sheet-cloud')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">cloud_queue</span>
+<span class="font-body-lg text-body-lg">Cloud Providers</span>
+</div>
+<span class="material-symbols-outlined text-outline">expand_less</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 active:scale-[0.98] transition-transform" onclick="openSheet('sheet-roadmap')">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">timeline</span>
+<span class="font-body-lg text-body-lg">Roadmap Timeline</span>
+</div>
+<span class="material-symbols-outlined text-outline">expand_less</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-40 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl flex justify-around items-center py-sm px-gutter">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 opacity-40">
+<span class="material-symbols-outlined">dynamic_feed</span>
+<span class="font-label-sm text-label-sm">Feed</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 opacity-40">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 opacity-40">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="font-label-sm text-label-sm">Badges</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</div>
+</nav>
+<!-- Modal: Notify Me (Success) -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-md" id="modal-notify">
+<div class="modal-backdrop absolute inset-0" onclick="toggleModal('modal-notify')"></div>
+<div class="relative bg-surface-container-lowest w-full max-w-xs rounded-3xl p-xl shadow-2xl scale-95 transition-transform duration-300">
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-sm">Notifications On</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">You'll be the first to know when your favorite threads get new updates.</p>
+<button class="w-full py-md bg-primary text-on-primary rounded-full font-label-lg text-label-lg" onclick="toggleModal('modal-notify')">Got it</button>
+</div>
+</div>
+</div>
+<!-- Modal: Premium Details -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-md" id="modal-premium">
+<div class="modal-backdrop absolute inset-0" onclick="toggleModal('modal-premium')"></div>
+<div class="relative bg-surface-container-lowest w-full max-w-sm rounded-3xl p-xl shadow-2xl">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg">RAAZ Premium</h3>
+<p class="font-label-sm text-label-sm text-primary">Upgrade Your Identity</p>
+</div>
+</div>
+<ul class="space-y-md mb-xl">
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+<span class="font-body-md text-body-md">Verified Badge on all anonymous posts</span>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary text-lg">shield</span>
+<span class="font-body-md text-body-md">Advanced end-to-end encryption logs</span>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary text-lg">palette</span>
+<span class="font-body-md text-body-md">Exclusive dark glass UI themes</span>
+</li>
+</ul>
+<div class="flex flex-col gap-sm">
+<button class="w-full py-md bg-primary text-on-primary rounded-full font-label-lg text-label-lg">Subscribe for $4.99/mo</button>
+<button class="w-full py-md text-primary font-label-lg text-label-lg" onclick="toggleModal('modal-premium')">Maybe later</button>
+</div>
+</div>
+</div>
+<!-- Modal: Coming Soon (Alert) -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-md" id="modal-soon">
+<div class="modal-backdrop absolute inset-0" onclick="toggleModal('modal-soon')"></div>
+<div class="relative bg-surface-container-lowest w-full max-w-xs rounded-3xl p-xl shadow-2xl overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 shimmer opacity-50"></div>
+<div class="flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-md">rocket_launch</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Almost Ready</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Encrypted Voice Channels are coming in Phase 7. Stay tuned for the invite link.</p>
+<div class="flex gap-sm w-full">
+<button class="flex-1 py-md border border-outline text-primary rounded-full font-label-lg text-label-lg" onclick="toggleModal('modal-soon')">Close</button>
+<button class="flex-1 py-md bg-primary text-on-primary rounded-full font-label-lg text-label-lg">Pre-register</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal: Feature Reminder -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-md" id="modal-reminder">
+<div class="modal-backdrop absolute inset-0" onclick="toggleModal('modal-reminder')"></div>
+<div class="relative bg-surface-container-lowest w-full max-w-sm rounded-3xl p-xl shadow-2xl">
+<div class="mb-lg">
+<h3 class="font-title-lg text-title-lg mb-xs">Scheduled Review</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Time to review your privacy settings. It has been 30 days since your last check.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<button class="w-full py-md bg-secondary-container text-on-secondary-container rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-sm">security</span> Review Now
+                </button>
+<button class="w-full py-md text-on-surface-variant font-label-lg text-label-lg" onclick="toggleModal('modal-reminder')">Remind me in a week</button>
+</div>
+</div>
+</div>
+<!-- Modal: Network Error -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-md" id="modal-error">
+<div class="modal-backdrop absolute inset-0" onclick="toggleModal('modal-error')"></div>
+<div class="relative bg-surface-container-lowest w-full max-w-xs rounded-3xl p-xl shadow-2xl">
+<div class="flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-error text-5xl mb-md">cloud_off</span>
+<h3 class="font-title-lg text-title-lg text-error mb-sm">Connection Lost</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">We couldn't reach the secure gateway. Please check your network and try again.</p>
+<button class="w-full py-md bg-error text-on-error rounded-full font-label-lg text-label-lg" onclick="toggleModal('modal-error')">Retry Connection</button>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet: Premium Features -->
+<div class="fixed inset-0 z-[100] pointer-events-none overflow-hidden" id="sheet-premium">
+<div class="modal-backdrop absolute inset-0 pointer-events-auto opacity-0 transition-opacity duration-300" onclick="closeSheet('sheet-premium')"></div>
+<div class="bottom-sheet-transition absolute bottom-0 left-0 w-full bg-surface-container-lowest rounded-t-[32px] pointer-events-auto translate-y-full shadow-[0_-8px_32px_rgba(0,0,0,0.1)]">
+<div class="flex justify-center p-sm">
+<div class="w-12 h-1 bg-outline-variant rounded-full"></div>
+</div>
+<div class="px-xl pb-2xl pt-md">
+<div class="flex justify-between items-center mb-xl">
+<h2 class="font-headline-md text-headline-md">RAAZ Unlocked</h2>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="space-y-md">
+<div class="flex items-center gap-md p-md bg-surface-container-low rounded-2xl">
+<div class="w-16 h-16 rounded-xl bg-cover bg-center shrink-0" data-alt="A macro photography shot of an iridescent, glowing crystal prism reflecting soft blue and pink light on a clean white surface. High-end product photography style with shallow depth of field, bright and modern aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANC3Fi8GkbknsNSM-s5rtLE81jgBnDrju5Yxz6bSG5aMK5JImSJ3tZ8uODcUDxk-YQ_svT6c0NHQKewQWCXxfCY9Tl1nZmdRugnAhldzcRkINqdAko1WbWU7FMGIJGzt5mdJA8bC9STie6bB0RtbUDKc4-z57kB1hcRD9HU6ysUE_hsWFZuhmYzZ8sxSadoBY56r41DxNmIQ1MLahtSSe17TCEc6bYDN8km9lRNA8ht7xEdvzStaqCV9IL3PFukylUDGrMBs9xaXP6')"></div>
+<div>
+<h4 class="font-title-md text-title-md">Custom Avatars</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Generative art profiles for each persona.</p>
+</div>
+</div>
+<div class="flex items-center gap-md p-md bg-surface-container-low rounded-2xl">
+<div class="w-16 h-16 rounded-xl bg-cover bg-center shrink-0" data-alt="Abstract digital rendering of floating silver spheres and geometric lines connected in a web-like structure. The background is a soft gradient of light blues. Modern, clean, and high-tech feel, representing network connectivity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBYAi1ucI4egiXnTt3vH86n2VZ_QvGp5RJfdM-H8oj2D8P2Q0h0OU0RHwRbjPsqejV_tvQzYKg-cQd9yjhhM9tGvBeJe2ikyMjMGS30gGbJltxA5CTf3JTEcZxy-ds5v-b09-5dPFUTny_AXDAejqFRQbD1UuRD0UG-tVgGxDqWjVqCL-tLKzPG1wCcrdzVkui8EBXMR1u_I2-3cjyWYYazcNKNVnUkjo0HZLpkt8YdquC1gWxuaxmDGZeUR62EFBpK-G7up2RNaysy')"></div>
+<div>
+<h4 class="font-title-md text-title-md">Priority Reach</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Boost your shares to more viewers.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet: Cloud Providers -->
+<div class="fixed inset-0 z-[100] pointer-events-none overflow-hidden" id="sheet-cloud">
+<div class="modal-backdrop absolute inset-0 pointer-events-auto opacity-0 transition-opacity duration-300" onclick="closeSheet('sheet-cloud')"></div>
+<div class="bottom-sheet-transition absolute bottom-0 left-0 w-full bg-surface-container-lowest rounded-t-[32px] pointer-events-auto translate-y-full">
+<div class="flex justify-center p-sm">
+<div class="w-12 h-1 bg-outline-variant rounded-full"></div>
+</div>
+<div class="px-xl pb-2xl pt-md">
+<h3 class="font-title-lg text-title-lg mb-lg">Select Storage Node</h3>
+<div class="grid grid-cols-1 gap-sm">
+<div class="flex items-center gap-md p-md border-2 border-primary bg-primary/5 rounded-2xl">
+<span class="material-symbols-outlined text-primary">cloud_done</span>
+<div class="flex-1">
+<h4 class="font-title-md text-title-md">RAAZ Distributed</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Default secure node (Standard)</p>
+</div>
+<span class="material-symbols-outlined text-primary">radio_button_checked</span>
+</div>
+<div class="flex items-center gap-md p-md border border-outline-variant rounded-2xl opacity-60">
+<span class="material-symbols-outlined">storage</span>
+<div class="flex-1">
+<h4 class="font-title-md text-title-md">Local Proxy</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Store data on your device only</p>
+</div>
+<span class="material-symbols-outlined">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet: Roadmap Timeline -->
+<div class="fixed inset-0 z-[100] pointer-events-none overflow-hidden" id="sheet-roadmap">
+<div class="modal-backdrop absolute inset-0 pointer-events-auto opacity-0 transition-opacity duration-300" onclick="closeSheet('sheet-roadmap')"></div>
+<div class="bottom-sheet-transition absolute bottom-0 left-0 w-full bg-surface-container-lowest h-[751px] rounded-t-[32px] pointer-events-auto translate-y-full">
+<div class="flex justify-center p-sm sticky top-0 bg-surface-container-lowest z-10">
+<div class="w-12 h-1 bg-outline-variant rounded-full"></div>
+</div>
+<div class="px-xl pb-margin-mobile overflow-y-auto h-full">
+<h3 class="font-headline-md text-headline-md mb-xl pt-md">Project Roadmap</h3>
+<div class="relative pl-8 space-y-xl before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant">
+<div class="relative">
+<div class="absolute -left-[27px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-primary/20"></div>
+<h4 class="font-title-md text-title-md">Phase 5: Secure Vaults</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Implemented private storage for sensitive interactions and media.</p>
+<span class="mt-sm inline-block px-2 py-0.5 bg-surface-container text-on-surface-variant text-[10px] rounded uppercase font-bold tracking-wider">Completed</span>
+</div>
+<div class="relative">
+<div class="absolute -left-[27px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-primary/20"></div>
+<h4 class="font-title-md text-title-md">Phase 6: Advanced Overlays</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Current focus on refined Material 3 modal interactions and bottom sheets.</p>
+<span class="mt-sm inline-block px-2 py-0.5 bg-primary/10 text-primary text-[10px] rounded uppercase font-bold tracking-wider">In Progress</span>
+</div>
+<div class="relative">
+<div class="absolute -left-[27px] top-1 w-4 h-4 rounded-full bg-outline-variant"></div>
+<h4 class="font-title-md text-title-md">Phase 7: Voice Nodes</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time anonymous voice channels with hardware-level encryption.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[27px] top-1 w-4 h-4 rounded-full bg-outline-variant"></div>
+<h4 class="font-title-md text-title-md">Phase 8: Global Decentralization</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Migrating backend infrastructure to a fully peer-to-peer network.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            const content = modal.querySelector('.relative');
+            
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('scale-95', 'opacity-0');
+                    content.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            } else {
+                content.classList.remove('scale-100', 'opacity-100');
+                content.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function openSheet(id) {
+            const sheetContainer = document.getElementById(id);
+            const backdrop = sheetContainer.querySelector('.modal-backdrop');
+            const sheet = sheetContainer.querySelector('.bottom-sheet-transition');
+            
+            sheetContainer.classList.remove('pointer-events-none');
+            setTimeout(() => {
+                backdrop.classList.add('opacity-100');
+                sheet.classList.remove('translate-y-full');
+                sheet.classList.add('translate-y-0');
+            }, 10);
+        }
+
+        function closeSheet(id) {
+            const sheetContainer = document.getElementById(id);
+            const backdrop = sheetContainer.querySelector('.modal-backdrop');
+            const sheet = sheetContainer.querySelector('.bottom-sheet-transition');
+            
+            backdrop.classList.remove('opacity-100');
+            sheet.classList.remove('translate-y-0');
+            sheet.classList.add('translate-y-full');
+            
+            setTimeout(() => {
+                sheetContainer.classList.add('pointer-events-none');
+            }, 400);
+        }
+
+        // Accessibility Escape Key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('[id^="modal-"]').forEach(m => {
+                    if (!m.classList.contains('hidden')) toggleModal(m.id);
+                });
+                document.querySelectorAll('[id^="sheet-"]').forEach(s => {
+                    if (s.querySelector('.bottom-sheet-transition').classList.contains('translate-y-0')) closeSheet(s.id);
+                });
+            }
+        });
+    </script>
+</body></html>

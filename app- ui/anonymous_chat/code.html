@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Anonymous Chat</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#dce2f7",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed": "#d8e2ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#eeefff",
+                        "primary-container": "#2563eb",
+                        "on-primary-fixed": "#00174b",
+                        "background": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "surface-tint": "#0053db",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f1f3ff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e1e8fd",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-surface": "#141b2b",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-highest": "#dce2f7",
+                        "outline-variant": "#c3c6d7",
+                        "on-secondary-container": "#fefcff",
+                        "secondary-container": "#2170e4",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "tertiary": "#00569c",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-container": "#196fc0",
+                        "outline": "#737686",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#edf0ff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "on-secondary-fixed": "#001a42",
+                        "on-primary": "#ffffff",
+                        "secondary": "#0058be",
+                        "surface-dim": "#d3daef",
+                        "surface-container": "#e9edff",
+                        "inverse-surface": "#293040",
+                        "on-tertiary-container": "#ebf1ff",
+                        "on-surface-variant": "#434655",
+                        "primary": "#004ac6",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface": "#f9f9ff",
+                        "on-error-container": "#93000a",
+                        "on-background": "#141b2b",
+                        "secondary-fixed-dim": "#adc6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "2xl": "48px",
+                        "sm": "8px",
+                        "margin-tablet": "32px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-desktop": "auto",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "title-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "title-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .chat-bubble-received {
+            border-bottom-left-radius: 4px;
+        }
+        .chat-bubble-sent {
+            border-bottom-right-radius: 4px;
+        }
+        .floating-animation {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-sm h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="shield_lock">shield_lock</span>
+<h1 class="font-display-lg text-[22px] tracking-tighter text-primary">Anonymous Chat</h1>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity cursor-pointer" data-icon="workspace_premium">workspace_premium</span>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto space-y-xl">
+<!-- Status Banner -->
+<div class="relative overflow-hidden bg-primary-container rounded-xl p-md flex items-center justify-between text-on-primary-container shadow-md">
+<div class="flex flex-col gap-xs">
+<span class="font-label-sm uppercase tracking-widest opacity-80">Phase 6 • RAAZ</span>
+<h2 class="font-title-lg text-title-lg">Coming Soon</h2>
+</div>
+<span class="material-symbols-outlined text-4xl opacity-40" data-icon="lock_clock">lock_clock</span>
+</div>
+<!-- Illustration Section -->
+<div class="flex flex-col items-center justify-center py-lg">
+<div class="relative w-full aspect-square max-w-[320px] floating-animation">
+<!-- Abstract Secure Chat Illustration using Containers & Icons -->
+<div class="absolute inset-0 bg-secondary-container/10 rounded-full flex items-center justify-center">
+<div class="w-4/5 h-4/5 bg-white rounded-3xl shadow-xl border border-outline-variant/30 flex flex-col p-md gap-md">
+<!-- Simulated Chat UI -->
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="person">person</span>
+</div>
+<div class="h-4 w-24 bg-surface-container rounded-full"></div>
+</div>
+<div class="space-y-sm">
+<div class="h-10 w-4/5 bg-secondary-fixed/30 rounded-xl rounded-bl-none"></div>
+<div class="h-10 w-2/3 bg-secondary-fixed/30 rounded-xl rounded-bl-none"></div>
+</div>
+<div class="flex justify-end pt-md">
+<div class="h-10 w-3/4 bg-primary-container/20 rounded-xl rounded-br-none"></div>
+</div>
+<!-- Shield Overlay -->
+<div class="absolute -bottom-4 -right-4 w-24 h-24 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center shadow-lg border-4 border-background">
+<span class="material-symbols-outlined text-4xl" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<!-- Message Bubbles Floating -->
+<div class="absolute -top-6 -left-6 w-16 h-16 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-2xl" data-icon="forum">forum</span>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center mt-xl space-y-md">
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[280px] mx-auto leading-relaxed">
+                    Connect with others in temporary, anonymous rooms based on shared experiences.
+                </p>
+<div class="flex items-center justify-center gap-sm">
+<span class="px-md py-xs bg-surface-container-high rounded-full font-label-lg text-primary border border-primary/10">Private</span>
+<span class="px-md py-xs bg-surface-container-high rounded-full font-label-lg text-primary border border-primary/10">Encrypted</span>
+<span class="px-md py-xs bg-surface-container-high rounded-full font-label-lg text-primary border border-primary/10">Ephemeral</span>
+</div>
+</div>
+</div>
+<!-- Chat Interface Preview (Visual Content) -->
+<div class="space-y-md">
+<h3 class="font-title-md text-title-md text-on-surface opacity-60 ml-1">Live Rooms Preview</h3>
+<div class="grid grid-cols-1 gap-md">
+<!-- Room Card 1 -->
+<div class="bg-white rounded-xl p-md shadow-sm border border-outline-variant/20 flex flex-col gap-md active:scale-[0.98] transition-transform">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h4 class="font-title-md text-title-md text-primary">Overcoming Loss</h4>
+<span class="font-label-sm text-outline flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs" data-icon="groups">groups</span>
+                                24 Active Listeners
+                            </span>
+</div>
+<span class="px-sm py-1 bg-secondary-container/10 text-secondary text-[10px] font-bold uppercase rounded tracking-wider">Active</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="face">face</span></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary-fixed flex items-center justify-center"><span class="material-symbols-outlined text-xs text-on-secondary-fixed" data-icon="sentiment_satisfied">sentiment_satisfied</span></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-tertiary-fixed flex items-center justify-center"><span class="material-symbols-outlined text-xs text-on-tertiary-fixed" data-icon="account_circle">account_circle</span></div>
+</div>
+<span class="text-label-sm text-outline">+12 more</span>
+</div>
+</div>
+<!-- Room Card 2 -->
+<div class="bg-white rounded-xl p-md shadow-sm border border-outline-variant/20 flex flex-col gap-md opacity-70">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h4 class="font-title-md text-title-md text-primary">Work Stress Support</h4>
+<span class="font-label-sm text-outline flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs" data-icon="groups">groups</span>
+                                8 Active Listeners
+                            </span>
+</div>
+<span class="px-sm py-1 bg-outline-variant/20 text-outline text-[10px] font-bold uppercase rounded tracking-wider">Waiting</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="face_3">face_3</span></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center"><span class="material-symbols-outlined text-xs text-on-primary-fixed" data-icon="account_circle">account_circle</span></div>
+</div>
+<span class="text-label-sm text-outline">+3 more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="pt-lg flex flex-col gap-md">
+<button class="w-full bg-primary-container text-on-primary-container h-14 rounded-full font-title-md flex items-center justify-center gap-sm shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                Notify Me on Release
+            </button>
+<p class="text-center font-label-sm text-outline">Production Ready Architecture • End-to-End Encrypted</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-sm px-gutter bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-label-sm text-label-sm mt-xs">Feed</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm mt-xs">Trending</span>
+</div>
+<!-- Active Chat Tab -->
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-6 py-2 shadow-inner scale-110">
+<span class="material-symbols-outlined" data-icon="military_tech" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+<span class="font-label-sm text-label-sm">Badges</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-xs">Settings</span>
+</div>
+</nav>
+<script>
+        // Subtle micro-interaction for cards
+        document.querySelectorAll('.active\\:scale-\\[0\\.98\\]').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.opacity = '0.9';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.opacity = '1';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.opacity = '1';
+            });
+        });
+
+        // Scroll shadow logic for TopAppBar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.add('shadow-sm');
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>

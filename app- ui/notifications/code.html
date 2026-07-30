@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@200,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#004ac6",
+                    "surface-container": "#e9edff",
+                    "on-secondary-container": "#fefcff",
+                    "secondary": "#0058be",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed": "#dbe1ff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "surface": "#f9f9ff",
+                    "on-surface": "#141b2b",
+                    "on-primary-container": "#eeefff",
+                    "on-primary-fixed": "#00174b",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface-tint": "#0053db",
+                    "secondary-container": "#2170e4",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e1e8fd",
+                    "tertiary-container": "#196fc0",
+                    "primary-container": "#2563eb",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-highest": "#dce2f7",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-background": "#141b2b",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-surface-variant": "#434655",
+                    "tertiary": "#00569c",
+                    "background": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d3daef",
+                    "surface-bright": "#f9f9ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary-fixed": "#d8e2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "margin-desktop": "auto",
+                    "base": "4px",
+                    "margin-tablet": "32px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .notification-unread-tint {
+            background-color: rgba(0, 74, 198, 0.04);
+        }
+        .safe-pb {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16 transition-opacity active:scale-95 duration-200">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="done_all">done_all</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="more_vert">more_vert</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-20 pb-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- Section Header -->
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Notifications</h2>
+<span class="bg-primary text-on-primary px-3 py-0.5 rounded-full font-label-sm text-label-sm">4 New</span>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-lg text-label-lg transition-transform active:scale-95">All</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-lg text-label-lg transition-transform active:scale-95">Activity</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-lg text-label-lg transition-transform active:scale-95">System</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-lg text-label-lg transition-transform active:scale-95">Trending</button>
+</div>
+<!-- Notifications List -->
+<div class="space-y-2">
+<!-- Unread: New Comment -->
+<div class="notification-unread-tint p-4 rounded-xl flex gap-4 transition-all hover:bg-surface-container-low cursor-pointer active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-title-md text-on-surface">New Comment</h3>
+<span class="font-label-sm text-label-sm text-outline">2m ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Someone replied to your secret share: "This happened to me too, stay strong!"</p>
+<div class="mt-2 flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-[10px] uppercase tracking-wider font-bold text-primary">Unread</span>
+</div>
+</div>
+</div>
+<!-- Unread: New Support -->
+<div class="notification-unread-tint p-4 rounded-xl flex gap-4 transition-all hover:bg-surface-container-low cursor-pointer active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary" data-icon="favorite">favorite</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-title-md text-on-surface">New Support</h3>
+<span class="font-label-sm text-label-sm text-outline">15m ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Your post in "Career Anonymous" received 5 new support reactions.</p>
+</div>
+</div>
+<!-- Unread: Trending Alert -->
+<div class="notification-unread-tint p-4 rounded-xl flex gap-4 transition-all hover:bg-surface-container-low cursor-pointer active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="trending_up">trending_up</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-title-md text-on-surface">Trending alert</h3>
+<span class="font-label-sm text-label-sm text-outline">1h ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">A story about "Remote Work Struggles" is gaining massive traction right now.</p>
+</div>
+</div>
+<!-- Read: System Notice -->
+<div class="bg-surface p-4 rounded-xl flex gap-4 transition-all hover:bg-surface-container-low cursor-pointer active:scale-[0.98] border border-outline-variant/30">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline" data-icon="info">info</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-title-md text-on-surface">System Notice</h3>
+<span class="font-label-sm text-label-sm text-outline">5h ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Security Update: We've enhanced our end-to-end encryption for private DMs.</p>
+</div>
+</div>
+<!-- Read: Previous Comment -->
+<div class="bg-surface p-4 rounded-xl flex gap-4 transition-all hover:bg-surface-container-low cursor-pointer active:scale-[0.98] border border-outline-variant/30">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-title-md text-on-surface">New Comment</h3>
+<span class="font-label-sm text-label-sm text-outline">Yesterday</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">User_8291 commented: "I totally agree with your point about transparency."</p>
+</div>
+</div>
+<!-- Featured Content Card (Asymmetric Bento Element) -->
+<div class="relative overflow-hidden rounded-2xl h-48 mt-8 group cursor-pointer shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A highly aesthetic digital art scene showing a person walking through a misty, neon-lit city at night. The colors are deep blues, purples, and soft primary blue accents. Cinematic lighting, soft focus, sophisticated atmosphere, modern minimalist digital art style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5XC7VGVH-62KkT8CKGesE_f6Fi74RoFGJIvOH7Afw6LFmRrZsbgFVY-b_SmdFn6msRyTrVSWZzXffR_6TKbU6Aa05WkvCcNDyDYxcBwUqpiToXV4svBLCh4Tgx_ThozjCNYfSoexQ8ec9xi3CF47ro-LCmlkmMOlhMLuqgOdyO--kW1qi04_1CdgaNEdWdSsvZ33h-OWCZOI99os9VBVt8LcptMQWhS3j2nMVpLxDz4T9Do_Lh8bbh4U-NFmKG9CcPJcKdvJtr8z5')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 p-6">
+<span class="text-white/70 font-label-sm text-label-sm uppercase tracking-widest">Community Spotlight</span>
+<h4 class="text-white font-title-lg text-title-lg mt-1">The Art of Staying Anonymous</h4>
+<p class="text-white/80 font-body-md text-body-md line-clamp-1">Learn how to protect your identity in the digital age.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out px-5 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out px-5 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out px-5 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<!-- Settings as active for this specific navigation context -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for notification clicks
+        document.querySelectorAll('.notification-unread-tint').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.remove('notification-unread-tint');
+                this.classList.add('bg-surface');
+                this.classList.add('border', 'border-outline-variant/30');
+                const badge = this.querySelector('.bg-primary');
+                if (badge) badge.parentElement.remove();
+                
+                // Haptic feedback simulation
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(10);
+                }
+            });
+        });
+
+        // Hide BottomNavBar on Scroll Down
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('nav');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                navbar.style.transform = 'translateY(100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            navbar.style.transition = 'transform 0.3s ease-in-out';
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body></html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>RAAZ | Anonymous Sharing</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#dce2f7",
+                    "on-background": "#141b2b",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d3daef",
+                    "primary-container": "#2563eb",
+                    "error": "#ba1a1a",
+                    "surface-container": "#e9edff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "background": "#f9f9ff",
+                    "secondary-container": "#2170e4",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#293040",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#0058be",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-surface": "#141b2b",
+                    "outline": "#737686",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#196fc0",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "margin-tablet": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "auto",
+                    "2xl": "48px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.95; }
+        }
+        
+        @keyframes float-slow {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-brand-pulse {
+            animation: subtle-pulse 3s ease-in-out infinite;
+        }
+
+        .animate-float {
+            animation: float-slow 6s ease-in-out infinite;
+        }
+
+        .splash-container {
+            background-color: #F8FAFC;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- Splash Screen Wrapper -->
+<main class="splash-container flex flex-col items-center justify-center min-h-screen relative px-margin-mobile md:px-margin-tablet">
+<!-- Subtle Ambient Background Elements -->
+<div class="absolute inset-0 overflow-hidden pointer-events-none">
+<div class="absolute -top-[10%] -left-[5%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] animate-float"></div>
+<div class="absolute top-[60%] -right-[10%] w-[50%] h-[50%] bg-secondary/5 rounded-full blur-[150px] animate-float" style="animation-delay: -2s;"></div>
+</div>
+<!-- Center Identity -->
+<div class="flex flex-col items-center z-10">
+<!-- Logo Section -->
+<div class="relative mb-lg">
+<!-- Branding Glow -->
+<div class="absolute inset-0 bg-primary/10 rounded-full blur-2xl animate-brand-pulse"></div>
+<!-- Main Branding (RAAZ) -->
+<div class="relative flex flex-col items-center">
+<div class="mb-4">
+<span class="material-symbols-outlined text-[64px] text-primary" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary tracking-tighter animate-brand-pulse">
+                        RAAZ
+                    </h1>
+</div>
+</div>
+<!-- Tagline Section -->
+<div class="text-center opacity-0 translate-y-4 transition-all duration-1000 ease-out" id="tagline-container">
+<p class="font-title-md text-title-md text-on-surface-variant font-medium tracking-wide">
+                    Share Your Secrets. Stay Anonymous.
+                </p>
+</div>
+<!-- Progress Indicator -->
+<div class="mt-2xl w-48 h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-[3000ms] ease-in-out w-0" id="splash-progress"></div>
+</div>
+</div>
+<!-- Security Badge Footer -->
+<div class="absolute bottom-12 flex items-center gap-2 text-on-surface-variant/60">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock">lock</span>
+<span class="font-label-sm text-label-sm uppercase tracking-[0.2em]">End-to-End Encrypted</span>
+</div>
+</main>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animation triggers for splash elements
+            const tagline = document.getElementById('tagline-container');
+            const progress = document.getElementById('splash-progress');
+            
+            // Trigger entry animations
+            setTimeout(() => {
+                tagline.classList.remove('opacity-0', 'translate-y-4');
+                tagline.classList.add('opacity-100', 'translate-y-0');
+            }, 500);
+
+            // Progress bar simulation
+            setTimeout(() => {
+                progress.style.width = '100%';
+            }, 300);
+
+            // Lightweight atmospheric interaction (Mouse parallax)
+            document.addEventListener('mousemove', (e) => {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+                
+                const backgroundElements = document.querySelectorAll('.bg-primary\\/5, .bg-secondary\\/5');
+                backgroundElements.forEach((el, index) => {
+                    const factor = index === 0 ? 1 : -1.5;
+                    el.style.transform = `translate(${moveX * factor}px, ${moveY * factor}px)`;
+                });
+            });
+        });
+    </script>
+</body></html>

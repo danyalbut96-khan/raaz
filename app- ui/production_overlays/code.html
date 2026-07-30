@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Phase 7: Production Overlays</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'wght' 200, 'FILL' 0;
+            font-size: 24px;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        .bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bottom-sheet.active {
+            transform: translateY(0);
+        }
+        .modal-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        .animate-float {
+            animation: subtle-float 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#f9f9ff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-secondary-fixed": "#001a42",
+                      "on-primary-fixed": "#00174b",
+                      "on-tertiary-container": "#ebf1ff",
+                      "surface-container-highest": "#dce2f7",
+                      "outline": "#737686",
+                      "surface-variant": "#dce2f7",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-background": "#141b2b",
+                      "surface-container": "#e9edff",
+                      "background": "#f9f9ff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "surface-dim": "#d3daef",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "secondary": "#0058be",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "on-secondary-container": "#fefcff",
+                      "error-container": "#ffdad6",
+                      "inverse-primary": "#b4c5ff",
+                      "surface-container-high": "#e1e8fd",
+                      "surface-container-low": "#f1f3ff",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-primary-container": "#eeefff",
+                      "tertiary-fixed": "#d4e3ff",
+                      "secondary-fixed": "#d8e2ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#2170e4",
+                      "primary": "#004ac6",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#00569c",
+                      "surface-bright": "#f9f9ff",
+                      "on-surface-variant": "#434655",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#dbe1ff",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#196fc0",
+                      "primary-container": "#2563eb",
+                      "outline-variant": "#c3c6d7",
+                      "surface-tint": "#0053db",
+                      "on-surface": "#141b2b",
+                      "inverse-surface": "#293040"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "base": "4px",
+                      "margin-tablet": "32px",
+                      "margin-desktop": "auto",
+                      "lg": "24px",
+                      "md": "16px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "title-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                      "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full backdrop-blur-xl bg-surface/85 z-50 shadow-sm flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-headline-md text-headline-md-mobile font-bold tracking-tight text-primary">RAAZ</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform" onclick="toggleDrawer()">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_circle">account_circle</span>
+</button>
+</header>
+<!-- Main Content: Developer Test Bench -->
+<main class="pt-24 pb-32 px-margin-mobile max-w-2xl mx-auto">
+<section class="mb-10">
+<h2 class="font-headline-md text-headline-md-mobile mb-4">Production Bench</h2>
+<p class="text-on-surface-variant font-body-md mb-8">Test-drive the critical overlays and interaction patterns designed for RAAZ Phase 7. These components follow M3 specifications for depth and accessibility.</p>
+<div class="grid grid-cols-1 gap-4">
+<!-- Trigger Buttons -->
+<button class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 hover:bg-surface-container-low transition-colors group" onclick="showModal('exitApp')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="exit_to_app">exit_to_app</span>
+</div>
+<span class="font-title-md text-title-md">Exit App</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 hover:bg-surface-container-low transition-colors group" onclick="showModal('retryConnection')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</div>
+<span class="font-title-md text-title-md">Retry Connection</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 hover:bg-surface-container-low transition-colors group" onclick="showModal('permissionRequired')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="key">key</span>
+</div>
+<span class="font-title-md text-title-md">Permission Required</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 hover:bg-surface-container-low transition-colors group" onclick="showPopUp('updateAvailable')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="system_update">system_update</span>
+</div>
+<span class="font-title-md text-title-md">Update Available</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 hover:bg-surface-container-low transition-colors group" onclick="showModal('deletePost')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</div>
+<span class="font-title-md text-title-md">Delete Post</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Bottom Sheet Triggers -->
+<section>
+<h2 class="font-title-lg text-title-lg mb-4">Contextual Sheets</h2>
+<div class="flex flex-wrap gap-2">
+<button class="px-6 py-2 bg-secondary text-on-secondary rounded-full font-label-lg text-label-lg transition-transform active:scale-95" onclick="toggleSheet('privacySheet')">Privacy Info</button>
+<button class="px-6 py-2 border border-outline text-primary rounded-full font-label-lg text-label-lg transition-transform active:scale-95" onclick="toggleSheet('connectionSheet')">Status</button>
+<button class="px-6 py-2 bg-surface-container-highest text-on-surface-variant rounded-full font-label-lg text-label-lg transition-transform active:scale-95" onclick="toggleSheet('adSheet')">Ad Disclosure</button>
+</div>
+</section>
+<!-- Illustration Card for Context -->
+<div class="mt-12 p-6 bg-surface-container-low rounded-2xl border border-outline-variant/10 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="font-title-lg text-title-lg mb-2">Production Grade</h3>
+<p class="text-on-surface-variant font-body-md max-w-xs">All RAAZ overlays use 85% opacity surfaces with 20px background blur for a premium glassmorphic effect.</p>
+</div>
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+<div class="mt-6">
+<img class="w-full h-40 object-cover rounded-xl shadow-sm" data-alt="A clean, minimalist 3D rendering of floating translucent geometric glass shapes on a soft neutral light blue background. The scene is lit with soft, professional studio lighting, emphasizing depth and transparency. The aesthetic is modern, secure, and technologically advanced, fitting a high-end anonymous sharing platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDGbrj_CHBHtbFljJbo0QNI8TH8kjrURVU2B-c2Bf0xyhzC7ajyMcnFZxb9YbSfvo-f3VAnLrYBnY6xCU0WSovDbGHgzJkRlDneLLOqi1Wt4CmehJOAdDTEBv7MsF3buOgnDteN47fODEoNSPrc71HePSk3zdHmeLRZfNm0wA-4e2dLzB-XhVDlQtYfY__hM1AZBq7chm8zBBNtCVU6WXs0clSUKG7pNi7gGSprYcdLMLxn-C-ruwM3LXEYaPNPiwYrU_vUJU1VGJl"/>
+</div>
+</div>
+</main>
+<!-- NAVIGATION OVERLAYS (HIDDEN BY DEFAULT) -->
+<!-- Modal Overlay Backdrop -->
+<div class="modal-overlay fixed inset-0 bg-on-background/40 glass-panel z-[60] flex items-center justify-center p-6" id="modalBackdrop">
+<!-- Exit App Dialog -->
+<div class="hidden w-full max-w-xs bg-surface p-6 rounded-3xl shadow-2xl animate-float" id="exitApp">
+<span class="material-symbols-outlined text-secondary mb-4 block" data-icon="logout">logout</span>
+<h3 class="font-title-lg text-title-lg mb-2">Exit RAAZ?</h3>
+<p class="text-on-surface-variant font-body-md mb-6">Are you sure you want to exit the app? Your active anonymous session will remain encrypted.</p>
+<div class="flex justify-end gap-2">
+<button class="px-4 py-2 text-primary font-label-lg text-label-lg hover:bg-primary/5 rounded-full transition-colors" onclick="hideModals()">Cancel</button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-full font-label-lg text-label-lg transition-transform active:scale-95">Exit</button>
+</div>
+</div>
+<!-- Retry Connection Mini-Modal -->
+<div class="hidden w-full max-w-xs bg-surface p-6 rounded-3xl shadow-2xl" id="retryConnection">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-error animate-spin" data-icon="sync_problem" style="animation-duration: 3s;">sync_problem</span>
+<h3 class="font-title-md text-title-md">Connection Lost</h3>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">RAAZ is having trouble reaching the encrypted nodes. Check your internet.</p>
+<button class="w-full py-3 bg-primary-container text-on-primary-container rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-2 active:scale-95 transition-transform" onclick="hideModals()">
+<span class="material-symbols-outlined text-[18px]" data-icon="refresh">refresh</span>
+                Try Again
+            </button>
+</div>
+<!-- Permission Required -->
+<div class="hidden w-full max-w-sm bg-surface p-8 rounded-[32px] shadow-2xl" id="permissionRequired">
+<div class="w-16 h-16 bg-tertiary-container/20 rounded-2xl flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined text-[32px]" data-icon="security_update_good">security_update_good</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Biometrics Required</h3>
+<p class="text-on-surface-variant font-body-lg mb-8">To maintain your anonymity, RAAZ requires fingerprint access to unlock your local vault.</p>
+<div class="space-y-3">
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-label-lg text-label-lg active:scale-95 transition-transform shadow-lg shadow-primary/20" onclick="hideModals()">Enable Access</button>
+<button class="w-full py-2 text-outline font-label-lg text-label-lg" onclick="hideModals()">Not Now</button>
+</div>
+</div>
+<!-- Delete Post Confirmation (Destructive) -->
+<div class="hidden w-full max-w-xs bg-surface p-6 rounded-3xl shadow-2xl border-2 border-error/5" id="deletePost">
+<h3 class="font-title-lg text-title-lg mb-4 text-error flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+                Permanently Delete?
+            </h3>
+<p class="text-on-surface-variant font-body-md mb-6">This action cannot be undone. All interactions and encryption keys for this post will be destroyed.</p>
+<div class="flex flex-col gap-2">
+<button class="w-full py-3 bg-error text-on-error rounded-xl font-label-lg text-label-lg active:scale-95 transition-transform shadow-md">Confirm Delete</button>
+<button class="w-full py-3 text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant/50 rounded-xl transition-colors" onclick="hideModals()">Go Back</button>
+</div>
+</div>
+</div>
+<!-- Small Pop-up (Update Available) -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 w-[90%] max-w-sm glass-panel bg-surface-container-high/90 border border-outline-variant/30 p-4 rounded-2xl shadow-xl z-[70] hidden transition-all duration-500 scale-90 opacity-0 translate-y-[-20px]" id="updatePopUp">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md">Update v2.4</h4>
+<p class="text-xs text-on-surface-variant">New encryption features ready.</p>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-lg text-label-lg shadow-sm active:scale-95" onclick="hidePopUp()">Update</button>
+</div>
+</div>
+<!-- Bottom Sheets -->
+<div class="fixed inset-0 bg-on-background/20 backdrop-blur-[2px] z-[80] hidden transition-opacity duration-300 opacity-0" id="sheetOverlay" onclick="closeAllSheets()"></div>
+<!-- Privacy Sheet -->
+<div class="bottom-sheet fixed bottom-0 left-0 w-full bg-surface-container-lowest z-[90] rounded-t-[32px] p-margin-mobile shadow-[0_-8px_24px_rgba(0,0,0,0.1)]" id="privacySheet">
+<div class="w-12 h-1.5 bg-outline-variant/30 rounded-full mx-auto mb-6"></div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="policy">policy</span>
+<h3 class="font-headline-md text-headline-md-mobile">Privacy Explanation</h3>
+</div>
+<div class="space-y-4 mb-8">
+<p class="text-on-surface-variant font-body-lg">At RAAZ, your identity is mathematically obscured. We use zero-knowledge proofs (ZKP) to verify you're a human without knowing who you are.</p>
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<h4 class="font-title-md text-title-md mb-1">Encrypted Transit</h4>
+<p class="text-sm text-on-surface-variant">All messages are split into multiple packets and routed through different secure nodes before delivery.</p>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-label-lg text-label-lg active:scale-95 transition-transform mb-6" onclick="closeAllSheets()">I Understand</button>
+</div>
+<!-- Connection Sheet -->
+<div class="bottom-sheet fixed bottom-0 left-0 w-full bg-surface z-[90] rounded-t-[32px] p-margin-mobile" id="connectionSheet">
+<div class="w-12 h-1.5 bg-outline-variant/30 rounded-full mx-auto mb-6"></div>
+<h3 class="font-title-lg text-title-lg mb-6">Network Diagnostics</h3>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-2xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-success text-green-600" data-icon="wifi_tethering">wifi_tethering</span>
+<span class="font-body-md">Primary Gateway</span>
+</div>
+<span class="text-green-600 font-label-sm text-label-sm font-bold uppercase">Connected</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-2xl opacity-60">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="vpn_lock">vpn_lock</span>
+<span class="font-body-md">Onion Routing</span>
+</div>
+<span class="text-on-surface-variant font-label-sm text-label-sm font-bold uppercase">Bypassed</span>
+</div>
+</div>
+<div class="mt-8 mb-4">
+<button class="w-full py-4 border border-outline text-primary rounded-full font-label-lg text-label-lg" onclick="closeAllSheets()">Close Status</button>
+</div>
+</div>
+<!-- Ad Info Sheet -->
+<div class="bottom-sheet fixed bottom-0 left-0 w-full bg-surface-container-highest z-[90] rounded-t-[32px] p-margin-mobile" id="adSheet">
+<div class="w-12 h-1.5 bg-outline-variant/30 rounded-full mx-auto mb-6"></div>
+<div class="bg-surface p-6 rounded-2xl mb-6">
+<span class="material-symbols-outlined text-on-surface-variant mb-2" data-icon="info">info</span>
+<h3 class="font-title-lg text-title-lg mb-2">About Sponsored Content</h3>
+<p class="text-on-surface-variant font-body-md">To keep RAAZ free and server-maintained, we display privacy-respecting ads. We do not share your unique hash with any advertisers.</p>
+</div>
+<div class="flex gap-3 mb-6">
+<button class="flex-1 py-4 bg-on-background text-background rounded-full font-label-lg text-label-lg" onclick="closeAllSheets()">Got it</button>
+<button class="flex-1 py-4 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg">Go Ad-Free</button>
+</div>
+</div>
+<!-- Navigation Drawer -->
+<aside class="fixed inset-y-0 left-0 w-[280px] bg-surface z-[100] transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col p-4" id="navDrawer">
+<div class="flex flex-col gap-1 mb-8 p-4">
+<div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A stylized, minimalist profile avatar of a ghost figure, wearing a subtle hood, with clean vector lines. The color palette uses shades of cool grey and light blue, set against a pristine white background. Professional and secure editorial feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADX8mzjKL0UhQGTH8GY_gbuzisSwn_kD-o-6o5UH9GwbUnUzAcTS05CWQOe3-032WEJ_c5bp-x_asxPwkW1ERqO9B4LuIpKZfV640H6fUllwRlepV3UnpelTHTVz3WrUuoJ-uR-xOzjSvlt__vyZXfMCzUUGAHnImEKOTx9qBasrNTzTzpiP_zJvRfquqenDPpq0oGQGAJGbGvmKIq6LfXSns-h4AbXc-YMZBliJky52Y5at_UySqon_M31kQr6kmhsH3ERViHF7IB"/>
+</div>
+<h3 class="font-headline-md text-primary">Anonymous Ghost</h3>
+<p class="text-on-surface-variant font-body-md">Verified Citizen</p>
+<div class="mt-2 inline-block px-3 py-1 bg-secondary-container/10 text-secondary rounded-full font-label-sm text-label-sm w-fit">
+                Trust Score: 98
+            </div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 p-4 rounded-full bg-secondary-container text-on-secondary-container font-bold transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+<span class="font-title-md text-title-md">My Identity</span>
+</a>
+<a class="flex items-center gap-4 p-4 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="vpn_key">vpn_key</span>
+<span class="font-title-md text-title-md">Security Key</span>
+</a>
+<a class="flex items-center gap-4 p-4 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="policy">policy</span>
+<span class="font-title-md text-title-md">Privacy Policy</span>
+</a>
+<div class="mt-auto pt-4 border-t border-outline-variant/20">
+<a class="flex items-center gap-4 p-4 rounded-full text-error hover:bg-error-container/10 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-title-md text-title-md">Logout</span>
+</a>
+</div>
+</nav>
+</aside>
+<div class="fixed inset-0 bg-on-background/20 backdrop-blur-sm z-[95] hidden transition-opacity duration-300 opacity-0" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 h-20 backdrop-blur-xl border-t border-outline-variant/20 bg-surface/85 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center gap-1 text-primary bg-primary-container/20 rounded-xl px-3 py-1 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Feed</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="add_circle">add_circle</span>
+<span class="font-label-sm text-label-sm">Post</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-sm text-label-sm">Alerts</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</button>
+</nav>
+<script>
+        // Modal Logic
+        function showModal(id) {
+            const backdrop = document.getElementById('modalBackdrop');
+            const modals = backdrop.querySelectorAll('div[id]');
+            
+            modals.forEach(m => m.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            
+            backdrop.classList.add('active');
+        }
+
+        function hideModals() {
+            document.getElementById('modalBackdrop').classList.remove('active');
+        }
+
+        // Pop-up Logic
+        function showPopUp() {
+            const popup = document.getElementById('updatePopUp');
+            popup.classList.remove('hidden');
+            setTimeout(() => {
+                popup.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+            }, 10);
+        }
+
+        function hidePopUp() {
+            const popup = document.getElementById('updatePopUp');
+            popup.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+            setTimeout(() => {
+                popup.classList.add('hidden');
+            }, 500);
+        }
+
+        // Bottom Sheet Logic
+        function toggleSheet(id) {
+            const overlay = document.getElementById('sheetOverlay');
+            const sheet = document.getElementById(id);
+            
+            overlay.classList.remove('hidden');
+            setTimeout(() => overlay.classList.add('opacity-100'), 10);
+            
+            sheet.classList.add('active');
+        }
+
+        function closeAllSheets() {
+            const overlay = document.getElementById('sheetOverlay');
+            const sheets = document.querySelectorAll('.bottom-sheet');
+            
+            overlay.classList.remove('opacity-100');
+            sheets.forEach(s => s.classList.remove('active'));
+            
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+        }
+
+        // Drawer Logic
+        function toggleDrawer() {
+            const drawer = document.getElementById('navDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            
+            const isOpen = drawer.classList.contains('translate-x-0');
+            
+            if (isOpen) {
+                drawer.classList.add('-translate-x-full');
+                drawer.classList.remove('translate-x-0');
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            } else {
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 10);
+                drawer.classList.add('translate-x-0');
+                drawer.classList.remove('-translate-x-full');
+            }
+        }
+
+        // Close on backdrop clicks
+        document.getElementById('modalBackdrop').addEventListener('click', (e) => {
+            if (e.target.id === 'modalBackdrop') hideModals();
+        });
+    </script>
+</body></html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Posts Management | RAAZ Phase 8 Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Ripple Effect simulation */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: .3;
+            transition: 0s;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#dce2f7",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#001a42",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#d3daef",
+                      "on-surface": "#141b2b",
+                      "on-background": "#141b2b",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#e1e8fd",
+                      "on-primary-fixed": "#00174b",
+                      "primary-container": "#2563eb",
+                      "background": "#f9f9ff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-container-low": "#f1f3ff",
+                      "on-primary-container": "#eeefff",
+                      "secondary": "#0058be",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#fefcff",
+                      "primary": "#004ac6",
+                      "on-tertiary-container": "#ebf1ff",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "error-container": "#ffdad6",
+                      "outline": "#737686",
+                      "surface": "#f9f9ff",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#dce2f7",
+                      "tertiary-fixed": "#d4e3ff",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#b4c5ff",
+                      "surface-bright": "#f9f9ff",
+                      "surface-container": "#e9edff",
+                      "outline-variant": "#c3c6d7",
+                      "on-surface-variant": "#434655",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-tertiary-fixed": "#001c39",
+                      "inverse-surface": "#293040",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-tint": "#0053db",
+                      "tertiary-container": "#196fc0",
+                      "secondary-container": "#2170e4",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "tertiary": "#00569c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "container-margin": "24px",
+                      "sm": "8px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "title-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "title-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background custom-scrollbar overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] z-50 bg-surface/70 backdrop-blur-xl border-r border-white/20 shadow-lg flex flex-col p-md space-y-xs hidden md:flex">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">RAAZ Admin</h1>
+<p class="text-on-surface-variant font-label-lg text-label-lg">Phase 8 Moderation</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<!-- Posts Active State -->
+<a class="flex items-center gap-md p-md rounded-lg bg-primary/10 text-primary border-l-4 border-primary font-bold active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">article</span>
+<span class="font-label-lg text-label-lg">Posts</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">comment</span>
+<span class="font-label-lg text-label-lg">Comments</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">report</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-lg text-label-lg">Categories</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-lg text-label-lg">Daily Reflection</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">emoji_events</span>
+<span class="font-label-lg text-label-lg">Daily Challenge</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label-lg text-label-lg">Featured Stories</span>
+</a>
+<div class="pt-lg pb-sm border-t border-white/10 mt-md">
+<p class="px-sm text-label-sm font-label-sm text-outline uppercase tracking-widest">System</p>
+</div>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-lg text-label-lg">Notifications</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-lg text-label-lg">Analytics</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-md bg-surface-container-low rounded-xl flex items-center gap-md">
+<img class="w-10 h-10 rounded-full border-2 border-primary/20 object-cover" data-alt="A professional headshot of a corporate admin with a friendly expression, wearing business casual attire, set against a clean, minimalist studio background with soft bokeh lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP9kv3PAz2uEARvBXzBfdBiQ3WePDqeWHfHTgjYjK6fcW5m8WyBrAobLH9YYCAMJtHHx6ACeCY_GDFQzQqpPaHQv1a8CT7wLm9UHT9dvMEBjTDY5TFNe_32tepte6StRulMiljMWTVX2rGADI-aTntr8L0XUbriIqULb93Vsh3bKW2uyg1Q5t9Nhgb8NysjlshZHBkk9DqhWaZZWhdzsCFyw7Uxm90x8GQMbaBSZJCpxPvO5DKVjDMjoSlBZsMhB0S4wGAEbBH5wFZ"/>
+<div class="overflow-hidden">
+<p class="font-label-lg text-label-lg text-on-surface truncate">Alex Rivera</p>
+<p class="text-[10px] text-outline uppercase">System Admin</p>
+</div>
+<button class="ml-auto text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-0 md:left-[280px] z-40 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-lg py-md">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-full max-w-md hidden md:block">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low border-none rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 transition-shadow outline-none shadow-inner" placeholder="Search posts, users or IDs..." type="text"/>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm rounded-lg hover:bg-surface-container-high/50 text-on-surface-variant transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">bolt</span>
+</button>
+<button class="p-sm rounded-lg hover:bg-surface-container-high/50 text-on-surface-variant transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="relative">
+<button class="p-sm rounded-lg hover:bg-surface-container-high/50 text-on-surface-variant transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
+</div>
+<div class="h-6 w-px bg-outline/20 mx-sm"></div>
+<button class="flex items-center gap-xs px-md py-sm rounded-lg bg-primary text-on-primary font-label-lg text-label-lg shadow-sm ripple">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Quick Actions
+            </button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="pt-[80px] md:pl-[280px] min-h-screen">
+<div class="max-w-[1440px] mx-auto p-lg lg:p-xl space-y-lg">
+<!-- Content Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Posts Management</h2>
+<p class="text-on-surface-variant font-body-md">Review, moderate and organize all platform community posts.</p>
+</div>
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-title-md text-title-md shadow-md ripple flex items-center gap-md hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-weight="fill">star</span>
+                    Feature Post
+                </button>
+</div>
+<!-- Filter Bar Card -->
+<div class="bg-surface-container-lowest border border-white/20 rounded-xl p-md shadow-sm flex flex-wrap items-center gap-md">
+<div class="flex-1 min-w-[240px] relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline text-[20px]">filter_list</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low border-none rounded-lg text-body-md focus:ring-2 focus:ring-primary/20" placeholder="Search content title..." type="text"/>
+</div>
+<select class="bg-surface-container-low border-none rounded-lg text-label-lg py-sm pl-md pr-xl focus:ring-2 focus:ring-primary/20 appearance-none cursor-pointer">
+<option>All Categories</option>
+<option>Lifestyle</option>
+<option>Tech</option>
+<option>Community</option>
+</select>
+<select class="bg-surface-container-low border-none rounded-lg text-label-lg py-sm pl-md pr-xl focus:ring-2 focus:ring-primary/20 appearance-none cursor-pointer">
+<option>All Status</option>
+<option>Pending</option>
+<option>Approved</option>
+<option>Rejected</option>
+</select>
+<div class="relative">
+<button class="flex items-center gap-sm bg-surface-container-low px-md py-sm rounded-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                        Oct 01 - Oct 31, 2023
+                    </button>
+</div>
+<button class="p-sm text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest border border-white/20 rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant border-b border-white/10">
+<th class="p-lg font-label-lg text-label-lg">ID</th>
+<th class="p-lg font-label-lg text-label-lg">Preview</th>
+<th class="p-lg font-label-lg text-label-lg">Post Title</th>
+<th class="p-lg font-label-lg text-label-lg">User</th>
+<th class="p-lg font-label-lg text-label-lg">Category</th>
+<th class="p-lg font-label-lg text-label-lg">Status</th>
+<th class="p-lg font-label-lg text-label-lg">Date</th>
+<th class="p-lg font-label-lg text-label-lg text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="p-lg font-label-sm text-outline">#8421</td>
+<td class="p-lg">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center border border-white/20" data-alt="A macro photograph of lush green tropical leaves with glistening water droplets, captured in a vibrant, high-contrast style with shallow depth of field. The lighting is warm and golden, reflecting a modern light-mode botanical aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDV3eNgk3gpOJzCsrNEWHnOp6eisPen5-JJzPj7dNA2WR9gwvHDkIPhubd0-BrUKL73wny1-peEVRGROyL4ROgR4NArYQyVWoF0AE7puIGoxYsXDq34lxOp9X4Kd_XKy8APqXUWP9a94GtF3srCgFWYbVBUuc2CgACiYUwC6cZ_wr0slHY7eIDvbJAlyxdp1wIWaOiucviJOWB8UuXXnmKZC-suxyXDJB8Y32811YcApldiUwCoBFG2pASYj_-Wkw4pwyijZUs9Z58d')"></div>
+</td>
+<td class="p-lg max-w-xs">
+<p class="font-title-md text-title-md text-on-surface truncate">The Future of Urban Architecture in 2024</p>
+<p class="text-label-sm text-outline truncate">"Architecture is a visual art, and the buildings speak..."</p>
+</td>
+<td class="p-lg">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs font-bold">JD</div>
+<div>
+<p class="text-label-lg font-label-lg">Jane Doe</p>
+<p class="text-[10px] text-outline">@janedoe</p>
+</div>
+</div>
+</td>
+<td class="p-lg">
+<span class="px-md py-xs rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Lifestyle</span>
+</td>
+<td class="p-lg">
+<span class="inline-flex items-center gap-xs px-md py-xs rounded-full bg-[#10B981]/10 text-[#059669] text-[12px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+                                        Approved
+                                    </span>
+</td>
+<td class="p-lg text-label-lg text-outline">24 Oct, 2023</td>
+<td class="p-lg">
+<div class="flex justify-end items-center gap-sm">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:bg-primary/10 hover:text-primary transition-all active:scale-90" title="Feature">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:bg-error/10 hover:text-error transition-all active:scale-90" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="p-lg font-label-sm text-outline">#8419</td>
+<td class="p-lg">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center border border-white/20" data-alt="A sleek, minimalist home office setup with a high-end ultra-wide monitor, mechanical keyboard, and a single succulent on a white desk. The room is flooded with bright, natural daylight from a nearby window, creating a serene and professional work-from-home atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC60h01gs24He0bphLi3cET18JCjtlepOn110_G3gXYChtehJ_zQ3DqUAEWoOG-ueaA43cLbcHmobO1EYK6GcDM9IByanRh1uLpZq2j1juXhsVnUVy4TzlaKBP_7SWKa1pyaWIrmVTVGZbKv8CtVhA4O9EvKTFw0E09hN7gWUcxgyeDc3NTIlq3N9YD1i9MJ7RX-yUtdCJt4X9v3dnQ7xGJmshOCiul_4YsMYagsRcruLEkdTNeoJ_GzzWa6Gm41bK5GEzk9Ps9Hoiv')"></div>
+</td>
+<td class="p-lg max-w-xs">
+<p class="font-title-md text-title-md text-on-surface truncate">Optimizing Your Workflow with AI tools</p>
+<p class="text-label-sm text-outline truncate">"In this post, we explore the top 5 AI productivity..."</p>
+</td>
+<td class="p-lg">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container text-xs font-bold">MK</div>
+<div>
+<p class="text-label-lg font-label-lg">Mark Kelvin</p>
+<p class="text-[10px] text-outline">@mark_ai</p>
+</div>
+</div>
+</td>
+<td class="p-lg">
+<span class="px-md py-xs rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Tech</span>
+</td>
+<td class="p-lg">
+<span class="inline-flex items-center gap-xs px-md py-xs rounded-full bg-[#F59E0B]/10 text-[#D97706] text-[12px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+                                        Pending
+                                    </span>
+</td>
+<td class="p-lg text-label-lg text-outline">23 Oct, 2023</td>
+<td class="p-lg">
+<div class="flex justify-end items-center gap-sm">
+<button class="bg-primary/5 text-primary px-md py-1 rounded-lg text-label-sm font-bold hover:bg-primary/10 transition-colors">APPROVE</button>
+<button class="bg-error/5 text-error px-md py-1 rounded-lg text-label-sm font-bold hover:bg-error/10 transition-colors">REJECT</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="p-lg font-label-sm text-outline">#8415</td>
+<td class="p-lg">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center border border-white/20" data-alt="An abstract 3D render of interconnected blue and violet glass spheres floating in a void, illuminated by soft rim lighting. The style is ultra-modern and corporate, representing connectivity and networking. The background is a clean gradient from white to very light blue." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBDBrFUDXlIRz3Fczx0syRl1C-ooMxtL1DdZvm9GXJ5aEz6kYgSmm288YbY12g0j0q4SuC4vZOMDHj-XZnAce_RUmQfK594r534NJcWOI2OpsA-FMIfneTyITupLi4BZmnk4NnSR7VOP7p4ItZoHJUzPghwwIzJD4te_tmmAsk-a_8I5Rg7bNnVoY4FDW0QBxP6X9h8v3oN8CSVK1DO-AEDF_c08L_PgKTMEpOKLsZQLZdWj_kNd-KT6iO6UqW5oRBdpL7wGG4AJaBz')"></div>
+</td>
+<td class="p-lg max-w-xs">
+<p class="font-title-md text-title-md text-on-surface truncate">Community Guidelines Update for Q4</p>
+<p class="text-label-sm text-outline truncate">"We are updating our terms of service to reflect..."</p>
+</td>
+<td class="p-lg">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant text-xs font-bold">RA</div>
+<div>
+<p class="text-label-lg font-label-lg">RAAZ Team</p>
+<p class="text-[10px] text-outline">@official_raaz</p>
+</div>
+</div>
+</td>
+<td class="p-lg">
+<span class="px-md py-xs rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Community</span>
+</td>
+<td class="p-lg">
+<span class="inline-flex items-center gap-xs px-md py-xs rounded-full bg-[#EF4444]/10 text-[#DC2626] text-[12px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#EF4444]"></span>
+                                        Rejected
+                                    </span>
+</td>
+<td class="p-lg text-label-lg text-outline">22 Oct, 2023</td>
+<td class="p-lg">
+<div class="flex justify-end items-center gap-sm">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="p-lg font-label-sm text-outline">#8412</td>
+<td class="p-lg">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center border border-white/20" data-alt="A close-up shot of a steaming ceramic bowl of artisanal ramen topped with soft-boiled eggs, scallions, and nori. The food photography is warm and appetizing, with professional studio lighting that emphasizes textures and steam. The background is a dark, modern kitchen setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzuCcUgh65WG5CbKDB41bmlS7eSAXqgv7OpzG7-BUgG_iVtM-R-aQ7tkdndftlRB6b50aWxQmmCwT-e0N2DO5pEg-pVz6Qsu7BdwuqXkdfucAQ8rJyxJ2Za76rlYBqD87mnKq43L-6SIvj5sXTX1sG-rPIuF1qmnusHFkS4NJhF_uyNYf9kSO4ysKETsVA04ipUTCJasirop-iusY76RX2-FiNttc_ccQm6NQw9d4Q8Nkg-WwDgSU58TzS_PvBiOyaXmvRfxavaqtC')"></div>
+</td>
+<td class="p-lg max-w-xs">
+<p class="font-title-md text-title-md text-on-surface truncate">Hidden Culinary Gems in Downtown</p>
+<p class="text-label-sm text-outline truncate">"After visiting 20 different restaurants, I found..."</p>
+</td>
+<td class="p-lg">
+<div class="flex items-center gap-sm">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A professional avatar of a young female blogger with a bright smile, wearing a stylish hat, set against a blurred outdoor cafe background during golden hour. The image has a warm, inviting feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVFTlxJBpkbL38L82f0H8Qy3j_fqQMCXfTcbAcmpKQyq7g6BAlZwFpr6EOwBaktleb7bwD8HQsGcXiIpmpLyijhpPbKas8h0VFJCQwEAk3z_1Y_qU_mENL3LjRItV_GlAkDU4J7nBMlT174WXbRrkxqeej5fw0hxYAzxRHGHwTv3-kLO-VbevI9g9tLzD0UDBT9JbrMSaZc-_35n9lcMpvcBnvrWO036i2NVJbrvaYCbPxXBQdMjo2RQEr2Xy976AdtktpTTlWsSOk"/>
+<div>
+<p class="text-label-lg font-label-lg">Sarah Chen</p>
+<p class="text-[10px] text-outline">@sarah_eats</p>
+</div>
+</div>
+</td>
+<td class="p-lg">
+<span class="px-md py-xs rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Lifestyle</span>
+</td>
+<td class="p-lg">
+<span class="inline-flex items-center gap-xs px-md py-xs rounded-full bg-[#10B981]/10 text-[#059669] text-[12px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+                                        Approved
+                                    </span>
+</td>
+<td class="p-lg text-label-lg text-outline">21 Oct, 2023</td>
+<td class="p-lg">
+<div class="flex justify-end items-center gap-sm">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-primary bg-primary/10 active:scale-90" title="Featured">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:bg-error/10 hover:text-error transition-all active:scale-90" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-surface-container-low px-lg py-md border-t border-white/10 flex items-center justify-between">
+<p class="text-label-lg text-on-surface-variant">Showing 1 to 10 of 240 posts</p>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-high transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary text-on-primary font-bold shadow-sm">1</button>
+<button class="w-10 h-10 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-medium">2</button>
+<button class="w-10 h-10 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-medium">3</button>
+<span class="px-sm text-outline">...</span>
+<button class="w-10 h-10 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-medium">24</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Summary Chips/Widgets -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg">
+<div class="bg-surface-container-lowest border border-white/20 p-lg rounded-xl shadow-sm flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">post_add</span>
+</div>
+<div>
+<p class="text-outline text-label-sm uppercase font-bold tracking-widest">Total Posts</p>
+<h4 class="text-headline-lg font-headline-lg text-on-surface">1,284</h4>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-white/20 p-lg rounded-xl shadow-sm flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-[#10B981]/10 text-[#10B981] flex items-center justify-center">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="text-outline text-label-sm uppercase font-bold tracking-widest">Approved</p>
+<h4 class="text-headline-lg font-headline-lg text-on-surface">840</h4>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-white/20 p-lg rounded-xl shadow-sm flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] flex items-center justify-center">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<div>
+<p class="text-outline text-label-sm uppercase font-bold tracking-widest">Pending</p>
+<h4 class="text-headline-lg font-headline-lg text-on-surface">122</h4>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-white/20 p-lg rounded-xl shadow-sm flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-error/10 text-error flex items-center justify-center">
+<span class="material-symbols-outlined">report_problem</span>
+</div>
+<div>
+<p class="text-outline text-label-sm uppercase font-bold tracking-widest">Rejected</p>
+<h4 class="text-headline-lg font-headline-lg text-on-surface">42</h4>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions and effects
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ripple simulation
+            const buttons = document.querySelectorAll('.ripple');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    let rect = button.getBoundingClientRect();
+                    let x = e.clientX - rect.left;
+                    let y = e.clientY - rect.top;
+                    
+                    let ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    ripple.style.width = '0px';
+                    ripple.style.height = '0px';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.4)';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.transform = 'translate(-50%, -50%)';
+                    ripple.style.pointerEvents = 'none';
+                    ripple.style.transition = 'width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out';
+                    
+                    button.style.overflow = 'hidden';
+                    button.style.position = 'relative';
+                    button.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.style.width = '300px';
+                        ripple.style.height = '300px';
+                        ripple.style.opacity = '0';
+                    }, 0);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+            
+            // Hover sound/haptic simulation placeholder
+            const tableRows = document.querySelectorAll('tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    // Logic for hover state enhancements
+                });
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - System States &amp; UI Shell</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #edf0ff 25%, #dce2f7 50%, #edf0ff 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Hide all sections initially except for the demo controller */
+        .state-section { display: none; }
+        .state-section.active { display: block; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e1e8fd",
+                        "surface-container-low": "#f1f3ff",
+                        "on-background": "#141b2b",
+                        "on-secondary-fixed": "#001a42",
+                        "primary-fixed": "#dbe1ff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "surface-dim": "#d3daef",
+                        "inverse-surface": "#293040",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-surface": "#141b2b",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#196fc0",
+                        "surface-variant": "#dce2f7",
+                        "on-secondary-container": "#fefcff",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-primary-fixed": "#00174b",
+                        "inverse-primary": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-tertiary-container": "#ebf1ff",
+                        "surface-container-highest": "#dce2f7",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "primary": "#004ac6",
+                        "tertiary": "#00569c",
+                        "surface-tint": "#0053db",
+                        "surface-container": "#e9edff",
+                        "on-primary-container": "#eeefff",
+                        "secondary-container": "#2170e4",
+                        "surface-bright": "#f9f9ff",
+                        "primary-container": "#2563eb",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface": "#f9f9ff",
+                        "outline": "#737686",
+                        "inverse-on-surface": "#edf0ff",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c3c6d7",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary": "#0058be",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "margin-desktop": "auto",
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "md": "16px",
+                        "margin-tablet": "32px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                        "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Top App Bar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-sm h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="shield_lock">shield_lock</span>
+<h1 class="font-display-lg text-headline-lg-mobile tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="workspace_premium">workspace_premium</span>
+</div>
+</header>
+<!-- State Controller (Demo Utility) -->
+<div class="fixed top-20 left-4 z-[60] bg-surface-container-high p-4 rounded-xl shadow-lg border border-outline-variant max-w-xs overflow-y-auto max-h-[618px]">
+<h3 class="font-title-md text-primary mb-2">UI State Switcher</h3>
+<div class="flex flex-col gap-2">
+<button class="text-left px-3 py-2 rounded-lg bg-primary text-on-primary text-label-lg" onclick="showState('loading')">1. App Loading</button>
+<button class="text-left px-3 py-2 rounded-lg bg-surface-container-highest text-on-surface text-label-lg" onclick="showState('skeleton')">2. Skeleton Loading</button>
+<button class="text-left px-3 py-2 rounded-lg bg-surface-container-highest text-on-surface text-label-lg" onclick="showState('empty')">3. Empty States</button>
+<button class="text-left px-3 py-2 rounded-lg bg-surface-container-highest text-on-surface text-label-lg" onclick="showState('offline')">4. No Internet</button>
+<button class="text-left px-3 py-2 rounded-lg bg-surface-container-highest text-on-surface text-label-lg" onclick="showState('maintenance')">6. Maintenance</button>
+<button class="text-left px-3 py-2 rounded-lg bg-surface-container-highest text-on-surface text-label-lg" onclick="showState('permissions')">7. Permissions</button>
+<button class="text-left px-3 py-2 rounded-lg bg-surface-container-highest text-on-surface text-label-lg" onclick="showState('ads')">9. Ad Integration</button>
+<button class="text-left px-3 py-2 rounded-lg bg-tertiary text-on-tertiary text-label-lg" onclick="toggleModal('modal-update')">8. Dialog: Update</button>
+</div>
+</div>
+<main class="pt-20 pb-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- 1. App Loading State -->
+<section class="state-section active fade-in fixed inset-0 z-[100] bg-surface flex flex-col items-center justify-center" id="loading">
+<div class="w-48 h-48 mb-8 relative">
+
+<div class="absolute inset-0 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+</div>
+<div class="text-center">
+<p class="font-title-md text-primary h-6 transition-all duration-500" id="security-msg">Establishing Secure Tunnel</p>
+<p class="font-body-md text-on-surface-variant mt-2">RAAZ Security Protocol v2.4</p>
+</div>
+</section>
+<!-- 2. Skeleton Loading State -->
+<section class="state-section fade-in" id="skeleton">
+<div class="space-y-lg">
+<div class="h-8 w-48 shimmer rounded-lg mb-md"></div>
+<!-- Post Card Skeleton -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/10 space-y-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full shimmer"></div>
+<div class="space-y-xs">
+<div class="h-4 w-32 shimmer rounded"></div>
+<div class="h-3 w-20 shimmer rounded"></div>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="h-4 w-full shimmer rounded"></div>
+<div class="h-4 w-5/6 shimmer rounded"></div>
+<div class="h-4 w-4/6 shimmer rounded"></div>
+</div>
+<div class="h-48 w-full shimmer rounded-xl"></div>
+</div>
+<!-- Inline Ad Skeleton -->
+<div class="bg-surface-container p-md rounded-xl border border-dashed border-outline flex flex-col items-center">
+<div class="h-3 w-16 shimmer rounded mb-sm"></div>
+<div class="h-24 w-full shimmer rounded-lg"></div>
+</div>
+</div>
+</section>
+<!-- 3. Empty States -->
+<section class="state-section fade-in text-center py-xl" id="empty">
+<div class="flex flex-col items-center max-w-sm mx-auto">
+<div class="w-full aspect-square mb-lg rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-[80px] text-outline-variant" data-icon="post_add">post_add</span>
+</div>
+<h2 class="font-headline-lg-mobile text-on-surface mb-sm">No Secrets Shared Yet</h2>
+<p class="font-body-md text-on-surface-variant mb-xl">Your feed is currently quiet. Be the first to break the silence by sharing an anonymous thought with the community.</p>
+<button class="w-full bg-primary text-on-primary h-12 rounded-full font-label-lg flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Create First Post
+                </button>
+</div>
+</section>
+<!-- 4. No Internet State -->
+<section class="state-section fade-in flex flex-col items-center justify-center py-2xl" id="offline">
+<div class="w-64 h-64 bg-contain bg-no-repeat bg-center mb-lg" data-alt="A minimalist 3D illustration of a broken digital link or a floating astronaut disconnected from a cable, set against a soft blue and white background. The style is clean, modern, and friendly with soft lighting and subtle shadows, conveying a calm technical error state." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBN6mlFAsCZ8Inymbv0udWmFFd-iEs5ZKHVl48_5CYQD4_jnhui2fuDdXyTLH1q5AailtNKvChRF0043OCC6IXNLtuBEbNbm6EtcXHoxBlqAUjCLWRbn6L72pKVi_42AZbnOUhBamEr4xoC0LeN7dqb19W7UqGadFGePWiUhw4qLrrm8qL2_rAxGSuk9tFUZAhl--pF7a6wZ3GlI29J_DJcq7YHNEu68J0o9EIP5-WPHfqI3nKJmpe7-DiW9kqPi653GoelC0R6A8tf')"></div>
+<h2 class="font-headline-lg-mobile text-on-surface mb-sm">You're Offline</h2>
+<p class="font-body-md text-on-surface-variant mb-xl text-center">It seems your secure tunnel has been interrupted. Please check your connection to resume browsing.</p>
+<button class="bg-primary text-on-primary px-xl py-md rounded-full font-label-lg active:scale-95 transition-transform">Retry Connection</button>
+</section>
+<!-- 6. Maintenance Mode -->
+<section class="state-section fade-in" id="maintenance">
+<div class="bg-surface-container-high p-lg rounded-2xl border border-primary/20 text-center">
+<span class="material-symbols-outlined text-primary text-[48px] mb-md" data-icon="build_circle">build_circle</span>
+<h2 class="font-headline-md text-on-surface mb-sm">Enhancing Security</h2>
+<p class="font-body-md text-on-surface-variant mb-lg">We're performing a scheduled upgrade to our encryption protocols. We'll be back online shortly.</p>
+<div class="flex justify-center gap-md mb-xl">
+<div class="bg-surface-container-lowest p-md rounded-xl w-20">
+<span class="block font-headline-md text-primary">14</span>
+<span class="text-label-sm text-on-surface-variant">MINS</span>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl w-20">
+<span class="block font-headline-md text-primary">42</span>
+<span class="text-label-sm text-on-surface-variant">SECS</span>
+</div>
+</div>
+<button class="bg-secondary-container text-on-secondary-container w-full py-md rounded-full font-label-lg">Follow Security Roadmap</button>
+</div>
+</section>
+<!-- 7. Permissions Center -->
+<section class="state-section fade-in" id="permissions">
+<h2 class="font-title-lg text-on-surface mb-lg">Permissions Center</h2>
+<div class="space-y-md">
+<!-- Toggle Item 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center justify-between border border-outline-variant/10">
+<div class="flex items-center gap-md">
+<div class="bg-primary/10 p-sm rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</div>
+<div>
+<p class="font-title-md">Notifications</p>
+<p class="text-label-sm text-on-surface-variant">Alerts for replies and mentions</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item 2 (Coming Soon) -->
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center justify-between border border-outline-variant/10 opacity-70">
+<div class="flex items-center gap-md">
+<div class="bg-outline-variant/20 p-sm rounded-lg text-outline">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</div>
+<div>
+<p class="font-title-md">Microphone</p>
+<p class="text-label-sm text-on-surface-variant">Voice encryption (Coming Soon)</p>
+</div>
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-sm py-xs rounded text-[10px] font-bold">LOCKED</span>
+</div>
+</div>
+</section>
+<!-- 9. AdMob Integration -->
+<section class="state-section fade-in space-y-lg" id="ads">
+<!-- Banner Ad Placeholder -->
+<div class="bg-surface-container-high border border-outline-variant rounded p-2 flex items-center justify-center">
+<span class="text-label-sm text-outline tracking-widest uppercase">Sponsored Banner</span>
+</div>
+<h2 class="font-title-lg text-on-surface">Experience Rewards</h2>
+<!-- Rewarded Ad Card -->
+<div class="bg-gradient-to-br from-tertiary-container to-secondary-container p-lg rounded-2xl text-on-tertiary-container relative overflow-hidden">
+<div class="relative z-10">
+<span class="bg-white/20 text-white px-md py-xs rounded-full text-label-sm inline-block mb-md">Special Offer</span>
+<h3 class="font-headline-md mb-sm">Unlock Premium Theme</h3>
+<p class="font-body-md mb-lg opacity-90">Watch a short security briefing to unlock the "Midnight Obsidian" high-contrast theme for 24 hours.</p>
+<button class="bg-white text-primary px-xl py-md rounded-full font-label-lg flex items-center gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+                        Watch to Unlock Theme
+                    </button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-[120px] opacity-10" data-icon="workspace_premium">workspace_premium</span>
+</div>
+<!-- Native Ad Feed Card -->
+<div class="bg-surface-container-lowest p-md rounded-xl border-2 border-primary/10 shadow-sm relative">
+<div class="absolute top-2 right-2 text-[10px] bg-primary-fixed text-on-primary-fixed px-sm rounded">AD</div>
+<div class="flex items-center gap-sm mb-md">
+<img class="w-8 h-8 rounded-lg" data-alt="A professional tech logo for a fictional cybersecurity firm, clean geometric lines, vibrant blue and silver colors, modern corporate aesthetic on a white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfsqD3dq98g9ITZ35BvrK4Ht97q3xmleIXReig0ac2uRjEdUYKRTsVLXAit_y4eobO7LHRdUZZHbnA-nE-COvVf1YEaJIGcRLA7eKBGwkxHnYKlc8-lq71kyRsfaVY_En_3ESiTgC-flLXTjW4kc5lYrZjoEWEOeOoq8-GDMVAmS_x6iwaCEBVPjmHFoAj7ey-TEebfUC7iga_eo7mQBQV_vq6IWleryaitrRu6t4fEjgjCYLcFcUX0Ipz0ZqYJqt-szdbDNLQcY9G"/>
+<p class="font-label-lg text-primary">CyberGuard Pro</p>
+</div>
+<p class="font-body-md mb-md">Your anonymity is only as good as your VPN. Get 3 months free with our premium secure tunnel service.</p>
+<div class="h-32 w-full bg-cover bg-center rounded-lg mb-md" data-alt="A high-tech digital shield made of interlocking glowing blue lines and hexagonal patterns, floating in a dark server room environment with soft bokeh lights in the background. Modern, secure, and professional vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA1C6vAYkHEZQ6IlROnURj6WjkIk_hSJubvji7yl_W5jCIa-clK6JN-h5ip2vec1Weq1uBvoTSEzi676a3_41-EcVqms_fK71vuNyGzwiFkF8_Razfu5GpTgi8FiVCtgf2Vh9p3fBvKwedxS8-TNXGPDvO3PWqAafE51xrqhTBjgWjhmC_m5ukXJfs01yMcIB5Rp0Z2eaerJMHtwjFZYtwmxsKokKNLFFS1fA8gsaZfwiQjhllwiaXc7HHPW0y3mSK-M2-fe_wff1gQ')"></div>
+<button class="w-full border border-primary text-primary py-sm rounded-full font-label-lg">Learn More</button>
+</div>
+</section>
+</main>
+<!-- Dialogs & Modals -->
+<!-- 8 & 10. Update Available Dialog -->
+<div class="fixed inset-0 z-[200] hidden" id="modal-update">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleModal('modal-update')"></div>
+<div class="absolute bottom-0 left-0 w-full bg-surface rounded-t-3xl p-xl shadow-2xl animate-[slideUp_0.3s_ease-out]">
+<div class="w-12 h-1 bg-outline-variant rounded-full mx-auto mb-lg"></div>
+<div class="flex items-center gap-md mb-md">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="system_update">system_update</span>
+<div>
+<h3 class="font-title-lg">Update Available</h3>
+<p class="text-label-sm text-on-surface-variant">Version 2.5.0 • 14.2 MB</p>
+</div>
+</div>
+<ul class="space-y-sm mb-xl">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-body-md text-on-surface-variant">Enhanced end-to-end encryption for private DMs.</p>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-body-md text-on-surface-variant">New 'Burn After Reading' post setting.</p>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-body-md text-on-surface-variant">Fixed connection drops in high-latency tunnels.</p>
+</li>
+</ul>
+<div class="flex flex-col gap-sm">
+<button class="w-full bg-primary text-on-primary py-md rounded-full font-label-lg">Update Now</button>
+<button class="w-full py-md text-on-surface-variant font-label-lg" onclick="toggleModal('modal-update')">Skip for now</button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl flex justify-around items-center py-sm px-gutter">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 rounded-full cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-label-sm text-label-sm">Feed</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 rounded-full cursor-pointer">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 rounded-full cursor-pointer">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+<span class="font-label-sm text-label-sm">Badges</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</div>
+</nav>
+<script>
+        function showState(id) {
+            document.querySelectorAll('.state-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            // Special handling for loading simulation
+            if(id === 'loading') {
+                simulateLoading();
+            }
+        }
+
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.toggle('hidden');
+        }
+
+        function simulateLoading() {
+            const msgs = ['Establishing Secure Tunnel', 'Encrypting Session', 'Authenticating Shadow Identity'];
+            let i = 0;
+            const interval = setInterval(() => {
+                i = (i + 1) % msgs.length;
+                const el = document.getElementById('security-msg');
+                if(!el) { clearInterval(interval); return; }
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    el.innerText = msgs[i];
+                    el.style.opacity = '1';
+                }, 500);
+            }, 2500);
+
+            // Auto transition from loading to skeleton after a few seconds
+            setTimeout(() => {
+                showState('skeleton');
+                clearInterval(interval);
+            }, 6000);
+        }
+
+        // Initial launch
+        window.onload = () => {
+            simulateLoading();
+        };
+
+        // Custom Element logic for animations placeholder (minimal mock as instructed)
+        class AnimatedSvg extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<div class="w-full h-full bg-primary/5 rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[64px] text-primary animate-pulse" data-icon="lock_open">lock_open</span>
+                </div>`;
+            }
+        }
+        customElements.define('animated-svg', AnimatedSvg);
+    </script>
+<style>
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+    </style>
+</body></html>

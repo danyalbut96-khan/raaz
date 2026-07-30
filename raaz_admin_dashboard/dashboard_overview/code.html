@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Phase 8 - Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .sparkline-container {
+            height: 40px;
+            width: 80px;
+        }
+        /* Custom scrollbar for side nav */
+        #side-nav::-webkit-scrollbar { width: 4px; }
+        #side-nav::-webkit-scrollbar-track { background: transparent; }
+        #side-nav::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); border-radius: 10px; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#dce2f7",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#001a42",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#d3daef",
+                      "on-surface": "#141b2b",
+                      "on-background": "#141b2b",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#e1e8fd",
+                      "on-primary-fixed": "#00174b",
+                      "primary-container": "#2563eb",
+                      "background": "#f9f9ff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-container-low": "#f1f3ff",
+                      "on-primary-container": "#eeefff",
+                      "secondary": "#0058be",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#fefcff",
+                      "primary": "#004ac6",
+                      "on-primary-container": "#eeefff",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#fefcff",
+                      "primary": "#004ac6",
+                      "on-tertiary-container": "#ebf1ff",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "error-container": "#ffdad6",
+                      "outline": "#737686",
+                      "surface": "#f9f9ff",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#dce2f7",
+                      "tertiary-fixed": "#d4e3ff",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#b4c5ff",
+                      "surface-bright": "#f9f9ff",
+                      "surface-container": "#e9edff",
+                      "outline-variant": "#c3c6d7",
+                      "on-surface-variant": "#434655",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-tertiary-fixed": "#001c39",
+                      "inverse-surface": "#293040",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-tint": "#0053db",
+                      "tertiary-container": "#196fc0",
+                      "secondary-container": "#2170e4",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "tertiary": "#00569c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "container-margin": "24px",
+                      "sm": "8px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "title-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] z-50 bg-surface/70 backdrop-blur-xl border-r border-white/20 shadow-lg flex flex-col p-md space-y-xs overflow-y-auto" id="side-nav">
+<div class="px-md py-lg mb-md">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">RAAZ Admin</h1>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest mt-xs">Phase 8 Moderation</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active State Logic: Dashboard is primary intent -->
+<a class="flex items-center px-md py-sm rounded-lg bg-primary/10 text-primary border-l-4 border-primary font-bold transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-md">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">article</span>
+<span class="font-label-lg text-label-lg">Posts</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">comment</span>
+<span class="font-label-lg text-label-lg">Comments</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">report</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">category</span>
+<span class="font-label-lg text-label-lg">Categories</span>
+</a>
+<div class="pt-md pb-xs px-md">
+<span class="font-label-sm text-on-surface-variant/60 uppercase tracking-tighter">Content &amp; Stories</span>
+</div>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">auto_stories</span>
+<span class="font-label-lg text-label-lg">Daily Reflection</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">emoji_events</span>
+<span class="font-label-lg text-label-lg">Daily Challenge</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">star</span>
+<span class="font-label-lg text-label-lg">Featured Stories</span>
+</a>
+<div class="pt-md pb-xs px-md">
+<span class="font-label-sm text-on-surface-variant/60 uppercase tracking-tighter">System Control</span>
+</div>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">analytics</span>
+<span class="font-label-lg text-label-lg">Analytics</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">notifications</span>
+<span class="font-label-lg text-label-lg">Notifications</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-150 active:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-md">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<div class="p-md bg-surface-container-low rounded-xl flex items-center space-x-md">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary font-bold">A</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-lg text-on-surface truncate">Admin Moderator</p>
+<p class="font-label-sm text-on-surface-variant truncate">admin@raaz.io</p>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors">logout</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 w-full bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-lg py-md max-w-[1440px] mx-auto">
+<div class="flex items-center space-x-lg flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-md py-sm focus:ring-2 focus:ring-primary/20 transition-all text-body-md" placeholder="Search analytics, posts, or users..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-md">
+<button class="flex items-center space-x-xs px-md py-xs rounded-full bg-primary/10 text-primary font-label-lg hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>Quick Actions</span>
+</button>
+<div class="flex space-x-sm px-md border-l border-outline-variant/30">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-lg max-w-[1440px] mx-auto w-full space-y-lg animate-fade-in">
+<!-- Welcome Header -->
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Welcome back, Admin</h2>
+<p class="font-body-lg text-on-surface-variant">Here's what's happening on RAAZ Phase 8 today, <span class="font-semibold text-primary" id="current-date">October 24, 2023</span>.</p>
+</div>
+<button class="flex items-center space-x-sm px-lg py-sm bg-primary text-on-primary rounded-lg font-label-lg shadow-sm hover:translate-y-[-2px] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+<span>New Post</span>
+</button>
+</div>
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- KPI Card 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white hover:shadow-lg transition-all group">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">article</span>
+</div>
+<div class="flex items-center text-[#10B981] font-label-sm">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+12.5%</span>
+</div>
+</div>
+<p class="font-label-lg text-on-surface-variant mb-xs">Total Posts</p>
+<div class="flex items-end justify-between">
+<h3 class="font-title-lg text-[28px] font-bold text-on-surface">24,592</h3>
+<div class="sparkline-container relative">
+<!-- Simple custom SVG sparkline -->
+<svg class="stroke-primary fill-none stroke-2" viewbox="0 0 80 40">
+<path d="M0,35 Q10,10 20,30 T40,20 T60,10 T80,30"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- KPI Card 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white hover:shadow-lg transition-all">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div class="flex items-center text-[#10B981] font-label-sm">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+8.2%</span>
+</div>
+</div>
+<p class="font-label-lg text-on-surface-variant mb-xs">Active Users</p>
+<div class="flex items-end justify-between">
+<h3 class="font-title-lg text-[28px] font-bold text-on-surface">1,208</h3>
+<div class="sparkline-container relative">
+<svg class="stroke-secondary fill-none stroke-2" viewbox="0 0 80 40">
+<path d="M0,30 Q15,35 30,15 T60,25 T80,5"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- KPI Card 3 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white hover:shadow-lg transition-all">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex items-center text-error font-label-sm">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+<span>-2.4%</span>
+</div>
+</div>
+<p class="font-label-lg text-on-surface-variant mb-xs">Pending Reports</p>
+<div class="flex items-end justify-between">
+<h3 class="font-title-lg text-[28px] font-bold text-on-surface">43</h3>
+<div class="sparkline-container relative">
+<svg class="stroke-error fill-none stroke-2" viewbox="0 0 80 40">
+<path d="M0,10 Q20,30 40,20 T80,35"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- KPI Card 4 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white hover:shadow-lg transition-all">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<div class="flex items-center text-[#10B981] font-label-sm">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+15.0%</span>
+</div>
+</div>
+<p class="font-label-lg text-on-surface-variant mb-xs">New Comments</p>
+<div class="flex items-end justify-between">
+<h3 class="font-title-lg text-[28px] font-bold text-on-surface">856</h3>
+<div class="sparkline-container relative">
+<svg class="stroke-tertiary fill-none stroke-2" viewbox="0 0 80 40">
+<path d="M0,35 Q10,25 20,30 T40,5 T60,15 T80,10"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Row: Analytics & Online Users -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Analytics Chart -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-xl rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white flex flex-col">
+<div class="flex justify-between items-center mb-xl">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Analytics Overview</h4>
+<p class="font-body-md text-on-surface-variant">Daily active users over the last 30 days</p>
+</div>
+<select class="bg-surface-container-low border-none rounded-lg font-label-md px-md py-xs text-on-surface-variant focus:ring-primary/20">
+<option>Last 30 Days</option>
+<option>Last 7 Days</option>
+<option>Last Year</option>
+</select>
+</div>
+<div class="flex-1 min-h-[300px] w-full relative flex items-end justify-between space-x-xs pt-xl">
+<!-- Simplified representation of a bezier line chart with pure CSS/SVG -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+</div>
+<svg class="w-full h-full absolute inset-0 overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:rgba(37, 99, 235, 0.2); stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:rgba(37, 99, 235, 0); stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+<path d="M 0 80 C 10 75, 20 85, 30 60 C 40 35, 50 45, 60 20 C 70 -5, 80 15, 90 10 C 100 5, 110 5, 110 5 V 100 H 0 Z" fill="url(#chartGradient)"></path>
+<path d="M 0 80 C 10 75, 20 85, 30 60 C 40 35, 50 45, 60 20 C 70 -5, 80 15, 90 10 C 100 5, 110 5, 110 5" fill="none" stroke="#2563eb" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute bottom-[-24px] w-full flex justify-between font-label-sm text-on-surface-variant">
+<span>01 Oct</span>
+<span>08 Oct</span>
+<span>15 Oct</span>
+<span>22 Oct</span>
+<span>29 Oct</span>
+</div>
+</div>
+</div>
+<!-- Online Users Widget -->
+<div class="bg-surface-container-lowest p-xl rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white">
+<div class="flex justify-between items-center mb-lg">
+<h4 class="font-title-lg text-title-lg text-on-surface">Online Users</h4>
+<span class="px-sm py-1 bg-[#10B981]/10 text-[#10B981] rounded-full font-label-sm flex items-center">
+<span class="w-2 h-2 rounded-full bg-[#10B981] mr-1.5 animate-pulse"></span>
+                            124 Live
+                        </span>
+</div>
+<div class="space-y-md">
+<div class="flex items-center space-x-md group cursor-pointer hover:bg-surface-container/30 p-xs rounded-lg transition-colors">
+<div class="relative">
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="A professional studio headshot of a smiling young tech professional with a clean, high-key lighting aesthetic, against a minimalist soft gray background. The subject has dark hair and is wearing a sleek navy blue polo shirt, fitting the corporate modern theme of the dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGWHI9PkAqSERaPVC1qCJ_Ox27OKb15Dq8Th8xe6s5enBVvdYm-4YOe0Fh8J4RZ6hPqgqLQ-q1gidNextQwW-GGsGpUcWHTDJo3M673JT_z-0LPTBK1u9bHa5tw_tBoTCY6AslNantRYFIDKECmvR2oLaLfRwE130O3rQ6skgqsGC-080HH9RstZe3irPTlBB4mlMAKuwKw1s-qva5ZlV7llENEMe8eULbCLo3kUeAqpjTl97aVuvEFG60-z271wf9b8h1CPE8GX8K"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#10B981] rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-lg text-on-surface truncate">Sarah Jenkins</p>
+<p class="font-label-sm text-on-surface-variant truncate">San Francisco, US</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-primary">Viewing Post</p>
+</div>
+</div>
+<div class="flex items-center space-x-md group cursor-pointer hover:bg-surface-container/30 p-xs rounded-lg transition-colors">
+<div class="relative">
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a thoughtful mid-40s male executive with spectacles, looking slightly off-camera. The lighting is soft and cinematic with cool tones. The overall aesthetic is professional, reliable, and modern, shot on a high-end camera with a shallow depth of field, minimalist office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoP4AdaxjsGQWq_pymuD6-CIKS5boEsIzKLx6vQjVpcnQ1yJnxInV0JPz3hvbLu507csFE9rkIWznpshBg_iI1csbNEdT3yRnQavdT9LGQB2fQ-7BL1SBRrK79RslfORf9-jkpAHyKHQFkk92MeCwXqrJBB5H7IssPT_BUw_0A6dXhjyUUWQJ7_ht5AuPhucGbWXdbFQEk4KdkzH4YWW0DzTWRoPheYhfe-L4cbbq80BpWW5T5VAppWIHH9pISmHzdNdHCoydNmHoD"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#10B981] rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-lg text-on-surface truncate">Marcus Chen</p>
+<p class="font-label-sm text-on-surface-variant truncate">London, UK</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-primary">In Challenge</p>
+</div>
+</div>
+<div class="flex items-center space-x-md group cursor-pointer hover:bg-surface-container/30 p-xs rounded-lg transition-colors">
+<div class="relative">
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="High-quality portrait of an energetic young female developer with curly hair and a bright smile. She is in a modern, naturally lit workspace with hints of lush green plants in the blurred background. The image is bright, crisp, and exudes a positive, corporate-friendly atmosphere with a blue and white color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAE5I_eDj86tl0bSiY0fDmjKXL9jd8X1LYs73B2y6FvJBYiWCGKh-XM2704cjHzmQYs0BAZpMHUkMlRTFfI0l6vXem4dKcQ3UWt5XHD28DHDejB23kcTFwScqViyc71FRkSgHTd-XGvB2_LEU3BUhTIactydhApOyKs-jeF4vkPX3SmtbTiBy-azOAXNdPKnSNenCciQXHM8asMIMp1iBuOe7JZsE29Pw5GCEW4gp-EM9AWkGGK-E680g3V2MUWWCv4ljM2gZzyejk"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#10B981] rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-lg text-on-surface truncate">Elena Rodriguez</p>
+<p class="font-label-sm text-on-surface-variant truncate">Madrid, ES</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-primary">Reflecting</p>
+</div>
+</div>
+<div class="flex items-center space-x-md group cursor-pointer hover:bg-surface-container/30 p-xs rounded-lg transition-colors">
+<div class="relative">
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Candid-style professional portrait of a senior business analyst with a confident expression. High-end photography with precise focus and natural window lighting. The background is a blurred modern architectural space, maintaining a clean and minimalist aesthetic that aligns with a high-performance SaaS environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCOn241kkUgSYpTlsE1J4YCCeSFBEHaBv6AjvSBSJ7dwpReFUGKijQgGnrQArG2Po-UH7Gi_H7ba0I5_htVyRMsYSD6zRQV2O_g8UJnFFSdi6aWPraQuZ_I1MVofmDn4z30E_zB62KZcWz-dz8qtX2-hqhV15Vtei6e6If_MzburGZSRNiA8F0jV01KE0W-n0aQ5x4L34K6i5txbGYrw-68oj_93hZyhSZW-DiH4sgiQ3ckmHmlgsvpmTYNIBL9lpdMoi1QnoCgQHG"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#10B981] rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-lg text-on-surface truncate">David Kim</p>
+<p class="font-label-sm text-on-surface-variant truncate">Seoul, KR</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-primary">Commenting</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-lg py-sm border border-outline-variant/50 rounded-lg font-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                        View All Activity
+                    </button>
+</div>
+</div>
+<!-- Bottom Row: Table & Recent Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Today's Posts Table -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-xl rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white overflow-hidden">
+<div class="flex justify-between items-center mb-lg">
+<h4 class="font-title-lg text-title-lg text-on-surface">Today's Posts</h4>
+<button class="text-primary font-label-lg hover:underline transition-all">Export Report</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="border-b border-outline-variant/10">
+<tr>
+<th class="py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">ID</th>
+<th class="py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">User</th>
+<th class="py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Title</th>
+<th class="py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="py-sm text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-container/20 transition-colors group">
+<td class="py-md font-label-sm text-on-surface-variant">#PH8-9021</td>
+<td class="py-md">
+<div class="flex items-center space-x-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary flex items-center justify-center font-bold text-xs">JD</div>
+<span class="font-body-md font-medium">Jane Doe</span>
+</div>
+</td>
+<td class="py-md font-body-md text-on-surface">The Future of Phase 8 Security</td>
+<td class="py-md">
+<span class="px-sm py-1 rounded-full bg-[#10B981]/10 text-[#10B981] font-label-sm">Published</span>
+</td>
+<td class="py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/20 transition-colors group">
+<td class="py-md font-label-sm text-on-surface-variant">#PH8-8994</td>
+<td class="py-md">
+<div class="flex items-center space-x-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container text-secondary flex items-center justify-center font-bold text-xs">RK</div>
+<span class="font-body-md font-medium">Robert King</span>
+</div>
+</td>
+<td class="py-md font-body-md text-on-surface">Exploring New Community Guidelines</td>
+<td class="py-md">
+<span class="px-sm py-1 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] font-label-sm">In Review</span>
+</td>
+<td class="py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/20 transition-colors group">
+<td class="py-md font-label-sm text-on-surface-variant">#PH8-8982</td>
+<td class="py-md">
+<div class="flex items-center space-x-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container text-tertiary flex items-center justify-center font-bold text-xs">SL</div>
+<span class="font-body-md font-medium">Sam Lee</span>
+</div>
+</td>
+<td class="py-md font-body-md text-on-surface">Weekly Moderation Highlights</td>
+<td class="py-md">
+<span class="px-sm py-1 rounded-full bg-[#10B981]/10 text-[#10B981] font-label-sm">Published</span>
+</td>
+<td class="py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/20 transition-colors group">
+<td class="py-md font-label-sm text-on-surface-variant">#PH8-8975</td>
+<td class="py-md">
+<div class="flex items-center space-x-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container text-error flex items-center justify-center font-bold text-xs">AM</div>
+<span class="font-body-md font-medium">Alice Miller</span>
+</div>
+</td>
+<td class="py-md font-body-md text-on-surface">User Reporting Feedback</td>
+<td class="py-md">
+<span class="px-sm py-1 rounded-full bg-error/10 text-error font-label-sm">Flagged</span>
+</td>
+<td class="py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="bg-surface-container-lowest p-xl rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white">
+<h4 class="font-title-lg text-title-lg text-on-surface mb-lg">Recent Activity</h4>
+<div class="space-y-lg relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/10">
+<div class="relative pl-xl flex flex-col">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-primary text-[14px]">bolt</span>
+</div>
+<p class="font-label-lg text-on-surface">System Update <span class="font-normal text-on-surface-variant">deployed to Phase 8 server cluster.</span></p>
+<span class="font-label-sm text-on-surface-variant/60 mt-1">12 minutes ago</span>
+</div>
+<div class="relative pl-xl flex flex-col">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-[#10B981]/20 flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-[#10B981] text-[14px]">shield</span>
+</div>
+<p class="font-label-lg text-on-surface">Audit Log <span class="font-normal text-on-surface-variant">reviewed by Security Admin.</span></p>
+<span class="font-label-sm text-on-surface-variant/60 mt-1">45 minutes ago</span>
+</div>
+<div class="relative pl-xl flex flex-col">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-error/20 flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-error text-[14px]">warning</span>
+</div>
+<p class="font-label-lg text-on-surface">New Flagged Content <span class="font-normal text-on-surface-variant">requires immediate moderator action.</span></p>
+<span class="font-label-sm text-on-surface-variant/60 mt-1">2 hours ago</span>
+</div>
+<div class="relative pl-xl flex flex-col">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-secondary text-[14px]">mail</span>
+</div>
+<p class="font-label-lg text-on-surface">Newsletter <span class="font-normal text-on-surface-variant">scheduled for weekly release.</span></p>
+<span class="font-label-sm text-on-surface-variant/60 mt-1">4 hours ago</span>
+</div>
+<div class="relative pl-xl flex flex-col">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-tertiary/20 flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-tertiary text-[14px]">history</span>
+</div>
+<p class="font-label-lg text-on-surface">Database Backup <span class="font-normal text-on-surface-variant">completed successfully.</span></p>
+<span class="font-label-sm text-on-surface-variant/60 mt-1">6 hours ago</span>
+</div>
+</div>
+<button class="w-full mt-xl py-sm font-label-lg text-primary hover:bg-primary/5 rounded-lg transition-colors">
+                        Download Full Log
+                    </button>
+</div>
+</div>
+</div>
+<!-- Footer for Content Area -->
+<footer class="mt-auto py-lg px-lg border-t border-outline-variant/10 text-center">
+<p class="font-label-sm text-on-surface-variant/60">© 2023 RAAZ Administration Phase 8. All rights reserved. Built with Enterprise Core Design System.</p>
+</footer>
+</main>
+<!-- FAB Suppression: On Dashboard, we don't need a single primary action that overrides the UI, but if we did it would be "Add Post" which is already in header. -->
+<script>
+        // Update date to real-time-like feel
+        const dateEl = document.getElementById('current-date');
+        const now = new Date();
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        dateEl.innerText = now.toLocaleDateString('en-US', options);
+
+        // Simple interactive ripples on buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', function(e) {
+                const circle = document.createElement('span');
+                const diameter = Math.max(this.clientWidth, this.clientHeight);
+                const radius = diameter / 2;
+
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${e.clientX - (this.offsetLeft + radius)}px`;
+                circle.style.top = `${e.clientY - (this.offsetTop + radius)}px`;
+                circle.classList.add('ripple');
+
+                const ripple = this.getElementsByClassName('ripple')[0];
+                if (ripple) { ripple.remove(); }
+                this.appendChild(circle);
+            });
+        });
+    </script>
+</body></html>

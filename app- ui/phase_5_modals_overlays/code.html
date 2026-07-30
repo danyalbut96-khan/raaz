@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings Modals &amp; Sheets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@200,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#dce2f7",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-background": "#141b2b",
+                      "surface-container": "#e9edff",
+                      "background": "#f9f9ff",
+                      "surface": "#f9f9ff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-secondary-fixed": "#001a42",
+                      "on-primary-fixed": "#00174b",
+                      "on-tertiary-container": "#ebf1ff",
+                      "surface-container-highest": "#dce2f7",
+                      "outline": "#737686",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "on-secondary-container": "#fefcff",
+                      "error-container": "#ffdad6",
+                      "inverse-primary": "#b4c5ff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "surface-dim": "#d3daef",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "secondary": "#0058be",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#2170e4",
+                      "primary": "#004ac6",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#00569c",
+                      "surface-container-high": "#e1e8fd",
+                      "surface-container-low": "#f1f3ff",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-primary-container": "#eeefff",
+                      "tertiary-fixed": "#d4e3ff",
+                      "secondary-fixed": "#d8e2ff",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#196fc0",
+                      "primary-container": "#2563eb",
+                      "outline-variant": "#c3c6d7",
+                      "surface-tint": "#0053db",
+                      "on-surface": "#141b2b",
+                      "inverse-surface": "#293040",
+                      "surface-bright": "#f9f9ff",
+                      "on-surface-variant": "#434655",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#dbe1ff",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px",
+                      "margin-tablet": "32px",
+                      "margin-desktop": "auto",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "title-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                      "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        .modal-enter { animation: modalFadeIn 0.3s ease-out forwards; }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .sheet-enter { animation: sheetSlideIn 0.4s cubic-bezier(0.32, 0.72, 0, 1) forwards; }
+        @keyframes sheetSlideIn {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        body { background-color: #f9f9ff; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface overflow-x-hidden">
+<!-- Header (Shared Component: TopAppBar) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl">
+<div class="flex items-center justify-between px-4 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-high/50 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg font-medium text-primary">Settings</h1>
+</div>
+<div class="font-headline-md text-headline-md font-bold text-primary">Aura</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 max-w-7xl mx-auto">
+<!-- Gallery Intro -->
+<section class="mb-12">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-2">Component Library</h2>
+<p class="text-on-surface-variant font-body-lg text-body-lg">Previewing Material 3 Modals, Alerts, and Bottom Sheets for the Aura platform.</p>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Section 1: Dialogs Gallery -->
+<div class="space-y-8">
+<h3 class="font-title-lg text-title-lg text-secondary px-2">Dialogs</h3>
+<!-- Clear Cache Confirmation -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant modal-enter">
+<span class="material-symbols-outlined text-primary mb-4 block">delete_sweep</span>
+<h4 class="font-title-lg text-title-lg mb-2">Clear Cache?</h4>
+<p class="text-on-surface-variant mb-6 font-body-md text-body-md">This will free up 248MB of space. Your saved preferences won't be affected.</p>
+<div class="flex justify-end gap-2">
+<button class="px-4 py-2 font-label-lg text-label-lg text-primary hover:bg-surface-container-high rounded-full transition-colors">Cancel</button>
+<button class="px-6 py-2 font-label-lg text-label-lg bg-primary text-on-primary rounded-full hover:shadow-md transition-all active:scale-95">Clear</button>
+</div>
+</div>
+<!-- Reset Settings Warning -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant">
+<span class="material-symbols-outlined text-error mb-4 block">warning</span>
+<h4 class="font-title-lg text-title-lg mb-2">Reset All Settings?</h4>
+<p class="text-on-surface-variant mb-6 font-body-md text-body-md">This action cannot be undone. All personalizations will be returned to factory defaults.</p>
+<div class="flex flex-col gap-2">
+<button class="w-full py-3 font-label-lg text-label-lg bg-error text-on-error rounded-full active:scale-95 transition-transform">Reset Everything</button>
+<button class="w-full py-3 font-label-lg text-label-lg text-outline hover:bg-surface-container-high rounded-full transition-colors">Keep My Settings</button>
+</div>
+</div>
+</div>
+<!-- Section 2: Sheets Preview (Inline representation) -->
+<div class="space-y-8">
+<h3 class="font-title-lg text-title-lg text-secondary px-2">Bottom Sheets</h3>
+<!-- Theme Picker Sheet -->
+<div class="bg-surface-container rounded-t-3xl p-6 border-x border-t border-outline-variant shadow-lg relative overflow-hidden">
+<div class="w-8 h-1 bg-outline-variant rounded-full mx-auto mb-6"></div>
+<h4 class="font-title-lg text-title-lg mb-6">Choose Theme</h4>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-4 bg-primary-container text-on-primary-container rounded-2xl">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined">light_mode</span>
+<span class="font-label-lg text-label-lg">Light Theme</span>
+</div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container-high rounded-2xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+<span class="font-label-lg text-label-lg">Dark Theme</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container-high rounded-2xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant">settings_brightness</span>
+<span class="font-label-lg text-label-lg">System Default</span>
+</div>
+</div>
+</div>
+<!-- Share Sheet -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant">
+<h4 class="font-title-md text-title-md mb-4">Share Aura</h4>
+<div class="grid grid-cols-4 gap-4">
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary-fixed transition-colors cursor-pointer">
+<span class="material-symbols-outlined">content_copy</span>
+</div>
+<span class="text-[10px] font-medium uppercase tracking-wider text-outline">Copy</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary-fixed transition-colors cursor-pointer">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<span class="text-[10px] font-medium uppercase tracking-wider text-outline">Email</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary-fixed transition-colors cursor-pointer">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<span class="text-[10px] font-medium uppercase tracking-wider text-outline">Sms</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary-fixed transition-colors cursor-pointer">
+<span class="material-symbols-outlined">more_horiz</span>
+</div>
+<span class="text-[10px] font-medium uppercase tracking-wider text-outline">More</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: State Feedback -->
+<div class="space-y-8">
+<h3 class="font-title-lg text-title-lg text-secondary px-2">Success States</h3>
+<!-- Language Changed Toast/Dialog -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-xl border border-outline-variant text-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10">
+<div class="w-16 h-16 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">language</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Language Updated</h4>
+<p class="text-on-surface-variant font-body-md text-body-md mb-8">System preferences have been updated to French (FR). Re-syncing localized content...</p>
+<button class="w-full py-3 bg-secondary text-on-secondary rounded-full font-label-lg text-label-lg hover:shadow-lg transition-all active:scale-95">Great, Thanks</button>
+</div>
+</div>
+<!-- Interactive Demo Trigger -->
+<div class="bg-primary-container/20 rounded-xl p-6 border border-primary/20">
+<h4 class="font-title-md text-title-md text-primary mb-2">Live Preview</h4>
+<p class="text-on-surface-variant font-body-md text-body-md mb-4">Click below to see the interactive overlay transition.</p>
+<button class="flex items-center gap-3 px-6 py-3 bg-primary text-on-primary rounded-full active:scale-95 transition-transform shadow-md" onclick="toggleSheet()">
+<span class="material-symbols-outlined">open_in_new</span>
+<span class="font-label-lg text-label-lg">Open Theme Sheet</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive Overlay (Hidden by default) -->
+<div class="fixed inset-0 bg-black/40 z-[60] hidden backdrop-blur-sm transition-opacity duration-300 opacity-0" id="overlay" onclick="toggleSheet()">
+<div class="absolute bottom-0 left-0 w-full bg-surface rounded-t-[32px] p-8 sheet-enter" id="bottom-sheet" onclick="event.stopPropagation()">
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-8"></div>
+<div class="max-w-md mx-auto">
+<header class="mb-8">
+<h2 class="font-headline-md text-headline-md mb-2">Appearance</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Customize how Aura looks on your device.</p>
+</header>
+<div class="space-y-4 mb-8">
+<div class="group flex items-center justify-between p-5 bg-surface-container-low rounded-3xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-5">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">light_mode</span>
+</div>
+<div>
+<p class="font-title-md text-title-md">Light Mode</p>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Classic bright experience</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="group flex items-center justify-between p-5 bg-surface-container-low rounded-3xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-5">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-highest flex items-center justify-center text-on-surface-variant group-hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</div>
+<div>
+<p class="font-title-md text-title-md">Dark Mode</p>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Gentle on the eyes at night</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-label-lg text-label-lg shadow-lg active:scale-95 transition-all" onclick="toggleSheet()">
+                    Apply Selection
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation (Shared Component: BottomNavBar) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface/85 backdrop-blur-xl z-50 rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-lg text-label-lg font-medium">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-lg text-label-lg font-medium">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-lg text-label-lg font-medium">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl px-5 py-1 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg text-label-lg font-medium">Settings</span>
+</a>
+</nav>
+<script>
+        function toggleSheet() {
+            const overlay = document.getElementById('overlay');
+            if (overlay.classList.contains('hidden')) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 10);
+            } else {
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        // Simple subtle entrance animations for cards on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bg-surface-container-lowest, .bg-surface-container-low, .bg-surface-container');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s`;
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 50);
+            });
+        });
+    </script>
+</body></html>

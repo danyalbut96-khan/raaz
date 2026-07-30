@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Permissions Center</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary-fixed": "#00174b",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-highest": "#dce2f7",
+                    "outline": "#737686",
+                    "surface-variant": "#dce2f7",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-background": "#141b2b",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary": "#0058be",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary-container": "#fefcff",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#b4c5ff",
+                    "surface-container-high": "#e1e8fd",
+                    "surface-container-low": "#f1f3ff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-container": "#eeefff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#2170e4",
+                    "primary": "#004ac6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#434655",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#196fc0",
+                    "primary-container": "#2563eb",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "on-surface": "#141b2b",
+                    "inverse-surface": "#293040"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "base": "4px",
+                    "margin-tablet": "32px",
+                    "margin-desktop": "auto",
+                    "lg": "24px",
+                    "md": "16px",
+                    "2xl": "48px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .permission-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+        }
+        .permission-card:active {
+            transform: scale(0.98);
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 32px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #c3c6d7;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input:checked + .slider {
+            background-color: #2563eb;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        .custom-glass {
+            backdrop-filter: blur(20px) saturate(180%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/85 shadow-sm h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-on-surface-variant">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile font-bold tracking-tight text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-32 px-margin-mobile max-w-2xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Permissions Center</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Control how RAAZ interacts with your device to ensure maximum anonymity and security.</p>
+</section>
+<!-- Illustration / Visual Anchor -->
+<div class="mb-10 w-full aspect-[16/9] rounded-2xl overflow-hidden relative shadow-lg">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10"></div>
+<img class="w-full h-full object-cover" data-alt="A sophisticated, minimalist 3D rendering of a translucent glass shield glowing with a soft blue light in a clean, high-key white environment. The aesthetic is ultra-modern and secure, representing high-end data protection. Floating abstract geometric data nodes surround the shield, emphasizing a premium digital security ecosystem. The lighting is soft and diffused, creating a calm yet powerful professional atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVBtUceGc1AHHwS_z09DXKIPNJIHxPhzd6EH061t_n0-7c4Pi73SYlmEXeXYB-oVxT55ssMyZRyRS8Qff1EsIuREUl0t_mF7uKetEuJqRUgaDAuD29yZzoJfLjHZOolkTBW8UDBEEOyl_CrT5ieGMrl-IThjH7fGahbuGSQcvFedRTQBXq0ysR8SoghiIHWV5mtHFkM9BPLQ4odue6VItWd6WFVMfJhn3AW9HwuhIzGS6KTvNWx9f3BAjPait-NHzFQWK0bAdAlSRX"/>
+</div>
+<!-- Permission Cards Grid -->
+<div class="space-y-4">
+<!-- Notifications Card -->
+<div class="permission-card bg-surface-container-lowest p-5 rounded-xl flex items-start gap-4 shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-outline-variant/10">
+<div class="bg-primary-container/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="font-title-md text-title-md text-on-surface">Notifications</h3>
+<label class="toggle-switch">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Critical for real-time safety alerts and encrypted message receipts without compromising your background identity.</p>
+</div>
+</div>
+<!-- Storage Card -->
+<div class="permission-card bg-surface-container-lowest p-5 rounded-xl flex items-start gap-4 shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-outline-variant/10">
+<div class="bg-primary-container/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary text-[28px]">storage</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="font-title-md text-title-md text-on-surface">Storage</h3>
+<label class="toggle-switch">
+<input type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Required to securely store your local-only vault and encrypted media. We never access your personal photo gallery.</p>
+</div>
+</div>
+<!-- Microphone Card -->
+<div class="permission-card bg-surface-container-lowest p-5 rounded-xl flex items-start gap-4 shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-outline-variant/10">
+<div class="bg-primary-container/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary text-[28px]">mic</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="font-title-md text-title-md text-on-surface">Microphone</h3>
+<label class="toggle-switch">
+<input type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Enables voice distortion sharing. Audio is processed on-device and instantly anonymized before being transmitted.</p>
+</div>
+</div>
+<!-- Camera Card -->
+<div class="permission-card bg-surface-container-lowest p-5 rounded-xl flex items-start gap-4 shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-outline-variant/10">
+<div class="bg-primary-container/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary text-[28px]">photo_camera</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="font-title-md text-title-md text-on-surface">Camera</h3>
+<label class="toggle-switch">
+<input type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Used strictly for scanning secure invitation codes and capturing anonymous visual proof of life when requested.</p>
+</div>
+</div>
+</div>
+<!-- Privacy Footer -->
+<footer class="mt-16 text-center space-y-4">
+<div class="inline-flex items-center gap-2 bg-surface-container p-3 px-6 rounded-full">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<p class="font-label-lg text-label-lg text-primary font-bold">Privacy First: We only ask for what we need to protect you.</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant/60 max-w-xs mx-auto">
+                RAAZ utilizes end-to-end encryption. Your hardware permissions are never shared with third parties or advertisers.
+            </p>
+</footer>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 h-20 backdrop-blur-xl border-t border-outline-variant/20 bg-surface/85 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-200 active:scale-90 px-3 py-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-200 active:scale-90 px-3 py-1" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-200 active:scale-90 px-3 py-1" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-sm text-label-sm">Post</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-200 active:scale-90 px-3 py-1" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-sm text-label-sm">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-primary bg-primary-container/20 rounded-xl px-3 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for toggles
+        const toggles = document.querySelectorAll('.toggle-switch input');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                const parent = e.target.closest('.permission-card');
+                if (e.target.checked) {
+                    parent.classList.add('border-primary/20');
+                    // Add subtle haptic simulation or sound if needed
+                    console.log('Permission Granted');
+                } else {
+                    parent.classList.remove('border-primary/20');
+                    console.log('Permission Revoked');
+                }
+            });
+        });
+
+        // Entrance animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.permission-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+        });
+    </script>
+</body></html>

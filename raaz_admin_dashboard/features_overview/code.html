@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Features - RAAZ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d8e2ff",
+                    "outline": "#737686",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface": "#f9f9ff",
+                    "on-primary-container": "#eeefff",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#d3daef",
+                    "tertiary-fixed": "#d4e3ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#141b2b",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-surface-variant": "#434655",
+                    "inverse-surface": "#293040",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "secondary-container": "#2170e4",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface-container-low": "#f1f3ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-background": "#141b2b",
+                    "on-secondary-fixed": "#001a42",
+                    "tertiary": "#00569c",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#196fc0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#b4c5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "16px",
+                    "xl": "24px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "container-margin": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .feature-card {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .bento-inner {
+            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/20 selection:text-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<nav class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-primary font-semibold border-b-2 border-primary font-title-md text-title-md py-1" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md" href="#">Blog</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md" href="#">Careers</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg text-label-lg active:scale-95 transition-all shadow-md hover:bg-primary-container">
+                Download App
+            </button>
+</nav>
+</header>
+<main class="pt-32 pb-24 overflow-hidden">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-lg text-center mb-32">
+<span class="inline-block py-1 px-4 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-lg text-label-lg mb-md">Product Ecosystem</span>
+<h1 class="font-display-lg text-display-lg mb-lg text-on-surface max-w-4xl mx-auto">Design for Privacy, Engineered for <span class="text-primary">Expression</span>.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-xl">Explore the core modules of RAAZ designed to protect your identity while fostering genuine human connections.</p>
+<div class="relative w-full h-[400px] rounded-xl overflow-hidden shadow-xl border border-outline-variant">
+
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent flex items-end p-xl">
+<div class="text-left">
+<p class="font-title-lg text-title-lg text-on-surface font-bold">Interactive Dynamic Interface</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Experience fluidity in every interaction.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature 1: Anonymous Posting (Text Left, Image Right) -->
+<section class="max-w-7xl mx-auto px-lg grid grid-cols-1 md:grid-cols-2 gap-xl items-center mb-40">
+<div class="order-2 md:order-1">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">visibility_off</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-md">Anonymous Posting</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+                    Speak your truth without fear of judgment. Our multi-layered encryption ensures that your identity remains hidden even from us. Use custom pseudonyms or total anonymity for every thread.
+                </p>
+<ul class="space-y-sm mb-xl">
+<li class="flex items-center gap-sm text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                        No data tracking for anonymous sessions
+                    </li>
+<li class="flex items-center gap-sm text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                        Temporary identity rotation
+                    </li>
+</ul>
+</div>
+<div class="order-1 md:order-2 feature-card rounded-xl overflow-hidden bg-surface-container-high p-4 border border-outline-variant shadow-sm">
+<div class="aspect-[4/3] rounded-lg overflow-hidden bg-surface-container shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist mobile UI screenshot showcasing a sleek dark-themed post editor interface. The background is a soft, light-mode corporate studio setting with gentle blue shadows. The interface highlights a 'Post Anonymously' toggle switch in a vibrant primary blue, surrounded by crisp white typography and subtle glassmorphic elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs4H0nAV-KbpLo9h637WFc_tsCCVKuCSVdtCvbqoKVZ4ujUInu4SAxwpp4Zkx9QaHFDn6vHlIgrnt5MyS2se0MZT9IIJ8PBbmocd0ivsrRB1jPqtmeeGiiXZ39Wyryxvdy9tF1WdnjisVxdvWfjgvh2TCG99fWeHgJ8kuThyHUL4NsfWx1o4X6gAPq2Uqh_P-dr85XJ4duFNy_OmwVdPmmFE6inA3fS9r5ZPSNc7sXn7pSvdlYvqLiY1ODc7nVx8Dq9KJUzLBV9lKu"/>
+</div>
+</div>
+</section>
+<!-- Feature 2: Daily Reflection (Image Left, Text Right) -->
+<section class="max-w-7xl mx-auto px-lg grid grid-cols-1 md:grid-cols-2 gap-xl items-center mb-40">
+<div class="feature-card rounded-xl overflow-hidden bg-surface-container-high p-4 border border-outline-variant shadow-sm">
+<div class="aspect-[4/3] rounded-lg overflow-hidden bg-surface-container shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A high-fidelity digital illustration of a serene morning scene. A stylized digital journal sits on a clean white desk, reflecting soft sunlight filtering through a window. The color palette consists of calming teals, whites, and soft primary blues, echoing a professional enterprise SaaS aesthetic. The atmosphere is peaceful, mindful, and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqz8SoslLy72Q4IsbqisaUuDZnGrejnoTheVVAf5QLuYUCLWb2qV14xW3Iz_G5ZtMHWdFW4Lye30CHK3WUvHmXYgcGJ8w6c75ZmAOPJigk_dNXiNji1mSwkraPLvc_qQAOZ_DHBPOL6u3wIrbkdrz77iC8N3Qx5CDkP20p7pxRDpk71ZixsarMCjbP63sWoQ-EGoD3muGB6-hvcU4gfVr_YXx4A5qI1_AfZOIdB3iW4X3LlzBS3fo8uAcnZm1Pd1WtyLEH8EE5OFcL"/>
+</div>
+</div>
+<div>
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">self_improvement</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-md">Daily Reflection</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+                    Cultivate mindfulness through our guided daily journaling prompts. Track your emotional landscape over time with AI-driven sentiment insights that help you understand your patterns without compromising privacy.
+                </p>
+<div class="grid grid-cols-2 gap-md">
+<div class="p-md bg-surface-container-low rounded-lg border border-outline-variant/30">
+<p class="font-title-md text-title-md text-primary mb-xs">Mood Flow</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Visual emotional tracking</p>
+</div>
+<div class="p-md bg-surface-container-low rounded-lg border border-outline-variant/30">
+<p class="font-title-md text-title-md text-primary mb-xs">Deep Dive</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">AI-prompted journaling</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature 3: Challenges (Text Left, Image Right) -->
+<section class="max-w-7xl mx-auto px-lg grid grid-cols-1 md:grid-cols-2 gap-xl items-center mb-40">
+<div>
+<div class="w-12 h-12 bg-tertiary/10 rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-md">Growth Challenges</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+                    Participate in community-curated challenges designed to push your boundaries. From 30 days of gratitude to digital detoxes, achieve milestones with a collective of supportive strangers.
+                </p>
+<div class="flex flex-wrap gap-sm">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface rounded-full text-label-lg font-label-lg">Gratitude 30</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface rounded-full text-label-lg font-label-lg">Active Mind</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface rounded-full text-label-lg font-label-lg">Zero Ghosting</span>
+</div>
+</div>
+<div class="feature-card rounded-xl overflow-hidden bg-surface-container-high p-4 border border-outline-variant shadow-sm">
+<div class="aspect-[4/3] rounded-lg overflow-hidden bg-surface-container shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A modern bento-style UI layout displaying various challenge cards. Each card has a different vibrant primary color accent, showing progress bars, participant counts, and trophy icons. The style is strictly Material Design 3, with rounded corners, ample white space, and a clean, high-end corporate feel. The lighting is bright and optimistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4596VBm4HOYxGElo1ghhMIsnii4mym9gR298q7-g-UOK6zWQgPEw0mrJnsBqbpNupgOPwmv2ZL4jG1mK_PQkZ4Uxa5wMQPy6my-lMAMj5TtyEtrPc9qz_BkXRLBo_-EOEPzF0hh0H4aWKcqHtZmUaLVHduh39opPpfrGSWMDR-9BftQEThwMuSaY1HaWmptjyNMu9xp0v5tJ1qTY8Msnp6TOznfoNEgZRXV_GjhxsCMt3bSNtnuVFjWwtxQCMGQ0l2mDUgoCZl_Om"/>
+</div>
+</div>
+</section>
+<!-- Feature 4: Letters Never Sent (Image Left, Text Right) -->
+<section class="max-w-7xl mx-auto px-lg grid grid-cols-1 md:grid-cols-2 gap-xl items-center mb-40">
+<div class="feature-card rounded-xl overflow-hidden bg-surface-container-high p-4 border border-outline-variant shadow-sm relative">
+<div class="absolute inset-4 z-10">
+
+</div>
+<div class="aspect-[4/3] rounded-lg overflow-hidden bg-surface-container shadow-inner flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="An artistic digital representation of floating letters and envelopes merging into a stream of light. The composition is clean and minimalist, using a professional color palette of deep blues and bright whites. It feels poetic yet technologically polished, representing the release of unsaid words in a safe, anonymous digital space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs5r5l97wsuBfl0U2BykFqBI1ncsomsIki7N4bN2PowTbrpYi2HqYN2ArlEQPTb4627gfJBEgPY8h9P2on-sZemk_aul31yKmUQSwJSbAcWb8aQ4i975EdtTUXCySCqUnPuJGp8k3fP6mox-QWIZIRzlFYQ_WaonoeJgWQE659y1UYNmc_Wx0acok4L6Jqil8-1SUApQuTgiyZN05GZX6153PnxiaePxUOyD567GXdpd7VB2--uxfH-Q9NjKMC5OkbMV56QnpXVSUP"/>
+</div>
+</div>
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-md">Letters Never Sent</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+                    Write that message you could never send. Release the burden of unspoken words into our digital void, where they are transformed into beautiful visual data points or archived for personal closure.
+                </p>
+<button class="flex items-center gap-sm text-primary font-title-md text-title-md hover:underline">
+                    Learn about our encryption
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Feature 5: Community Support (Text Left, Image Right) -->
+<section class="max-w-7xl mx-auto px-lg grid grid-cols-1 md:grid-cols-2 gap-xl items-center mb-40">
+<div>
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">diversity_1</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-md">Community Support</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+                    Find your tribe in specialized circles. Whether dealing with career stress or seeking creative inspiration, RAAZ provides moderate, safe spaces for collective wisdom.
+                </p>
+<div class="p-lg bg-surface-container rounded-xl border border-outline-variant/50">
+<div class="flex -space-x-4 mb-md">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">JD</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-secondary/20 flex items-center justify-center text-xs font-bold text-secondary">AM</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-tertiary/20 flex items-center justify-center text-xs font-bold text-tertiary">SK</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-on-surface-variant/20 flex items-center justify-center text-xs font-bold text-on-surface-variant">+42</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Join over 5,000+ active circles globally.</p>
+</div>
+</div>
+<div class="feature-card rounded-xl overflow-hidden bg-surface-container-high p-4 border border-outline-variant shadow-sm">
+<div class="aspect-[4/3] rounded-lg overflow-hidden bg-surface-container shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A sophisticated data visualization dashboard showing interconnected nodes and glowing pathways, representing a global community of support. The design uses a clean, light-mode enterprise palette with subtle glassmorphic cards floating over a minimalist map background. It evokes a sense of vast, safe, and organized human connection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM470yUkktl3wJe1b0vla7fCfxSqUovOCvh_oBNoF2-7FpkxsAdoAT0ADkRSpcK1MRaqSG5cGqF_m6eoUB6QHAvrkxz_jbC7DLucLubjh1CJPaE27c_00vLaA-MtP5yuEwfpZb_0G53j1Wh4N4qxi9V1GUtKHJZzz0q6XV-Yu8-7KzndAMgnyEJHPZgvgfTsN-5JVosSJJYAOOseoezhZQoYlU7EfuF5YAi2N_oAsqmqh_U694muG94TgvCx8dUbZoF955V40sxbRj"/>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-5xl mx-auto px-lg mb-24">
+<div class="bg-primary-container text-on-primary-container p-xl md:p-32 rounded-xl text-center relative overflow-hidden shadow-2xl">
+
+<div class="relative z-10">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg mb-lg">Ready to express yourself?</h2>
+<p class="font-body-lg text-body-lg mb-xl max-w-xl mx-auto opacity-90">Download RAAZ today and join a community that values your voice more than your identity.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md">
+<button class="bg-white text-primary px-xl py-md rounded-full font-title-md text-title-md flex items-center justify-center gap-sm shadow-lg hover:shadow-xl transition-all">
+<span class="material-symbols-outlined">apps</span>
+                            App Store
+                        </button>
+<button class="bg-white text-primary px-xl py-md rounded-full font-title-md text-title-md flex items-center justify-center gap-sm shadow-lg hover:shadow-xl transition-all">
+<span class="material-symbols-outlined">play_books</span>
+                            Google Play
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full rounded-t-xl mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-title-lg text-title-lg font-bold text-on-surface mb-md">RAAZ</div>
+<p class="text-on-surface-variant text-body-md">Anonymous expression platform built for radical honesty and total privacy.</p>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary mb-md">Product</h4>
+<ul class="space-y-sm">
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Features</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Community</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Release Notes</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary mb-md">Company</h4>
+<ul class="space-y-sm">
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">About Us</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Careers</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary mb-md">Legal</h4>
+<ul class="space-y-sm">
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Terms &amp; Conditions</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-lg py-lg border-t border-outline-variant/10 flex justify-between items-center">
+<p class="text-on-surface-variant text-body-md">© 2024 RAAZ Anonymous. Built for privacy.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">language</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">shield</span>
+</div>
+</div>
+</footer>
+<!-- Sticky Download Mobile Section -->
+<div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-surface-container-highest/80 backdrop-blur-md rounded-full p-2 border border-white/30 shadow-2xl flex items-center justify-between z-40">
+<div class="flex items-center gap-sm ml-4">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xs">R</div>
+<span class="font-title-md text-on-surface font-bold">RAAZ</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg text-label-lg">Get App</button>
+</div>
+<script>
+        // Micro-interactions and scroll effects
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-12');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-12');
+                observer.observe(section);
+            });
+        });
+
+        // Simple Ripple effect for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+                let ripple = document.createElement('span');
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('absolute', 'w-1', 'h-1', 'bg-white/30', 'rounded-full', 'animate-ping', 'pointer-events-none');
+                this.appendChild(ripple);
+                setTimeout(() => { ripple.remove(); }, 1000);
+            });
+        });
+    </script>
+</body></html>

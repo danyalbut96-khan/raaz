@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ | Support &amp; FAQ</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d8e2ff",
+                        "outline": "#737686",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "surface": "#f9f9ff",
+                        "on-primary-container": "#eeefff",
+                        "surface-container": "#e9edff",
+                        "background": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#0058be",
+                        "primary": "#004ac6",
+                        "surface-container-highest": "#dce2f7",
+                        "surface-container-high": "#e1e8fd",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#d3daef",
+                        "tertiary-fixed": "#d4e3ff",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface": "#141b2b",
+                        "surface-tint": "#0053db",
+                        "on-tertiary-container": "#ebf1ff",
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#293040",
+                        "tertiary": "#00569c",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#196fc0",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "container-margin": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+        .accordion-item.active .icon-rotate {
+            transform: rotate(180deg);
+        }
+        .category-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        .custom-shadow {
+            box-shadow: 0px 2px 4px rgba(17, 24, 39, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<nav class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</div>
+<div class="hidden md:flex items-center space-x-xl">
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Blog</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Careers</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg text-label-lg active:scale-95 transform transition-all hover:bg-primary-container">
+                Download App
+            </button>
+</nav>
+</header>
+<main class="pt-32 pb-xl px-lg max-w-7xl mx-auto">
+<!-- Hero Search Section -->
+<div class="mb-xl text-center space-y-md">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">How can we help?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Search our knowledge base or browse categories below to find answers to common questions about RAAZ.</p>
+<div class="max-w-2xl mx-auto relative mt-lg">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-lg py-md bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all shadow-sm" placeholder="Search for privacy, encryption, accounts..." type="text"/>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-xl mt-xl">
+<!-- Sidebar Navigation -->
+<aside class="w-full md:w-64 flex-shrink-0">
+<div class="category-sidebar space-y-xs">
+<button class="w-full flex items-center gap-md px-md py-sm rounded-lg text-primary bg-primary/10 font-title-md text-title-md transition-all" onclick="scrollToCategory('general')">
+<span class="material-symbols-outlined">info</span>
+                        General
+                    </button>
+<button class="w-full flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-all font-title-md text-title-md" onclick="scrollToCategory('privacy')">
+<span class="material-symbols-outlined">lock</span>
+                        Privacy
+                    </button>
+<button class="w-full flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-all font-title-md text-title-md" onclick="scrollToCategory('account')">
+<span class="material-symbols-outlined">person</span>
+                        Account
+                    </button>
+<button class="w-full flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-all font-title-md text-title-md" onclick="scrollToCategory('technical')">
+<span class="material-symbols-outlined">settings</span>
+                        Technical
+                    </button>
+<div class="mt-xl p-lg rounded-xl bg-primary-container text-on-primary-container space-y-md">
+<p class="font-title-md text-title-md">Still have questions?</p>
+<p class="font-body-md text-body-md opacity-90">Our support team is available 24/7 to assist with your privacy needs.</p>
+<button class="w-full py-sm bg-white text-primary rounded-lg font-label-lg text-label-lg hover:bg-surface-container-lowest transition-colors">
+                            Contact Us
+                        </button>
+</div>
+</div>
+</aside>
+<!-- FAQ Content -->
+<div class="flex-grow space-y-xl">
+<!-- General Section -->
+<section class="space-y-lg scroll-mt-32" id="general">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="w-1 h-8 bg-primary rounded-full"></span>
+                        General
+                    </h2>
+<div class="space-y-md">
+<!-- Accordion Item -->
+<div class="accordion-item bg-white rounded-xl border border-outline-variant overflow-hidden custom-shadow transition-all">
+<button class="w-full flex items-center justify-between p-lg text-left hover:bg-surface-container-low transition-colors group" onclick="toggleAccordion(this)">
+<span class="font-title-md text-title-md text-on-surface">What is RAAZ?</span>
+<span class="material-symbols-outlined icon-rotate transition-transform duration-300 text-outline">expand_more</span>
+</button>
+<div class="accordion-content px-lg">
+<p class="font-body-md text-body-md text-on-surface-variant">RAAZ is an enterprise-grade anonymous communication and data sharing platform designed for organizations that prioritize absolute privacy. We use zero-knowledge architecture to ensure your data stays yours.</p>
+</div>
+</div>
+<div class="accordion-item bg-white rounded-xl border border-outline-variant overflow-hidden custom-shadow transition-all">
+<button class="w-full flex items-center justify-between p-lg text-left hover:bg-surface-container-low transition-colors group" onclick="toggleAccordion(this)">
+<span class="font-title-md text-title-md text-on-surface">How do I get started?</span>
+<span class="material-symbols-outlined icon-rotate transition-transform duration-300 text-outline">expand_more</span>
+</button>
+<div class="accordion-content px-lg">
+<p class="font-body-md text-body-md text-on-surface-variant">Simply download the app, create a local vault, and generate your unique RAAZ identity. No email or phone number is required to sign up, maintaining your complete anonymity from day one.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Privacy Section -->
+<section class="space-y-lg scroll-mt-32" id="privacy">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="w-1 h-8 bg-primary rounded-full"></span>
+                        Privacy
+                    </h2>
+<div class="space-y-md">
+<div class="accordion-item bg-white rounded-xl border border-outline-variant overflow-hidden custom-shadow transition-all">
+<button class="w-full flex items-center justify-between p-lg text-left hover:bg-surface-container-low transition-colors group" onclick="toggleAccordion(this)">
+<span class="font-title-md text-title-md text-on-surface">Is my data encrypted?</span>
+<span class="material-symbols-outlined icon-rotate transition-transform duration-300 text-outline">expand_more</span>
+</button>
+<div class="accordion-content px-lg">
+<p class="font-body-md text-body-md text-on-surface-variant">Yes, all data is end-to-end encrypted using AES-256-GCM. We never have access to your private keys, meaning even if our servers were compromised, your data remains unreadable to anyone but you and your recipients.</p>
+</div>
+</div>
+<div class="accordion-item bg-white rounded-xl border border-outline-variant overflow-hidden custom-shadow transition-all">
+<button class="w-full flex items-center justify-between p-lg text-left hover:bg-surface-container-low transition-colors group" onclick="toggleAccordion(this)">
+<span class="font-title-md text-title-md text-on-surface">Do you store logs?</span>
+<span class="material-symbols-outlined icon-rotate transition-transform duration-300 text-outline">expand_more</span>
+</button>
+<div class="accordion-content px-lg">
+<p class="font-body-md text-body-md text-on-surface-variant">We have a strict zero-logs policy. We do not track IP addresses, connection timestamps, or session durations. Our system is architected to prioritize metadata obfuscation.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Account Section -->
+<section class="space-y-lg scroll-mt-32" id="account">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="w-1 h-8 bg-primary rounded-full"></span>
+                        Account
+                    </h2>
+<div class="space-y-md">
+<div class="accordion-item bg-white rounded-xl border border-outline-variant overflow-hidden custom-shadow transition-all">
+<button class="w-full flex items-center justify-between p-lg text-left hover:bg-surface-container-low transition-colors group" onclick="toggleAccordion(this)">
+<span class="font-title-md text-title-md text-on-surface">How do I recover my account?</span>
+<span class="material-symbols-outlined icon-rotate transition-transform duration-300 text-outline">expand_more</span>
+</button>
+<div class="accordion-content px-lg">
+<p class="font-body-md text-body-md text-on-surface-variant">Account recovery is only possible through your 24-word recovery phrase. Because we do not store your identity, we cannot reset your password. Please keep your recovery phrase in a secure, offline location.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Section -->
+<section class="space-y-lg scroll-mt-32" id="technical">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="w-1 h-8 bg-primary rounded-full"></span>
+                        Technical
+                    </h2>
+<div class="space-y-md">
+<div class="accordion-item bg-white rounded-xl border border-outline-variant overflow-hidden custom-shadow transition-all">
+<button class="w-full flex items-center justify-between p-lg text-left hover:bg-surface-container-low transition-colors group" onclick="toggleAccordion(this)">
+<span class="font-title-md text-title-md text-on-surface">What are the system requirements?</span>
+<span class="material-symbols-outlined icon-rotate transition-transform duration-300 text-outline">expand_more</span>
+</button>
+<div class="accordion-content px-lg">
+<p class="font-body-md text-body-md text-on-surface-variant">RAAZ is compatible with macOS 12+, Windows 10 (64-bit), and modern Linux distributions. Our mobile app requires iOS 15+ or Android 10+.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-xl bg-surface-container-low mt-xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="space-y-md">
+<div class="font-title-lg text-title-lg font-bold text-on-surface">RAAZ</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Securing human connection through advanced anonymity and zero-trust engineering.</p>
+</div>
+<div class="space-y-md">
+<p class="font-title-md text-title-md text-primary font-medium">Resources</p>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">FAQ</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Release Notes</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div class="space-y-md">
+<p class="font-title-md text-title-md text-primary font-medium">Company</p>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">About Us</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div class="space-y-md">
+<p class="font-title-md text-title-md text-primary font-medium">Legal</p>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Terms &amp; Conditions</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-lg py-md border-t border-outline-variant flex justify-between items-center text-on-surface-variant font-body-md text-body-md">
+<span>© 2024 RAAZ Anonymous. Built for privacy.</span>
+<div class="flex gap-md">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">shield</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">verified_user</span>
+</div>
+</div>
+</footer>
+<script>
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('active');
+            
+            // Close all items
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Open clicked item if it was closed
+            if (!isOpen) {
+                item.classList.add('active');
+            }
+        }
+
+        function scrollToCategory(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth' });
+            
+            // Update active state in sidebar
+            const buttons = document.querySelectorAll('.category-sidebar button');
+            buttons.forEach(btn => {
+                btn.classList.remove('text-primary', 'bg-primary/10');
+                btn.classList.add('text-on-surface-variant');
+            });
+
+            event.currentTarget.classList.add('text-primary', 'bg-primary/10');
+            event.currentTarget.classList.remove('text-on-surface-variant');
+        }
+
+        // Initialize first accordion
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstItem = document.querySelector('.accordion-item');
+            if (firstItem) firstItem.classList.add('active');
+        });
+    </script>
+</body></html>

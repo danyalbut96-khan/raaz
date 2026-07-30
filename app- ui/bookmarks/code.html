@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bookmarks - RAAZ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#b4c5ff",
+                    "surface-container-low": "#f1f3ff",
+                    "outline": "#737686",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#2170e4",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dbe1ff",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-highest": "#dce2f7",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-background": "#141b2b",
+                    "primary": "#004ac6",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface": "#f9f9ff",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-container": "#196fc0",
+                    "surface-container": "#e9edff",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "primary-container": "#2563eb",
+                    "background": "#f9f9ff",
+                    "inverse-surface": "#293040",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-dim": "#d3daef",
+                    "on-surface-variant": "#434655",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "tertiary": "#00569c",
+                    "surface-container-high": "#e1e8fd",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#0058be",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed": "#001c39",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#141b2b",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-tablet": "32px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "base": "4px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "2xl": "48px",
+                    "margin-desktop": "auto"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+        }
+        .active-nav-pill {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface bg-background min-h-screen">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16 transition-opacity">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist profile avatar of an abstract geometric figure in soft blue and white colors, representing anonymity and digital identity in a clean light-mode aesthetic. High-end, professional feel with subtle shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAssAt3Ac1ZLKDl06c33p0xmM5edFmCe2a0kmw4LtvhZ2Q-KluCVji4KE3b2VY1_yjaY_5pQEedK900RxNQDLrzifrwvTsI_JbZhKZzl7WzfdnVlU6zXrkwBVUZb3srjPDKKqgKA0gmV0uRdTjbQht8RaziW7BLbxJuGorIflABhII6K7_ytqIsBoYCESKRWGPfvesIYwp2wKcc2yNmh4hKdx3sWdb1D-V3BtfM9c7vZje-1BMkSj8AS0Y4dwW2BpZJXfExUPfZukgb"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-24 px-margin-mobile max-w-2xl mx-auto min-h-screen flex flex-col">
+<!-- Header Section -->
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Bookmarks</h2>
+<button class="text-primary font-label-lg hover:underline transition-all">Clear all</button>
+</div>
+<!-- Empty State (Hidden by default, toggle via JS for demo) -->
+<div class="flex-grow flex flex-col items-center justify-center text-center py-2xl space-y-lg hidden" id="empty-state">
+<div class="relative w-48 h-48 mb-md">
+<!-- Simple aesthetic empty state visual using Tailwind shapes -->
+<div class="absolute inset-0 bg-primary/5 rounded-full animate-pulse"></div>
+<div class="absolute inset-4 bg-primary/10 rounded-full"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary/30 text-7xl" data-icon="bookmark_border">bookmark_border</span>
+</div>
+</div>
+<div class="space-y-sm">
+<h3 class="font-title-lg text-title-lg text-on-surface">No bookmarks yet</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">Save your favorite anonymous thoughts and stories to find them later here.</p>
+</div>
+<button class="mt-xl bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="explore">explore</span>
+                Explore Feed
+            </button>
+</div>
+<!-- Bookmark List -->
+<div class="space-y-md" id="bookmark-list">
+<!-- Bookmark Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-md card-shadow border border-surface-variant/20 group hover:border-primary/20 transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container text-lg" data-icon="person_outline">person_outline</span>
+</div>
+<div>
+<span class="font-label-lg text-on-surface block">Anonymous Wanderer</span>
+<span class="font-label-sm text-outline block">2 hours ago</span>
+</div>
+</div>
+<button class="text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<p class="font-body-lg text-on-surface mb-md leading-relaxed">
+                    Sometimes I think about how many people I've walked past in my life who were having the worst day of their existence, and I just gave them a casual nod. We are all carrying such heavy burdens in silence.
+                </p>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="favorite_border">favorite_border</span>
+<span class="font-label-sm">1.2k</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="chat_bubble_outline">chat_bubble_outline</span>
+<span class="font-label-sm">84</span>
+</div>
+</div>
+</article>
+<!-- Bookmark Card 2 (With Image) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden card-shadow border border-surface-variant/20 group hover:border-primary/20 transition-colors">
+<div class="p-md">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container text-lg" data-icon="shield_person">shield_person</span>
+</div>
+<div>
+<span class="font-label-lg text-on-surface block">Night Thinker</span>
+<span class="font-label-sm text-outline block">Yesterday</span>
+</div>
+</div>
+<button class="text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<p class="font-body-lg text-on-surface mb-md">The city looks different at 3 AM. No noise, just the humming of the streetlights and the cool breeze. It's the only time I feel truly free.</p>
+</div>
+<div class="w-full h-48 bg-surface-variant relative">
+<img class="w-full h-full object-cover" data-alt="A moody, cinematic photograph of a deserted city street at 3 AM. Soft glow from modern blue-tinted street lamps creates long shadows on wet pavement. The overall mood is peaceful, solitary, and sophisticated, aligning with a premium minimalist aesthetic. High-key accents of light pierce through the dark night." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmHo9-YZBJQW7dKDb3hlQoFJ_fjNL_LNUgPOpg-HHX3qPIuc90Y-2UCDLy5T7AWrjlsBqCd5ekThyAExMXPqnKIEOJId4JxwrNvh621O9TBoqnX0sass-lAIFbIV6Lg_Zn7kxccpiApdB8KF_NS4JvFHr-Df--Z0iytX-vhfPj7DzLLWv1yu7uV5xbo5spd475NKV8JXrEq_0mZstj14jr_nxo3Drg5qGg0wfChPhVO0Vx8EV8riy-6qLzg825DcLC9nFEx9mkJy_A"/>
+</div>
+<div class="p-md flex items-center gap-lg">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="favorite_border">favorite_border</span>
+<span class="font-label-sm">432</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="chat_bubble_outline">chat_bubble_outline</span>
+<span class="font-label-sm">22</span>
+</div>
+</div>
+</article>
+<!-- Bookmark Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl p-md card-shadow border border-surface-variant/20 group hover:border-primary/20 transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="masks">masks</span>
+</div>
+<div>
+<span class="font-label-lg text-on-surface block">Secret Keeper</span>
+<span class="font-label-sm text-outline block">Oct 24</span>
+</div>
+</div>
+<button class="text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<div class="bg-surface-container-low p-sm rounded-lg mb-md border-l-4 border-primary">
+<p class="font-body-md italic text-on-surface-variant">"The biggest secrets are often hidden in plain sight, we just choose not to see them."</p>
+</div>
+<p class="font-body-lg text-on-surface mb-md">I've lived in this house for ten years and only just discovered a loose floorboard with a box of old letters from 1954. Reading them feels like trespassing on a life I never knew.</p>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="favorite_border">favorite_border</span>
+<span class="font-label-sm">8.1k</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="chat_bubble_outline">chat_bubble_outline</span>
+<span class="font-label-sm">156</span>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Bottom NavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<!-- Bookmarks is active (closest to settings/profile intent provided in instructions for navigation logic) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="font-label-sm text-label-sm">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple logic to demonstrate the empty state if needed
+        const bookmarkList = document.getElementById('bookmark-list');
+        const emptyState = document.getElementById('empty-state');
+        const clearAllBtn = document.querySelector('button.text-primary');
+
+        clearAllBtn.addEventListener('click', () => {
+            if(confirm('Clear all bookmarks?')) {
+                bookmarkList.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                clearAllBtn.classList.add('hidden');
+            }
+        });
+
+        // Micro-interaction for bookmark toggling
+        document.querySelectorAll('article button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const icon = this.querySelector('.material-symbols-outlined');
+                if (icon.getAttribute('data-icon') === 'bookmark') {
+                    icon.setAttribute('data-icon', 'bookmark_border');
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                    this.classList.replace('text-primary', 'text-on-surface-variant');
+                } else {
+                    icon.setAttribute('data-icon', 'bookmark');
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    this.classList.replace('text-on-surface-variant', 'text-primary');
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#b4c5ff",
+                    "surface-container-low": "#f1f3ff",
+                    "outline": "#737686",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#2170e4",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dbe1ff",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-highest": "#dce2f7",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-background": "#141b2b",
+                    "primary": "#004ac6",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface": "#f9f9ff",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-container": "#196fc0",
+                    "surface-container": "#e9edff",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "primary-container": "#2563eb",
+                    "background": "#f9f9ff",
+                    "inverse-surface": "#293040",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-dim": "#d3daef",
+                    "on-surface-variant": "#434655",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "tertiary": "#00569c",
+                    "surface-container-high": "#e1e8fd",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#0058be",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed": "#001c39",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#141b2b",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-tablet": "32px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "base": "4px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "2xl": "48px",
+                    "margin-desktop": "auto"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-3">
+<button class="active:scale-95 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md text-primary">Search Results</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-title-lg" data-icon="security">security</span>
+<span class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</span>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile max-w-4xl mx-auto">
+<!-- Search Input & Filters Trigger -->
+<div class="flex flex-col gap-4 mb-6">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-lg text-on-surface shadow-sm" placeholder="Search secrets..." type="text" value="Deep Web Safety"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2">
+<button class="flex items-center gap-1 bg-primary text-on-primary px-4 py-2 rounded-full text-label-lg whitespace-nowrap active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+                    Filters
+                </button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full text-label-lg whitespace-nowrap hover:bg-surface-variant/50 transition-colors">Latest</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full text-label-lg whitespace-nowrap hover:bg-surface-variant/50 transition-colors">Most Liked</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full text-label-lg whitespace-nowrap hover:bg-surface-variant/50 transition-colors">Near Me</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full text-label-lg whitespace-nowrap hover:bg-surface-variant/50 transition-colors">Verified Only</button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="flex border-b border-outline-variant mb-6">
+<button class="flex-1 py-4 text-center font-label-lg text-primary border-b-2 border-primary active:scale-95 transition-all" id="tab-posts" onclick="switchTab('posts')">Posts</button>
+<button class="flex-1 py-4 text-center font-label-lg text-on-surface-variant hover:text-primary transition-all" id="tab-users" onclick="switchTab('users')">Users</button>
+<button class="flex-1 py-4 text-center font-label-lg text-on-surface-variant hover:text-primary transition-all" id="tab-categories" onclick="switchTab('categories')">Categories</button>
+</div>
+<!-- Content Area -->
+<div class="space-y-4" id="search-content">
+<!-- Result: Post Card (Bento-style variation) -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-transparent hover:border-primary/20 transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary text-[18px]" data-icon="person_outline">person_outline</span>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Anonymous Phantom</p>
+<p class="text-label-sm text-outline">2 hours ago in <span class="text-primary">#CyberSec</span></p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<h3 class="font-title-md text-on-surface mb-2">Essential safety protocols for anonymous browsing in 2024</h3>
+<p class="text-body-md text-on-surface-variant line-clamp-3 mb-4">
+                    The landscape of privacy is changing rapidly. When you're browsing "Deep Web" results, ensure your VPN is tiered and you're using a hardened browser instance. Never leak metadata...
+                </p>
+<div class="flex items-center justify-between pt-3 border-t border-surface-variant">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="text-label-sm">1.2k</span>
+</button>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-label-sm">42</span>
+</button>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="share">share</span>
+</button>
+</div>
+</div>
+<!-- Result: Informational Asset Card -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-primary-container text-on-primary-container p-md rounded-xl flex flex-col justify-between h-48 relative overflow-hidden group cursor-pointer shadow-lg active:scale-[0.98] transition-transform">
+<div class="z-10">
+<span class="material-symbols-outlined text-[32px] mb-2" data-icon="shield_lock">shield_lock</span>
+<h4 class="font-title-lg mb-1">Encrypted Vaults</h4>
+<p class="text-label-sm opacity-90">Manage your private keys locally.</p>
+</div>
+<div class="z-10 flex justify-end">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-4 items-center hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A macro photograph of an intricate, futuristic fiber-optic cable network glowing with a soft blue light against a dark, minimalist background. The lighting is crisp and technological, embodying a sense of high-speed data security and modern privacy. The colors are deep blues, navies, and bright cyan highlights, fitting a premium tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5D5rsJBHSpTYD9R-uS72BUKWS0ci4AHytLWEQfnyNwev3kAdrklm0RnDK7EbCVvWyuzySJFoBRswOOd69v2riDpK4VBF7YOGymTr8NxVXtHAnFthSRBZqYjai8RPBVitLijwxjdUu9qgCSNt6b18U5u9AXccpDx4IgQ5LXbY8elcZaSoqogZbIwmY0rnm0xQ7_IXXkVNeGdHpgLYyChrXAq7acV-BXrFbQxIm-DifcfPRSGNx_aRWuu-cJI2UMldLHwIAxRubFzLV"/>
+</div>
+<div>
+<h4 class="font-title-md text-on-surface">Privacy Masterclass</h4>
+<p class="text-body-md text-on-surface-variant">Learn to hide your digital footprint...</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-tertiary">Top Result</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Result: User Search Items (Initially Hidden or for Demo) -->
+<div class="space-y-3 mt-8">
+<h4 class="font-label-lg text-outline uppercase tracking-wider px-2">Top Contributors</h4>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">SD</div>
+<div>
+<p class="font-label-lg">SecDev_01</p>
+<p class="text-label-sm text-outline">Verified Researcher</p>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-label-sm font-bold active:scale-95 transition-transform">Follow</button>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold">
+<span class="material-symbols-outlined" data-icon="face">face</span>
+</div>
+<div>
+<p class="font-label-lg">GhostOperator</p>
+<p class="text-label-sm text-outline">Active in #Privacy</p>
+</div>
+</div>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-1.5 rounded-full text-label-sm font-bold">Follow</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl rounded-t-xl shadow-lg">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</button>
+</nav>
+<script>
+        function switchTab(tabId) {
+            const tabs = ['posts', 'users', 'categories'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    btn.classList.add('text-primary', 'border-b-2', 'border-primary');
+                    btn.classList.remove('text-on-surface-variant');
+                } else {
+                    btn.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                    btn.classList.add('text-on-surface-variant');
+                }
+            });
+            
+            // Interaction feedback
+            const container = document.getElementById('search-content');
+            container.style.opacity = '0';
+            setTimeout(() => {
+                container.style.opacity = '1';
+                container.style.transition = 'opacity 0.3s ease';
+            }, 100);
+        }
+
+        // Micro-interaction for search focus
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+            searchInput.parentElement.style.transition = 'transform 0.2s ease';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+    </script>
+</body></html>

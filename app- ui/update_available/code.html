@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ | Update Available</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary-fixed": "#00174b",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-highest": "#dce2f7",
+                    "outline": "#737686",
+                    "surface-variant": "#dce2f7",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-background": "#141b2b",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary": "#0058be",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary-container": "#fefcff",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#b4c5ff",
+                    "surface-container-high": "#e1e8fd",
+                    "surface-container-low": "#f1f3ff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-container": "#eeefff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#2170e4",
+                    "primary": "#004ac6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#434655",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#196fc0",
+                    "primary-container": "#2563eb",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "on-surface": "#141b2b",
+                    "inverse-surface": "#293040"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "base": "4px",
+                    "margin-tablet": "32px",
+                    "margin-desktop": "auto",
+                    "lg": "24px",
+                    "md": "16px",
+                    "2xl": "48px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .celebration-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/85 flex items-center justify-between px-margin-mobile h-16 shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-headline-md text-headline-md-mobile font-bold tracking-tight text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95" data-icon="notifications">notifications</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]" data-icon="person">person</span>
+</div>
+</div>
+</header>
+<main class="relative min-h-screen w-full flex flex-col items-center justify-center px-margin-mobile pt-16 pb-24">
+<!-- Atmospheric Background Layer -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+
+</div>
+<!-- Update Card Container -->
+<div class="relative z-10 w-full max-w-md celebration-float">
+<!-- Decorative Elements -->
+<div class="absolute -top-12 -right-8 w-24 h-24 bg-tertiary/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-10 -left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+<!-- The High-Fidelity Card -->
+<div class="glass-card rounded-2xl p-xl shadow-[0_12px_40px_rgba(17,24,39,0.08)] border border-white/50 overflow-hidden relative">
+<!-- Visual Header -->
+<div class="relative h-48 -mx-xl -mt-xl mb-lg overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A sophisticated 3D abstract digital illustration representing high-end technology and secure communication. Central glowing sphere surrounded by floating rings and digital particles in shades of primary blue, deep navy, and metallic silver. The mood is celebratory, premium, and futuristic, with soft focus lighting and high-key highlights typical of modern Material Design aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa3b0gfgklKw5_gdKUjwTi18H04J2gKc64iq0MugsTlRZUtBz92x2NzEgFgKu1lOs6hliiWz_odgZXv_CdCnWtUJjN_fTxbHz6bUP0EHH9OwSkcyBCOrzPkyihu4VYNL85CPFkrfKl87vTizQ_ejtsDSEhriawWpiq-sx0wJ_hKVGjy39OEeqQw33OiTkZL8D5jmZmN47SiG2fZpqntT8JeG6HLMzfCj0yjtnlUpBkQE6g1g5G0gxjBvM4gDZcXave8hflJFbbZGaX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2 bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+<span class="material-symbols-outlined text-white text-[16px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-white uppercase tracking-widest">Update Available</span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="space-y-md">
+<div class="space-y-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight">Version 2.0 is Here</h2>
+<p class="font-body-md text-on-surface-variant">We've reimagined privacy with powerful new tools for the anonymous collective.</p>
+</div>
+<!-- Bulleted Features with Icons -->
+<div class="space-y-sm bg-surface-container-low/50 p-md rounded-xl border border-outline-variant/30">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="mic">mic</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Voice Confessions</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Distort and share your voice while staying 100% anonymous.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary text-[20px]" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">AI Writing Assistant</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Smart tools to help craft your stories without leaving a trace.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="lock_open">lock_open</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Encrypted Media</h4>
+<p class="font-body-md text-on-surface-variant text-sm">End-to-end security for every photo and video you share.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-xl flex flex-col gap-sm">
+<button class="relative overflow-hidden w-full bg-primary text-white font-title-md text-title-md py-4 rounded-xl shadow-lg hover:shadow-primary/20 active:scale-95 transition-all group">
+<div class="absolute inset-0 shimmer opacity-30"></div>
+<span class="relative flex items-center justify-center gap-2">
+                            Update Now
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</span>
+</button>
+<button class="w-full text-on-surface-variant font-label-lg text-label-lg py-3 rounded-xl hover:bg-surface-variant/50 active:scale-95 transition-all">
+                        Maybe Later
+                    </button>
+</div>
+</div>
+<!-- Version Tag -->
+<div class="mt-lg text-center">
+<span class="text-xs text-outline font-label-sm">RAAZ CORE OS • BUILD 2024.07.V2</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Contextual Filter: Hidden on this transactional/focused task) -->
+<!-- Suppressed to prioritize the update flow as per 'Relevance Check' -->
+<script>
+        // Micro-interaction for button press effect
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Add a subtle parallax effect on the card based on mouse move (Desktop Only)
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                const card = document.querySelector('.celebration-float');
+                if (!card) return;
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateY(${Math.sin(Date.now()/1000)*10}px)`;
+            });
+        }
+    </script>
+</body></html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        .history-item-hover:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed-dim": "#b4c5ff",
+                      "surface-container-low": "#f1f3ff",
+                      "outline": "#737686",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#2170e4",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#eeefff",
+                      "on-secondary-fixed": "#001a42",
+                      "surface-bright": "#f9f9ff",
+                      "primary-fixed": "#dbe1ff",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#dce2f7",
+                      "surface-container-highest": "#dce2f7",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-tertiary-container": "#ebf1ff",
+                      "on-background": "#141b2b",
+                      "primary": "#004ac6",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#b4c5ff",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "tertiary-fixed": "#d4e3ff",
+                      "surface": "#f9f9ff",
+                      "on-secondary-container": "#fefcff",
+                      "tertiary-container": "#196fc0",
+                      "surface-container": "#e9edff",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#00174b",
+                      "primary-container": "#2563eb",
+                      "background": "#f9f9ff",
+                      "inverse-surface": "#293040",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "surface-dim": "#d3daef",
+                      "on-surface-variant": "#434655",
+                      "error": "#ba1a1a",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "tertiary": "#00569c",
+                      "surface-container-high": "#e1e8fd",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "secondary": "#0058be",
+                      "surface-tint": "#0053db",
+                      "on-tertiary-fixed": "#001c39",
+                      "outline-variant": "#c3c6d7",
+                      "on-surface": "#141b2b",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "margin-tablet": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "2xl": "48px",
+                      "margin-desktop": "auto"
+              },
+              "fontFamily": {
+                      "title-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar (From JSON) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile w-full h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="pt-20 px-margin-mobile max-w-2xl mx-auto">
+<header class="mb-6">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">History</h2>
+<p class="font-body-md text-on-surface-variant mt-1">Review your recent activity</p>
+</header>
+<!-- Search History Filter -->
+<div class="relative mb-8 group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="search">search</span>
+</div>
+<input class="w-full h-12 pl-12 pr-4 rounded-xl border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md" placeholder="Search history..." type="text"/>
+</div>
+<!-- Section: Today -->
+<section class="mb-10">
+<div class="flex items-center gap-4 mb-4">
+<span class="font-label-lg text-primary bg-primary-container/20 px-3 py-1 rounded-full">Today</span>
+<div class="h-px bg-outline-variant flex-1 opacity-40"></div>
+</div>
+<div class="space-y-4">
+<!-- History Item 1 -->
+<div class="group history-item-hover flex items-start gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-outline-variant/30 transition-all cursor-pointer shadow-sm">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast photograph of city lights reflecting in a rain-slicked street at night, with deep blue and soft yellow light. The composition is professional and editorial, aligning with a secure, high-fidelity digital interface designed for discreet interactions and premium content sharing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwLNxFUjLcG35r_itG2PLO0FjCJg7WmOhVXs02zgRc4nLwQjXQbsCsBc4i8yaoyeFu54ZSbGBo8XspPg2vTqOwWGsqvwwaiSZ8qfuTNualdlMqL7s_brMpYEwRFojlmwpWl_k0gzd-A3eEEBIdamxZ394SJnmKsnFDRgmMQNRyxfOT-LTX2rLS0KFkdCHQKhk0F4sMkuF3N2aXw9jIFf425TjYSJSkC5Wm12ITKfEG9JadNn7UHmXmHcaunHMXKKxgN7DQArFjCzlc"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-on-surface line-clamp-1">Thoughts on digital solitude</h3>
+<span class="font-label-sm text-outline-variant">2h ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">Exploring the boundary between anonymity and connection in modern platforms...</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="visibility">visibility</span>
+<span class="font-label-sm text-outline">Viewed</span>
+</div>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="group history-item-hover flex items-start gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-outline-variant/30 transition-all cursor-pointer shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-secondary-container/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="article">article</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-on-surface line-clamp-1">Community Guidelines Update</h3>
+<span class="font-label-sm text-outline-variant">4h ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">We've updated our safety protocols to better protect anonymous contributors...</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="link">link</span>
+<span class="font-label-sm text-outline">External Link</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Yesterday -->
+<section class="mb-10">
+<div class="flex items-center gap-4 mb-4">
+<span class="font-label-lg text-on-surface-variant bg-surface-variant px-3 py-1 rounded-full">Yesterday</span>
+<div class="h-px bg-outline-variant flex-1 opacity-40"></div>
+</div>
+<div class="space-y-4">
+<!-- History Item 3 -->
+<div class="group history-item-hover flex items-start gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-outline-variant/30 transition-all cursor-pointer shadow-sm">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist architectural shot of clean white walls and sharp shadows under a bright midday sun. The aesthetic is extremely modern and professional, using a clean white and soft blue color palette to suggest clarity, security, and a sophisticated user experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKA7aqpkkYADMP9oiUCJ1mNxQcjOK8V74-3VlHA32GULY8qUtRMlPRV7VTcFotgxyektzUj7klsOcSUSfLbtOreE61xmC-q4aUAnBbYrWfkMFRjmTurOuYBOnnkRhwMqeYf6ancQAg3_4Mf9e16NdcuYrLyk5sbHlSIM5cuvc4a4HIn9nBTVEyNLzQPS9mLsXcjcSymIS-3tLdXjfiQEGN0J7DeHyDShMYngbrVfS8wLyYNfu3jrmcMzuo3I6rdjmk4vCdNxBb_UPQ"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-on-surface line-clamp-1">The architecture of trust</h3>
+<span class="font-label-sm text-outline-variant">1d ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">How design choices can influence user behavior in non-attributed spaces...</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-sm text-outline">Liked by you</span>
+</div>
+</div>
+</div>
+<!-- History Item 4 -->
+<div class="group history-item-hover flex items-start gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-outline-variant/30 transition-all cursor-pointer shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-tertiary-container/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary" data-icon="lock">lock</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-on-surface line-clamp-1">Encrypted messaging 101</h3>
+<span class="font-label-sm text-outline-variant">1d ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">A deep dive into end-to-end encryption and what it means for your privacy...</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="history">history</span>
+<span class="font-label-sm text-outline">Viewed 3 times</span>
+</div>
+</div>
+</div>
+<!-- History Item 5 -->
+<div class="group history-item-hover flex items-start gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-outline-variant/30 transition-all cursor-pointer shadow-sm opacity-80">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="An abstract digital rendering of glowing fiber optic cables flowing like water through a dark void. Vibrant primary blue highlights contrast with deep indigo shadows, creating a high-tech, secure atmosphere that fits an anonymous sharing application's visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEh98dV3fUhQrCs2uBjbNYJizOROEqax1Ow9ZtIRJP-NyEUqY7iwn4ey_g8KVholKt4VisSBmJKfdLffOUHQ2hswR1_dBLTD7yHt-4iMd9dCRw5zfahJExG3RIO0cUZNxTwFYCVdbMlLJILGIMxwk5rMpotOSUkQcLoJOqrT-KVL2CJYy0tmNm68CpzQaYA15c4DypXmV3D2dipNbtGCLvdix-BQ1mZr-oEwF7J229DrfQ1IzYZYzDm6_TrLjFbrSHx8fWYHWVawAm"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-on-surface line-clamp-1">Data privacy in 2024</h3>
+<span class="font-label-sm text-outline-variant">1d ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">Understanding the new regulations and how they impact your digital footprint...</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Clear History Trigger -->
+<div class="py-8 flex justify-center">
+<button class="flex items-center gap-2 px-6 py-2 rounded-full border border-error/20 text-error hover:bg-error/5 transition-colors font-label-lg active:scale-95 duration-150">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+                Clear all history
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (From JSON) -->
+<!-- Determined active: Search or Settings (None of the labels match History directly, 
+         but History is a sub-page of account/settings usually. 
+         Let's assume Search is the primary 'Explore' mechanism or Settings for data control.)
+         Actually, History often lives under Profile/Settings. Let's keep it neutral or highlight 'Settings' if intent matches. -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm mt-1">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for list items
+        document.querySelectorAll('.history-item-hover').forEach(item => {
+            item.addEventListener('click', () => {
+                // Flash effect for feedback
+                item.classList.add('bg-surface-container-high');
+                setTimeout(() => {
+                    item.classList.remove('bg-surface-container-high');
+                }, 200);
+            });
+        });
+    </script>
+</body></html>

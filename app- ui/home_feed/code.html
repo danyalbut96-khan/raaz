@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Anonymous Sharing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .post-card-shadow {
+            box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "on-primary": "#ffffff",
+                      "surface-container-highest": "#dce2f7",
+                      "on-background": "#141b2b",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#d3daef",
+                      "primary-container": "#2563eb",
+                      "error": "#ba1a1a",
+                      "surface-container": "#e9edff",
+                      "surface": "#f9f9ff",
+                      "inverse-primary": "#b4c5ff",
+                      "on-tertiary-container": "#ebf1ff",
+                      "background": "#f9f9ff",
+                      "secondary-container": "#2170e4",
+                      "tertiary-fixed": "#d4e3ff",
+                      "secondary-fixed": "#d8e2ff",
+                      "inverse-surface": "#293040",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#dbe1ff",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-variant": "#dce2f7",
+                      "surface-container-high": "#e1e8fd",
+                      "on-surface-variant": "#434655",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#fefcff",
+                      "on-primary-container": "#eeefff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "inverse-on-surface": "#edf0ff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-secondary-fixed": "#001a42",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#00569c",
+                      "on-primary-fixed": "#00174b",
+                      "surface-bright": "#f9f9ff",
+                      "secondary": "#0058be",
+                      "surface-container-low": "#f1f3ff",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-surface": "#141b2b",
+                      "outline": "#737686",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#196fc0",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c3c6d7",
+                      "surface-tint": "#0053db",
+                      "primary": "#004ac6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "margin-tablet": "32px",
+                      "md": "16px",
+                      "sm": "8px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "auto",
+                      "2xl": "48px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="security">security</span>
+</div>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary dark:text-primary-fixed-dim uppercase">RAAZ</h1>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32">
+<!-- Categories Chips -->
+<section class="mb-6 px-margin-mobile">
+<div class="flex gap-3 overflow-x-auto hide-scrollbar py-2">
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-primary text-on-primary font-label-lg text-label-lg">All</button>
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant transition-colors">Confessions</button>
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant transition-colors">Questions</button>
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant transition-colors">Rants</button>
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant transition-colors">Life</button>
+</div>
+</section>
+<!-- Trending Section -->
+<section class="mb-8">
+<div class="px-margin-mobile flex justify-between items-center mb-4">
+<h2 class="font-headline-md text-title-md text-on-surface">Hot Today</h2>
+<button class="text-primary font-label-lg text-label-lg">View all</button>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar px-margin-mobile">
+<!-- Trending Card 1 -->
+<div class="min-w-[280px] p-4 rounded-xl glass-card border border-outline-variant/30 post-card-shadow flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-lg" data-icon="local_fire_department">local_fire_department</span>
+<span class="font-label-sm text-label-sm text-outline">Trending in Rants</span>
+</div>
+<p class="font-body-md text-body-md line-clamp-2">"I just realized that I've been working the wrong career for 10 years and I'm too scared to quit..."</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-label-sm text-label-sm text-outline">2.4k engagements</span>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-secondary-container flex items-center justify-center text-[10px] text-on-secondary-container font-bold">A</div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-tertiary-container flex items-center justify-center text-[10px] text-on-tertiary-container font-bold">B</div>
+</div>
+</div>
+</div>
+<!-- Trending Card 2 -->
+<div class="min-w-[280px] p-4 rounded-xl glass-card border border-outline-variant/30 post-card-shadow flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm text-outline">Trending in Questions</span>
+</div>
+<p class="font-body-md text-body-md line-clamp-2">"What is the one secret you'll take to your grave? No judgments here."</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-label-sm text-label-sm text-outline">1.8k comments</span>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-variant flex items-center justify-center text-[10px] text-on-surface-variant font-bold">?</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest Posts Feed -->
+<section class="px-margin-mobile space-y-4">
+<h2 class="font-headline-md text-title-md text-on-surface mb-4">Latest Shares</h2>
+<!-- Post Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-4 post-card-shadow transition-transform active:scale-[0.98] duration-200">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed text-sm" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Anonymous Owl</p>
+<p class="font-label-sm text-label-sm text-outline">12m ago • Confessions</p>
+</div>
+</div>
+<button class="text-outline-variant">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed">
+                    I found a stray kitten in the rain today and couldn't leave it there. My apartment doesn't allow pets, so I'm currently hiding a tiny fluff ball in my bathroom. He's sleeping in a shoebox and I've never felt more alive.
+                </p>
+<div class="flex items-center gap-6 border-t border-surface-variant pt-3">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="font-label-lg text-label-lg">342</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-lg text-label-lg">24</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors ml-auto">
+<span class="material-symbols-outlined text-[20px]" data-icon="ios_share">ios_share</span>
+</button>
+</div>
+</article>
+<!-- Post Card with Image -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden post-card-shadow transition-transform active:scale-[0.98] duration-200">
+<div class="p-4">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-sm" data-icon="mood">mood</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Midnight Rambler</p>
+<p class="font-label-sm text-label-sm text-outline">45m ago • Life</p>
+</div>
+</div>
+<button class="text-outline-variant">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed">
+                        The view from the rooftop tonight is everything I needed. Sometimes you just have to look at the city lights and realize how small your problems really are.
+                    </p>
+</div>
+<div class="w-full h-48 bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A moody, cinematic photograph of a vast city skyline at night, viewed from a high-altitude rooftop. The city lights glow in soft bokeh of amber, white, and blue against a deep navy sky. The lighting is low-key with a sophisticated, modern light-mode polish. The atmosphere is serene and contemplative, reflecting a high-end minimalist digital experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsIFqjsh3yA_t7R0rJadmKGXyMeQH6IX20rLZe2C69qKnlvYtvVClYm2CC8-taZudHADoIuXNeE6xXbL7T6kFawSJk8tgXDYFUsPMggqoRhanVgxYiOlorzsHd_WnbZWfDeulvXXMy11Ee8SEngnsBJXL4bCWZBUiguMY438UGa2a9H-5tXG48Ouvn4JYbI59xIlvNJ8WZvEEVLIoT0BFmcJS0hXmEswBzbDyfjxo2pFl3cf6e3CugqVqgzZhmhdB9ZJB0LnscS5Le"/>
+</div>
+<div class="p-4 flex items-center gap-6 border-t border-surface-variant">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="font-label-lg text-label-lg">892</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-lg text-label-lg">56</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors ml-auto">
+<span class="material-symbols-outlined text-[20px]" data-icon="ios_share">ios_share</span>
+</button>
+</div>
+</article>
+<!-- Post Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl p-4 post-card-shadow transition-transform active:scale-[0.98] duration-200">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-error-container text-sm" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Secret Keeper</p>
+<p class="font-label-sm text-label-sm text-outline">1h ago • Rants</p>
+</div>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed font-semibold italic">
+                    "I still haven't told my partner that I'm the one who accidentally broke their favorite vintage lamp. I bought an identical one online and they haven't noticed. The guilt is eating me alive but it's too late to confess now."
+                </p>
+<div class="flex items-center gap-6 border-t border-surface-variant pt-3">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="font-label-lg text-label-lg">1.2k</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-lg text-label-lg">112</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors ml-auto">
+<span class="material-symbols-outlined text-[20px]" data-icon="bookmark">bookmark</span>
+</button>
+</div>
+</article>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary-container text-on-primary-container rounded-2xl shadow-xl flex items-center justify-center active:scale-90 transition-transform duration-150 z-40">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-0.5">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm mt-0.5">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-0.5">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-0.5">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for category chip selection
+        document.querySelectorAll('button.rounded-full').forEach(button => {
+            button.addEventListener('click', function() {
+                if(this.closest('div').classList.contains('overflow-x-auto')) {
+                    this.closest('div').querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-on-primary');
+                        btn.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                    });
+                    this.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                    this.classList.add('bg-primary', 'text-on-primary');
+                }
+            });
+        });
+
+        // Simple scroll reveal effect for cards
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('article').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Blog | Voices of Privacy &amp; Mental Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d8e2ff",
+                        "outline": "#737686",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "surface": "#f9f9ff",
+                        "on-primary-container": "#eeefff",
+                        "surface-container": "#e9edff",
+                        "background": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#0058be",
+                        "primary": "#004ac6",
+                        "surface-container-highest": "#dce2f7",
+                        "surface-container-high": "#e1e8fd",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#d3daef",
+                        "tertiary-fixed": "#d4e3ff",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface": "#141b2b",
+                        "surface-tint": "#0053db",
+                        "on-tertiary-container": "#ebf1ff",
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#293040",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "secondary-container": "#2170e4",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface-container-low": "#f1f3ff",
+                        "surface-variant": "#dce2f7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-background": "#141b2b",
+                        "on-secondary-fixed": "#001a42",
+                        "tertiary": "#00569c",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#196fc0",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "container-margin": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; }
+        .glass-nav { backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        .card-shadow { box-shadow: 0px 2px 4px rgba(17, 24, 39, 0.05); transition: all 0.3s ease; }
+        .card-shadow:hover { box-shadow: 0px 4px 12px rgba(17, 24, 39, 0.08); transform: translateY(-2px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .masonry { column-count: 1; column-gap: 24px; }
+        @media (min-width: 768px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 24px; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<div class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="flex items-center gap-md">
+<span class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</span>
+</div>
+<div class="hidden md:flex gap-xl items-center">
+<a class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors" href="#">Features</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a>
+<a class="font-title-md text-title-md text-primary font-semibold border-b-2 border-primary" href="#">Blog</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors" href="#">Careers</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg text-label-lg active:scale-95 transform transition-all">
+                Download App
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-xl px-container-margin max-w-7xl mx-auto">
+<!-- Featured Hero Post -->
+<section class="mb-xl">
+<div class="relative w-full aspect-[21/9] rounded-xl overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A serene, high-end lifestyle photography shot of a person sitting in a sun-drenched, minimalist architectural space, looking out a large window at a peaceful garden. The lighting is soft and ethereal, emphasizing clean white surfaces and blue secondary accents. The mood is calm and contemplative, reflecting themes of mental clarity and personal sanctuary in a modern corporate style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC7RM6RPZWjXFas_aNVcZPmjmPx4qlZKv-D0DhnjtJbKrm6qW4R291qSPQo0v1K6HUJoSpVc4hgoQMvEXVCwu4OL8TuW5aYHVoso3wtnEU77010g36XDeZaPE7dpDZRCCt2hZIjgpVqcAd8MpLRtiC15RxwXR7ZAE9GvH10IhgOoamvCAHYR8ykMcFwN-dbNaVHfKnIwikMYFujRtypSL081g7u_iYS-mlw8CBhpU5Mgr7GGh0pjHmHdf39gJTOjqqGF0B9dwsMM2vl')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-xl md:p-24 max-w-3xl">
+<span class="inline-block bg-primary-container text-on-primary-container px-md py-xs rounded-full font-label-sm text-label-sm mb-md">
+                        Featured Story
+                    </span>
+<h1 class="font-headline-lg text-white mb-md leading-tight md:text-5xl">Finding Silence in a Digital World: Why Anonymity Matters for Mental Health</h1>
+<div class="flex items-center gap-md text-white/80 font-body-md text-body-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Oct 24, 2023</span>
+</div>
+<div class="w-1 h-1 bg-white/40 rounded-full"></div>
+<span>By Dr. Aris Thorne</span>
+<div class="w-1 h-1 bg-white/40 rounded-full"></div>
+<span>12 min read</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Filters -->
+<section class="flex flex-wrap gap-md mb-xl overflow-x-auto pb-sm no-scrollbar">
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg text-label-lg whitespace-nowrap">All Stories</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high px-lg py-sm rounded-full font-label-lg text-label-lg transition-colors whitespace-nowrap">Mental Health</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high px-lg py-sm rounded-full font-label-lg text-label-lg transition-colors whitespace-nowrap">Community Stories</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high px-lg py-sm rounded-full font-label-lg text-label-lg transition-colors whitespace-nowrap">Product Updates</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high px-lg py-sm rounded-full font-label-lg text-label-lg transition-colors whitespace-nowrap">Privacy First</button>
+</section>
+<!-- Masonry Grid -->
+<section class="masonry">
+<!-- Article Card 1 -->
+<div class="masonry-item card-shadow bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col cursor-pointer">
+<img class="w-full h-48 object-cover" data-alt="A macro shot of water droplets on a clear glass surface with a vibrant blue background. The light reflects softly through the water, creating a clean, professional aesthetic that conveys purity and transparency. High-fidelity textures with a corporate modern feel, focusing on minimal geometric patterns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-o_57YJDCJKE9_uNA-HocM9JJ6UL3DNk4LQSRv11qWtw0choo5SmP-JCNdQ1oY_DTu19v_YGyDpeCsh3iD7oG9hsCN7ZYkE4qeyp1RqaHHJO0mzII_e8BVM49DfxO-2e-eax0UmfwGSrC28P5xFdrll30C9hDl1NGtcze4FSc82zYggmRKW2ERfDyu6JWoNCOuexc-ICVaTBke291gLIKwbXF2fuOuE6egBddGP3H7uIjExyR--nGpXP4ezrsSteKY0ljZYAVhCZP"/>
+<div class="p-lg flex flex-col flex-grow">
+<span class="text-primary font-label-sm text-label-sm mb-sm">Mental Health</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md leading-snug">The Psychology of Shared Secrets: How Vulnerability Builds Community</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mb-lg line-clamp-3">Discover the scientific link between expressing hidden thoughts and reduced cortisol levels in anonymous safe-spaces.</p>
+<div class="mt-auto pt-md border-t border-outline-variant flex justify-between items-center text-outline font-label-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>6 min read</span>
+</div>
+<span>Oct 20, 2023</span>
+</div>
+</div>
+</div>
+<!-- Article Card 2 -->
+<div class="masonry-item card-shadow bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col cursor-pointer">
+<div class="p-lg flex flex-col bg-primary text-on-primary">
+<span class="text-white/70 font-label-sm text-label-sm mb-sm">Product Updates</span>
+<h3 class="font-title-lg text-title-lg mb-md leading-snug">Introducing End-to-End Encrypted Group Huddles</h3>
+<p class="text-white/80 font-body-md text-body-md mb-lg">Our latest release brings real-time, completely private voice conversations to the RAAZ ecosystem. Your voice, never recorded.</p>
+<div class="mt-auto pt-md border-t border-white/20 flex justify-between items-center text-white/60 font-label-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Release Notes</span>
+</div>
+<span>Oct 18, 2023</span>
+</div>
+</div>
+</div>
+<!-- Article Card 3 -->
+<div class="masonry-item card-shadow bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col cursor-pointer">
+<img class="w-full h-64 object-cover" data-alt="An artistic representation of a diverse crowd of people silhouetted against a bright, multi-colored dawn. The colors are sophisticated gradients of primary blue and deep indigo. The composition is clean and modern, emphasizing unity and collective strength in a premium enterprise SaaS visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC49FFJZ26JbXTkooBJ8Kh7zlPywfzD8bjTmQDsuL3qLRcoFcZyXduwL7tyJm3voUeoPFTNmMQgbc0i04cUEYswh_oRX-1MU5Mx3ioSgI7hwBr0dWHpV0S6Xq0-I5W9GEOdjxy-oICPNJQlFN5MzX_NFwaiuxjdFC6YLdbCIs8DFaf2uN384a_cRouOXRjynDMYmJcnWFd5Qoj-vaD0SqVZPWYHNx1EEh8ESJe1QZGeP4CPmhMFQKo5ZdkZQAu9wIKo0UZQpwiKOwz4"/>
+<div class="p-lg flex flex-col flex-grow">
+<span class="text-tertiary font-label-sm text-label-sm mb-sm">Community Stories</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md leading-snug">How 5,000 Strangers Supported Me Through Recovery</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mb-lg line-clamp-3">A first-hand account of finding hope through the RAAZ community during the most difficult year of a life journey.</p>
+<div class="mt-auto pt-md border-t border-outline-variant flex justify-between items-center text-outline font-label-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>8 min read</span>
+</div>
+<span>Oct 15, 2023</span>
+</div>
+</div>
+</div>
+<!-- Article Card 4 -->
+<div class="masonry-item card-shadow bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col cursor-pointer">
+<div class="p-lg flex flex-col flex-grow">
+<span class="text-primary font-label-sm text-label-sm mb-sm">Privacy First</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md leading-snug">The Future of Data Sovereignty: Why We Delete Everything</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mb-lg">At RAAZ, we believe the safest data is the data that doesn't exist. Learn about our zero-retention architecture.</p>
+<div class="mt-auto pt-md border-t border-outline-variant flex justify-between items-center text-outline font-label-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>5 min read</span>
+</div>
+<span>Oct 12, 2023</span>
+</div>
+</div>
+</div>
+<!-- Article Card 5 -->
+<div class="masonry-item card-shadow bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col cursor-pointer">
+<img class="w-full h-48 object-cover" data-alt="A minimalist 3D rendering of a white, organic sculpture resembling a smooth pebble or cloud, set against a soft gray-blue gradient. The lighting is focused and crisp, creating elegant shadows. This abstract image represents peace of mind and mental balance, tailored for a professional wellness blog." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABwXxOsBCThEGTwSeVaDOEfqAnzm2XB8-4-qU0zpHCrs2tQPFc6nXNXFEP5RsY6oBY0AD_y-b17u_MVssbcFgDQGc2Z9Ibw08MA_W2peJCu-x5En6KEO1Phb900CjIdvUyg0O_4m20HD0OojN_9MAXOabcyeCiraQBZevZOE16riGkzlQ8AGpWxYCa9dwHW71WHV-Q77cb50HtRTvuG9QGHBg1QazA-5O3UfcsV3XPcjViOU9JLBs-6cdgieUT5VataBYkc1l-_hxe"/>
+<div class="p-lg flex flex-col flex-grow">
+<span class="text-primary font-label-sm text-label-sm mb-sm">Mental Health</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md leading-snug">Journaling Without Judgment: The Power of the Void</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mb-lg line-clamp-3">Why writing for no one—literally—can be more therapeutic than traditional blogging or social media updates.</p>
+<div class="mt-auto pt-md border-t border-outline-variant flex justify-between items-center text-outline font-label-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>4 min read</span>
+</div>
+<span>Oct 08, 2023</span>
+</div>
+</div>
+</div>
+<!-- Article Card 6 -->
+<div class="masonry-item card-shadow bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col cursor-pointer">
+<div class="p-lg flex flex-col flex-grow border-l-4 border-secondary">
+<span class="text-secondary font-label-sm text-label-sm mb-sm">Community Voices</span>
+<blockquote class="font-title-lg text-title-lg italic text-on-surface mb-lg">"In a world where we are constantly tracked, RAAZ gave me the one thing I couldn't buy: true invisibility."</blockquote>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">person</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Anonymous User</span>
+<span class="text-outline font-label-sm">Beta Member</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="mt-32 mb-xl">
+<div class="relative bg-surface-container-high rounded-3xl overflow-hidden p-xl md:p-32 flex flex-col md:flex-row items-center gap-xl">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl -ml-24 -mb-24"></div>
+<div class="relative z-10 md:w-1/2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Stay in the loop. Stay private.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Join 50,000+ subscribers receiving weekly insights on digital wellness, privacy tech, and anonymous community stories.</p>
+</div>
+<div class="relative z-10 md:w-1/2 w-full">
+<form class="flex flex-col sm:flex-row gap-md">
+<input class="flex-grow bg-surface-container-lowest border-none rounded-xl px-lg py-md focus:ring-2 focus:ring-primary font-body-md text-body-md" placeholder="Enter your email" required="" type="email"/>
+<button class="bg-primary text-on-primary px-xl py-md rounded-xl font-label-lg text-label-lg whitespace-nowrap active:scale-95 transition-all shadow-md" type="submit">
+                            Subscribe Now
+                        </button>
+</form>
+<p class="text-outline font-label-sm mt-sm">No tracking. Just good content. Unsubscribe anytime.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-xl bg-surface-container-low">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="flex flex-col gap-md">
+<span class="font-title-lg text-title-lg font-bold text-on-surface">RAAZ</span>
+<p class="text-on-surface-variant font-body-md text-body-md">Empowering voices through secure, anonymous connections since 2022.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">chat</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">alternate_email</span>
+</div>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-lg">Platform</h4>
+<ul class="flex flex-col gap-md">
+<li><a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-2 underline-offset-4 transition-all" href="#">About Us</a></li>
+<li><a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-2 underline-offset-4 transition-all" href="#">FAQ</a></li>
+<li><a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-2 underline-offset-4 transition-all" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-lg">Privacy</h4>
+<ul class="flex flex-col gap-md">
+<li><a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-2 underline-offset-4 transition-all" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-2 underline-offset-4 transition-all" href="#">Terms &amp; Conditions</a></li>
+<li><a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-2 underline-offset-4 transition-all" href="#">Release Notes</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-md">
+<h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-lg">Contact</h4>
+<p class="text-on-surface-variant font-body-md text-body-md">support@raaz.io</p>
+<button class="border border-primary text-primary px-lg py-sm rounded-lg font-label-lg text-label-lg hover:bg-primary/5 transition-all">
+                    Contact Us
+                </button>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-lg py-md border-t border-outline/10 text-center text-on-surface-variant font-body-md text-body-md">
+            © 2024 RAAZ Anonymous. Built for privacy.
+        </div>
+</footer>
+<script>
+        // Micro-interactions for navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Newsletter form interaction
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Subscribed!';
+            btn.classList.replace('bg-primary', 'bg-green-600');
+            e.target.reset();
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.replace('bg-green-600', 'bg-primary');
+            }, 3000);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Profile Customization</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#dce2f7",
+                    "outline-variant": "#c3c6d7",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#434655",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-primary-container": "#eeefff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "on-surface": "#141b2b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "on-background": "#141b2b",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-container": "#196fc0",
+                    "on-error": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "secondary-container": "#2170e4",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-high": "#e1e8fd",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#2563eb",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-bright": "#f9f9ff",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed": "#001c39",
+                    "primary": "#004ac6",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f1f3ff",
+                    "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-desktop": "auto",
+                    "margin-tablet": "32px",
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-background min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<button class="p-2 active:scale-95 duration-200 hover:opacity-80 transition-opacity text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</header>
+<main class="pt-20 px-margin-mobile max-w-2xl mx-auto space-y-6">
+<!-- Identity Preview Card -->
+<section class="relative overflow-hidden rounded-xl bg-primary-container p-6 text-on-primary-container shadow-lg">
+
+<div class="relative z-10 flex flex-col items-center text-center space-y-4">
+<div class="w-24 h-24 rounded-full bg-surface/20 border-2 border-surface/30 p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="A stylized, minimalist 3D avatar icon for an anonymous user, featuring sleek geometric shapes and a soft blue glow. The background is a clean, neutral gradient. The lighting is ethereal and premium, matching a sophisticated digital security aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPgAZI4ZxYyQCC570htpXCb3oD054NFIhroH0E9G5mY3L6EJ7mux2d4In7K0RmGVEQeOxA3bue96Yw9c6-gNhYCmDxPevDyf-vs2E0TeBedg4JD0QlrLp8jvaJsVsw7vW7G85PCqFapWKUwMt0JH4XOHutRzjbuXvfRWHB_5kH63FbnZ_TJKQsqwcBZ_CR21C9tgdtuNSoxj4iSPucAVs_3WYcOvUk6pcin3RtdReYJbb3T7M_dhVejSPd-9GluTXMNs5jD1HfrdGU"/>
+</div>
+<div>
+<h2 class="font-title-lg text-title-lg text-on-primary-container">Phantom_Echo_42</h2>
+<p class="font-body-md text-body-md opacity-80">Your current digital shadow</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface/10 rounded-full font-label-sm text-label-sm border border-surface/20">Tech Observer</span>
+<span class="px-3 py-1 bg-surface/10 rounded-full font-label-sm text-label-sm border border-surface/20">Night Mode</span>
+</div>
+</div>
+</section>
+<!-- Customization Settings -->
+<div class="space-y-4">
+<!-- Random Avatar Section -->
+<div class="glass-card rounded-xl p-4 shadow-sm border border-surface-variant/30">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="cached">cached</span>
+<span class="font-title-md text-title-md">Random Avatar</span>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full font-label-lg text-label-lg active:scale-95 transition-transform">Regenerate</button>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<div class="aspect-square bg-surface-container rounded-lg border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A futuristic minimalist avatar concept featuring a sleek chrome mask with soft blue internal lighting, isolated on a deep blue background. The style is editorial and high-end digital art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjuP5Y6blTPgE38PdgrZ_vmtXLJTLBPkC_bgFCoiTHp0EW0ZStQfPwUnbYDR3kHm3oBXq0_9ZM_Eo2KBDRrf7EWZg2Vjo79RSpsQbovhtUap8Ll7KuwKcHbn2bU2pqLZiGhcFl70ZJCVMBkXE_fKkW0Cmu2D0JbgH1F40btLBEAP0lF-1LeckDTGFI38wmCbpfPX0d4kLSgUqk3H8tfCdlstMNRR2K51xJeYwbgZsCnhq92pCzhsuGIW3MUHTYsdGoZW23tvH00T--"/>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg opacity-50 hover:opacity-100 transition-opacity cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist vector illustration of an anonymous profile icon using overlapping translucent circles in shades of slate and navy. Modern and secure visual language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYy1ao7SqVQmn2cUKGEAxvkKPrbdHKM9U0xDXHRU4VsBSZsxAHfkVROAILBRfg5Wm08t8tAsr35QUNUdsObEwMPXb5cZ9ZerG8i3vDQLHaCDW7U1crE_CkwXnn8IIWxGAcRR5a2O06Vt7bilUpS5SPprIUVaaz6XXFNC9ycbmHVlySX1oThkMp5fGYY7lXoTMDvwjY63vSEZHF0kl6eT48T4OjXymj8AECuz0jf4YarcNe4MT_mv1H-SY7W6Sw8FuA1EpyzMB4g5YQ"/>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg opacity-50 hover:opacity-100 transition-opacity cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An abstract geometric avatar representing a digital ghost, using clean lines and a soft glow, presented in a high-fidelity Material Design style with primary blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgP568C1je6VeSDx0IWoNFelK4S3uLJZbIbn2k_8mIab1qfHdpjBveyDv-Q1b31IAPCimw0DpTsD3-n4jIxjRs0nc1LVpgiadyT3n_nV_09hRSYube9Dni8fkDFgjooZ4PDBZ63DSV4U9Y-zE_pDbvIt4q1K2UOYOMim7A7ixVNKsNjmIKbU9AP6mRpu7mfZKg2fYMUBBXXZkJbYfm38Q36rNjuR2Ikckmy3hDdSdzrkGcQrQi_0RBgnogFQBx-xXuJ4741t5yfYF8"/>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg opacity-50 hover:opacity-100 transition-opacity cursor-pointer overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="add">add</span>
+</div>
+</div>
+</div>
+<!-- Avatar Themes -->
+<div class="glass-card rounded-xl p-4 shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="palette">palette</span>
+<span class="font-title-md text-title-md">Avatar Themes</span>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<button class="flex-shrink-0 px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container font-label-lg text-label-lg">Cyberpunk</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-lg text-label-lg border border-outline-variant">Ethereal</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-lg text-label-lg border border-outline-variant">Monochrome</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-lg text-label-lg border border-outline-variant">Abstract</button>
+</div>
+</div>
+<!-- Accent Color -->
+<div class="glass-card rounded-xl p-4 shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="color_lens">color_lens</span>
+<span class="font-title-md text-title-md">Accent Color</span>
+</div>
+<div class="flex items-center justify-between px-2">
+<div class="w-8 h-8 rounded-full bg-[#2563EB] ring-4 ring-primary-fixed ring-offset-2"></div>
+<div class="w-8 h-8 rounded-full bg-[#7C3AED] opacity-60"></div>
+<div class="w-8 h-8 rounded-full bg-[#DB2777] opacity-60"></div>
+<div class="w-8 h-8 rounded-full bg-[#059669] opacity-60"></div>
+<div class="w-8 h-8 rounded-full bg-[#D97706] opacity-60"></div>
+<div class="w-8 h-8 rounded-full bg-[#4B5563] opacity-60"></div>
+</div>
+</div>
+<!-- Anonymous Name Style -->
+<div class="glass-card rounded-xl p-4 shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="badge">badge</span>
+<span class="font-title-md text-title-md">Anonymous Name Style</span>
+</div>
+<div class="space-y-3">
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container/50 border border-transparent hover:border-primary transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg">Techno-Nomad</span>
+<span class="text-xs text-on-surface-variant/60">e.g., Cyber_Wraith_99</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary rounded-full"></div>
+</div>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container/30 border border-transparent hover:border-primary transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg">Natural Observer</span>
+<span class="text-xs text-on-surface-variant/60">e.g., Silent_Willow</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant"></div>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container/30 border border-transparent hover:border-primary transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg">Abstract Geometric</span>
+<span class="text-xs text-on-surface-variant/60">e.g., Polygon_Alpha</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant"></div>
+</label>
+</div>
+</div>
+<!-- Privacy Preferences -->
+<div class="glass-card rounded-xl p-4 shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="lock_person">lock_person</span>
+<span class="font-title-md text-title-md">Privacy Preferences</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-label-lg text-label-lg">Mask Online Status</p>
+<p class="text-xs text-on-surface-variant/70">Others won't see when you're active</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary-container relative p-1 transition-colors">
+<div class="w-4 h-4 bg-on-primary rounded-full ml-auto"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-label-lg text-label-lg">Hide Activity History</p>
+<p class="text-xs text-on-surface-variant/70">Prevent public view of your shares</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-surface-container-highest relative p-1 transition-colors">
+<div class="w-4 h-4 bg-surface rounded-full"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-label-lg text-label-lg">Anti-Screenshot Shield</p>
+<p class="text-xs text-on-surface-variant/70">Disable screenshots on your profile</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary-container relative p-1 transition-colors">
+<div class="w-4 h-4 bg-on-primary rounded-full ml-auto"></div>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-4 flex flex-col gap-3">
+<button class="w-full h-14 bg-primary text-on-primary rounded-full font-title-md text-title-md shadow-lg active:scale-[0.98] transition-transform">
+                Save Identity
+            </button>
+<button class="w-full h-14 bg-surface-container text-on-surface-variant rounded-full font-title-md text-title-md active:scale-[0.98] transition-transform">
+                Reset Defaults
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl rounded-t-xl shadow-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interactions for toggles
+        document.querySelectorAll('button[class*="rounded-full relative"]').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const isOff = toggle.classList.contains('bg-surface-container-highest');
+                const dot = toggle.querySelector('div');
+                
+                if (isOff) {
+                    toggle.classList.remove('bg-surface-container-highest');
+                    toggle.classList.add('bg-primary-container');
+                    dot.classList.remove('ml-0');
+                    dot.classList.add('ml-auto');
+                    dot.classList.remove('bg-surface');
+                    dot.classList.add('bg-on-primary');
+                } else {
+                    toggle.classList.add('bg-surface-container-highest');
+                    toggle.classList.remove('bg-primary-container');
+                    dot.classList.add('ml-0');
+                    dot.classList.remove('ml-auto');
+                    dot.classList.add('bg-surface');
+                    dot.classList.remove('bg-on-primary');
+                }
+            });
+        });
+    </script>
+</body></html>

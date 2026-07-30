@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Bookmarks Collection | RAAZ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#dce2f7",
+                    "outline-variant": "#c3c6d7",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#434655",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-primary-container": "#eeefff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "on-surface": "#141b2b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "on-background": "#141b2b",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-container": "#196fc0",
+                    "on-error": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "secondary-container": "#2170e4",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#2563eb",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-bright": "#f9f9ff",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed": "#001c39",
+                    "primary": "#004ac6",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-high": "#e1e8fd",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f1f3ff",
+                    "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-desktop": "auto",
+                    "margin-tablet": "32px",
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Bar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200" data-icon="notifications">notifications</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-end, minimalist portrait of a sleek, abstract crystalline structure representing a digital user avatar. The composition is centered with soft, cinematic lighting in a professional studio setting. The color palette features cool blues and crisp whites, echoing a premium tech brand identity. Subtle refractions and sharp geometric edges convey a sense of modern sophistication and secure anonymity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8uRf6sI7hylkpj1dJOJxbDNCeMe0_KpsNryYR0b9i6PqGUISxxk-ZvXW346I4T8rKBa2QvC8fMBOAUKkmoZr9K3NCMgz0v4qw6wMibGUgLAsVpIEZUX7nILUE4sVOVZyhB98Po-ceg5nnlr5Zyq4mCZkXkOPYkODcPPYZi9FhC8accJhnsrVlEMwJIscI906jQRQSECttoSGsMe3froYD5H2LPRrBkTx_wKcT-aVT9rO8qzi9p1Vwgvyok3RDjnICMlVQFdYzh2wL"/>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-24 px-margin-mobile max-w-4xl mx-auto">
+<!-- Search Bar Section -->
+<section class="mb-lg">
+<h2 class="font-headline-md text-headline-md-mobile mb-md">Collection</h2>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 text-body-md placeholder:text-outline focus:ring-2 focus:ring-primary transition-all" placeholder="Search Saved Items" type="text"/>
+</div>
+</section>
+<!-- Category Tabs -->
+<nav class="flex items-center gap-2 mb-lg overflow-x-auto no-scrollbar pb-2">
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-primary text-on-primary font-label-lg shadow-md active:scale-95 transition-transform">Saved Posts</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-lg hover:bg-surface-container-highest active:scale-95 transition-all">Saved Letters</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-lg hover:bg-surface-container-highest active:scale-95 transition-all">Saved Reflections</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-lg hover:bg-surface-container-highest active:scale-95 transition-all">Saved Challenges</button>
+</nav>
+<!-- Bento Grid for Bookmarked Items -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Bento Card: Primary Large Item -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/30 flex flex-col gap-md relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm font-label-sm">Inspiration</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full text-label-sm font-label-sm">Post</span>
+</div>
+<button class="material-symbols-outlined text-primary" data-icon="bookmark" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bookmark</button>
+</div>
+<p class="font-title-md text-title-md text-on-surface leading-snug z-10">Sometimes the bravest thing you can do is stand in your own light even when the shadows feel more comfortable.</p>
+<div class="flex items-center justify-between mt-auto z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="schedule">schedule</span>
+<span class="text-label-sm text-outline">Saved 2h ago</span>
+</div>
+<button class="text-primary font-label-lg flex items-center gap-1 hover:underline">
+                        Read more
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Bento Card: Medium Item -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/30 flex flex-col gap-sm relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container rounded-lg text-label-sm font-label-sm">Letter</span>
+<button class="material-symbols-outlined text-primary" data-icon="bookmark" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bookmark</button>
+</div>
+<h3 class="font-title-md text-on-surface line-clamp-2">Dear Future Self: A reminder of resilience during the quiet storms.</h3>
+<p class="text-body-md text-on-surface-variant line-clamp-3">I am writing this because today was harder than most, but I still chose to find the silver lining in the grayest clouds...</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="text-label-sm text-outline">Saved yesterday</span>
+<span class="material-symbols-outlined text-outline-variant" data-icon="mail">mail</span>
+</div>
+</div>
+<!-- Bento Card: Image Integrated Item -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden flex flex-col">
+<div class="h-32 relative">
+<img class="w-full h-full object-cover" data-alt="An ethereal, abstract digital painting of soft morning light filtering through dense, dreamy clouds. The aesthetic is extremely minimalist and clean, utilizing a palette of soft whites, pale blues, and subtle silver highlights. The image evokes a sense of peace, clarity, and renewal, perfectly matching a premium high-fidelity anonymous sharing platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4p41dcFJdruwNeJtTtOB4JRpDpjARNDJO6rb3Njni0OIdKdrWGUPzPD91iM9dPLh-RmvNRqBEPeC6sESHzVWB_V3_BtEK3RyLDl-fmG7ko_JLu_fnKGIJd23FGn0KJQNnJe8fiYtVXAnlucyCdCUbKAnUuRfacs3sRgKTkBMbQuJK-nqEUXkizulSwjlV5vej6DtWfxzvSgYMl9ND2ClHlg-DWOlObJWmSgKMlKNESDUqpoMK1mrs9l3kMY9Vd9pkX8ccNU7KxF9"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
+<div class="absolute top-3 left-3 px-2 py-1 bg-primary text-on-primary rounded-lg text-label-sm font-label-sm">Reflection</div>
+<button class="absolute top-3 right-3 material-symbols-outlined text-primary bg-white/50 backdrop-blur-md rounded-full p-1" data-icon="bookmark" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bookmark</button>
+</div>
+<div class="p-md">
+<h3 class="font-title-md text-on-surface">The Clarity Challenge</h3>
+<p class="text-body-md text-on-surface-variant mt-1">3 days of mindful disconnect.</p>
+</div>
+</div>
+<!-- Bento Card: Small Info Card -->
+<div class="bg-surface-container-low rounded-xl p-md flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</div>
+<div>
+<p class="font-title-md text-on-surface text-sm">Mindfulness Log</p>
+<p class="text-label-sm text-on-surface-variant">Challenge • Day 4</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Bento Card: Small Info Card 2 -->
+<div class="bg-surface-container-low rounded-xl p-md flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="draw">draw</span>
+</div>
+<div>
+<p class="font-title-md text-on-surface text-sm">Sketch of Thought</p>
+<p class="text-label-sm text-on-surface-variant">Reflection • Private</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Empty State (Hidden by default, for future use) -->
+<!-- 
+        <div class="hidden flex-col items-center justify-center py-20 text-center">
+            <span class="material-symbols-outlined text-outline-variant text-6xl mb-4" data-icon="bookmark_border">bookmark_border</span>
+            <h3 class="font-headline-md text-on-surface-variant">Nothing saved yet</h3>
+            <p class="text-body-md text-outline mt-2">Explore content and bookmark your favorite items to see them here.</p>
+            <button class="mt-6 bg-primary text-on-primary px-8 py-3 rounded-full font-label-lg">Explore Now</button>
+        </div>
+        -->
+</main>
+<!-- Bottom Navigation Bar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction logic for Tab Switching
+        const tabs = document.querySelectorAll('nav button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
+                    t.classList.add('bg-surface-container', 'text-on-surface-variant');
+                });
+                tab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                tab.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+            });
+        });
+
+        // Search Input Focus Effect
+        const searchInput = document.querySelector('input');
+        const searchIcon = document.querySelector('input + span');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

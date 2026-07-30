@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Download RAAZ - Privacy First</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d8e2ff",
+                    "outline": "#737686",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface": "#f9f9ff",
+                    "on-primary-container": "#eeefff",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#d3daef",
+                    "tertiary-fixed": "#d4e3ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#141b2b",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-surface-variant": "#434655",
+                    "inverse-surface": "#293040",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "secondary-container": "#2170e4",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface-container-low": "#f1f3ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-background": "#141b2b",
+                    "on-secondary-fixed": "#001a42",
+                    "tertiary": "#00569c",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#196fc0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#b4c5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "container-margin": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            color: #141b2b;
+            overflow-x: hidden;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(0, 74, 198, 0.05), transparent),
+                        radial-gradient(circle at bottom left, rgba(0, 88, 190, 0.03), transparent);
+        }
+        .phone-mockup-shadow {
+            box-shadow: 0px 12px 32px rgba(17, 24, 39, 0.12);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm glass-nav">
+<div class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Blog</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Careers</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg text-label-lg hover:bg-primary-container active:scale-95 transform transition-all shadow-sm">
+                Download App
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24 hero-gradient">
+<div class="max-w-7xl mx-auto px-lg grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<!-- Content Section -->
+<div class="space-y-xl order-2 lg:order-1">
+<div class="space-y-md">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-md py-xs rounded-full font-label-sm text-label-sm inline-block uppercase tracking-wider">Available Now on Android</span>
+<h1 class="font-display-lg text-display-lg text-on-background leading-tight">Your data, your rules. <span class="text-primary">Always anonymous.</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        Experience the world's most secure messaging and data sharing platform. RAAZ uses military-grade encryption and zero-knowledge architecture to ensure your privacy is never compromised.
+                    </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-md pt-md">
+<!-- Google Play Button -->
+<a class="w-full sm:w-auto bg-on-background text-surface-lowest px-xl py-md rounded-xl flex items-center gap-md hover:opacity-90 active:scale-95 transition-all shadow-lg border border-white/10" href="#">
+<span class="material-symbols-outlined text-[32px]">play_books</span>
+<div class="flex flex-col text-left">
+<span class="text-[10px] uppercase font-semibold leading-none tracking-widest opacity-80">Get it on</span>
+<span class="text-title-lg font-bold">Google Play</span>
+</div>
+</a>
+<!-- App Store Coming Soon -->
+<div class="w-full sm:w-auto bg-surface-container-low text-outline px-xl py-md rounded-xl flex items-center gap-md border border-outline-variant/30 cursor-not-allowed">
+<span class="material-symbols-outlined text-[32px]">amp_stories</span>
+<div class="flex flex-col text-left">
+<span class="text-[10px] uppercase font-semibold leading-none tracking-widest">Available soon</span>
+<span class="text-title-lg font-bold">App Store</span>
+</div>
+</div>
+</div>
+<!-- QR Code & Quick Scan -->
+<div class="flex items-center gap-lg p-lg bg-surface-container-highest/30 rounded-xl border border-white/50 backdrop-blur-sm">
+<div class="w-24 h-24 bg-white p-2 rounded-lg shadow-sm">
+<img class="w-full h-full object-contain" data-alt="A clean, high-contrast QR code rendered on a white rounded-square substrate with the RAAZ logo subtly integrated in the center. The style is modern and tech-oriented, matching the professional blue and white corporate branding of the app. The lighting is bright and even, highlighting the sharp edges of the QR pattern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANfHSlHRiH6Naulr_NOMmp3TbNJ60GIfx6Sa8qKybCWnUEBHIgFpJmE93nD4n0kDa-emP1ETH1PvLRw4NPLHNVKinqKMDWa2ARr01NVVkmd7YFT1gvwYkH_0OYGn1_JVXR_GxoQce7XVbCdxG4yBcj-OuQ7iH2UiRjQ_N1cjU0CTCj34P2Oglu9GEwev9ZtlKAmwJEYY_5sXLuDZ6-fQQIYQZaM70sY6UPYsfVTKuVnIn5bPVyBjF85cVUYS6Lcr3Ng784weO0SUC3"/>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Scan to Download</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Point your camera at the QR code to install RAAZ instantly on your Android device.</p>
+</div>
+</div>
+</div>
+<!-- Mockup Section -->
+<div class="order-1 lg:order-2 flex justify-center relative">
+<!-- Decorative Elements -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+<!-- Main Phone Mockup -->
+<div class="relative w-full max-w-[320px] aspect-[9/19] bg-on-background rounded-[3rem] p-3 shadow-2xl animate-float">
+<div class="w-full h-full bg-surface rounded-[2.5rem] overflow-hidden relative border-[4px] border-on-surface/5">
+<img class="w-full h-full object-cover" data-alt="A high-fidelity mobile app interface mockup for RAAZ shown on a sleek smartphone screen. The UI features a clean, minimalist dashboard with dark blue accents, displaying encrypted messaging threads and privacy control toggles. The lighting is studio-quality with soft reflections on the glass screen, set against a bright, professional light-mode background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHVFaTXJ1LKMh5GjIhQz7JSJfYzrW5M3Q-kFKMc3GjLnOEA8KYZ1MLTfTM9xFPCHbkHOSOLESSWxY6piRjutYNNEyabX0wMYE8EG5TCelzogVbpluJCJaeWiEGG4BToxaqfRUmrOkBbqLiMbQDW1rog0BVvbF58vmkrdhH68R3mc3pwe4K7B9yIgLny33w1O1obxlfOtOdGOjOW_EFWTKBVrFreuh9c2G-P_pczy7hdqrc6BT54wLoT71998UbjsDaGSGopAHkPhyk"/>
+<!-- Dynamic Status Bar -->
+<div class="absolute top-0 left-0 w-full h-8 flex justify-between px-6 items-center">
+<span class="text-[10px] font-bold">9:41</span>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[12px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[12px]">wifi</span>
+<span class="material-symbols-outlined text-[12px]">battery_full</span>
+</div>
+</div>
+</div>
+<!-- Physical Buttons Mockup -->
+<div class="absolute top-24 -left-1 w-1 h-12 bg-on-background/20 rounded-r-md"></div>
+<div class="absolute top-40 -left-1 w-1 h-12 bg-on-background/20 rounded-r-md"></div>
+<div class="absolute top-28 -right-1 w-1 h-20 bg-on-background/20 rounded-l-md"></div>
+</div>
+<!-- Floating Screen 2 (Offset) -->
+<div class="absolute top-1/4 -right-8 w-48 h-[360px] bg-surface rounded-2xl shadow-xl border border-outline-variant/20 hidden md:block rotate-12 transform hover:rotate-0 transition-transform duration-500 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A secondary mobile screen showing the settings and security page of the RAAZ app. The design is airy and spacious, using white surfaces and blue accent buttons. It focuses on a 'Shield Enabled' status and biometric lock options. The style is consistent with high-end corporate SaaS applications, emphasizing trust and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4gNv-b3mCkjeJ7YyL74ygy4vnKnOPfc5Vr3Y8jH-91tDDD5YfDneVL8Bj6yZS9QW_iHgWgBslwZtLTU3Hlm5MNaCDEITF58oK3R79TAKyRpCs7iBArO5qwNwD-IuuDNXlVn_iDvvnMbzUEQdmg4_IrQ1o7Z-NRJfLMC0C3ZOx8fZVyro0Vo7w6WFOrzjfjqQDMYNs7qKyID9P1ttthr7nzhH7RQbeQEjQrci3sRrWr0wH3tExHus91F0KqNakmuqVw0E4KhCiUVEu"/>
+</div>
+</div>
+</div>
+</main>
+<!-- App Highlights Bento Grid -->
+<section class="max-w-7xl mx-auto px-lg py-24">
+<div class="text-center mb-16 space-y-md">
+<h2 class="font-headline-lg text-headline-lg">Privacy without compromise.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">RAAZ is built on three pillars that define the future of digital communication.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="p-xl bg-surface-container-low rounded-xl border border-outline-variant/10 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-lg">
+<span class="material-symbols-outlined text-[28px]">lock</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-sm">End-to-End Encryption</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Every message, file, and call is secured with personal keys that only you and the recipient hold.</p>
+</div>
+<div class="p-xl bg-surface-container-low rounded-xl border border-outline-variant/10 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-lg">
+<span class="material-symbols-outlined text-[28px]">visibility_off</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-sm">Zero Knowledge</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">We don't store your data. We don't see your contacts. We don't even know who you are. Absolute anonymity.</p>
+</div>
+<div class="p-xl bg-surface-container-low rounded-xl border border-outline-variant/10 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-lg">
+<span class="material-symbols-outlined text-[28px]">speed</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-sm">Lightweight Performance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Optimized for speed even on low-bandwidth networks, ensuring you're always connected when it matters.</p>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full rounded-t-xl bg-surface-container-low border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="space-y-md">
+<div class="font-title-lg text-title-lg font-bold text-on-surface">RAAZ</div>
+<p class="font-body-md text-body-md text-on-surface-variant">The future of private communication is here. Download now and take back control of your digital identity.</p>
+</div>
+<div class="space-y-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Product</h4>
+<ul class="space-y-xs">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Features</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Release Notes</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Enterprise</a></li>
+</ul>
+</div>
+<div class="space-y-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Legal</h4>
+<ul class="space-y-xs">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms &amp; Conditions</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Security Audit</a></li>
+</ul>
+</div>
+<div class="space-y-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Connect</h4>
+<div class="flex gap-md">
+<a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-lg py-md border-t border-outline-variant/10 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 RAAZ Anonymous. Built for privacy.</p>
+</div>
+</footer>
+<script>
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>

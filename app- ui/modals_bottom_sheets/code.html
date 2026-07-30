@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>RAAZ UI Components - Material Design 3</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#dce2f7",
+                    "on-background": "#141b2b",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d3daef",
+                    "primary-container": "#2563eb",
+                    "error": "#ba1a1a",
+                    "surface-container": "#e9edff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "background": "#f9f9ff",
+                    "secondary-container": "#2170e4",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#293040",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#0058be",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-surface": "#141b2b",
+                    "outline": "#737686",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#196fc0",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "margin-tablet": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "auto",
+                    "2xl": "48px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .scrim {
+            background-color: rgba(20, 27, 43, 0.4);
+            backdrop-filter: blur(4px);
+        }
+        .bottom-sheet {
+            transition: transform 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+        .dialog-pop {
+            animation: dialogPop 0.2s cubic-bezier(0, 0, 0.2, 1);
+        }
+        @keyframes dialogPop {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- Top App Bar (Shared Component Anchor) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200" data-icon="notifications">notifications</button>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-md mx-auto space-y-6">
+<!-- Dashboard Content -->
+<div class="space-y-4">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Component Preview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Click the triggers below to see the Material Design 3 Dialogs and Bottom Sheets in action.</p>
+<div class="grid grid-cols-1 gap-4">
+<!-- Trigger Buttons -->
+<button class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant hover:bg-surface-container transition-colors text-left" onclick="openModal('dialog-exit')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="logout">logout</span>
+<span class="font-title-md text-title-md">Exit App Dialog</span>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant hover:bg-surface-container transition-colors text-left" onclick="openModal('dialog-delete')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error" data-icon="delete">delete</span>
+<span class="font-title-md text-title-md">Delete Post Dialog</span>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant hover:bg-surface-container transition-colors text-left" onclick="openModal('dialog-success')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle">check_circle</span>
+<span class="font-title-md text-title-md">Success Dialog</span>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant hover:bg-surface-container transition-colors text-left" onclick="openModal('dialog-error')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error" data-icon="error">error</span>
+<span class="font-title-md text-title-md">Error Dialog</span>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</button>
+<hr class="border-outline-variant my-2"/>
+<button class="flex items-center justify-between p-4 bg-primary-container text-on-primary-container rounded-xl shadow-md hover:opacity-90 transition-opacity text-left" onclick="openModal('sheet-category')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="font-title-md text-title-md">Category Selector</span>
+</div>
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_up">keyboard_arrow_up</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-secondary-container text-on-secondary-container rounded-xl shadow-md hover:opacity-90 transition-opacity text-left" onclick="openModal('sheet-share')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="font-title-md text-title-md">Social Share Sheet</span>
+</div>
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_up">keyboard_arrow_up</span>
+</button>
+<button class="flex items-center justify-between p-4 bg-surface-container-highest text-on-surface rounded-xl shadow-sm hover:bg-surface-variant transition-colors text-left" onclick="openModal('sheet-report')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="flag">flag</span>
+<span class="font-title-md text-title-md">Report Post</span>
+</div>
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_up">keyboard_arrow_up</span>
+</button>
+</div>
+</div>
+</main>
+<!-- MODALS OVERLAY (SCRIM) -->
+<div class="hidden fixed inset-0 z-[60] scrim items-center justify-center p-6" id="modal-container">
+<!-- EXIT APP DIALOG -->
+<div class="modal-content hidden dialog-pop bg-surface-container-high rounded-[28px] p-6 w-full max-w-sm space-y-4" id="dialog-exit">
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Exit application?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Are you sure you want to exit RAAZ? Any unsaved whispers will be lost permanently.</p>
+</div>
+<div class="flex justify-end gap-2 pt-4">
+<button class="px-6 py-2.5 rounded-full font-label-lg text-label-lg text-primary hover:bg-primary/5 transition-colors" onclick="closeModal()">Cancel</button>
+<button class="px-6 py-2.5 rounded-full font-label-lg text-label-lg bg-primary text-on-primary shadow-sm active:scale-95 transition-transform" onclick="closeModal()">Exit</button>
+</div>
+</div>
+<!-- DELETE POST DIALOG -->
+<div class="modal-content hidden dialog-pop bg-surface-container-high rounded-[28px] p-6 w-full max-w-sm space-y-4" id="dialog-delete">
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Delete Whisper?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">This action cannot be undone. Your anonymous share will be wiped from our secure servers.</p>
+</div>
+<div class="flex justify-end gap-2 pt-4">
+<button class="px-6 py-2.5 rounded-full font-label-lg text-label-lg text-primary hover:bg-primary/5 transition-colors" onclick="closeModal()">Keep it</button>
+<button class="px-6 py-2.5 rounded-full font-label-lg text-label-lg text-error hover:bg-error/5 transition-colors" onclick="closeModal()">Delete</button>
+</div>
+</div>
+<!-- SUCCESS DIALOG -->
+<div class="modal-content hidden dialog-pop bg-surface-container-high rounded-[28px] p-6 w-full max-w-sm flex flex-col items-center text-center space-y-4" id="dialog-success">
+<div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600 text-3xl" data-icon="check" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Post Published</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Your whisper is now floating in the void, completely anonymous and secure.</p>
+</div>
+<button class="w-full mt-4 px-6 py-2.5 rounded-full font-label-lg text-label-lg bg-primary text-on-primary" onclick="closeModal()">Great</button>
+</div>
+<!-- ERROR DIALOG -->
+<div class="modal-content hidden dialog-pop bg-surface-container-high rounded-[28px] p-6 w-full max-w-sm space-y-4" id="dialog-error">
+<div class="flex items-center gap-3 text-error">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<h3 class="font-title-lg text-title-lg">Connection Error</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">We couldn't reach the secure gateway. Please check your network connection and try again.</p>
+<div class="flex justify-end pt-2">
+<button class="px-6 py-2.5 rounded-full font-label-lg text-label-lg bg-error-container text-on-error-container" onclick="closeModal()">Try Again</button>
+</div>
+</div>
+<!-- BOTTOM SHEET CONTAINER -->
+<div class="hidden absolute inset-x-0 bottom-0 bg-surface-container-lowest rounded-t-[32px] bottom-sheet max-h-[795px] overflow-hidden flex flex-col" id="bottom-sheet-container">
+<div class="w-12 h-1.5 bg-outline-variant/30 rounded-full mx-auto my-4 shrink-0"></div>
+<!-- Category Sheet -->
+<div class="modal-content hidden px-6 pb-12 overflow-y-auto" id="sheet-category">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-4">Select Category</h3>
+<div class="space-y-1">
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="mode_comment">mode_comment</span>
+<span class="font-body-lg text-body-lg">Confessions</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="work">work</span>
+<span class="font-body-lg text-body-lg">Work Life</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="favorite">favorite</span>
+<span class="font-body-lg text-body-lg">Relationships</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="psychology">psychology</span>
+<span class="font-body-lg text-body-lg">Deep Thoughts</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="celebration">celebration</span>
+<span class="font-body-lg text-body-lg">Small Wins</span>
+</div>
+</div>
+</div>
+<!-- Share Sheet -->
+<div class="modal-content hidden px-6 pb-12" id="sheet-share">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-6">Share Secret</h3>
+<div class="grid grid-cols-4 gap-4 mb-8">
+<div class="flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="content_copy">content_copy</span>
+</div>
+<span class="font-label-sm text-label-sm">Copy Link</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="send">send</span>
+</div>
+<span class="font-label-sm text-label-sm">Signal</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="chat">chat</span>
+</div>
+<span class="font-label-sm text-label-sm">Discord</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="more_horiz">more_horiz</span>
+</div>
+<span class="font-label-sm text-label-sm">System</span>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-2xl border border-outline-variant flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="lock">lock</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Links are encrypted and expire in 24 hours.</p>
+</div>
+</div>
+<!-- Report Sheet -->
+<div class="modal-content hidden px-6 pb-12 overflow-y-auto" id="sheet-report">
+<div class="flex items-center gap-3 mb-4 text-error">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+<h3 class="font-title-lg text-title-lg">Why report this post?</h3>
+</div>
+<div class="space-y-1">
+<div class="p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="font-body-lg text-body-lg">Hate Speech or Harassment</span>
+</div>
+<div class="p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="font-body-lg text-body-lg">Sensitive Content</span>
+</div>
+<div class="p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="font-body-lg text-body-lg">Spam or Misleading</span>
+</div>
+<div class="p-4 hover:bg-surface-container rounded-2xl cursor-pointer">
+<span class="font-body-lg text-body-lg">Intellectual Property</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant">
+<button class="w-full px-6 py-2.5 rounded-full font-label-lg text-label-lg bg-error text-on-error" onclick="closeModal()">Submit Report</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar (Shared Component Anchor) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl rounded-t-xl shadow-lg">
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</button>
+</nav>
+<script>
+        function openModal(id) {
+            const container = document.getElementById('modal-container');
+            const sheetContainer = document.getElementById('bottom-sheet-container');
+            const allContent = document.querySelectorAll('.modal-content');
+            
+            // Hide all content first
+            allContent.forEach(el => el.classList.add('hidden'));
+            
+            // Reset containers
+            container.classList.remove('hidden');
+            container.classList.add('flex');
+            sheetContainer.classList.add('hidden');
+
+            const content = document.getElementById(id);
+            content.classList.remove('hidden');
+
+            // Logic for Bottom Sheets vs Dialogs
+            if (id.startsWith('sheet-')) {
+                container.classList.remove('items-center', 'justify-center', 'p-6');
+                sheetContainer.classList.remove('hidden');
+                // Trigger animation
+                setTimeout(() => {
+                    sheetContainer.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                container.classList.add('items-center', 'justify-center', 'p-6');
+                sheetContainer.style.transform = 'translateY(100%)';
+            }
+
+            // Prevent scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const container = document.getElementById('modal-container');
+            const sheetContainer = document.getElementById('bottom-sheet-container');
+            
+            sheetContainer.style.transform = 'translateY(100%)';
+            
+            setTimeout(() => {
+                container.classList.add('hidden');
+                container.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }, 200);
+        }
+
+        // Close on scrim click
+        document.getElementById('modal-container').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initial setup for bottom sheets
+        document.getElementById('bottom-sheet-container').style.transform = 'translateY(100%)';
+    </script>
+</body></html>

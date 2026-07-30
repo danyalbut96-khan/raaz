@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Careers | RAAZ - Anonymous by Design</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d8e2ff",
+                    "outline": "#737686",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface": "#f9f9ff",
+                    "on-primary-container": "#eeefff",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#d3daef",
+                    "tertiary-fixed": "#d4e3ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#141b2b",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-surface-variant": "#434655",
+                    "inverse-surface": "#293040",
+                    "tertiary": "#00569c",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#196fc0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#b4c5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "container-margin": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #004ac6 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes subtle-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: subtle-float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 dark:bg-surface-container/70 backdrop-blur-xl border-b border-white/20 dark:border-outline/10 shadow-sm">
+<div class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg font-bold text-primary dark:text-primary-fixed tracking-tight">RAAZ</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-outline hover:text-primary hover:bg-primary/5 transition-colors duration-200 px-sm py-xs rounded-lg" href="#">Features</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-outline hover:text-primary hover:bg-primary/5 transition-colors duration-200 px-sm py-xs rounded-lg" href="#">Community</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-outline hover:text-primary hover:bg-primary/5 transition-colors duration-200 px-sm py-xs rounded-lg" href="#">Blog</a>
+<!-- Active Nav: Careers -->
+<a class="font-title-md text-title-md text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary px-sm py-xs" href="#">Careers</a>
+</div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg px-lg py-md rounded-full active:scale-95 transform transition-all shadow-md">
+                Download App
+            </button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-32 pb-xl overflow-x-hidden">
+<!-- Hero Section: Coming Soon -->
+<section class="relative max-w-7xl mx-auto px-lg flex flex-col items-center text-center mb-xl">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+<div class="absolute top-48 -right-24 w-80 h-80 bg-tertiary/10 rounded-full blur-3xl"></div>
+<div class="inline-flex items-center gap-sm bg-primary-container/10 border border-primary-container/20 text-primary-container px-md py-xs rounded-full mb-lg animate-float">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+<span class="font-label-lg text-label-lg">Future of Work</span>
+</div>
+<h1 class="font-display-lg text-display-lg max-w-4xl mb-md leading-tight">
+                Building the <span class="text-gradient">Silent Revolution.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-xl">
+                Our Careers platform is currently undercover. We're assembling a team of visionaries dedicated to digital privacy and absolute anonymity. 
+            </p>
+<div class="w-full max-w-md glass-panel p-lg rounded-xl shadow-lg">
+<h3 class="font-title-md text-title-md mb-sm">Get notified when we open roles</h3>
+<form class="flex flex-col sm:flex-row gap-md">
+<input class="flex-1 bg-surface-container-low border-outline-variant rounded-lg px-md py-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Enter your email" type="email"/>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg active:scale-95 transition-all" type="submit">
+                        Alert Me
+                    </button>
+</form>
+<p class="mt-md text-[12px] text-outline italic">Your email is encrypted and never shared. We practice what we preach.</p>
+</div>
+</section>
+<!-- Mission Statement -->
+<section class="bg-surface-container-low py-xl">
+<div class="max-w-7xl mx-auto px-lg">
+<div class="grid md:grid-cols-2 gap-xl items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-lg">Our Mission: <br/><span class="text-primary">Radical Privacy</span></h2>
+<div class="space-y-md">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                                At RAAZ, we believe that anonymity isn't about having something to hide; it's about having something to protect. In an era of pervasive surveillance, we are building the infrastructure for a free digital society.
+                            </p>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                                Our goal is to create tools that allow human connection without corporate tracking. We don't just secure data; we eliminate its existence wherever possible.
+                            </p>
+</div>
+<div class="mt-lg flex gap-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-lg">Zero-Knowledge</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">encrypted</span>
+<span class="font-label-lg">End-to-End</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">visibility_off</span>
+<span class="font-label-lg">True Anonymity</span>
+</div>
+</div>
+</div>
+<div class="relative h-[400px] rounded-xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A cinematic, low-angle shot of a minimalist server room with blue ambient lighting. Glowing fiber optic cables pulse with soft light, representing the flow of private data. The atmosphere is quiet, high-tech, and secure, with a corporate modern aesthetic focused on cool blue and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDguwxcNLhwtgpDJKQFdvSFHty9uzGmg3wqZsf4O3-Zk-l0rJQMtAM0JoSZqpVi2ThgnLPqS_AAwrkCR0gNLtResU0L-YJQBjFSfdKdBe_kLP0X1nYHH8HGoaSTe3DbvSyIUQzgYBBXZjikQoYCMozPSHmlOZpgrI95oeMkff6YOpEJhkk6DjS-z_8xtTmbsSqZvp1uUAAZVzTbusvuUDIRVe4kJkZPcBVI2vK6U4gXdR5hnKA9BWpQuIqUJE73jnr6kYzptRMMaJpJ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Values Section: Bento Grid -->
+<section class="max-w-7xl mx-auto px-lg py-xl">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Our Values</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">What it means to be part of the RAAZ team.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-md">
+<!-- Value 1 -->
+<div class="md:col-span-3 lg:col-span-4 bg-surface-container-highest p-lg rounded-xl flex flex-col gap-md border border-white hover:shadow-lg transition-shadow">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<h4 class="font-title-lg text-title-lg">User-First Privacy</h4>
+<p class="font-body-md text-on-surface-variant">We prioritize the user's right to silence. Every line of code is written with the assumption that data should not be stored.</p>
+</div>
+<!-- Value 2 (Large) -->
+<div class="md:col-span-3 lg:col-span-8 bg-primary text-on-primary p-lg rounded-xl flex flex-col justify-between relative overflow-hidden group">
+<div class="relative z-10">
+<h4 class="font-display-lg text-headline-lg mb-md">Absolute Transparency</h4>
+<p class="font-body-lg text-on-primary/80 max-w-lg">We are opaque to the world but transparent within. We share everything—knowledge, challenges, and successes—freely among teammates.</p>
+</div>
+<div class="mt-xl relative z-10">
+<span class="bg-white/20 px-md py-xs rounded-full font-label-lg">Open Source Core</span>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-[160px] opacity-10 group-hover:scale-110 transition-transform duration-500">visibility</span>
+</div>
+<!-- Value 3 (Tall) -->
+<div class="md:col-span-3 lg:col-span-4 bg-surface-container-high p-lg rounded-xl flex flex-col gap-md border border-white hover:shadow-lg transition-shadow">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h4 class="font-title-lg text-title-lg">Intellectual Curiosity</h4>
+<p class="font-body-md text-on-surface-variant">The problems we solve are hard. We look for people who are obsessed with the 'how' and 'why' of cryptographic systems.</p>
+<div class="mt-auto pt-md border-t border-outline/10">
+<p class="font-label-sm text-outline uppercase tracking-wider">Learning Budget Included</p>
+</div>
+</div>
+<!-- Value 4 -->
+<div class="md:col-span-3 lg:col-span-4 bg-surface-container-low p-lg rounded-xl flex flex-col gap-md border border-white hover:shadow-lg transition-shadow">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">diversity_3</span>
+</div>
+<h4 class="font-title-lg text-title-lg">Diverse Perspectives</h4>
+<p class="font-body-md text-on-surface-variant">Global anonymity requires global viewpoints. We build for everyone, so our team reflects everyone.</p>
+</div>
+<!-- Value 5 -->
+<div class="md:col-span-6 lg:col-span-4 bg-surface-bright p-lg rounded-xl flex flex-col gap-md border border-outline/20 hover:shadow-lg transition-shadow">
+<div class="w-12 h-12 rounded-full bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">offline_bolt</span>
+</div>
+<h4 class="font-title-lg text-title-lg">Sustainable Impact</h4>
+<p class="font-body-md text-on-surface-variant">We are here for the long run. We value deep work over shallow hustle and quality over rapid, buggy releases.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-lg mb-xl">
+<div class="bg-surface-container rounded-3xl p-xl flex flex-col md:flex-row items-center justify-between gap-lg overflow-hidden relative">
+<div class="absolute inset-0 opacity-10">
+<div class="grid grid-cols-10 gap-2 h-full w-full">
+<div class="bg-primary/20 h-full w-full rotate-45"></div>
+<div class="bg-primary/20 h-full w-full -rotate-12"></div>
+<div class="bg-primary/20 h-full w-full rotate-12"></div>
+</div>
+</div>
+<div class="relative z-10 max-w-xl">
+<h3 class="font-headline-lg text-headline-lg mb-md">Can't wait to join us?</h3>
+<p class="font-body-lg text-on-surface-variant">Follow our engineering blog or contribute to our open-source repositories while we prepare for our first hiring cohort.</p>
+</div>
+<div class="relative z-10 flex flex-col sm:flex-row gap-md">
+<button class="bg-on-surface text-surface px-xl py-md rounded-lg font-label-lg active:scale-95 transition-all flex items-center gap-sm">
+<span class="material-symbols-outlined text-[20px]">code</span>
+                        GitHub
+                    </button>
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-label-lg active:scale-95 transition-all flex items-center gap-sm shadow-md shadow-primary/20">
+                        Explore Blog
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-xl bg-surface-container-low dark:bg-surface-dim">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="font-title-lg text-title-lg font-bold text-on-surface dark:text-on-surface-variant mb-md">RAAZ</div>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline mb-lg">
+                    The invisible layer for the secure internet. Built for humans, not for trackers.
+                </p>
+</div>
+<div>
+<h5 class="font-title-md text-title-md text-primary dark:text-primary-fixed-dim font-medium mb-lg">Company</h5>
+<ul class="flex flex-col gap-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">About Us</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Careers</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-title-md text-title-md text-primary dark:text-primary-fixed-dim font-medium mb-lg">Legal</h5>
+<ul class="flex flex-col gap-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Terms &amp; Conditions</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Release Notes</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-title-md text-title-md text-primary dark:text-primary-fixed-dim font-medium mb-lg">Support</h5>
+<ul class="flex flex-col gap-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">FAQ</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed underline decoration-2 underline-offset-4 transition-all duration-300" href="#">Contact Us</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-outline/10 py-lg px-lg max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-md">
+<span class="font-body-md text-body-md text-on-surface-variant dark:text-outline">© 2024 RAAZ Anonymous. Built for privacy.</span>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">terminal</span></a>
+</div>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const btn = form.querySelector('button');
+                    const input = form.querySelector('input');
+                    if (input.value) {
+                        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span>';
+                        btn.classList.add('opacity-70');
+                        setTimeout(() => {
+                            btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span>';
+                            btn.classList.remove('bg-primary');
+                            btn.classList.add('bg-green-600');
+                            input.value = '';
+                            input.placeholder = 'Confirmed!';
+                        }, 1200);
+                    }
+                });
+            }
+        });
+    </script>
+</body></html>

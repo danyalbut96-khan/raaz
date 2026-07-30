@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>RAAZ - Share a Secret</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#dce2f7",
+                    "on-background": "#141b2b",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d3daef",
+                    "primary-container": "#2563eb",
+                    "error": "#ba1a1a",
+                    "surface-container": "#e9edff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "background": "#f9f9ff",
+                    "secondary-container": "#2170e4",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#293040",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#0058be",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-surface": "#141b2b",
+                    "outline": "#737686",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#196fc0",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "margin-tablet": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "auto",
+                    "2xl": "48px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple-effect {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- Top App Bar (Shared Component Strategy) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile w-full h-16">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 transition-opacity hover:opacity-80 p-2">
+<span class="material-symbols-outlined text-on-surface">close</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Share a Secret</h1>
+</div>
+<button class="ripple bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-lg text-label-lg shadow-sm hover:opacity-90 active:scale-95 duration-200" id="post-button">
+            Post
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-32 px-margin-mobile max-w-2xl mx-auto">
+<!-- Input Section -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_rgba(17,24,39,0.04)] p-lg flex flex-col min-h-[400px]">
+<!-- Anonymous ID Label -->
+<div class="flex items-center gap-2 mb-lg opacity-60">
+<span class="material-symbols-outlined text-body-md" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-label-lg text-label-lg">Posting anonymously</span>
+</div>
+<textarea class="w-full flex-grow bg-transparent border-none focus:ring-0 resize-none font-body-lg text-body-lg placeholder-outline-variant p-0 leading-relaxed" id="post-textarea" maxlength="500" placeholder="What's on your mind?"></textarea>
+<div class="flex justify-end mt-md">
+<span class="font-label-sm text-label-sm text-outline" id="char-counter">0 / 500</span>
+</div>
+</div>
+<!-- Category Selection -->
+<div class="mt-xl">
+<h2 class="font-title-md text-title-md text-on-surface mb-md px-1">Select a Category</h2>
+<div class="flex gap-sm overflow-x-auto hide-scrollbar pb-2">
+<button class="category-chip whitespace-nowrap px-lg py-2.5 rounded-full border border-outline-variant font-label-lg text-label-lg bg-surface text-on-surface-variant hover:bg-surface-variant/20 transition-all duration-200" data-active="false">
+                    Confessions
+                </button>
+<button class="category-chip whitespace-nowrap px-lg py-2.5 rounded-full border border-outline-variant font-label-lg text-label-lg bg-surface text-on-surface-variant hover:bg-surface-variant/20 transition-all duration-200" data-active="false">
+                    Rants
+                </button>
+<button class="category-chip whitespace-nowrap px-lg py-2.5 rounded-full border border-outline-variant font-label-lg text-label-lg bg-surface text-on-surface-variant hover:bg-surface-variant/20 transition-all duration-200" data-active="false">
+                    Questions
+                </button>
+<button class="category-chip whitespace-nowrap px-lg py-2.5 rounded-full border border-outline-variant font-label-lg text-label-lg bg-surface text-on-surface-variant hover:bg-surface-variant/20 transition-all duration-200" data-active="false">
+                    Advice
+                </button>
+<button class="category-chip whitespace-nowrap px-lg py-2.5 rounded-full border border-outline-variant font-label-lg text-label-lg bg-surface text-on-surface-variant hover:bg-surface-variant/20 transition-all duration-200" data-active="false">
+                    Random
+                </button>
+</div>
+</div>
+<!-- Security Visual -->
+<div class="mt-2xl p-lg rounded-xl bg-surface-container-low flex items-center gap-lg">
+<div class="p-md bg-secondary-container/10 rounded-full">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'opsz' 32;">verified_user</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-secondary">RAAZ Protection</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Your identity is cryptographically hashed. Even we don't know who you are.</p>
+</div>
+</div>
+</main>
+<!-- Post Helper Bar (Mobile Focused) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/85 backdrop-blur-xl h-16 flex items-center px-margin-mobile justify-between md:hidden">
+<div class="flex gap-md">
+<button class="text-on-surface-variant p-2 hover:bg-surface-variant/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">image</span>
+</button>
+<button class="text-on-surface-variant p-2 hover:bg-surface-variant/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">alternate_email</span>
+</button>
+<button class="text-on-surface-variant p-2 hover:bg-surface-variant/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">mood</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant border-t-primary-container rotate-0 transition-transform duration-300" id="progress-circle"></div>
+</div>
+</div>
+<script>
+        // Material Ripple Effect
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+            circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+            circle.classList.add("ripple-effect");
+
+            const ripple = button.getElementsByClassName("ripple-effect")[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        const postBtn = document.getElementById("post-button");
+        postBtn.addEventListener("click", createRipple);
+
+        // Character Counter & UI Feedback
+        const textarea = document.getElementById("post-textarea");
+        const counter = document.getElementById("char-counter");
+        const progressCircle = document.getElementById("progress-circle");
+
+        textarea.addEventListener("input", (e) => {
+            const length = e.target.value.length;
+            counter.innerText = `${length} / 500`;
+            
+            // Visual feedback on counter
+            if (length > 450) {
+                counter.classList.replace("text-outline", "text-error");
+            } else {
+                counter.classList.replace("text-error", "text-outline");
+            }
+
+            // Mobile progress indicator
+            const percentage = (length / 500) * 360;
+            progressCircle.style.transform = `rotate(${percentage}deg)`;
+            if(length > 0) {
+                progressCircle.classList.replace("border-outline-variant", "border-primary-container");
+            } else {
+                progressCircle.classList.replace("border-primary-container", "border-outline-variant");
+            }
+        });
+
+        // Category Selection Logic
+        const chips = document.querySelectorAll(".category-chip");
+        chips.forEach(chip => {
+            chip.addEventListener("click", () => {
+                chips.forEach(c => {
+                    c.classList.remove("bg-secondary-container", "text-on-secondary-container", "border-transparent");
+                    c.classList.add("bg-surface", "text-on-surface-variant", "border-outline-variant");
+                });
+                chip.classList.remove("bg-surface", "text-on-surface-variant", "border-outline-variant");
+                chip.classList.add("bg-secondary-container", "text-on-secondary-container", "border-transparent");
+            });
+        });
+
+        // Focus behavior for textarea
+        window.addEventListener('load', () => {
+            textarea.focus();
+        });
+    </script>
+</body></html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - My Posts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@200,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#004ac6",
+                    "surface-container": "#e9edff",
+                    "on-secondary-container": "#fefcff",
+                    "secondary": "#0058be",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed": "#dbe1ff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "surface": "#f9f9ff",
+                    "on-surface": "#141b2b",
+                    "on-primary-container": "#eeefff",
+                    "on-primary-fixed": "#00174b",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface-tint": "#0053db",
+                    "secondary-container": "#2170e4",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e1e8fd",
+                    "tertiary-container": "#196fc0",
+                    "primary-container": "#2563eb",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-highest": "#dce2f7",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-background": "#141b2b",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-surface-variant": "#434655",
+                    "tertiary": "#00569c",
+                    "background": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d3daef",
+                    "surface-bright": "#f9f9ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary-fixed": "#d8e2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "margin-desktop": "auto",
+                    "base": "4px",
+                    "margin-tablet": "32px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 active:scale-95 transition-all" data-icon="notifications">notifications</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-label-lg text-label-lg">JD</div>
+</div>
+</header>
+<main class="pt-20 pb-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- Header Section -->
+<div class="mb-6">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">My Posts</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage your anonymous shares and drafts</p>
+</div>
+<!-- Tabbed Interface -->
+<div class="flex items-center justify-between mb-8 border-b border-surface-variant">
+<div class="flex gap-8 overflow-x-auto hide-scrollbar">
+<button class="pb-3 px-1 border-b-2 border-primary font-title-md text-title-md text-primary transition-all duration-300" id="tab-published">
+                    Published
+                </button>
+<button class="pb-3 px-1 border-b-2 border-transparent font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-all duration-300" id="tab-drafts">
+                    Drafts
+                </button>
+<button class="pb-3 px-1 border-b-2 border-transparent font-title-md text-title-md text-outline-variant flex items-center gap-2 cursor-not-allowed opacity-60" id="tab-scheduled">
+                    Scheduled
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm">COMING SOON</span>
+</button>
+</div>
+</div>
+<!-- Post Feed -->
+<div class="space-y-4" id="post-feed">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-surface-variant/30 hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Published 2h ago</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface line-clamp-3 mb-4">
+                    Sometimes I feel like I'm living two lives. One for the corporate world and another one where I actually care about things. Does anyone else feel like they're just acting all day?
+                </p>
+<div class="flex items-center justify-between border-t border-surface-variant pt-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm">124</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-sm text-label-sm">32</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm">#MentalHealth</span>
+</div>
+</div>
+</div>
+<!-- Card 2 (Image Post) -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-surface-variant/30 hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] transition-all">
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Published Yesterday</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</div>
+</div>
+<div class="relative h-48 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A moody, high-end photograph of a city skyline at dusk with a soft-focus bokeh effect. The lighting is dominated by deep blues and subtle golden lights from office buildings, reflecting the discreet and sophisticated RAAZ brand identity. The composition is artistic and minimalist, emphasizing a sense of quiet anonymity within a bustling urban environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc_HQa99vMUn4E8d0T0zTP8Oxctup6BM_CSvlE4jqGqxSaPCU86nULeC-ECQbebFVGU39Inb-lW9Usx8Bq4KHmkes02jok3xprB-d0njeXeDRZ4Jd0VxCPEGYzEW1-sZJl2hIaD5Q8UrH7tPwLw2TM0oHMHFP8oQcoKLa-CO4E8TV3l76s79Xq4hW1zFGgfEeAzssrET8SK-V6H2DDWqODGBvshK7FLg_-4uguMj2rDqMpPDVLYklevzZzyAT-yIJnbe-Qsc5-QYom"/>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="font-body-md text-body-md text-white drop-shadow-md line-clamp-2">The view from my hidden sanctuary. No one knows I come here to think.</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm">850</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>
+<span class="font-label-sm text-label-sm">4.2k</span>
+</div>
+</div>
+<button class="flex items-center gap-1 text-primary font-label-lg text-label-lg">
+                        View Insights
+                        <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3 (Draft) -->
+<div class="hidden bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-surface-variant/30 border-dashed opacity-80" id="draft-card">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]" data-icon="edit_note">edit_note</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Draft saved 15m ago</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface/60 italic mb-4">
+                    The truth about what happened at the conference... (Untitled Draft)
+                </p>
+<div class="flex justify-end gap-2 pt-2">
+<button class="px-4 py-2 rounded-full text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant/20 transition-colors">Discard</button>
+<button class="px-4 py-2 rounded-full bg-primary-container text-white font-label-lg text-label-lg active:scale-95 transition-all">Resume</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_12px_rgba(17,24,39,0.04)] border border-surface-variant/30 hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Published 3 days ago</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface line-clamp-2">
+                    Found an old journal entry from 10 years ago. I'm exactly who I hoped I wouldn't become, and yet, I'm happier than ever.
+                </p>
+<div class="flex items-center gap-4 mt-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm">45</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm mt-1">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<script>
+        const tabPublished = document.getElementById('tab-published');
+        const tabDrafts = document.getElementById('tab-drafts');
+        const postFeed = document.getElementById('post-feed');
+        const draftCard = document.getElementById('draft-card');
+
+        tabPublished.addEventListener('click', () => {
+            tabPublished.className = 'pb-3 px-1 border-b-2 border-primary font-title-md text-title-md text-primary transition-all duration-300';
+            tabDrafts.className = 'pb-3 px-1 border-b-2 border-transparent font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-all duration-300';
+            
+            // Show all published cards, hide drafts
+            Array.from(postFeed.children).forEach(card => {
+                if (card === draftCard) card.classList.add('hidden');
+                else card.classList.remove('hidden');
+            });
+        });
+
+        tabDrafts.addEventListener('click', () => {
+            tabDrafts.className = 'pb-3 px-1 border-b-2 border-primary font-title-md text-title-md text-primary transition-all duration-300';
+            tabPublished.className = 'pb-3 px-1 border-b-2 border-transparent font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-all duration-300';
+            
+            // Hide all published cards, show drafts
+            Array.from(postFeed.children).forEach(card => {
+                if (card === draftCard) card.classList.remove('hidden');
+                else card.classList.add('hidden');
+            });
+        });
+
+        // Micro-interaction for cards
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(card => {
+            card.addEventListener('mousedown', () => card.style.transform = 'scale(0.98)');
+            card.addEventListener('mouseup', () => card.style.transform = 'scale(1)');
+            card.addEventListener('mouseleave', () => card.style.transform = 'scale(1)');
+        });
+    </script>
+</body></html>

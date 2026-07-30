@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community Guidelines | RAAZ</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d8e2ff",
+                        "outline": "#737686",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "surface": "#f9f9ff",
+                        "on-primary-container": "#eeefff",
+                        "surface-container": "#e9edff",
+                        "background": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#0058be",
+                        "primary": "#004ac6",
+                        "surface-container-highest": "#dce2f7",
+                        "surface-container-high": "#e1e8fd",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#d3daef",
+                        "tertiary-fixed": "#d4e3ff",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface": "#141b2b",
+                        "surface-tint": "#0053db",
+                        "on-tertiary-container": "#ebf1ff",
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#293040",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "secondary-container": "#2170e4",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface-container-low": "#f1f3ff",
+                        "surface-variant": "#dce2f7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-background": "#141b2b",
+                        "on-secondary-fixed": "#001a42",
+                        "tertiary": "#00569c",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#196fc0",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "container-margin": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            color: #141b2b;
+            scroll-behavior: smooth;
+        }
+        .glass-nav {
+            background: rgba(249, 249, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-elevation-1 {
+            box-shadow: 0px 2px 4px rgba(17, 24, 39, 0.05);
+        }
+        .card-elevation-2 {
+            box-shadow: 0px 4px 12px rgba(17, 24, 39, 0.08);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<div class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</div>
+<div class="hidden md:flex items-center space-x-xl">
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Features</a>
+<a class="text-primary font-semibold border-b-2 border-primary font-title-md text-title-md transition-colors duration-200" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Blog</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Careers</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-title-md text-title-md active:scale-95 transform transition-all shadow-sm">
+                Download App
+            </button>
+</div>
+</nav>
+<!-- Hero Header -->
+<header class="pt-32 pb-16 px-lg max-w-4xl mx-auto text-center">
+<div class="inline-flex items-center gap-xs px-md py-xs bg-primary/10 text-primary rounded-full mb-md">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-lg text-label-lg">Official Policy</span>
+</div>
+<h1 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-md">Community Guidelines</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+            RAAZ is built on trust, anonymity, and mutual respect. These guidelines ensure our community remains a safe space for everyone to share their truths.
+        </p>
+</header>
+<main class="max-w-7xl mx-auto px-lg pb-xl grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Sidebar Navigation (Anchor Links) -->
+<aside class="lg:col-span-3 hidden lg:block h-fit sticky top-32">
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/30 card-elevation-1">
+<nav class="flex flex-col gap-sm">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg bg-primary/10 text-primary font-title-md" href="#posting">
+<span class="material-symbols-outlined">edit_note</span>
+                        Posting Rules
+                    </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-title-md" href="#safety">
+<span class="material-symbols-outlined">security</span>
+                        Safety &amp; Privacy
+                    </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-title-md" href="#moderation">
+<span class="material-symbols-outlined">gavel</span>
+                        Moderation Process
+                    </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-title-md" href="#reporting">
+<span class="material-symbols-outlined">flag</span>
+                        How to Report
+                    </a>
+</nav>
+</div>
+</aside>
+<!-- Content Area -->
+<div class="lg:col-span-9 space-y-xl">
+<!-- Section: Posting Rules -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden card-elevation-1" id="posting">
+<div class="p-lg md:p-xl">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-[28px]">edit_note</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Posting Rules</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-lg">
+<div class="p-lg rounded-xl bg-surface-container-low">
+<h3 class="font-title-lg text-title-lg text-primary mb-sm">Be Authentic</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Share your own stories and truths. RAAZ is for human expression, not commercial promotion or spam.</p>
+</div>
+<div class="p-lg rounded-xl bg-surface-container-low">
+<h3 class="font-title-lg text-title-lg text-primary mb-sm">Keep it Legal</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Do not post content that encourages illegal acts or shares confidential proprietary information.</p>
+</div>
+</div>
+<ul class="space-y-md">
+<li class="flex gap-md items-start">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<div>
+<strong class="font-title-md text-title-md block">Anonymity is a Shield, Not a Weapon</strong>
+<p class="font-body-md text-body-md text-on-surface-variant">Your identity is protected so you can speak freely, not so you can harass others. We strictly prohibit doxxing.</p>
+</div>
+</li>
+<li class="flex gap-md items-start">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<div>
+<strong class="font-title-md text-title-md block">Quality Content</strong>
+<p class="font-body-md text-body-md text-on-surface-variant">Low-effort, repetitive, or nonsensical posts may be removed to keep the community feed valuable.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="bg-primary/5 p-lg border-t border-outline-variant/20">
+<div class="w-full h-48 rounded-lg bg-cover bg-center" data-alt="A clean, minimalist high-quality digital illustration of diverse abstract human silhouettes interacting in a glowing, interconnected network space. The colors are dominated by soft blues and whites with vibrant primary blue accents, reflecting a professional and welcoming corporate SaaS aesthetic with soft diffused lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBknHEzakVvTnaXjUnXpHVHSPAi3wWu7lLVrfOW2j-QOYCqdILYlAYfqUzFNW_r6MW0b9Z8ilKToVpiBTp5Tub7Qum-jM_HEjRsGmq571Gs9UGjZGSzZ0vmyRLfRjtCxOPcpCY_TBiU-9HQxtZGqb7WWQe8erHNrwO0P16ft-dfs0_CYdN5gKGbUtHC5pVn1EjnhfT-bIJlMWX34uWQ_fwaJBDMVTKRvRosx4FrW7lpiQVy9Gz52j1YGT7xo_JRUhFJ72w9hfo0OaYu')"></div>
+</div>
+</section>
+<!-- Section: Safety Rules (Bento Style) -->
+<section class="space-y-lg" id="safety">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[28px]">security</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Safety Protocols</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-lg card-elevation-1">
+<span class="material-symbols-outlined text-error mb-sm" style="font-variation-settings: 'FILL' 1;">error</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Zero Tolerance: Harassment</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">We have a zero-tolerance policy for hate speech, bullying, or targeted harassment. This includes discrimination based on race, gender, religion, or sexual orientation.</p>
+<div class="flex flex-wrap gap-sm">
+<span class="px-sm py-1 bg-error/10 text-error rounded-md text-label-sm font-label-sm">Immediate Ban</span>
+<span class="px-sm py-1 bg-error/10 text-error rounded-md text-label-sm font-label-sm">No Warning</span>
+<span class="px-sm py-1 bg-error/10 text-error rounded-md text-label-sm font-label-sm">Permanent</span>
+</div>
+</div>
+<div class="bg-secondary-container text-on-secondary-container rounded-xl p-lg card-elevation-1 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined mb-sm">no_photography</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Personal Privacy</h3>
+</div>
+<p class="font-body-md text-body-md opacity-90">Never share phone numbers, home addresses, or private photos of others without explicit consent.</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-lg card-elevation-1">
+<span class="material-symbols-outlined text-primary mb-sm">health_and_safety</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Self-Harm</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Posts promoting self-harm will be removed and we will provide resources for professional help immediately.</p>
+</div>
+<div class="md:col-span-2 bg-tertiary-container text-on-tertiary-container rounded-xl p-lg card-elevation-1">
+<div class="flex items-center gap-md">
+<div class="flex-1">
+<h3 class="font-title-lg text-title-lg mb-sm">Identity Masking</h3>
+<p class="font-body-md text-body-md opacity-90">Our technology actively scrubs PII (Personally Identifiable Information) from your posts before they go live.</p>
+</div>
+<span class="material-symbols-outlined text-[48px] opacity-20">masks</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Moderation -->
+<section class="bg-inverse-surface text-inverse-on-surface rounded-xl p-lg md:p-xl card-elevation-2 relative overflow-hidden" id="moderation">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] rounded-full -mr-32 -mt-32"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">gavel</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg">Moderation Process</h2>
+</div>
+<div class="space-y-xl">
+<div class="flex gap-lg">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center font-bold">1</div>
+<div class="w-0.5 h-full bg-white/20 my-2"></div>
+</div>
+<div>
+<h4 class="font-title-md text-title-md mb-xs">Automated Scanning</h4>
+<p class="font-body-md text-body-md opacity-70">AI systems scan content for banned keywords and safety violations in real-time.</p>
+</div>
+</div>
+<div class="flex gap-lg">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center font-bold">2</div>
+<div class="w-0.5 h-full bg-white/20 my-2"></div>
+</div>
+<div>
+<h4 class="font-title-md text-title-md mb-xs">Community Reporting</h4>
+<p class="font-body-md text-body-md opacity-70">Users flag content that breaches guidelines. High-report content is hidden automatically.</p>
+</div>
+</div>
+<div class="flex gap-lg">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center font-bold">3</div>
+</div>
+<div>
+<h4 class="font-title-md text-title-md mb-xs">Human Review</h4>
+<p class="font-body-md text-body-md opacity-70">Expert moderators review flagged content to make final decisions on appeals and bans.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: How to Report -->
+<section class="bg-surface-container-high rounded-xl p-lg md:p-xl border border-outline-variant/30" id="reporting">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">See something wrong?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Help us maintain the RAAZ environment. Reporting is anonymous and helps our AI learn faster.</p>
+<div class="flex flex-col md:flex-row gap-md justify-center">
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-title-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">flag</span>
+                            Report a Post
+                        </button>
+<button class="border border-primary text-primary px-xl py-md rounded-lg font-title-md hover:bg-primary/5 transition-all active:scale-95">
+                            Contact Support
+                        </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-xl bg-surface-container-low w-full rounded-t-xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="font-title-lg text-title-lg font-bold text-on-surface mb-md">RAAZ</div>
+<p class="text-on-surface-variant font-body-md text-body-md">The world's leading anonymous professional community for radical honesty.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<h5 class="font-title-md text-title-md text-primary">Company</h5>
+<a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300 font-body-md" href="#">About Us</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300 font-body-md" href="#">Careers</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300 font-body-md" href="#">Press Kit</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h5 class="font-title-md text-title-md text-primary">Support</h5>
+<a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300 font-body-md" href="#">FAQ</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300 font-body-md" href="#">Contact Us</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300 font-body-md" href="#">Release Notes</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h5 class="font-title-md text-title-md text-primary">Legal</h5>
+<a class="text-primary font-medium font-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-2 underline-offset-4 transition-all duration-300 font-body-md" href="#">Terms &amp; Conditions</a>
+</div>
+</div>
+<div class="border-t border-outline/10 py-lg px-lg text-center font-body-md text-body-md text-on-surface-variant">
+            © 2024 RAAZ Anonymous. Built for privacy.
+        </div>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        // Smooth scroll spy and active link highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('aside nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('bg-primary/10', 'text-primary');
+                link.classList.add('text-on-surface-variant');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('bg-primary/10', 'text-primary');
+                    link.classList.remove('text-on-surface-variant');
+                }
+            });
+        });
+
+        // Add subtle hover tracking for cards
+        document.querySelectorAll('.card-elevation-1').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.replace('card-elevation-1', 'card-elevation-2');
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.3s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.replace('card-elevation-2', 'card-elevation-1');
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

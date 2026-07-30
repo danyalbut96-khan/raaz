@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Design System Phase 3</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#004ac6",
+                    "surface-container": "#e9edff",
+                    "on-secondary-container": "#fefcff",
+                    "secondary": "#0058be",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed": "#dbe1ff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "surface": "#f9f9ff",
+                    "on-surface": "#141b2b",
+                    "on-primary-container": "#eeefff",
+                    "on-primary-fixed": "#00174b",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface-tint": "#0053db",
+                    "secondary-container": "#2170e4",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e1e8fd",
+                    "tertiary-container": "#196fc0",
+                    "primary-container": "#2563eb",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-highest": "#dce2f7",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-background": "#141b2b",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-surface-variant": "#434655",
+                    "tertiary": "#00569c",
+                    "background": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d3daef",
+                    "surface-bright": "#f9f9ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary-fixed": "#d8e2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "margin-desktop": "auto",
+                    "base": "4px",
+                    "margin-tablet": "32px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .modal-overlay {
+            background-color: rgba(20, 27, 43, 0.4);
+            backdrop-filter: blur(4px);
+        }
+        .sheet-gradient {
+            background: linear-gradient(to top, var(--surface-container), transparent);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto">
+<header class="mb-8">
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface mb-2">Overlays &amp; Sheets</h2>
+<p class="text-on-surface-variant font-body-lg text-body-lg">Explore the Material 3 interaction patterns for CloudExify.</p>
+</header>
+<!-- Bento Grid for Interactions -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Dialog Showcase -->
+<section class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-title-md text-title-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="desktop_windows">desktop_windows</span>
+                    System Dialogs
+                </h3>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-surface-container-high transition-colors text-error" onclick="openModal('delete-modal')">
+<span class="font-label-lg text-label-lg">Delete Post</span>
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-surface-container-high transition-colors" onclick="openModal('discard-modal')">
+<span class="font-label-lg text-label-lg">Discard Draft</span>
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-surface-container-high transition-colors" onclick="openModal('success-report-modal')">
+<span class="font-label-lg text-label-lg">Report Submitted</span>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-surface-container-high transition-colors" onclick="openModal('error-modal')">
+<span class="font-label-lg text-label-lg">Network Error</span>
+<span class="material-symbols-outlined text-error" data-icon="wifi_off">wifi_off</span>
+</button>
+</div>
+</section>
+<!-- Bottom Sheet Showcase -->
+<section class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-title-md text-title-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="expand_less">expand_less</span>
+                    Bottom Sheets
+                </h3>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-surface-container-high transition-colors" onclick="openSheet('share-sheet')">
+<span class="font-label-lg text-label-lg">Share Options</span>
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-surface-container-high transition-colors" onclick="openSheet('more-sheet')">
+<span class="font-label-lg text-label-lg">More Options</span>
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-surface-container-high transition-colors" onclick="openSheet('sort-sheet')">
+<span class="font-label-lg text-label-lg">Sort Posts</span>
+<span class="material-symbols-outlined" data-icon="sort">sort</span>
+</button>
+</div>
+</section>
+</div>
+<div class="mt-12 bg-white rounded-2xl overflow-hidden shadow-sm p-1">
+<div class="w-full h-48 bg-cover bg-center rounded-xl" data-alt="A cinematic, minimalist digital workspace with soft morning light streaming through a window. The focus is on a clean glass desk with a high-end smartphone displaying a professional UI design. The background is slightly blurred with soft blue and white tones, creating a tranquil and secure atmosphere. 8k resolution, editorial photography style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQ5Y04EI_K7weOVouORgByvAIRyOPMNMJppvnDYhDPur7ROwNxDGydNR7ntGi6oVcZpW3EkzKtuX7gOkukcmBb9v8x9AkiEyENLrKHz7M71AjAuUnHjjknALAj1GN9eW9bHHFzgi8DkXLn3qDPk_s79cS1T7NvFe8CGKhDA3oDwn9wCBiWmfphoJmytQoZTVnycnqvln3-fJO2o9361cnWQ6xMk0icWFKwlAqY7ZRpOk1fXe8BOMgobonHtkBA45hQQjeprwhod3Qi')"></div>
+</div>
+</main>
+<!-- Modal Overlays -->
+<div class="fixed inset-0 z-[100] hidden" id="modal-container">
+<div class="modal-overlay absolute inset-0 transition-opacity duration-300" onclick="closeAll()"></div>
+<!-- Delete Post (Destructive) -->
+<div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface-container-lowest p-6 rounded-[28px] hidden scale-95 opacity-0 transition-all duration-300" id="delete-modal">
+<span class="material-symbols-outlined text-error mb-4 block" data-icon="delete_forever">delete_forever</span>
+<h4 class="font-headline-md text-headline-md-mobile text-on-surface mb-3">Delete Post?</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6">This action cannot be undone. Your anonymous share will be permanently removed from the platform.</p>
+<div class="flex justify-end gap-2">
+<button class="px-6 h-10 font-label-lg text-primary hover:bg-primary/5 rounded-full transition-colors" onclick="closeAll()">Cancel</button>
+<button class="px-6 h-10 font-label-lg bg-error text-on-error hover:opacity-90 rounded-full transition-colors active:scale-95" onclick="closeAll()">Delete</button>
+</div>
+</div>
+<!-- Discard Draft (Warning) -->
+<div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface-container-lowest p-6 rounded-[28px] hidden scale-95 opacity-0 transition-all duration-300" id="discard-modal">
+<h4 class="font-headline-md text-headline-md-mobile text-on-surface mb-3">Discard Draft?</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6">You have unsaved changes in your draft. If you exit now, your progress will be lost.</p>
+<div class="flex justify-end gap-2">
+<button class="px-6 h-10 font-label-lg text-primary hover:bg-primary/5 rounded-full transition-colors" onclick="closeAll()">Keep Editing</button>
+<button class="px-6 h-10 font-label-lg text-error hover:bg-error/5 rounded-full transition-colors active:scale-95" onclick="closeAll()">Discard</button>
+</div>
+</div>
+<!-- Report Submitted (Success) -->
+<div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface-container-lowest p-6 rounded-[28px] text-center hidden scale-95 opacity-0 transition-all duration-300" id="success-report-modal">
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h4 class="font-headline-md text-headline-md-mobile text-on-surface mb-2">Report Submitted</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6">Thank you for helping keep RAAZ safe. Our moderators will review this content shortly.</p>
+<button class="w-full h-10 font-label-lg bg-primary text-on-primary rounded-full hover:opacity-90 transition-opacity" onclick="closeAll()">Done</button>
+</div>
+<!-- Network Error -->
+<div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface-container-lowest p-6 rounded-[28px] hidden scale-95 opacity-0 transition-all duration-300" id="error-modal">
+<span class="material-symbols-outlined text-error mb-4 block" data-icon="cloud_off">cloud_off</span>
+<h4 class="font-headline-md text-headline-md-mobile text-on-surface mb-3">Connection Lost</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6">We couldn't reach our servers. Please check your internet connection and try again.</p>
+<div class="flex flex-col gap-2">
+<button class="w-full h-10 font-label-lg bg-primary text-on-primary rounded-full hover:opacity-90 transition-opacity" onclick="closeAll()">Try Again</button>
+<button class="w-full h-10 font-label-lg text-primary hover:bg-primary/5 rounded-full transition-colors" onclick="closeAll()">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Bottom Sheets -->
+<div class="fixed inset-0 z-[100] hidden" id="sheet-container">
+<div class="modal-overlay absolute inset-0" onclick="closeAll()"></div>
+<!-- Share Options Sheet -->
+<div class="sheet-content fixed bottom-0 left-0 right-0 bg-surface-container-low rounded-t-[28px] p-6 pt-2 translate-y-full transition-transform duration-300 ease-out hidden" id="share-sheet">
+<div class="w-8 h-1 bg-outline-variant/50 rounded-full mx-auto my-3"></div>
+<h4 class="font-title-md text-title-md text-on-surface mb-4">Share with friends</h4>
+<div class="grid grid-cols-4 gap-4 mb-6">
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Copy Link</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Message</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">QR Code</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">More</span>
+</div>
+</div>
+</div>
+<!-- More Options Sheet -->
+<div class="sheet-content fixed bottom-0 left-0 right-0 bg-surface-container-low rounded-t-[28px] overflow-hidden translate-y-full transition-transform duration-300 ease-out hidden" id="more-sheet">
+<div class="w-8 h-1 bg-outline-variant/50 rounded-full mx-auto mt-3 mb-1"></div>
+<div class="p-2">
+<button class="w-full flex items-center gap-4 px-4 py-3 hover:bg-surface-container-high transition-colors text-on-surface rounded-xl">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+<span class="font-label-lg text-label-lg">Edit Post</span>
+</button>
+<button class="w-full flex items-center gap-4 px-4 py-3 hover:bg-surface-container-high transition-colors text-on-surface rounded-xl">
+<span class="material-symbols-outlined" data-icon="push_pin">push_pin</span>
+<span class="font-label-lg text-label-lg">Pin to Profile</span>
+</button>
+<button class="w-full flex items-center gap-4 px-4 py-3 hover:bg-surface-container-high transition-colors text-error rounded-xl">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+<span class="font-label-lg text-label-lg">Delete Post</span>
+</button>
+</div>
+<div class="h-6"></div>
+</div>
+<!-- Sort Posts Sheet -->
+<div class="sheet-content fixed bottom-0 left-0 right-0 bg-surface-container-low rounded-t-[28px] overflow-hidden translate-y-full transition-transform duration-300 ease-out hidden" id="sort-sheet">
+<div class="w-8 h-1 bg-outline-variant/50 rounded-full mx-auto mt-3 mb-1"></div>
+<div class="px-6 py-4">
+<h4 class="font-title-md text-title-md text-on-surface mb-2">Sort Posts</h4>
+</div>
+<div class="p-2">
+<button class="w-full flex items-center justify-between px-4 py-4 bg-secondary-container text-on-secondary-container rounded-xl">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="font-label-lg text-label-lg">Latest</span>
+</div>
+<span class="material-symbols-outlined text-[20px]" data-icon="check">check</span>
+</button>
+<button class="w-full flex items-center gap-4 px-4 py-4 hover:bg-surface-container-high transition-colors text-on-surface rounded-xl">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-lg text-label-lg">Most Liked</span>
+</button>
+<button class="w-full flex items-center gap-4 px-4 py-4 hover:bg-surface-container-high transition-colors text-on-surface rounded-xl">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-lg text-label-lg">Trending</span>
+</button>
+</div>
+<div class="h-6"></div>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="trending_up" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-label-sm text-label-sm mt-1">Trending</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-1">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</button>
+</nav>
+<script>
+        function openModal(id) {
+            const container = document.getElementById('modal-container');
+            const modal = document.getElementById(id);
+            container.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('scale-95', 'opacity-0');
+                    modal.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }, 10);
+        }
+
+        function openSheet(id) {
+            const container = document.getElementById('sheet-container');
+            const sheet = document.getElementById(id);
+            container.classList.remove('hidden');
+            setTimeout(() => {
+                sheet.classList.remove('hidden');
+                setTimeout(() => {
+                    sheet.classList.remove('translate-y-full');
+                    sheet.classList.add('translate-y-0');
+                }, 10);
+            }, 10);
+        }
+
+        function closeAll() {
+            // Close Modals
+            const modals = document.querySelectorAll('.modal-content');
+            modals.forEach(m => {
+                m.classList.add('scale-95', 'opacity-0');
+                m.classList.remove('scale-100', 'opacity-100');
+                setTimeout(() => m.classList.add('hidden'), 300);
+            });
+            
+            // Close Sheets
+            const sheets = document.querySelectorAll('.sheet-content');
+            sheets.forEach(s => {
+                s.classList.add('translate-y-full');
+                s.classList.remove('translate-y-0');
+                setTimeout(() => s.classList.add('hidden'), 300);
+            });
+
+            setTimeout(() => {
+                document.getElementById('modal-container').classList.add('hidden');
+                document.getElementById('sheet-container').classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body></html>

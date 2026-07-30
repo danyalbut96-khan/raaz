@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Roadmap - Phase 6</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#dce2f7",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#b4c5ff",
+                      "secondary-fixed": "#d8e2ff",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#eeefff",
+                      "primary-container": "#2563eb",
+                      "on-primary-fixed": "#00174b",
+                      "background": "#f9f9ff",
+                      "surface-bright": "#f9f9ff",
+                      "surface-tint": "#0053db",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f1f3ff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#e1e8fd",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "on-surface": "#141b2b",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "surface-container-highest": "#dce2f7",
+                      "outline-variant": "#c3c6d7",
+                      "on-secondary-container": "#fefcff",
+                      "secondary-container": "#2170e4",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "tertiary": "#00569c",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "primary-fixed": "#dbe1ff",
+                      "tertiary-container": "#196fc0",
+                      "outline": "#737686",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#edf0ff",
+                      "tertiary-fixed": "#d4e3ff",
+                      "on-secondary-fixed": "#001a42",
+                      "on-primary": "#ffffff",
+                      "secondary": "#0058be",
+                      "surface-dim": "#d3daef",
+                      "surface-container": "#e9edff",
+                      "inverse-surface": "#293040",
+                      "on-tertiary-container": "#ebf1ff",
+                      "on-surface-variant": "#434655",
+                      "primary": "#004ac6",
+                      "on-tertiary-fixed": "#001c39",
+                      "surface": "#f9f9ff",
+                      "on-error-container": "#93000a",
+                      "on-background": "#141b2b",
+                      "secondary-fixed-dim": "#adc6ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "2xl": "48px",
+                      "sm": "8px",
+                      "margin-tablet": "32px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "gutter": "16px",
+                      "margin-desktop": "auto",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "title-md": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+        .timeline-line {
+            background: linear-gradient(180deg, #2563eb 0%, #2563eb 33%, #c3c6d7 33.1%, #c3c6d7 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-sm h-16 flex items-center justify-between px-margin-mobile">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="shield_lock">shield_lock</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer" data-icon="workspace_premium">workspace_premium</span>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- Header Section -->
+<section class="mb-12">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Roadmap</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">See what we're building next and vote for the features you want to see.</p>
+<div class="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Production Ready</span>
+</div>
+</section>
+<!-- Vertical Timeline Section -->
+<section class="relative mb-16 pl-8">
+<!-- Timeline Connector -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 timeline-line opacity-30"></div>
+<!-- Version 1: Completed -->
+<div class="relative mb-12">
+<div class="absolute -left-[29px] top-0 w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div class="glass-card rounded-xl p-5 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-md text-title-md text-on-surface">Version 1.0</h3>
+<span class="px-2 py-0.5 bg-surface-variant text-on-surface-variant text-[10px] font-bold rounded uppercase">Completed</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Foundation of the RAAZ anonymous ecosystem, encrypted messaging, and basic feed.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant font-label-sm text-label-sm rounded-full">Zero-Knowledge Proofs</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant font-label-sm text-label-sm rounded-full">Tor Routing</span>
+</div>
+</div>
+</div>
+<!-- Version 2: Coming Soon -->
+<div class="relative mb-12">
+<div class="absolute -left-[29px] top-0 w-6 h-6 bg-primary-container rounded-full flex items-center justify-center shadow-lg animate-pulse-soft">
+<span class="w-2 h-2 bg-white rounded-full"></span>
+</div>
+<div class="glass-card border-primary/20 rounded-xl p-5 shadow-md">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-md text-title-md text-primary">Version 2.0</h3>
+<span class="px-2 py-0.5 bg-primary text-on-primary text-[10px] font-bold rounded uppercase tracking-wide">Coming Soon</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Enhanced identity masking, community-driven moderation, and the "Phase 6" secure layer.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/10 text-primary font-label-sm text-label-sm rounded-full">Verified Anonymity</span>
+<span class="px-3 py-1 bg-primary/10 text-primary font-label-sm text-label-sm rounded-full">Encrypted Media</span>
+</div>
+</div>
+</div>
+<!-- Version 3: Future -->
+<div class="relative">
+<div class="absolute -left-[29px] top-0 w-6 h-6 bg-outline-variant rounded-full flex items-center justify-center border-2 border-background">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="bg-surface-container-low/50 border border-outline-variant/30 rounded-xl p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-md text-title-md text-outline">Version 3.0</h3>
+<span class="px-2 py-0.5 bg-outline-variant/20 text-outline text-[10px] font-bold rounded uppercase">Future</span>
+</div>
+<p class="font-body-md text-body-md text-outline italic">The decentralization of the RAAZ protocol, global p2p nodes, and programmable privacy layers.</p>
+</div>
+</div>
+</section>
+<!-- Community Voting Section -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-title-lg text-title-lg text-on-surface">Community Voting</h2>
+<button class="text-primary font-label-lg text-label-lg flex items-center gap-1 active:scale-95 transition-transform">
+                    View All <span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Vote Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4 flex items-center justify-between shadow-sm hover:border-primary/30 transition-colors">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-secondary-container rounded-lg flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined" data-icon="voice_chat">voice_chat</span>
+</div>
+<div>
+<h4 class="font-title-md text-body-lg text-on-surface">Voice Masking</h4>
+<p class="font-body-md text-label-lg text-on-surface-variant">Real-time pitch shift for voice shares.</p>
+</div>
+</div>
+<div class="flex flex-col items-center ml-4">
+<button class="w-10 h-10 rounded-full hover:bg-primary/10 text-primary transition-colors flex items-center justify-center active:scale-90" onclick="handleVote(this)">
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_up">keyboard_arrow_up</span>
+</button>
+<span class="font-label-lg text-label-lg font-bold">1.2k</span>
+</div>
+</div>
+<!-- Vote Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4 flex items-center justify-between shadow-sm hover:border-primary/30 transition-colors">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-tertiary-container rounded-lg flex items-center justify-center text-on-tertiary-container shrink-0">
+<span class="material-symbols-outlined" data-icon="lock_clock">lock_clock</span>
+</div>
+<div>
+<h4 class="font-title-md text-body-lg text-on-surface">Disappearing Feeds</h4>
+<p class="font-body-md text-label-lg text-on-surface-variant">Self-destructing post expiration timers.</p>
+</div>
+</div>
+<div class="flex flex-col items-center ml-4">
+<button class="w-10 h-10 rounded-full hover:bg-primary/10 text-primary transition-colors flex items-center justify-center active:scale-90" onclick="handleVote(this)">
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_up">keyboard_arrow_up</span>
+</button>
+<span class="font-label-lg text-label-lg font-bold">856</span>
+</div>
+</div>
+<!-- Vote Item 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4 flex items-center justify-between shadow-sm hover:border-primary/30 transition-colors">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-surface-variant rounded-lg flex items-center justify-center text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined" data-icon="group_work">group_work</span>
+</div>
+<div>
+<h4 class="font-title-md text-body-lg text-on-surface">Anonymous Circles</h4>
+<p class="font-body-md text-label-lg text-on-surface-variant">Private group sharing based on interests.</p>
+</div>
+</div>
+<div class="flex flex-col items-center ml-4">
+<button class="w-10 h-10 rounded-full hover:bg-primary/10 text-primary transition-colors flex items-center justify-center active:scale-90" onclick="handleVote(this)">
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_up">keyboard_arrow_up</span>
+</button>
+<span class="font-label-lg text-label-lg font-bold">642</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-4 border-2 border-dashed border-outline-variant text-on-surface-variant rounded-xl font-title-md flex items-center justify-center gap-2 hover:bg-surface-variant/20 transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                Suggest a Feature
+            </button>
+</section>
+<!-- Visual Asset -->
+<div class="relative w-full h-48 rounded-2xl overflow-hidden mb-12 shadow-inner bg-surface-container-high">
+<div class="w-full h-full bg-cover bg-center opacity-60 mix-blend-overlay" data-alt="A cinematic, high-end digital render of a glowing blue futuristic architectural node structure. The scene is set in a pristine, minimalist environment with soft, high-key light-mode lighting. Glassy textures and subtle refractions suggest depth and security, with deep blue and white tones dominating the palette. The overall mood is sophisticated, professional, and forward-looking, perfectly representing a production-ready technology roadmap." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAADEDf8IDQaX8U7z9np0keg7keygAiMdtv1ACVguAQIIoNSZ4WV55o_an4XSS-pU73x0gO3JyMltDct3G358hyeSAYBGWFp63znbac7JjfXMOlHNiiyQ1xLVg5l40l8lNHR62JPAjoIl3mfSUvLxKIbyE1HFoC46EW_iUlC1eF3ysA0SBrbWVDXzebxdXOUTlpQNA6tdjmOqfmMYdwK3uF4YqYReKUwTNF7o1r2Bdu7OZO0CoHG_rWNnZ63w5Jilab_2VDp1z28r8t')"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-background/80 to-transparent">
+<h4 class="font-title-lg text-title-lg text-primary mb-2">The Future is Discrete</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">Building the most secure layer for digital human expression.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-2 px-margin-mobile bg-surface/85 backdrop-blur-xl rounded-t-xl shadow-lg border-t border-outline-variant/10">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 rounded-full transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-label-sm text-label-sm">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 rounded-full transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-variant/50 rounded-full transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+<span class="font-label-sm text-label-sm">Badges</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 shadow-sm transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        function handleVote(btn) {
+            const span = btn.nextElementSibling;
+            let count = span.innerText;
+            
+            if (btn.dataset.voted === "true") {
+                btn.classList.remove('text-primary-container', 'bg-primary/10');
+                btn.classList.add('text-primary');
+                // Logic to decrement if we really wanted to
+                btn.dataset.voted = "false";
+            } else {
+                btn.classList.add('text-primary-container', 'bg-primary/20', 'scale-110');
+                setTimeout(() => btn.classList.remove('scale-110'), 200);
+                btn.dataset.voted = "true";
+                // Simple visual increment
+                if (count.includes('k')) {
+                    // ignore for k strings for demo
+                } else {
+                    span.innerText = parseInt(count) + 1;
+                }
+            }
+        }
+
+        // Add some subtle parallax or scroll reveal effects
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const timelineLine = document.querySelector('.timeline-line');
+            if (timelineLine) {
+                timelineLine.style.transform = `translateY(${scrolled * 0.05}px)`;
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Admin - App Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "secondary-container": "#2170e4",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-dim": "#d3daef",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-container": "#eeefff",
+                        "background": "#f9f9ff",
+                        "on-tertiary-container": "#ebf1ff",
+                        "secondary": "#0058be",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary": "#004ac6",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#00569c",
+                        "on-error-container": "#93000a",
+                        "on-background": "#141b2b",
+                        "surface-variant": "#dce2f7",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-secondary-container": "#fefcff",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e9edff",
+                        "inverse-surface": "#293040",
+                        "surface-container-low": "#f1f3ff",
+                        "surface-container-high": "#e1e8fd",
+                        "on-surface": "#141b2b",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-surface-variant": "#434655",
+                        "surface-bright": "#f9f9ff",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary-fixed": "#d4e3ff",
+                        "tertiary-container": "#196fc0",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-container-highest": "#dce2f7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#0053db",
+                        "outline": "#737686"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "container-margin": "24px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; }
+        .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dce2f7; border-radius: 10px; }
+        
+        /* Toggle Switch Styling */
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #737686; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #004ac6; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Range Slider Styling */
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]:focus { outline: none; }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: #e9edff; border-radius: 3px; }
+        input[type=range]::-webkit-slider-thumb { height: 18px; width: 18px; border-radius: 50%; background: #004ac6; cursor: pointer; -webkit-appearance: none; margin-top: -6px; }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- Sidebar Navigation (Mandatory Shared Component) -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] z-50 bg-surface/70 backdrop-blur-xl border-r border-white/20 shadow-lg flex flex-col p-md space-y-xs hidden md:flex">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">RAAZ</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Phase 8 Moderation</p>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto custom-scrollbar">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="article">article</span>
+<span class="font-label-lg text-label-lg">Posts</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="comment">comment</span>
+<span class="font-label-lg text-label-lg">Comments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="font-label-lg text-label-lg">Categories</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-lg text-label-lg">Analytics</span>
+</a>
+<div class="h-[1px] bg-outline-variant/30 my-md mx-sm"></div>
+<!-- Settings Active State Logic applied -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary/10 text-primary border-l-4 border-primary font-bold transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<div class="pt-md border-t border-white/20">
+<div class="flex items-center gap-md px-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">A</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Admin User</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Super Administrator</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top AppBar (Mandatory Shared Component) -->
+<header class="docked full-width top-0 sticky z-40 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm md:pl-[280px]">
+<div class="flex justify-between items-center w-full px-lg py-md max-w-[1440px] mx-auto">
+<div class="flex items-center gap-md">
+<span class="md:hidden material-symbols-outlined text-primary cursor-pointer" data-icon="menu">menu</span>
+<h2 class="font-title-md text-title-md text-primary font-bold">App Settings</h2>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex items-center bg-surface-container-low px-md py-xs rounded-lg border border-outline-variant/30 w-64">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full" placeholder="Search settings..." type="text"/>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-xs rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-xs rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+<button class="bg-primary text-on-primary px-md py-sm rounded-lg font-label-lg text-label-lg flex items-center gap-sm active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+                        Quick Actions
+                    </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="md:pl-[280px] min-h-screen">
+<div class="p-lg max-w-[1440px] mx-auto space-y-lg">
+<!-- Page Header & Tabbed Navigation -->
+<div class="space-y-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Configuration Dashboard</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage global application parameters and moderation engine sensitivity.</p>
+</div>
+<div class="flex items-center gap-md">
+<button class="px-lg py-md rounded-lg border border-outline text-on-surface font-label-lg hover:bg-surface-container transition-colors">Discard</button>
+<button class="px-lg py-md rounded-lg bg-primary text-on-primary font-label-lg shadow-sm hover:shadow-md transition-all">Save Changes</button>
+</div>
+</div>
+<!-- Tabs Area -->
+<div class="flex items-center border-b border-outline-variant/50 overflow-x-auto whitespace-nowrap gap-xl no-scrollbar">
+<button class="px-md py-sm border-b-2 border-primary text-primary font-title-md transition-all" id="tab-general" onclick="switchTab('general')">General</button>
+<button class="px-md py-sm border-b-2 border-transparent text-on-surface-variant font-title-md hover:text-primary transition-all" id="tab-moderation" onclick="switchTab('moderation')">Content Moderation</button>
+<button class="px-md py-sm border-b-2 border-transparent text-on-surface-variant font-title-md hover:text-primary transition-all" id="tab-privacy" onclick="switchTab('privacy')">Privacy</button>
+<button class="px-md py-sm border-b-2 border-transparent text-on-surface-variant font-title-md hover:text-primary transition-all" id="tab-system" onclick="switchTab('system')">System</button>
+</div>
+</div>
+<!-- Settings Content Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg animate-in fade-in duration-500" id="settings-content">
+<!-- General Settings Section -->
+<section class="md:col-span-8 space-y-lg" id="section-general">
+<div class="bg-surface-container-lowest p-xl rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-md mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+<h4 class="font-title-lg text-title-lg">General Application Settings</h4>
+</div>
+<div class="space-y-xl">
+<!-- Maintenance Mode Toggle -->
+<div class="flex items-center justify-between p-lg rounded-lg bg-surface-container-low border border-outline-variant/20">
+<div class="space-y-xs">
+<p class="font-title-md text-title-md text-on-surface">Maintenance Mode</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Redirect all users to a technical downtime page during updates.</p>
+</div>
+<label class="switch">
+<input type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface">Application Name</label>
+<input class="w-full p-md rounded-lg border border-outline-variant bg-surface-bright focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none" type="text" value="RAAZ Phase 8"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface">Administrator Email</label>
+<input class="w-full p-md rounded-lg border border-outline-variant bg-surface-bright focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none" type="email" value="admin@raaz.internal"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface">Timezone</label>
+<select class="w-full p-md rounded-lg border border-outline-variant bg-surface-bright focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none">
+<option>UTC (Coordinated Universal Time)</option>
+<option>PST (Pacific Standard Time)</option>
+<option>EST (Eastern Standard Time)</option>
+<option>GMT (Greenwich Mean Time)</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Moderation Section (Hidden by default, toggled via JS) -->
+<section class="hidden md:col-span-8 space-y-lg" id="section-moderation">
+<div class="bg-surface-container-lowest p-xl rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-md mb-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="security">security</span>
+<h4 class="font-title-lg text-title-lg">Moderation Sensitivity</h4>
+</div>
+<div class="space-y-xl">
+<!-- Sensitivity Slider -->
+<div class="space-y-lg">
+<div class="flex justify-between items-center">
+<p class="font-title-md text-title-md text-on-surface">Auto-Flag Threshold</p>
+<span class="px-md py-xs bg-secondary/10 text-secondary rounded-full font-label-lg" id="flag-value">75%</span>
+</div>
+<input class="w-full" max="100" min="0" oninput="document.getElementById('flag-value').innerText = this.value + '%'" type="range" value="75"/>
+<div class="flex justify-between font-label-sm text-on-surface-variant">
+<span>Lenient</span>
+<span>Strict</span>
+</div>
+</div>
+<div class="space-y-lg border-t border-outline-variant/20 pt-lg">
+<p class="font-title-md text-title-md text-on-surface">Content Filtering Layers</p>
+<div class="space-y-md">
+<label class="flex items-center gap-md p-md rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<p class="font-label-lg text-label-lg group-hover:text-primary transition-colors">Profanity Detection</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Identify and mask vulgar language in user comments.</p>
+</div>
+</label>
+<label class="flex items-center gap-md p-md rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<p class="font-label-lg text-label-lg group-hover:text-primary transition-colors">Image AI Recognition</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Scan post attachments for inappropriate visual content.</p>
+</div>
+</label>
+<label class="flex items-center gap-md p-md rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input class="w-5 h-5 rounded text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<p class="font-label-lg text-label-lg group-hover:text-primary transition-colors">Link Sandboxing</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Automatically disable all external links until manual review.</p>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- System Info (Sidebar in Grid) -->
+<aside class="md:col-span-4 space-y-lg">
+<div class="bg-surface-container-high/40 p-xl rounded-xl border border-outline-variant/30 space-y-lg">
+<h4 class="font-title-md text-title-md font-bold text-on-surface-variant uppercase tracking-wider">System Overview</h4>
+<!-- Display Only Fields -->
+<div class="space-y-md">
+<div class="p-md bg-surface-container-lowest rounded-lg border border-outline-variant/20 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="info">info</span>
+<span class="font-body-md text-body-md font-medium">App Version</span>
+</div>
+<span class="font-label-lg text-label-lg px-sm py-xs bg-surface-container text-on-surface-variant rounded">v8.4.2-stable</span>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-lg border border-outline-variant/20 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md font-medium">API Status</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+</span>
+<span class="font-label-lg text-label-lg text-green-700">Healthy</span>
+</div>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-lg border border-outline-variant/20 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="database">database</span>
+<span class="font-body-md text-body-md font-medium">DB Connection</span>
+</div>
+<span class="font-label-lg text-label-lg text-primary">Active</span>
+</div>
+</div>
+<div class="pt-lg border-t border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md">LAST BACKUP</p>
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md">24 Oct 2023, 04:00 AM</span>
+<button class="text-primary hover:underline font-label-lg">Backup Now</button>
+</div>
+</div>
+</div>
+<!-- Visual Accent Card -->
+<div class="relative overflow-hidden rounded-xl h-48 group">
+<div class="absolute inset-0 bg-primary opacity-90 transition-opacity group-hover:opacity-100"></div>
+<div class="absolute inset-0 z-10 p-lg flex flex-col justify-end text-on-primary">
+<h5 class="font-title-lg text-title-lg font-bold">Cloud Infrastructure</h5>
+<p class="font-body-md text-body-md text-primary-container">Scale your moderation engine instantly across 14 regions.</p>
+</div>
+<div class="absolute inset-0 w-full h-full object-cover" data-alt="A futuristic, high-tech server room with glowing blue neon lights and sleek architectural lines, representing advanced cloud infrastructure and digital processing power. The aesthetic is clean, minimalist, and powerful, using a corporate blue and white color palette for consistency with the RAAZ brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxCzhNB0Kw-D0ZzkktRe17brc6jxuyBymPnb5dXJDiwm2uzBB5RdAKkXdfOdNuCMhYCTGgAHSUcMlghXxYSg0oJe9NXMaqVuJysqou_K6jl4znU8l4_F1kznfuxLt0jjpnJo_-0Wynd4R3-sRaBhEd5ikm8NCvizuc9ooU06TlVLNbXeHjLwU-yrO9OFMicuDFhd7ZlctsuAGHZXqNbIjKHK_pE0Llrq8jKIUNcPtLDQ_R7KJXqyWlEULTFrkTePyBPEqMlw0Wm7Eb')"></div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<footer class="md:hidden fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 flex justify-around py-md z-50">
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-primary">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] font-label-sm">Settings</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-[10px] font-label-sm">Alerts</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-label-sm">Profile</span>
+</button>
+</footer>
+<script>
+        function switchTab(tabId) {
+            // IDs of all tabs and sections
+            const tabs = ['general', 'moderation', 'privacy', 'system'];
+            
+            tabs.forEach(id => {
+                const tabEl = document.getElementById(`tab-${id}`);
+                const sectionEl = document.getElementById(`section-${id}`);
+                
+                if (id === tabId) {
+                    // Active state
+                    if (tabEl) {
+                        tabEl.classList.add('border-primary', 'text-primary');
+                        tabEl.classList.remove('border-transparent', 'text-on-surface-variant');
+                    }
+                    if (sectionEl) sectionEl.classList.remove('hidden');
+                } else {
+                    // Inactive state
+                    if (tabEl) {
+                        tabEl.classList.remove('border-primary', 'text-primary');
+                        tabEl.classList.add('border-transparent', 'text-on-surface-variant');
+                    }
+                    if (sectionEl) sectionEl.classList.add('hidden');
+                }
+            });
+
+            // Smooth content animation
+            const content = document.getElementById('settings-content');
+            content.classList.remove('animate-in', 'fade-in');
+            void content.offsetWidth; // Trigger reflow
+            content.classList.add('animate-in', 'fade-in');
+        }
+
+        // Lightweight Micro-interaction for inputs
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('focus', () => {
+                el.parentElement.classList.add('scale-[1.01]');
+                el.parentElement.style.transition = 'transform 0.2s ease-out';
+            });
+            el.addEventListener('blur', () => {
+                el.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body></html>

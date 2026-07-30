@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ | Legal &amp; Privacy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d8e2ff",
+                    "outline": "#737686",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface": "#f9f9ff",
+                    "on-primary-container": "#eeefff",
+                    "surface-container": "#e9edff",
+                    "background": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#d3daef",
+                    "tertiary-fixed": "#d4e3ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#141b2b",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-container": "#ebf1ff",
+                    "on-surface-variant": "#434655",
+                    "inverse-surface": "#293040",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "secondary-container": "#2170e4",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface-container-low": "#f1f3ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-background": "#141b2b",
+                    "on-secondary-fixed": "#001a42",
+                    "tertiary": "#00569c",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#196fc0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#b4c5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "container-margin": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .legal-content h2 {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.375rem; /* title-lg equivalent */
+            font-weight: 600;
+            color: #141b2b; /* on-surface */
+        }
+        .legal-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+            color: #434655; /* on-surface-variant */
+        }
+        .legal-content ul, .legal-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .legal-content li {
+            margin-bottom: 0.75rem;
+            color: #434655;
+        }
+        .tab-active {
+            border-bottom: 2px solid #004ac6;
+            color: #004ac6;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar from Shared Components -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<div class="flex justify-between items-center px-lg py-md max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg font-bold text-primary tracking-tight">RAAZ</div>
+<div class="hidden md:flex items-center space-x-xl">
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Blog</a>
+<a class="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors duration-200" href="#">Careers</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-title-md text-title-md hover:bg-primary/90 active:scale-95 transform transition-all">
+                Download App
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-xl px-lg max-w-4xl mx-auto min-h-screen">
+<!-- Header Section -->
+<header class="mb-xl text-center md:text-left">
+<h1 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-xs">Legal Resources</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                We believe in total transparency. Our legal framework is designed to protect your privacy and ensure a safe, anonymous environment.
+            </p>
+</header>
+<!-- Tab Navigation -->
+<div class="flex items-center border-b border-outline-variant mb-xl">
+<button class="px-lg py-md font-title-md text-title-md tab-active transition-all cursor-pointer" id="tab-privacy" onclick="switchTab('privacy')">
+                Privacy Policy
+            </button>
+<button class="px-lg py-md font-title-md text-title-md text-on-surface-variant hover:text-primary transition-all cursor-pointer" id="tab-terms" onclick="switchTab('terms')">
+                Terms &amp; Conditions
+            </button>
+</div>
+<!-- Privacy Policy Content -->
+<div class="legal-content animate-in fade-in slide-in-from-bottom-4 duration-500" id="content-privacy">
+<div class="bg-surface-container-lowest p-md md:p-xl rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-lg border-b border-outline-variant/20 pb-md">
+<span class="text-label-lg font-label-lg text-outline uppercase tracking-wider mb-xs md:mb-0">Privacy Policy</span>
+<span class="text-body-md font-body-md text-on-surface-variant italic">Last Updated: October 24, 2023</span>
+</div>
+<p class="font-body-lg text-body-lg">At RAAZ, we prioritize your privacy above all else. This Privacy Policy describes how we collect, use, and handle your information when you use our website and mobile application.</p>
+<h2>1. Information We Collect</h2>
+<p>We only collect the absolute minimum data required to provide our services. This includes:</p>
+<ul class="list-disc list-outside">
+<li><strong>Account Credentials:</strong> We use cryptographic hashing for passwords; we never store plain-text credentials.</li>
+<li><strong>Device Metadata:</strong> Basic device type and operating system version for technical troubleshooting.</li>
+<li><strong>Anonymous Contributions:</strong> Any content you share is decoupled from your identity using our proprietary masking layer.</li>
+</ul>
+<h2>2. How We Protect Your Data</h2>
+<p>Security is not a feature at RAAZ; it is our foundation. We employ several layers of protection:</p>
+<ol class="list-decimal list-outside">
+<li>End-to-end encryption for all peer-to-peer communications.</li>
+<li>Zero-knowledge architecture, meaning even our administrators cannot read your private messages.</li>
+<li>Regular third-party security audits and penetration testing.</li>
+</ol>
+<h2>3. Cookies and Tracking</h2>
+<p>RAAZ does not use third-party tracking cookies or advertising pixels. We use only essential functional cookies to keep you logged in and maintain your session preferences.</p>
+<h2>4. Data Retention</h2>
+<p>We do not keep data longer than necessary. Anonymous posts are stored based on community engagement rules, while account data is deleted immediately upon account termination request.</p>
+<div class="mt-xl p-md bg-primary-container/10 border border-primary-container/20 rounded-lg">
+<p class="font-title-md text-title-md text-primary mb-xs">Questions about your privacy?</p>
+<p class="font-body-md text-body-md text-on-surface-variant m-0">Contact our Data Protection Officer at privacy@raaz.app for any inquiries regarding your personal information.</p>
+</div>
+</div>
+</div>
+<!-- Terms & Conditions Content (Hidden by default) -->
+<div class="hidden legal-content animate-in fade-in slide-in-from-bottom-4 duration-500" id="content-terms">
+<div class="bg-surface-container-lowest p-md md:p-xl rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-lg border-b border-outline-variant/20 pb-md">
+<span class="text-label-lg font-label-lg text-outline uppercase tracking-wider mb-xs md:mb-0">Terms &amp; Conditions</span>
+<span class="text-body-md font-body-md text-on-surface-variant italic">Last Updated: October 24, 2023</span>
+</div>
+<p class="font-body-lg text-body-lg">Welcome to RAAZ. By accessing or using our platform, you agree to comply with and be bound by the following terms and conditions of use.</p>
+<h2>1. Acceptance of Terms</h2>
+<p>By using RAAZ, you acknowledge that you have read, understood, and agree to be bound by these terms. If you do not agree to these terms, please do not use our services.</p>
+<h2>2. User Conduct</h2>
+<p>While RAAZ provides an anonymous environment, users are expected to maintain a standard of professional and ethical conduct. You agree not to:</p>
+<ul class="list-disc list-outside">
+<li>Engage in harassment, bullying, or hate speech.</li>
+<li>Share trade secrets or confidential corporate information in violation of your employment contracts.</li>
+<li>Impersonate other individuals or entities.</li>
+<li>Attempt to circumvent our security measures or de-anonymize other users.</li>
+</ul>
+<h2>3. Intellectual Property</h2>
+<p>All content included on the platform, such as text, graphics, logos, and software, is the property of RAAZ or its content suppliers and protected by international copyright laws.</p>
+<h2>4. Limitation of Liability</h2>
+<p>RAAZ provides its services on an "as is" and "as available" basis. We make no warranties, expressed or implied, regarding the accuracy, reliability, or availability of the platform. In no event shall RAAZ be liable for any indirect, incidental, or consequential damages.</p>
+<h2>5. Changes to Terms</h2>
+<p>We reserve the right to modify these terms at any time. We will notify users of any significant changes via the platform or email. Your continued use of RAAZ following such changes constitutes your acceptance of the new terms.</p>
+</div>
+</div>
+</main>
+<!-- Footer from Shared Components -->
+<footer class="w-full rounded-t-xl bg-surface-container-low mt-xl border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xl max-w-7xl mx-auto">
+<div class="space-y-md">
+<div class="font-title-lg text-title-lg font-bold text-on-surface">RAAZ</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Secure, anonymous collaboration for the modern enterprise.</p>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-title-md text-title-md text-primary mb-xs">Product</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Features</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Community</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Release Notes</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-title-md text-title-md text-primary mb-xs">Company</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Careers</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Press Kit</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-title-md text-title-md text-primary mb-xs">Legal</h4>
+<a class="font-body-md text-body-md text-primary font-medium transition-all duration-300" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Terms &amp; Conditions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">FAQ</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Contact Us</a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-lg py-md border-t border-outline-variant/10 text-center md:text-left">
+<span class="font-body-md text-body-md text-on-surface-variant opacity-70">© 2024 RAAZ Anonymous. Built for privacy.</span>
+</div>
+</footer>
+<script>
+        function switchTab(tab) {
+            const privacyBtn = document.getElementById('tab-privacy');
+            const termsBtn = document.getElementById('tab-terms');
+            const privacyContent = document.getElementById('content-privacy');
+            const termsContent = document.getElementById('content-terms');
+
+            if (tab === 'privacy') {
+                privacyBtn.classList.add('tab-active');
+                privacyBtn.classList.remove('text-on-surface-variant');
+                termsBtn.classList.remove('tab-active');
+                termsBtn.classList.add('text-on-surface-variant');
+                
+                privacyContent.classList.remove('hidden');
+                termsContent.classList.add('hidden');
+                
+                // Reset scroll to top of content
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                termsBtn.classList.add('tab-active');
+                termsBtn.classList.remove('text-on-surface-variant');
+                privacyBtn.classList.remove('tab-active');
+                privacyBtn.classList.add('text-on-surface-variant');
+                
+                termsContent.classList.remove('hidden');
+                privacyContent.classList.add('hidden');
+                
+                // Reset scroll to top of content
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Ripple Effect for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '0';
+                ripple.style.height = '0';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transition = 'width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.style.width = Math.max(rect.width, rect.height) * 2 + 'px';
+                    ripple.style.height = Math.max(rect.width, rect.height) * 2 + 'px';
+                    ripple.style.opacity = '0';
+                }, 0);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 400);
+            });
+        });
+    </script>
+</body></html>

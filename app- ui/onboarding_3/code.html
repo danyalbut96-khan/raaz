@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>RAAZ - Onboarding</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#dce2f7",
+                    "on-background": "#141b2b",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d3daef",
+                    "primary-container": "#2563eb",
+                    "error": "#ba1a1a",
+                    "surface-container": "#e9edff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "background": "#f9f9ff",
+                    "secondary-container": "#2170e4",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#293040",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "surface-variant": "#dce2f7",
+                    "surface-container-high": "#e1e8fd",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "inverse-on-surface": "#edf0ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#0058be",
+                    "surface-container-low": "#f1f3ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-surface": "#141b2b",
+                    "outline": "#737686",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#196fc0",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "margin-tablet": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "auto",
+                    "2xl": "48px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            color: #141b2b;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .indicator-active {
+            width: 24px;
+            background-color: #004ac6;
+            transition: all 0.3s ease;
+        }
+        /* Glassmorphism for the bottom container */
+        .glass-panel {
+            background: rgba(249, 249, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col">
+<!-- Top Navigation Anchor (Suppressed based on Onboarding Context, but keeping visual consistency) -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-margin-mobile h-16 bg-surface/85 backdrop-blur-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<span class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 relative flex flex-col justify-center items-center overflow-hidden">
+<!-- Background Visual / Abstract Glassmorphic Shape -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="absolute -top-20 -right-20 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl opacity-50"></div>
+<div class="absolute top-1/2 -left-32 w-80 h-80 bg-secondary-container/10 rounded-full blur-3xl opacity-40"></div>
+</div>
+<!-- Hero Content Section -->
+<div class="z-10 w-full px-margin-mobile text-center max-w-lg">
+<div class="mb-12 relative flex justify-center items-center">
+<!-- Image Placeholder with detailed data-alt -->
+<div class="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl relative">
+<div class="bg-cover bg-center w-full h-full" data-alt="A highly professional and minimalist digital illustration of a stylized shield with a subtle glowing aura, floating in a clean, high-key studio environment. The aesthetic is ultra-modern, using a sophisticated color palette of deep sapphire blue and soft ivory whites. Smooth gradients and soft, diffused shadows create a premium glassmorphic depth. The mood is secure, private, and technologically advanced, perfectly reflecting a high-end anonymous sharing platform's visual identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAoMSPKusX-IL8xppTppSpFhRyQCf80ylt2kCu3HZu9h6oTUXStedTcStTLyG1L77aTiUeSb-sYu-nmGAcxoZ4CTcmoIMupqlLA1aCrCmEtxcMJlA7hfWSiLtg_e-Ah2EmXzGkjjd9yhjCnaf01MYPdhv51xF5c1oQkZJKGhb0n3xaaI00Q1aUr_LvzDVkd9EauYEqlr8RHFq5qDYtG4mewpox8Ro_O4MQWe6NKuNLXhN0gEu8TKee__JLn3WAe3lemOjl6Q0yrkLJz')"></div>
+</div>
+<!-- Float Accent Icons -->
+<div class="absolute -right-4 top-1/4 bg-surface-container-highest p-3 rounded-2xl shadow-lg border border-white/50 animate-bounce duration-[3000ms]">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="lock">lock</span>
+</div>
+<div class="absolute -left-2 bottom-1/4 bg-white p-3 rounded-2xl shadow-lg border border-white/50 animate-pulse duration-[4000ms]">
+<span class="material-symbols-outlined text-secondary text-2xl" data-icon="visibility_off">visibility_off</span>
+</div>
+</div>
+<div class="fade-in space-y-4">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background tracking-tight">
+                    Completely Anonymous
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">
+                    No signup. No login. Just your thoughts shared with the world.
+                </p>
+</div>
+</div>
+</main>
+<!-- Bottom Action Area -->
+<footer class="glass-panel w-full pt-8 pb-12 px-margin-mobile flex flex-col items-center space-y-8 z-20">
+<!-- Swipe Indicators -->
+<div class="flex gap-2">
+<div class="h-1.5 w-1.5 rounded-full bg-outline-variant"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-outline-variant"></div>
+<div class="h-1.5 indicator-active rounded-full"></div>
+</div>
+<!-- Primary Action -->
+<div class="w-full max-w-md">
+<button class="w-full h-14 bg-primary-container text-on-primary font-label-lg text-label-lg rounded-full shadow-lg shadow-primary/20 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 group">
+                Get Started
+                <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="mt-6 text-center">
+<p class="font-label-sm text-label-sm text-outline">
+                    By continuing, you agree to our <span class="text-primary font-medium">Terms of Privacy</span>
+</p>
+</div>
+</div>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelector('button').addEventListener('click', function() {
+            // Add a small feedback ripple or redirection logic mock
+            this.style.opacity = '0.7';
+            setTimeout(() => {
+                this.style.opacity = '1';
+            }, 200);
+        });
+    </script>
+</body></html>

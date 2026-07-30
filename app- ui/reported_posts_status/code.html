@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        .safe-pb {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#004ac6",
+                      "surface-container": "#e9edff",
+                      "on-secondary-container": "#fefcff",
+                      "secondary": "#0058be",
+                      "inverse-on-surface": "#edf0ff",
+                      "primary-fixed": "#dbe1ff",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "inverse-surface": "#293040",
+                      "inverse-primary": "#b4c5ff",
+                      "surface": "#f9f9ff",
+                      "on-surface": "#141b2b",
+                      "on-primary-container": "#eeefff",
+                      "on-primary-fixed": "#00174b",
+                      "surface-variant": "#dce2f7",
+                      "outline": "#737686",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#f1f3ff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#d4e3ff",
+                      "surface-tint": "#0053db",
+                      "secondary-container": "#2170e4",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#e1e8fd",
+                      "tertiary-container": "#196fc0",
+                      "primary-container": "#2563eb",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-tertiary-container": "#ebf1ff",
+                      "surface-container-highest": "#dce2f7",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "on-background": "#141b2b",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "on-surface-variant": "#434655",
+                      "tertiary": "#00569c",
+                      "background": "#f9f9ff",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#d3daef",
+                      "surface-bright": "#f9f9ff",
+                      "outline-variant": "#c3c6d7",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "on-secondary-fixed": "#001a42",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "secondary-fixed": "#d8e2ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "gutter": "16px",
+                      "md": "16px",
+                      "margin-mobile": "16px",
+                      "2xl": "48px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "margin-desktop": "auto",
+                      "base": "4px",
+                      "margin-tablet": "32px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface overflow-x-hidden pb-24">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile w-full h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary dark:text-primary-fixed-dim">RAAZ</h1>
+</div>
+<div class="flex items-center">
+<button class="p-2 hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+</header>
+<main class="mt-16 px-margin-mobile">
+<!-- Hero Section -->
+<div class="pt-8 pb-4">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-on-surface mb-1">Report Status</h2>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">Tracking your reports to keep our community safe.</p>
+</div>
+<!-- Sticky Tabs Navigation -->
+<div class="sticky top-16 z-40 bg-background pt-2 pb-4 -mx-margin-mobile px-margin-mobile overflow-x-auto no-scrollbar">
+<div class="flex space-x-2 bg-surface-container-low p-1.5 rounded-full">
+<button class="tab-btn flex-1 whitespace-nowrap px-4 py-2 rounded-full font-label-lg text-label-lg bg-primary-container text-on-primary-container transition-all duration-200 shadow-sm" id="tab-review" onclick="filterReports('review')">
+                    Under Review
+                </button>
+<button class="tab-btn flex-1 whitespace-nowrap px-4 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200" id="tab-approved" onclick="filterReports('approved')">
+                    Approved
+                </button>
+<button class="tab-btn flex-1 whitespace-nowrap px-4 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200" id="tab-removed" onclick="filterReports('removed')">
+                    Removed
+                </button>
+</div>
+</div>
+<!-- Reports Feed -->
+<div class="space-y-4 pt-2" id="reports-container">
+<!-- Under Review Items -->
+<div class="report-item" data-category="review">
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-surface-variant/20 hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60 mb-1">REF: RZ-4829</span>
+<h3 class="font-title-md text-title-md text-on-surface">Harassment Claim</h3>
+</div>
+<span class="flex items-center gap-1.5 px-3 py-1 bg-tertiary-container/20 text-tertiary font-label-lg text-label-lg rounded-full">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                            Under Review
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">"Reported for targeted harassment in a public sharing thread..."</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant/30">
+<span class="font-label-sm text-label-sm text-outline">Reported 2h ago</span>
+<button class="text-primary font-label-lg text-label-lg flex items-center gap-1">Details <span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+<div class="report-item" data-category="review">
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-surface-variant/20 hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60 mb-1">REF: RZ-9912</span>
+<h3 class="font-title-md text-title-md text-on-surface">Spam Content</h3>
+</div>
+<span class="flex items-center gap-1.5 px-3 py-1 bg-tertiary-container/20 text-tertiary font-label-lg text-label-lg rounded-full">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                            Under Review
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">"Multiple repetitive links posted across various anonymous discussions."</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant/30">
+<span class="font-label-sm text-label-sm text-outline">Reported 5h ago</span>
+<button class="text-primary font-label-lg text-label-lg flex items-center gap-1">Details <span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- Approved Items (Initially Hidden) -->
+<div class="report-item hidden" data-category="approved">
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-surface-variant/20">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60 mb-1">REF: RZ-3321</span>
+<h3 class="font-title-md text-title-md text-on-surface">Hate Speech</h3>
+</div>
+<span class="flex items-center gap-1.5 px-3 py-1 bg-secondary-container text-on-secondary-container font-label-lg text-label-lg rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Approved
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">This content has been flagged for further moderator action following your report. Thank you for helping keep RAAZ safe.</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant/30">
+<span class="font-label-sm text-label-sm text-outline">Resolved 1d ago</span>
+</div>
+</div>
+</div>
+<!-- Removed Items (Initially Hidden) -->
+<div class="report-item hidden" data-category="removed">
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-surface-variant/20">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60 mb-1">REF: RZ-1102</span>
+<h3 class="font-title-md text-title-md text-on-surface">Illegal Material</h3>
+</div>
+<span class="flex items-center gap-1.5 px-3 py-1 bg-error-container text-on-error-container font-label-lg text-label-lg rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">delete</span>
+                            Removed
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">The reported post has been permanently removed from the platform for violating core community guidelines.</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant/30">
+<span class="font-label-sm text-label-sm text-outline">Removed 2d ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Info Card -->
+<div class="mt-8 bg-surface-container-high/40 p-6 rounded-2xl border border-primary/5 mb-12">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<h4 class="font-title-md text-title-md text-on-surface">How reporting works</h4>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Your anonymity is preserved when reporting. Our moderation team reviews every flag within 24 hours to ensure community standards are upheld.
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 transition-colors active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        function filterReports(category) {
+            const items = document.querySelectorAll('.report-item');
+            const tabs = document.querySelectorAll('.tab-btn');
+            
+            // Update Tab UI
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-sm');
+                tab.classList.add('text-on-surface-variant', 'hover:bg-surface-variant');
+            });
+            
+            const activeTab = document.getElementById(`tab-${category}`);
+            activeTab.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-sm');
+            activeTab.classList.remove('text-on-surface-variant', 'hover:bg-surface-variant');
+
+            // Filter logic
+            items.forEach(item => {
+                if (item.getAttribute('data-category') === category) {
+                    item.classList.remove('hidden');
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initialize state
+        window.onload = () => {
+            // Under review is active by default
+        };
+    </script>
+</body></html>

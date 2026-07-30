@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Categories Management - RAAZ Phase 8</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .drag-handle:hover {
+            cursor: grab;
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+        /* Custom Toggle Style */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #2563eb;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #2563eb;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#dce2f7",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#001a42",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#d3daef",
+                      "on-surface": "#141b2b",
+                      "on-background": "#141b2b",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#e1e8fd",
+                      "on-primary-fixed": "#00174b",
+                      "primary-container": "#2563eb",
+                      "background": "#f9f9ff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-container-low": "#f1f3ff",
+                      "on-primary-container": "#eeefff",
+                      "secondary": "#0058be",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#fefcff",
+                      "primary": "#004ac6",
+                      "on-primary-container": "#ffffff",
+                      "surface": "#f9f9ff",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#dce2f7",
+                      "tertiary-fixed": "#d4e3ff",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#b4c5ff",
+                      "surface-bright": "#f9f9ff",
+                      "surface-container": "#e9edff",
+                      "outline-variant": "#c3c6d7",
+                      "on-surface-variant": "#434655",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-tertiary-fixed": "#001c39",
+                      "inverse-surface": "#293040",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-tint": "#0053db",
+                      "tertiary-container": "#196fc0",
+                      "secondary-container": "#2170e4",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "tertiary": "#00569c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "16px",
+                      "xl": "24px",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "container-margin": "24px",
+                      "sm": "8px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "title-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] z-50 bg-surface/70 backdrop-blur-xl border-r border-white/20 shadow-lg flex flex-col p-md space-y-xs">
+<div class="px-md py-lg mb-md">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">RAAZ Admin</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Phase 8 Moderation</p>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto">
+<!-- Active: Categories -->
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">article</span>
+<span class="font-label-lg text-label-lg">Posts</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">comment</span>
+<span class="font-label-lg text-label-lg">Comments</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">report</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<!-- Active Item -->
+<a class="flex items-center px-md py-sm rounded-lg bg-primary/10 text-primary border-l-4 border-primary font-bold" href="#">
+<span class="material-symbols-outlined mr-md">category</span>
+<span class="font-label-lg text-label-lg">Categories</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">auto_stories</span>
+<span class="font-label-lg text-label-lg">Daily Reflection</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">emoji_events</span>
+<span class="font-label-lg text-label-lg">Daily Challenge</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">star</span>
+<span class="font-label-lg text-label-lg">Featured Stories</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">notifications</span>
+<span class="font-label-lg text-label-lg">Notifications</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">analytics</span>
+<span class="font-label-lg text-label-lg">Analytics</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">ads_click</span>
+<span class="font-label-lg text-label-lg">Advertisements</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg transition-all hover:bg-primary/5 hover:text-primary group text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mr-md">history</span>
+<span class="font-label-lg text-label-lg">Activity Logs</span>
+</a>
+</nav>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 left-[280px] z-40 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-lg py-md">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 font-body-md text-body-md" placeholder="Search Categories..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-md">
+<button class="flex items-center space-x-sm px-md py-sm rounded-lg hover:bg-surface-container-high/50 transition-colors">
+<span class="material-symbols-outlined text-primary">bolt</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">Quick Actions</span>
+</button>
+<div class="flex items-center space-x-sm border-l border-outline-variant pl-md">
+<button class="p-sm rounded-full hover:bg-surface-container-high/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">contrast</span>
+</button>
+<button class="p-sm rounded-full hover:bg-surface-container-high/50 transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<img alt="Admin Profile" class="w-10 h-10 rounded-full border-2 border-primary/20 object-cover" data-alt="A professional headshot of a senior administrator in a modern office environment, soft cinematic lighting, neutral background, looking confident and approachable, 8k resolution, corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzR5o1CD0TvBeIjks0x8V1oyxjtuOq005U4MckmdOnH_hAdPSTSikomE9vu-9WGfYO3Jm-hkK3kzOtXDKHtaYaThSrJA2lMUHh_mr-SZOE8JSVV0MYScGsAMEyoIm8jYRDMybwE6lUFwmvW_5Sv4dHy4pwiQSQCTwKc8QJCQ-N7hkObKia_PjS26BCsoMbcppjtjxmK6YBYqxnTRx_Txr7RpzNExhwQ_KXxxlkq0AjAi5-524egY5zJrg5WFy0uGcLDYamhUlUfi6-"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[280px] pt-[80px] p-lg">
+<div class="max-w-[1440px] mx-auto space-y-lg">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Categories Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Organize and manage the taxonomy of your platform content.</p>
+</div>
+<button class="flex items-center space-x-sm px-xl py-md bg-primary text-on-primary rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-title-md text-title-md">Create New Category</span>
+</button>
+</div>
+<!-- Dashboard Statistics for Context -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white/20">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Total Categories</p>
+<h3 class="font-display-lg text-[32px] font-bold text-on-surface mt-xs">24</h3>
+</div>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-sm rounded-lg">folder</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white/20">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Active Now</p>
+<h3 class="font-display-lg text-[32px] font-bold text-on-surface mt-xs">18</h3>
+</div>
+<span class="material-symbols-outlined text-[#10B981] bg-[#10B981]/10 p-sm rounded-lg">check_circle</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white/20">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Avg. Posts / Cat</p>
+<h3 class="font-display-lg text-[32px] font-bold text-on-surface mt-xs">142</h3>
+</div>
+<span class="material-symbols-outlined text-secondary bg-secondary/10 p-sm rounded-lg">bar_chart</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white/20">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Pending Review</p>
+<h3 class="font-display-lg text-[32px] font-bold text-on-surface mt-xs">3</h3>
+</div>
+<span class="material-symbols-outlined text-error bg-error/10 p-sm rounded-lg">pending</span>
+</div>
+</div>
+</div>
+<!-- Categories List Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white/20 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-white/20">
+<th class="p-md w-12"></th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Category Name</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Icon</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider text-center">Number of Posts</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider text-center">Visibility</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody id="category-list">
+<!-- Category Item 1 -->
+<tr class="border-b border-surface-container-high/50 hover:bg-surface-container/30 transition-colors group">
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-outline-variant drag-handle">drag_indicator</span>
+</td>
+<td class="p-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">General Discussion</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">For any non-specific topics</span>
+</div>
+</td>
+<td class="p-md">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-sm rounded-lg">forum</span>
+</td>
+<td class="p-md text-center">
+<span class="font-body-md text-body-md text-on-surface">1,248</span>
+</td>
+<td class="p-md text-center">
+<div class="relative inline-block w-12 h-6 transition duration-200 ease-linear rounded-full focus-within:ring-2 focus-within:ring-primary/50">
+<input checked="" class="opacity-0 absolute w-6 h-6 z-10 cursor-pointer toggle-checkbox" type="checkbox"/>
+<div class="block h-6 rounded-full bg-outline-variant transition-colors toggle-label"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform transform duration-200 ease-in-out peer-checked:translate-x-6"></div>
+</div>
+</td>
+<td class="p-md text-right space-x-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-error hover:bg-error/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</td>
+</tr>
+<!-- Category Item 2 -->
+<tr class="border-b border-surface-container-high/50 hover:bg-surface-container/30 transition-colors group">
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-outline-variant drag-handle">drag_indicator</span>
+</td>
+<td class="p-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Tech &amp; Innovation</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Future-forward tech insights</span>
+</div>
+</td>
+<td class="p-md">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-sm rounded-lg">memory</span>
+</td>
+<td class="p-md text-center">
+<span class="font-body-md text-body-md text-on-surface">854</span>
+</td>
+<td class="p-md text-center">
+<div class="relative inline-block w-12 h-6 transition duration-200 ease-linear rounded-full">
+<input checked="" class="opacity-0 absolute w-6 h-6 z-10 cursor-pointer toggle-checkbox" type="checkbox"/>
+<div class="block h-6 rounded-full bg-outline-variant transition-colors toggle-label"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform transform"></div>
+</div>
+</td>
+<td class="p-md text-right space-x-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-error hover:bg-error/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</td>
+</tr>
+<!-- Category Item 3 -->
+<tr class="border-b border-surface-container-high/50 hover:bg-surface-container/30 transition-colors group">
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-outline-variant drag-handle">drag_indicator</span>
+</td>
+<td class="p-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Lifestyle &amp; Wellness</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Health, travel, and balance</span>
+</div>
+</td>
+<td class="p-md">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-sm rounded-lg">spa</span>
+</td>
+<td class="p-md text-center">
+<span class="font-body-md text-body-md text-on-surface">512</span>
+</td>
+<td class="p-md text-center">
+<div class="relative inline-block w-12 h-6 transition duration-200 ease-linear rounded-full">
+<input class="opacity-0 absolute w-6 h-6 z-10 cursor-pointer toggle-checkbox" type="checkbox"/>
+<div class="block h-6 rounded-full bg-outline-variant transition-colors toggle-label"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform transform"></div>
+</div>
+</td>
+<td class="p-md text-right space-x-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-error hover:bg-error/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</td>
+</tr>
+<!-- Category Item 4 -->
+<tr class="border-b border-surface-container-high/50 hover:bg-surface-container/30 transition-colors group">
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-outline-variant drag-handle">drag_indicator</span>
+</td>
+<td class="p-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Business Analysis</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Market trends and reports</span>
+</div>
+</td>
+<td class="p-md">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-sm rounded-lg">trending_up</span>
+</td>
+<td class="p-md text-center">
+<span class="font-body-md text-body-md text-on-surface">320</span>
+</td>
+<td class="p-md text-center">
+<div class="relative inline-block w-12 h-6 transition duration-200 ease-linear rounded-full">
+<input checked="" class="opacity-0 absolute w-6 h-6 z-10 cursor-pointer toggle-checkbox" type="checkbox"/>
+<div class="block h-6 rounded-full bg-outline-variant transition-colors toggle-label"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform transform translate-x-6"></div>
+</div>
+</td>
+<td class="p-md text-right space-x-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-error hover:bg-error/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Footer -->
+<div class="p-lg flex justify-between items-center bg-surface-container-low border-t border-white/20">
+<p class="font-body-md text-body-md text-on-surface-variant">Showing 1-10 of 24 categories</p>
+<div class="flex space-x-sm">
+<button class="p-sm border border-outline-variant rounded hover:bg-surface transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-md py-sm bg-primary text-on-primary rounded font-label-lg text-label-lg">1</button>
+<button class="px-md py-sm hover:bg-surface transition-colors rounded font-label-lg text-label-lg">2</button>
+<button class="px-md py-sm hover:bg-surface transition-colors rounded font-label-lg text-label-lg">3</button>
+<button class="p-sm border border-outline-variant rounded hover:bg-surface transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Detailed Management Bento Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Most Popular Categories -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white/20 col-span-1">
+<h4 class="font-title-md text-title-md text-on-surface mb-lg">Traffic Distribution</h4>
+<div class="space-y-md">
+<div class="space-y-xs">
+<div class="flex justify-between font-label-lg text-label-lg">
+<span class="text-on-surface">Tech</span>
+<span class="text-on-surface-variant">42%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 42%"></div>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-label-lg text-label-lg">
+<span class="text-on-surface">Lifestyle</span>
+<span class="text-on-surface-variant">28%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 28%"></div>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-label-lg text-label-lg">
+<span class="text-on-surface">Business</span>
+<span class="text-on-surface-variant">18%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 18%"></div>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-label-lg text-label-lg">
+<span class="text-on-surface">Others</span>
+<span class="text-on-surface-variant">12%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-outline-variant h-full rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0px_2px_4px_rgba(17,24,39,0.05)] border border-white/20 col-span-2">
+<h4 class="font-title-md text-title-md text-on-surface mb-lg">Modification History</h4>
+<div class="space-y-md">
+<div class="flex items-center space-x-md pb-md border-b border-surface-container-high/50">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface"><span class="font-bold">Alex Miller</span> created <span class="font-bold">Cyber Security</span> category.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center space-x-md pb-md border-b border-surface-container-high/50">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">edit</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface"><span class="font-bold">Sarah Chen</span> updated icons for <span class="font-bold">Lifestyle</span>.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">5 hours ago</p>
+</div>
+</div>
+<div class="flex items-center space-x-md">
+<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error">visibility_off</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface"><span class="font-bold">System</span> disabled <span class="font-bold">Old Archive</span> category automatically.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Yesterday, 10:45 PM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Contextual) -->
+<button class="fixed bottom-lg right-lg w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 z-50">
+<span class="material-symbols-outlined">help</span>
+</button>
+<script>
+        // Custom micro-interactions for the drag handles and toggle
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const circle = this.parentElement.querySelector('div:last-child');
+                if(this.checked) {
+                    circle.style.transform = 'translateX(24px)';
+                } else {
+                    circle.style.transform = 'translateX(0)';
+                }
+            });
+        });
+
+        // Simple Drag and Drop UI Simulation (Visual only)
+        const categoryRows = document.querySelectorAll('#category-list tr');
+        categoryRows.forEach(row => {
+            const handle = row.querySelector('.drag-handle');
+            handle.addEventListener('mousedown', () => {
+                row.classList.add('opacity-50', 'bg-primary/5');
+            });
+            window.addEventListener('mouseup', () => {
+                row.classList.remove('opacity-50', 'bg-primary/5');
+            });
+        });
+
+        // Initialize Toggle states visually
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            const circle = toggle.parentElement.querySelector('div:last-child');
+            if(toggle.checked) {
+                circle.style.transform = 'translateX(24px)';
+            }
+        });
+    </script>
+</body></html>

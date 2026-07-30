@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ - Phase 4 Dialogs &amp; Bottom Sheets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#dce2f7",
+                    "outline-variant": "#c3c6d7",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#434655",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-primary-container": "#eeefff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0058be",
+                    "on-surface": "#141b2b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#00569c",
+                    "on-primary-fixed": "#00174b",
+                    "on-background": "#141b2b",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-container": "#196fc0",
+                    "on-error": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "secondary-container": "#2170e4",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "surface-container-high": "#e1e8fd",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-surface": "#293040",
+                    "inverse-primary": "#b4c5ff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#2563eb",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-bright": "#f9f9ff",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed": "#001c39",
+                    "primary": "#004ac6",
+                    "surface-variant": "#dce2f7",
+                    "outline": "#737686",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f1f3ff",
+                    "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-desktop": "auto",
+                    "margin-tablet": "32px",
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-sheet {
+            backdrop-filter: blur(20px);
+            background-color: rgba(249, 249, 255, 0.85);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c3c6d7;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl flex items-center justify-between px-margin-mobile h-16 transition-opacity hover:opacity-80">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter text-primary">RAAZ</h1>
+</div>
+<div class="flex items-center gap-md text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer active:scale-95 duration-200" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-label-lg">JD</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile max-w-screen-xl mx-auto">
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Interface Components</h2>
+<p class="text-body-lg text-on-surface-variant">Reviewing Stage 4 interactions: Dialogs and Bottom Sheets.</p>
+</div>
+<!-- Bento Grid for Previewing States -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- 1. Achievement Unlocked Dialog -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-tertiary-container rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-on-teriary text-4xl" data-icon="emoji_events" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-xs">Achievement Unlocked</h3>
+<p class="text-body-md text-on-surface-variant mb-lg">You've reached a 7-day reflection streak! Your mental resilience is growing.</p>
+<div class="flex gap-md w-full">
+<button class="flex-1 bg-primary text-on-primary py-2 rounded-full font-label-lg active:scale-95 transition-transform">Share</button>
+<button class="flex-1 border border-outline text-primary py-2 rounded-full font-label-lg active:scale-95 transition-transform">Great</button>
+</div>
+</div>
+<!-- 2. Reflection Submitted Dialog -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-secondary-container/20 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="task_alt">task_alt</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-xs">Reflection Submitted</h3>
+<p class="text-body-md text-on-surface-variant mb-lg">Your thoughts have been encrypted and stored safely. Peace of mind secured.</p>
+<button class="w-full bg-primary-container text-on-primary-container py-2 rounded-full font-label-lg active:scale-95 transition-transform">View Journal</button>
+</div>
+<!-- 3. Letter Saved Dialog -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-lg border border-outline-variant/20">
+<div class="flex items-start gap-md mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="drafts">drafts</span>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md">Letter Saved</h3>
+<p class="text-body-md text-on-surface-variant">Your unsent letter to "Future Me" has been saved to drafts.</p>
+</div>
+</div>
+<div class="flex justify-end gap-md">
+<button class="text-primary font-label-lg px-md py-1 active:scale-95">Discard</button>
+<button class="text-primary font-label-lg px-md py-1 active:scale-95">Keep Editing</button>
+</div>
+</div>
+<!-- 4. Bookmark Saved Dialog -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-md" data-icon="bookmark_added" style="font-variation-settings: 'FILL' 1;">bookmark_added</span>
+<h3 class="font-title-lg text-title-lg mb-xs">Bookmark Saved</h3>
+<p class="text-body-md text-on-surface-variant mb-lg">Added to your "Healing" collection.</p>
+<button class="text-primary font-label-lg hover:underline">Change Folder</button>
+</div>
+<!-- 5. Challenge Completed Dialog -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-lg border border-outline-variant/20 text-center">
+<div class="relative w-24 h-24 mx-auto mb-md">
+<svg class="w-full h-full rotate-[-90deg]" viewbox="0 0 36 36">
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e9edff" stroke-width="2"></path>
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#2563eb" stroke-dasharray="100, 100" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="celebration">celebration</span>
+</div>
+</div>
+<h3 class="font-title-lg text-title-lg mb-xs">Challenge Completed</h3>
+<p class="text-body-md text-on-surface-variant mb-lg">You finished "Digital Detox". Enjoy your +50 XP!</p>
+<button class="w-full bg-secondary text-on-secondary py-2 rounded-full font-label-lg active:scale-95 transition-transform">Claim Rewards</button>
+</div>
+<!-- 6. Feedback Submitted Dialog -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="thumb_up">thumb_up</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-xs">Feedback Received</h3>
+<p class="text-body-md text-on-surface-variant mb-lg">Thank you for helping us improve the anonymous ecosystem.</p>
+<button class="px-lg py-2 text-primary font-label-lg border border-primary rounded-full hover:bg-primary-container/10">Close</button>
+</div>
+</div>
+<!-- Bottom Sheet Visualizations (Represented as Overlay Previews) -->
+<div class="mt-2xl space-y-lg">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Interactive Sheets</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+<!-- Avatar Picker Sheet -->
+<div class="bg-surface-container shadow-xl rounded-t-3xl overflow-hidden flex flex-col h-[400px]">
+<div class="w-12 h-1 bg-outline-variant rounded-full mx-auto mt-4 mb-lg"></div>
+<div class="px-lg mb-md">
+<h3 class="font-title-lg text-title-lg">Choose Your Avatar</h3>
+<p class="text-body-md text-on-surface-variant">Maintain anonymity with a unique persona.</p>
+</div>
+<div class="grid grid-cols-4 gap-md px-lg overflow-y-auto pb-lg custom-scrollbar">
+<!-- Simulated Avatars -->
+<div class="aspect-square rounded-full bg-blue-100 border-2 border-primary flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-primary" data-icon="face">face</span>
+</div>
+<div class="aspect-square rounded-full bg-slate-200 flex items-center justify-center cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-slate-600" data-icon="mood">mood</span>
+</div>
+<div class="aspect-square rounded-full bg-amber-100 flex items-center justify-center cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-amber-600" data-icon="cruelty_free">cruelty_free</span>
+</div>
+<div class="aspect-square rounded-full bg-emerald-100 flex items-center justify-center cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-emerald-600" data-icon="psychology">psychology</span>
+</div>
+<div class="aspect-square rounded-full bg-purple-100 flex items-center justify-center cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-purple-600" data-icon="rocket">rocket</span>
+</div>
+<div class="aspect-square rounded-full bg-rose-100 flex items-center justify-center cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-rose-600" data-icon="forest">forest</span>
+</div>
+<div class="aspect-square rounded-full bg-orange-100 flex items-center justify-center cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-orange-600" data-icon="local_fire_department">local_fire_department</span>
+</div>
+<div class="aspect-square rounded-full bg-indigo-100 flex items-center justify-center cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-indigo-600" data-icon="ac_unit">ac_unit</span>
+</div>
+</div>
+<div class="p-lg bg-surface-container-high border-t border-outline-variant/10">
+<button class="w-full bg-primary text-on-primary py-3 rounded-full font-label-lg shadow-md">Set Persona</button>
+</div>
+</div>
+<!-- Letter Categories Sheet -->
+<div class="bg-surface-container shadow-xl rounded-t-3xl overflow-hidden flex flex-col h-[400px]">
+<div class="w-12 h-1 bg-outline-variant rounded-full mx-auto mt-4 mb-lg"></div>
+<div class="px-lg mb-md">
+<h3 class="font-title-lg text-title-lg">Letter Category</h3>
+<p class="text-body-md text-on-surface-variant">Sort your thoughts for better reflection.</p>
+</div>
+<div class="flex flex-col px-lg divide-y divide-outline-variant/20 overflow-y-auto pb-lg custom-scrollbar">
+<div class="py-md flex items-center gap-md cursor-pointer hover:bg-surface-container-high px-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="favorite">favorite</span>
+<span class="text-body-lg flex-1">Gratitude</span>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="py-md flex items-center gap-md cursor-pointer hover:bg-surface-container-high px-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="cloud">cloud</span>
+<span class="text-body-lg flex-1">Forgiveness</span>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="py-md flex items-center gap-md cursor-pointer hover:bg-surface-container-high px-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="self_improvement">self_improvement</span>
+<span class="text-body-lg flex-1">Personal Growth</span>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="py-md flex items-center gap-md cursor-pointer hover:bg-surface-container-high px-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="history">history</span>
+<span class="text-body-lg flex-1">Past Memories</span>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="py-md flex items-center gap-md cursor-pointer hover:bg-surface-container-high px-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+<span class="text-body-lg flex-1">Future Goals</span>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Accent Color Picker Sheet (Mockup) -->
+<div class="bg-surface-container shadow-xl rounded-t-3xl overflow-hidden flex flex-col h-[400px] lg:col-span-2">
+<div class="w-12 h-1 bg-outline-variant rounded-full mx-auto mt-4 mb-lg"></div>
+<div class="px-lg mb-md flex justify-between items-center">
+<div>
+<h3 class="font-title-lg text-title-lg">App Accent Color</h3>
+<p class="text-body-md text-on-surface-variant">Personalize your safe space.</p>
+</div>
+<button class="text-primary font-label-lg">Reset to Default</button>
+</div>
+<div class="flex flex-wrap gap-lg px-lg justify-center py-lg">
+<div class="w-14 h-14 rounded-full bg-[#004ac6] ring-offset-4 ring-2 ring-primary cursor-pointer"></div>
+<div class="w-14 h-14 rounded-full bg-[#ba1a1a] cursor-pointer"></div>
+<div class="w-14 h-14 rounded-full bg-[#006e1c] cursor-pointer"></div>
+<div class="w-14 h-14 rounded-full bg-[#6d17da] cursor-pointer"></div>
+<div class="w-14 h-14 rounded-full bg-[#7a5900] cursor-pointer"></div>
+<div class="w-14 h-14 rounded-full bg-[#006874] cursor-pointer"></div>
+<div class="w-14 h-14 rounded-full bg-[#1b5ead] cursor-pointer"></div>
+<div class="w-14 h-14 rounded-full bg-[#9c4200] cursor-pointer"></div>
+</div>
+<div class="mt-auto px-lg pb-lg">
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center justify-between border border-outline-variant/30">
+<div class="flex items-center gap-md">
+<div class="w-4 h-4 rounded-full bg-primary"></div>
+<span class="font-label-lg">Electric Indigo (Current)</span>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-surface/85 dark:bg-surface-dim/85 backdrop-blur-xl rounded-t-xl shadow-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 transition-colors hover:bg-surface-variant/50 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 transition-colors hover:bg-surface-variant/50 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 transition-colors hover:bg-surface-variant/50 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-90 duration-150 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</div>
+</nav>
+<script>
+        // Simple Micro-interaction for active scaling
+        document.querySelectorAll('button, .cursor-pointer').forEach(el => {
+            el.addEventListener('mousedown', () => el.classList.add('scale-95'));
+            el.addEventListener('mouseup', () => el.classList.remove('scale-95'));
+            el.addEventListener('mouseleave', () => el.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>

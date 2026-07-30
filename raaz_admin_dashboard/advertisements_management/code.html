@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAAZ Admin - Advertisements Management</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "secondary-container": "#2170e4",
+                    "primary-container": "#2563eb",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-dim": "#d3daef",
+                    "primary-fixed": "#dbe1ff",
+                    "on-primary-container": "#eeefff",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#ebf1ff",
+                    "secondary": "#0058be",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "primary": "#004ac6",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#00569c",
+                    "on-error-container": "#93000a",
+                    "on-background": "#141b2b",
+                    "surface-variant": "#dce2f7",
+                    "on-primary-fixed": "#00174b",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-secondary-container": "#fefcff",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "inverse-surface": "#293040",
+                    "surface-container-low": "#f1f3ff",
+                    "surface-container-high": "#e1e8fd",
+                    "on-surface": "#141b2b",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-surface-variant": "#434655",
+                    "surface-bright": "#f9f9ff",
+                    "outline-variant": "#c3c6d7",
+                    "tertiary-fixed": "#d4e3ff",
+                    "tertiary-container": "#196fc0",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-tertiary-fixed": "#001c39",
+                    "surface-container-highest": "#dce2f7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#0053db",
+                    "outline": "#737686"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "container-margin": "24px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        /* Custom Toggle Switch Style */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #004ac6; }
+        input:checked + .slider:before { transform: translateX(20px); }
+        
+        /* Level 1 Shadow */
+        .shadow-level-1 { box-shadow: 0px 2px 4px rgba(17, 24, 39, 0.05); }
+        /* Level 2 Shadow */
+        .shadow-level-2 { box-shadow: 0px 4px 12px rgba(17, 24, 39, 0.08); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] z-50 bg-surface/70 glass-panel border-r border-white/20 shadow-lg flex flex-col p-md space-y-xs hidden md:flex">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">RAAZ</h1>
+<p class="text-on-surface-variant font-label-sm">Phase 8 Moderation</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Navigation Mapping from JSON -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">article</span>
+<span class="font-label-lg">Posts</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">comment</span>
+<span class="font-label-lg">Comments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">report</span>
+<span class="font-label-lg">Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-lg">Categories</span>
+</a>
+<!-- Active Item: Advertisements -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary/10 text-primary border-l-4 border-primary font-bold active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">ads_click</span>
+<span class="font-label-lg">Advertisements</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-lg">Analytics</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg">Settings</span>
+</a>
+</nav>
+<div class="pt-md border-t border-white/20">
+<div class="flex items-center gap-md px-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<div class="overflow-hidden">
+<p class="font-label-lg truncate">Admin User</p>
+<p class="text-xs text-on-surface-variant">System Overseer</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-[280px] min-h-screen flex flex-col">
+<!-- TopAppBar (Shared Component) -->
+<header class="sticky top-0 z-40 bg-surface/70 glass-panel border-b border-white/20 shadow-sm">
+<div class="flex justify-between items-center w-full px-lg py-md max-w-[1440px] mx-auto">
+<div class="flex items-center gap-lg">
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:flex items-center bg-surface-container-low rounded-xl px-md py-xs border border-outline/10 focus-within:ring-2 ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64" placeholder="Search campaigns..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm rounded-full text-on-surface-variant hover:bg-surface-container-high/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-sm rounded-full text-on-surface-variant hover:bg-surface-container-high/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="h-8 w-[1px] bg-outline/20 mx-xs"></div>
+<button class="flex items-center gap-xs bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg shadow-sm hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>New Campaign</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-lg max-w-[1440px] mx-auto w-full space-y-lg">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-background">Advertisements Management</h2>
+<p class="text-on-surface-variant font-body-lg">Configure ad delivery and monitor real-time performance across all slots.</p>
+</div>
+<div class="flex gap-sm">
+<div class="bg-surface-container-high px-md py-sm rounded-lg flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-label-lg font-medium">Network Status: Optimal</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid - Stats & Configuration -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Ad Statistics Section -->
+<div class="lg:col-span-8 space-y-lg">
+<div class="bg-surface-container-lowest p-xl rounded-xl shadow-level-1 border border-outline-variant/30">
+<div class="flex items-center justify-between mb-xl">
+<h3 class="font-title-lg text-title-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+                                Ad Statistics
+                            </h3>
+<div class="flex items-center gap-xs bg-surface-container-low p-xs rounded-lg">
+<button class="px-md py-xs rounded-md text-label-sm font-bold bg-surface-container-lowest shadow-sm">24H</button>
+<button class="px-md py-xs rounded-md text-label-sm text-on-surface-variant hover:bg-surface-container-highest/50 transition-all">7D</button>
+<button class="px-md py-xs rounded-md text-label-sm text-on-surface-variant hover:bg-surface-container-highest/50 transition-all">30D</button>
+</div>
+</div>
+<!-- Stats Overview Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+<div class="bg-primary/5 p-lg rounded-xl border border-primary/10">
+<p class="text-on-surface-variant font-label-sm mb-xs">TOTAL REVENUE</p>
+<p class="font-display-lg text-[32px] text-primary">$12,482.50</p>
+<div class="flex items-center gap-xs text-green-600 mt-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-xs font-bold">+12.4% vs last period</span>
+</div>
+</div>
+<div class="bg-secondary/5 p-lg rounded-xl border border-secondary/10">
+<p class="text-on-surface-variant font-label-sm mb-xs">IMPRESSIONS</p>
+<p class="font-display-lg text-[32px] text-secondary">8.2M</p>
+<div class="flex items-center gap-xs text-green-600 mt-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-xs font-bold">+4.1% vs last period</span>
+</div>
+</div>
+<div class="bg-tertiary/5 p-lg rounded-xl border border-tertiary/10">
+<p class="text-on-surface-variant font-label-sm mb-xs">AVG. CTR</p>
+<p class="font-display-lg text-[32px] text-tertiary">2.14%</p>
+<div class="flex items-center gap-xs text-error mt-sm">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span class="text-xs font-bold">-0.8% vs last period</span>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant/30 text-on-surface-variant">
+<th class="py-md font-label-lg">Ad Slot</th>
+<th class="py-md font-label-lg">Impressions</th>
+<th class="py-md font-label-lg">Clicks</th>
+<th class="py-md font-label-lg">CTR</th>
+<th class="py-md font-label-lg text-right">Revenue</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-lg">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-md">view_stream</span>
+</div>
+<span class="font-title-md">Global Banner Top</span>
+</div>
+</td>
+<td class="py-lg text-body-lg">4,201,154</td>
+<td class="py-lg text-body-lg">42,012</td>
+<td class="py-lg text-body-lg">1.00%</td>
+<td class="py-lg text-right font-bold">$4,201.15</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-lg">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-md">article</span>
+</div>
+<span class="font-title-md">Native In-feed</span>
+</div>
+</td>
+<td class="py-lg text-body-lg">3,120,442</td>
+<td class="py-lg text-body-lg">124,817</td>
+<td class="py-lg text-body-lg">4.00%</td>
+<td class="py-lg text-right font-bold">$6,240.88</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-lg">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-md">stars</span>
+</div>
+<span class="font-title-md">Rewarded Video</span>
+</div>
+</td>
+<td class="py-lg text-body-lg">892,100</td>
+<td class="py-lg text-body-lg">26,763</td>
+<td class="py-lg text-body-lg">3.00%</td>
+<td class="py-lg text-right font-bold">$2,040.47</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Live Revenue Stream (Micro Interaction Idea) -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-level-1 border border-outline-variant/30">
+<div class="flex items-center justify-between mb-md">
+<h4 class="font-label-lg uppercase tracking-wider text-on-surface-variant">Live Traffic Heatmap</h4>
+<span class="text-xs text-on-surface-variant">Auto-updating every 5s</span>
+</div>
+<div class="h-32 w-full rounded-lg overflow-hidden relative">
+
+<div class="absolute inset-0 flex items-center justify-center">
+<p class="text-label-sm font-bold text-primary bg-white/80 px-md py-xs rounded-full shadow-sm">Real-time engagement surge in Southeast Asia</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Visual Configuration / Slots Panel -->
+<div class="lg:col-span-4 space-y-lg">
+<div class="bg-surface-container-lowest p-xl rounded-xl shadow-level-1 border border-outline-variant/30 h-full">
+<h3 class="font-title-lg text-title-lg mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">settings_input_component</span>
+                            Slot Configuration
+                        </h3>
+<div class="space-y-xl">
+<!-- Slot 1: Banner -->
+<div class="p-lg rounded-xl bg-surface-container-low/30 border border-outline-variant/20 hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start mb-lg">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">rectangle</span>
+</div>
+<div>
+<p class="font-title-md">Banner Ads</p>
+<p class="text-xs text-on-surface-variant">320 x 50 / 728 x 90</p>
+</div>
+</div>
+<label class="switch">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Refresh Rate</span>
+<span class="font-medium">30 seconds</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Floor Price</span>
+<span class="font-medium text-green-600">$0.45 CPM</span>
+</div>
+</div>
+<button class="mt-lg w-full py-sm border border-outline-variant rounded-lg font-label-lg hover:bg-surface-container-high transition-all text-primary">Edit Rules</button>
+</div>
+<!-- Slot 2: Native -->
+<div class="p-lg rounded-xl bg-surface-container-low/30 border border-outline-variant/20 hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start mb-lg">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[28px]">article</span>
+</div>
+<div>
+<p class="font-title-md">Native Ads</p>
+<p class="text-xs text-on-surface-variant">Fluid / Contextual</p>
+</div>
+</div>
+<label class="switch">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Frequency Cap</span>
+<span class="font-medium">2 per session</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Visual Style</span>
+<span class="font-medium">Seamless In-feed</span>
+</div>
+</div>
+<button class="mt-lg w-full py-sm border border-outline-variant rounded-lg font-label-lg hover:bg-surface-container-high transition-all text-secondary">Preview Native</button>
+</div>
+<!-- Slot 3: Rewarded -->
+<div class="p-lg rounded-xl bg-surface-container-low/30 border border-outline-variant/20 hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start mb-lg">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[28px]">stars</span>
+</div>
+<div>
+<p class="font-title-md">Rewarded Ads</p>
+<p class="text-xs text-on-surface-variant">Fullscreen Video</p>
+</div>
+</div>
+<label class="switch">
+<input type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">User Reward</span>
+<span class="font-medium">10 Credits</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Completion Rate</span>
+<span class="font-medium">92%</span>
+</div>
+</div>
+<div class="mt-lg flex gap-md">
+<div class="flex-1 text-center bg-error-container text-on-error-container p-xs rounded text-[10px] font-bold">DISABLED</div>
+<button class="flex-[2] py-sm border border-outline-variant rounded-lg font-label-lg hover:bg-surface-container-high transition-all text-tertiary">Settings</button>
+</div>
+</div>
+</div>
+<div class="mt-xl p-lg rounded-xl bg-inverse-surface text-inverse-on-surface">
+<p class="font-label-lg mb-sm">Campaign Alert</p>
+<p class="text-body-md opacity-80 mb-md">"Holiday Boost 2024" campaign ends in 4 hours. No successor campaign scheduled.</p>
+<button class="w-full py-sm bg-primary text-on-primary rounded-lg font-label-lg">Quick Schedule</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Campaign Manager Area -->
+<section class="bg-surface-container-lowest p-xl rounded-xl shadow-level-1 border border-outline-variant/30">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-xl">
+<h3 class="font-title-lg text-title-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">campaign</span>
+                        Active Campaigns
+                    </h3>
+<div class="flex gap-md overflow-x-auto pb-xs">
+<span class="px-lg py-sm bg-primary/10 text-primary rounded-full font-label-lg whitespace-nowrap cursor-pointer">All (24)</span>
+<span class="px-lg py-sm hover:bg-surface-container-high rounded-full font-label-lg whitespace-nowrap cursor-pointer text-on-surface-variant transition-colors">Direct Deals (8)</span>
+<span class="px-lg py-sm hover:bg-surface-container-high rounded-full font-label-lg whitespace-nowrap cursor-pointer text-on-surface-variant transition-colors">Programmatic (16)</span>
+</div>
+</div>
+<!-- Horizontal Campaign Cards -->
+<div class="space-y-md">
+<div class="p-lg rounded-xl border border-outline-variant/30 flex flex-col lg:flex-row lg:items-center gap-xl hover:shadow-level-2 transition-all">
+<div class="flex items-center gap-lg flex-1">
+<div class="w-16 h-16 rounded-xl bg-surface-container-high overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional high-tech brand advertisement visual with a deep blue and neon blue color palette. The image shows abstract data flows and a sleek tech gadget, emphasizing precision and innovation in a corporate modern style with glassmorphic accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsgQmjFqmhiWNcESdfuBr_f0tgErV0LgfZ2OfqolE3vP7lmnmPNRLRnoN8Vx8CIjF3BIAIvvSNXPquPg3KDHTYGltfl0KRkSskrwSdWLxTu6fxvWDteTmhtS-GbkaMdcyo_d6JSr9cpbl8mGCM6AWUWF1G1APZHHKj7Fn2f67NpA3Gpc11UBfAq2_BG9C6OciTEBIAPOMMlhNnpMIcLQhg37xbbEov7G6WzdLv-tkrqN0HeUl_ueHJNLl8lwugw4cCDh9NmBa_bCYn"/>
+</div>
+<div>
+<h4 class="font-title-md">Premium Tech Gear - Launch</h4>
+<p class="text-sm text-on-surface-variant">Client: Nexus Innovations | Ends Dec 24</p>
+</div>
+</div>
+<div class="flex gap-xl text-center">
+<div>
+<p class="text-xs text-on-surface-variant mb-xs">STATUS</p>
+<span class="bg-green-100 text-green-700 px-md py-xs rounded-full text-xs font-bold uppercase">Delivering</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant mb-xs">BUDGET</p>
+<p class="font-bold">$25,000</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant mb-xs">SPENT</p>
+<p class="font-bold text-primary">78%</p>
+</div>
+</div>
+<div class="flex gap-md">
+<button class="p-sm rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">pause</span>
+</button>
+<button class="p-sm rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">edit</span>
+</button>
+<button class="p-sm rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-lg rounded-xl border border-outline-variant/30 flex flex-col lg:flex-row lg:items-center gap-xl hover:shadow-level-2 transition-all">
+<div class="flex items-center gap-lg flex-1">
+<div class="w-16 h-16 rounded-xl bg-surface-container-high overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A lifestyle and travel advertisement visual featuring a serene luxury resort at sunset. Warm golden lighting reflects off a tranquil infinity pool, with a soft blur on the modern architecture in the background. Minimalist layout with deep blue accents to match the corporate design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIN7PPV84VGJwvq3vlNiGWgkeX-v0WKG9pcsLGl2JHGQpcgdMJKNi7EUPubsP6ILJbncRtEQRPeAYUHVGMo7MyBoqty75zLoVrYWAp6sZJpZF1p6-TaDdSMMlwH_3nKdRYKFZxB99i7EluAaIdaqYb2jeZRsTufjY5SdGkHGajjlWyrtmh8lmVL_v4kl68QfsoTLI-22mjR7VhAMKwuC-kPifbroimxCQkP23qdgNS-KX3fvbJuh57Po6so8QSoZa0cltN1Gso_g8K"/>
+</div>
+<div>
+<h4 class="font-title-md">Global Wanderlust - Winter Edition</h4>
+<p class="text-sm text-on-surface-variant">Client: Horizon Travels | Ends Jan 15</p>
+</div>
+</div>
+<div class="flex gap-xl text-center">
+<div>
+<p class="text-xs text-on-surface-variant mb-xs">STATUS</p>
+<span class="bg-primary/10 text-primary px-md py-xs rounded-full text-xs font-bold uppercase">Scheduled</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant mb-xs">BUDGET</p>
+<p class="font-bold">$12,000</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant mb-xs">SPENT</p>
+<p class="font-bold text-on-surface-variant">0%</p>
+</div>
+</div>
+<div class="flex gap-md">
+<button class="p-sm rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">play_arrow</span>
+</button>
+<button class="p-sm rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">edit</span>
+</button>
+<button class="p-sm rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual FAB (Mobile Only or Screen Primary Action) -->
+<button class="md:hidden fixed right-lg bottom-lg w-16 h-16 rounded-full bg-primary text-on-primary shadow-xl flex items-center justify-center z-50 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<script>
+        // Micro-interactions and real-time feel
+        document.querySelectorAll('.switch input').forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                const parent = e.target.closest('.p-lg');
+                if(!e.target.checked) {
+                    parent.classList.add('opacity-60', 'grayscale-[0.5]');
+                } else {
+                    parent.classList.remove('opacity-60', 'grayscale-[0.5]');
+                }
+            });
+        });
+
+        // Simulating live stat updates
+        setInterval(() => {
+            const revenueEl = document.querySelector('.text-primary.font-display-lg');
+            if (revenueEl) {
+                let current = parseFloat(revenueEl.innerText.replace(/[$,]/g, ''));
+                current += (Math.random() * 2);
+                revenueEl.innerText = '$' + current.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+        }, 5000);
+    </script>
+</body></html>
