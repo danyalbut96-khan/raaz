@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'main.dart';
+import 'onboarding_screen_3.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -207,7 +210,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
                           ),
                           const Spacer(),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (_) => const OnboardingScreen3()),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: primaryColor,
                               foregroundColor: Colors.white,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'splash_screen.dart';
+import 'settings_screen.dart';
+import 'home_feed_screen.dart';
 
 void main() {
   runApp(const RaazApp());
@@ -33,9 +35,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _screens = <Widget>[
-    WelcomeScreen(),
-    Center(child: Text('Reflections')),
-    Center(child: Text('Letters')),
+    HomeFeedScreen(),
+    Center(child: Text('Explore (Coming Soon)')),
+    Center(child: Text('Post (Coming Soon)')),
+    Center(child: Text('Alerts (Coming Soon)')),
+    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -47,10 +51,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('RAAZ'),
-        centerTitle: true,
-      ),
       body: _screens.elementAt(_selectedIndex),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
@@ -59,49 +59,27 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Feed',
           ),
           NavigationDestination(
-            icon: Icon(Icons.book_outlined),
-            selectedIcon: Icon(Icons.book),
-            label: 'Reflections',
+            icon: Icon(Icons.search_outlined),
+            selectedIcon: Icon(Icons.search),
+            label: 'Explore',
           ),
           NavigationDestination(
-            icon: Icon(Icons.mail_outline),
-            selectedIcon: Icon(Icons.mail),
-            label: 'Letters',
+            icon: Icon(Icons.add_circle_outline),
+            selectedIcon: Icon(Icons.add_circle),
+            label: 'Post',
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(Icons.spa, size: 80, color: Colors.deepPurpleAccent),
-          SizedBox(height: 20),
-          Text(
-            'Welcome to RAAZ',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+          NavigationDestination(
+            icon: Icon(Icons.notifications_outlined),
+            selectedIcon: Icon(Icons.notifications),
+            label: 'Alerts',
           ),
-          SizedBox(height: 10),
-          Text(
-            'A safe space for authentic expression.',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
-            ),
+          NavigationDestination(
+            icon: Icon(Icons.settings_outlined),
+            selectedIcon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
       ),
