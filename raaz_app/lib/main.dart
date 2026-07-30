@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'splash_screen.dart';
 
 void main() {
   runApp(const RaazApp());
@@ -15,7 +16,7 @@ class RaazApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
         useMaterial3: true,
       ),
-      home: const MainNavigationScreen(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
