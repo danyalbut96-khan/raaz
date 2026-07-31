@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
+import 'data/models/post_model.dart';
+import 'data/models/category_model.dart';
+import 'data/repositories/post_repository.dart';
 
 class EditPostScreen extends StatefulWidget {
-  const EditPostScreen({super.key});
+  final PostModel post;
+  const EditPostScreen({super.key, required this.post});
 
   @override
   State<EditPostScreen> createState() => _EditPostScreenState();
 }
 
 class _EditPostScreenState extends State<EditPostScreen> {
-  final TextEditingController _textController = TextEditingController(
-    text:
-        "I've always felt like I'm moving at a different speed than everyone else in the office. Sometimes it feels like I'm seeing the code in 4D while they're stuck in a spreadsheet. Is this what they call the \"flow state\" or am I just overcaffeinated again? ☕️💻",
-  );
+  late final TextEditingController _textController;
+  final _postRepo = PostRepository();
 
-  String _selectedCategory = 'Work Life';
-  String _selectedMood = '🤔';
+  String? _selectedCategoryId;
+  String? _selectedMood;
 
   bool _allowComments = true;
-  bool _externalSharing = false;
+  bool _externalSharing = true;
   bool _ghostMode = false;
 
   bool _isUpdating = false;
-
-  final List<Map<String, dynamic>> _categories = [
-    {'icon': Icons.work, 'label': 'Work Life'},
-    {'icon': Icons.favorite, 'label': 'Relationships'},
-    {'icon': Icons.lightbulb, 'label': 'Deep Thoughts'},
-    {'icon': Icons.mood, 'label': 'Life Hack'},
-  ];
+  List<CategoryModel> _categories = [];
 
   final List<Map<String, String>> _moods = [
     {'emoji': '😊', 'label': 'Happy'},
@@ -38,26 +34,60 @@ class _EditPostScreenState extends State<EditPostScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: widget.post.body);
+    _selectedCategoryId = widget.post.categoryId;
+    _selectedMood = widget.post.mood;
+    _allowComments = widget.post.allowComments;
+    _externalSharing = widget.post.allowSharing;
+    _ghostMode = widget.post.isGhostMode;
+    _loadCategories();
+  }
+
+  Future<void> _loadCategories() async {
+    try {
+      final cats = await _postRepo.getCategories();
+      if (mounted) setState(() => _categories = cats);
+    } catch (_) {}
+  }
+
+  @override
   void dispose() {
     _textController.dispose();
     super.dispose();
   }
 
   void _handleUpdate() async {
+    if (_selectedCategoryId == null) return;
     setState(() => _isUpdating = true);
-    await Future.delayed(const Duration(milliseconds: 1200));
-    if (mounted) {
-      setState(() => _isUpdating = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Post updated successfully!'),
-          behavior: SnackBarBehavior.floating,
-        ),
+    
+    try {
+      await _postRepo.updatePost(
+        postId: widget.post.id,
+        body: _textController.text.trim(),
+        categoryId: _selectedCategoryId,
+        mood: _selectedMood,
+        ghostMode: _ghostMode,
+        allowComments: _allowComments,
+        allowSharing: _externalSharing,
       );
-      Navigator.pop(context);
+      if (mounted) {
+        setState(() => _isUpdating = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Post updated successfully!'), behavior: SnackBarBehavior.floating),
+        );
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isUpdating = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Failed to update post.'), behavior: SnackBarBehavior.floating),
+        );
+      }
     }
   }
-
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = const Color(0xFF004ac6);
@@ -146,41 +176,32 @@ class _EditPostScreenState extends State<EditPostScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                ..._categories.map((cat) {
-                  final bool isSelected = _selectedCategory == cat['label'];
-                  return GestureDetector(
-                    onTap: () => setState(() => _selectedCategory = cat['label'] as String),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: isSelected ? const Color(0xFFd8e2ff) : const Color(0xFFe9edff),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(cat['icon'] as IconData, size: 16, color: isSelected ? primaryColor : onSurfaceVariant),
-                          const SizedBox(width: 6),
-                          Text(cat['label'] as String, style: TextStyle(fontSize: 14, color: isSelected ? primaryColor : onSurfaceVariant, fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal)),
-                        ],
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: _categories.map((c) {
+                  final isSelected = _selectedCategoryId == c.id;
+                  return ChoiceChip(
+                    label: Text(c.name),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      if (selected) setState(() => _selectedCategoryId = c.id);
+                    },
+                    selectedColor: primaryColor.withOpacity(0.1),
+                    backgroundColor: Colors.white,
+                    labelStyle: TextStyle(
+                      color: isSelected ? primaryColor : onSurfaceVariant,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(
+                        color: isSelected ? primaryColor : outlineVariant.withOpacity(0.5),
                       ),
                     ),
                   );
-                }),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(border: Border.all(color: outlineVariant), borderRadius: BorderRadius.circular(20)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [Icon(Icons.add, size: 16, color: outlineVariant), const SizedBox(width: 4), Text('More', style: TextStyle(fontSize: 14, color: outlineVariant))],
-                  ),
-                ),
-              ],
-            ),
+                }).toList(),
+              ),
 
             const SizedBox(height: 24),
 
@@ -190,31 +211,29 @@ class _EditPostScreenState extends State<EditPostScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(color: const Color(0xFFf1f3ff), borderRadius: BorderRadius.circular(12)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: _moods.map((mood) {
-                  final bool isSelected = _selectedMood == mood['emoji'];
-                  return GestureDetector(
-                    onTap: () => setState(() => _selectedMood = mood['emoji']!),
-                    child: Column(
-                      children: [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: isSelected ? primaryColor.withOpacity(0.1) : Colors.transparent,
-                            border: isSelected ? Border.all(color: primaryColor, width: 2) : null,
-                          ),
-                          child: Center(child: Text(mood['emoji']!, style: TextStyle(fontSize: isSelected ? 26 : 22))),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          mood['label']!,
-                          style: TextStyle(fontSize: 11, color: isSelected ? primaryColor : onSurfaceVariant, fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal),
-                        ),
-                      ],
+              child: Wrap(
+                spacing: 8,
+                children: _moods.map((m) {
+                  final isSelected = _selectedMood == m['label'];
+                  return ChoiceChip(
+                    label: Text('${m['emoji']} ${m['label']}'),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      setState(() {
+                        _selectedMood = selected ? m['label'] : null;
+                      });
+                    },
+                    selectedColor: const Color(0xFFd8e2ff),
+                    backgroundColor: Colors.white,
+                    labelStyle: TextStyle(
+                      color: isSelected ? primaryColor : onSurfaceVariant,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(
+                        color: isSelected ? primaryColor : outlineVariant.withOpacity(0.5),
+                      ),
                     ),
                   );
                 }).toList(),
