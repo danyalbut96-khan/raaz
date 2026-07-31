@@ -1,96 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'data/models/comment_model.dart';
+import 'data/repositories/comment_repository.dart';
+import 'reply_thread_screen.dart';
 
 class CommentsScreen extends StatefulWidget {
-  const CommentsScreen({super.key});
+  final String postId;
+  const CommentsScreen({super.key, required this.postId});
 
   @override
   State<CommentsScreen> createState() => _CommentsScreenState();
 }
 
 class _CommentsScreenState extends State<CommentsScreen> {
-  final TextEditingController _commentController = TextEditingController();
-  final List<Map<String, dynamic>> _comments = [
-    {
-      'name': 'Anonymous Fox',
-      'nameColor': Color(0xFF004ac6),
-      'avatarIcon': Icons.pets,
-      'avatarBg': Color(0xFFd8e2ff),
-      'avatarColor': Color(0xFF004ac6),
-      'time': '2h ago',
-      'content': "This is so brave. I've been holding onto a secret for three years now and seeing posts like this makes me feel like I might actually be able to breathe one day.",
-      'likes': 24,
-      'liked': false,
-      'isNested': false,
-    },
-    {
-      'name': 'Anonymous Leaf',
-      'nameColor': Color(0xFF006874),
-      'avatarIcon': Icons.eco,
-      'avatarBg': Color(0xFFcce5ff),
-      'avatarColor': Color(0xFF006874),
-      'time': '1h ago',
-      'content': "I promise you, the weight lifting is worth any initial awkwardness. Good luck!",
-      'likes': 8,
-      'liked': false,
-      'isNested': true,
-    },
-    {
-      'name': 'Anonymous Owl',
-      'nameColor': Color(0xFF0058be),
-      'avatarIcon': Icons.dark_mode,
-      'avatarBg': Color(0xFFd3e4ff),
-      'avatarColor': Color(0xFF0058be),
-      'time': '45m ago',
-      'content': "The relief is the best part. Even if things change, you're no longer living a lie or hiding. That's a win in my book.",
-      'likes': 12,
-      'liked': false,
-      'isNested': false,
-    },
-    {
-      'name': 'Anonymous Wave',
-      'nameColor': Color(0xFF141b2b),
-      'avatarIcon': Icons.waves,
-      'avatarBg': Color(0xFFe3e3ed),
-      'avatarColor': Color(0xFF434655),
-      'time': '10m ago',
-      'content': "Does anyone else feel like telling the truth is harder when it's positive? Like admitting you're happy when you should be sad?",
-      'likes': 5,
-      'liked': false,
-      'isNested': false,
-    },
-  ];
+  final _commentRepo = CommentRepository();
+  final TextEditingController _controller = TextEditingController();
+  List<CommentModel> _comments = [];
+  bool _isLoading = true;
+  bool _isSending = false;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadComments();
+  }
 
   @override
   void dispose() {
-    _commentController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
-  void _toggleLike(int index) {
-    setState(() {
-      _comments[index]['liked'] = !(_comments[index]['liked'] as bool);
-      _comments[index]['likes'] += (_comments[index]['liked'] as bool) ? 1 : -1;
-    });
+  Future<void> _loadComments() async {
+    try {
+      final comments = await _commentRepo.getComments(widget.postId);
+      if (mounted) setState(() { _comments = comments; _isLoading = false; });
+    } catch (e) {
+      if (mounted) setState(() { _error = 'Could not load comments.'; _isLoading = false; });
+    }
   }
 
-  void _postComment() {
-    if (_commentController.text.trim().isNotEmpty) {
+  Future<void> _postComment() async {
+    final text = _controller.text.trim();
+    if (text.isEmpty || _isSending) return;
+
+    setState(() => _isSending = true);
+    try {
+      final comment = await _commentRepo.addComment(
+          postId: widget.postId, body: text);
+      _controller.clear();
       setState(() {
-        _comments.insert(0, {
-          'name': 'You (Anonymous)',
-          'nameColor': const Color(0xFF004ac6),
-          'avatarIcon': Icons.person,
-          'avatarBg': const Color(0xFFd8e2ff),
-          'avatarColor': const Color(0xFF004ac6),
-          'time': 'Just now',
-          'content': _commentController.text.trim(),
-          'likes': 0,
-          'liked': false,
-          'isNested': false,
-        });
-        _commentController.clear();
+        _comments.insert(0, comment);
+        _isSending = false;
       });
+    } catch (_) {
+      setState(() => _isSending = false);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Failed to post comment.'), behavior: SnackBarBehavior.floating));
     }
+  }
+
+  Future<void> _toggleLike(int index) async {
+    final c = _comments[index];
+    try {
+      await _commentRepo.toggleCommentLike(c.id);
+      setState(() {
+        _comments[index] = c.copyWith(
+          likeCount: c.isLikedByMe ? c.likeCount - 1 : c.likeCount + 1,
+          isLikedByMe: !c.isLikedByMe,
+        );
+      });
+    } catch (_) {}
   }
 
   @override
@@ -108,7 +89,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
           icon: Icon(Icons.arrow_back, color: primaryColor),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Comments', style: TextStyle(color: primaryColor, fontWeight: FontWeight.w700, fontSize: 22, letterSpacing: -0.5)),
+        title: Text('Comments', style: TextStyle(
+            color: primaryColor, fontWeight: FontWeight.w700, fontSize: 22, letterSpacing: -0.5)),
         actions: [
           Icon(Icons.security, color: primaryColor),
           const SizedBox(width: 16),
@@ -117,143 +99,32 @@ class _CommentsScreenState extends State<CommentsScreen> {
       body: Column(
         children: [
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                // Post Summary Header
-                Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFf1f3ff),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: outlineVariant.withOpacity(0.3)),
-                  ),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          width: 48, height: 48,
-                          color: const Color(0xFFdce2f7),
-                          child: const Icon(Icons.image, color: Colors.black26),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('I finally told him how I feel...', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15), maxLines: 1, overflow: TextOverflow.ellipsis),
-                            SizedBox(height: 4),
-                            Text("The response wasn't what I expected, but the relief of finally saying it is overwhelming.", style: TextStyle(fontSize: 13, color: Color(0xFF434655)), maxLines: 2, overflow: TextOverflow.ellipsis),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Section title
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('RECENT SHARES', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, letterSpacing: 1.5, color: Color(0xFF737686))),
-                    Text('124 Comments', style: TextStyle(fontSize: 11, color: outlineVariant)),
-                  ],
-                ),
-                const SizedBox(height: 12),
-
-                // Comments list
-                ...List.generate(_comments.length, (i) {
-                  final c = _comments[i];
-                  final bool isNested = c['isNested'] as bool;
-                  return Padding(
-                    padding: EdgeInsets.only(left: isNested ? 24.0 : 0, bottom: 12),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        border: isNested
-                            ? Border(left: BorderSide(color: outlineVariant.withOpacity(0.4), width: 2))
-                            : Border.all(color: outlineVariant.withOpacity(0.2)),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
-                      ),
-                      padding: const EdgeInsets.all(14),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 32, height: 32,
-                                decoration: BoxDecoration(color: c['avatarBg'] as Color, shape: BoxShape.circle),
-                                child: Icon(c['avatarIcon'] as IconData, size: 16, color: c['avatarColor'] as Color),
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _error != null
+                    ? Center(child: Text(_error!))
+                    : RefreshIndicator(
+                        onRefresh: _loadComments,
+                        child: _comments.isEmpty
+                            ? ListView(children: const [
+                                SizedBox(height: 120),
+                                Center(child: Text('No comments yet. Be the first!',
+                                    style: TextStyle(color: Color(0xFF737686)))),
+                              ])
+                            : ListView.builder(
+                                padding: const EdgeInsets.all(16),
+                                itemCount: _comments.length,
+                                itemBuilder: (_, i) => _buildCommentCard(i, primaryColor),
                               ),
-                              const SizedBox(width: 8),
-                              Text(c['name'] as String, style: TextStyle(fontWeight: FontWeight.w600, color: c['nameColor'] as Color, fontSize: 14)),
-                              const Spacer(),
-                              Text(c['time'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF737686))),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Text(c['content'] as String, style: const TextStyle(fontSize: 16, height: 1.5)),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () => _toggleLike(i),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                                  decoration: BoxDecoration(
-                                    color: (c['liked'] as bool) ? const Color(0xFFd8e2ff) : const Color(0xFFf1f3ff),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        (c['liked'] as bool) ? Icons.favorite : Icons.favorite_border,
-                                        size: 16,
-                                        color: (c['liked'] as bool) ? Colors.red : const Color(0xFF434655),
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text('${c['likes']}', style: const TextStyle(fontSize: 13)),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                                decoration: BoxDecoration(color: const Color(0xFFf1f3ff), borderRadius: BorderRadius.circular(20)),
-                                child: const Row(
-                                  children: [
-                                    Icon(Icons.reply, size: 16, color: Color(0xFF434655)),
-                                    SizedBox(width: 4),
-                                    Text('Reply', style: TextStyle(fontSize: 13, color: Color(0xFF434655))),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
                       ),
-                    ),
-                  );
-                }),
-                const SizedBox(height: 32),
-              ],
-            ),
           ),
-
-          // Comment input bar
+          // Input bar
           SafeArea(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
-                color: surfaceColor.withOpacity(0.92),
+                color: surfaceColor.withOpacity(0.95),
                 border: Border(top: BorderSide(color: outlineVariant.withOpacity(0.2))),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -267,7 +138,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                         border: Border.all(color: outlineVariant.withOpacity(0.3)),
                       ),
                       child: TextField(
-                        controller: _commentController,
+                        controller: _controller,
                         maxLines: 4,
                         minLines: 1,
                         decoration: InputDecoration(
@@ -283,8 +154,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     onTap: _postComment,
                     child: Container(
                       width: 44, height: 44,
-                      decoration: BoxDecoration(color: primaryColor, shape: BoxShape.circle),
-                      child: const Icon(Icons.send, color: Colors.white, size: 20),
+                      decoration: BoxDecoration(
+                          color: _isSending ? Colors.grey : primaryColor, shape: BoxShape.circle),
+                      child: _isSending
+                          ? const Padding(padding: EdgeInsets.all(12),
+                              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                          : const Icon(Icons.send, color: Colors.white, size: 20),
                     ),
                   ),
                 ],
@@ -292,6 +167,93 @@ class _CommentsScreenState extends State<CommentsScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCommentCard(int index, Color primaryColor) {
+    final c = _comments[index];
+    final colors = [
+      const Color(0xFF004ac6), const Color(0xFF006874),
+      const Color(0xFF0058be), const Color(0xFF334AC0),
+    ];
+    final nameColor = colors[index % colors.length];
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color(0xFFe9edff).withOpacity(0.6)),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 32, height: 32,
+                  decoration: BoxDecoration(color: nameColor.withOpacity(0.1), shape: BoxShape.circle),
+                  child: Icon(Icons.person, size: 16, color: nameColor),
+                ),
+                const SizedBox(width: 8),
+                Text(c.pseudonym,
+                    style: TextStyle(fontWeight: FontWeight.w600, color: nameColor, fontSize: 14)),
+                const Spacer(),
+                Text(timeago.format(c.createdAt),
+                    style: const TextStyle(fontSize: 12, color: Color(0xFF737686))),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(c.body, style: const TextStyle(fontSize: 15, height: 1.5)),
+            if (c.replies.isNotEmpty) ...[
+              const SizedBox(height: 6),
+              Text('${c.replies.length} ${c.replies.length == 1 ? 'reply' : 'replies'}',
+                  style: TextStyle(fontSize: 12, color: primaryColor, fontWeight: FontWeight.w500)),
+            ],
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () => _toggleLike(index),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: c.isLikedByMe ? const Color(0xFFd8e2ff) : const Color(0xFFf1f3ff),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(children: [
+                      Icon(c.isLikedByMe ? Icons.favorite : Icons.favorite_border,
+                          size: 14,
+                          color: c.isLikedByMe ? Colors.red : const Color(0xFF434655)),
+                      const SizedBox(width: 4),
+                      Text('${c.likeCount}', style: const TextStyle(fontSize: 12)),
+                    ]),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => ReplyThreadScreen(
+                          postId: widget.postId, parentCommentId: c.id))),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFf1f3ff), borderRadius: BorderRadius.circular(20)),
+                    child: const Row(children: [
+                      Icon(Icons.reply, size: 14, color: Color(0xFF434655)),
+                      SizedBox(width: 4),
+                      Text('Reply', style: TextStyle(fontSize: 12)),
+                    ]),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

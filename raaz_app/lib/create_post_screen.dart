@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import 'data/models/category_model.dart';
+import 'data/repositories/post_repository.dart';
+import 'services/draft_database_service.dart';
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen({super.key});
+  final Map<String, dynamic>? draft; // passed when restoring a draft
+  const CreatePostScreen({super.key, this.draft});
 
   @override
   State<CreatePostScreen> createState() => _CreatePostScreenState();
@@ -9,25 +14,99 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   final TextEditingController _textController = TextEditingController();
-  int _charCount = 0;
-  String _selectedCategory = '';
+  final _postRepo = PostRepository();
+  final _uuid = const Uuid();
 
-  final List<String> _categories = [
-    'Confessions',
-    'Rants',
-    'Questions',
-    'Advice',
-    'Random'
-  ];
+  int _charCount = 0;
+  String? _selectedCategoryId;
+  String _selectedCategoryName = '';
+  String? _selectedMood;
+  bool _isPublishing = false;
+  bool _ghostMode = false;
+  bool _allowComments = true;
+
+  List<CategoryModel> _categories = [];
+  String? _draftId;
+
+  // PRD: 100–2000 chars
+  static const int _minChars = 100;
+  static const int _maxChars = 2000;
 
   @override
   void initState() {
     super.initState();
+    _loadCategories();
+    _draftId = _uuid.v4();
+
+    // Restore draft if passed
+    if (widget.draft != null) {
+      _textController.text = widget.draft!['body'] ?? '';
+      _selectedCategoryId = widget.draft!['category_id'];
+      _selectedMood = widget.draft!['mood'];
+      _draftId = widget.draft!['id'];
+    }
+
     _textController.addListener(() {
-      setState(() {
-        _charCount = _textController.text.length;
-      });
+      setState(() => _charCount = _textController.text.length);
+      // Auto-save draft every keystroke (debounced by Flutter's listener mechanism)
+      _autoSaveDraft();
     });
+  }
+
+  Future<void> _loadCategories() async {
+    try {
+      final cats = await _postRepo.getCategories();
+      if (mounted) {
+        setState(() {
+          _categories = cats;
+          if (cats.isNotEmpty && _selectedCategoryId == null) {
+            _selectedCategoryId = cats.first.id;
+            _selectedCategoryName = cats.first.name;
+          }
+        });
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _autoSaveDraft() async {
+    if (_textController.text.isEmpty) return;
+    await DraftDatabaseService.saveDraft(
+      id: _draftId!,
+      body: _textController.text,
+      categoryId: _selectedCategoryId,
+      mood: _selectedMood,
+    );
+  }
+
+  Future<void> _publish() async {
+    if (_selectedCategoryId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Please select a category.'), behavior: SnackBarBehavior.floating));
+      return;
+    }
+    setState(() => _isPublishing = true);
+    try {
+      await _postRepo.createPost(
+        body: _textController.text.trim(),
+        categoryId: _selectedCategoryId!,
+        mood: _selectedMood,
+        ghostMode: _ghostMode,
+        allowComments: _allowComments,
+      );
+      // Delete draft after publish
+      if (_draftId != null) await DraftDatabaseService.deleteDraft(_draftId!);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Post published! ✅'), behavior: SnackBarBehavior.floating));
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isPublishing = false);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Unable to publish. Draft saved.'), behavior: SnackBarBehavior.floating));
+      }
+    }
   }
 
   @override

@@ -1,22 +1,87 @@
 import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'data/models/post_model.dart';
+import 'data/repositories/post_repository.dart';
+import 'comments_screen.dart';
+import 'share_post_preview_screen.dart';
 
 class PostDetailsScreen extends StatefulWidget {
-  const PostDetailsScreen({super.key});
+  final String postId;
+  const PostDetailsScreen({super.key, required this.postId});
 
   @override
   State<PostDetailsScreen> createState() => _PostDetailsScreenState();
 }
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
-  bool _isLiked = false;
-  int _likeCount = 42;
-  bool _showShareSheet = false;
+  final _postRepo = PostRepository();
+  PostModel? _post;
+  bool _isLoading = true;
+  String? _error;
 
-  void _toggleLike() {
-    setState(() {
-      _isLiked = !_isLiked;
-      _likeCount += _isLiked ? 1 : -1;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _loadPost();
+  }
+
+  Future<void> _loadPost() async {
+    try {
+      final post = await _postRepo.getPost(widget.postId);
+      if (mounted) setState(() { _post = post; _isLoading = false; });
+    } catch (e) {
+      if (mounted) setState(() { _error = 'Failed to load post.'; _isLoading = false; });
+    }
+  }
+
+  Future<void> _toggleReaction(String type) async {
+    if (_post == null) return;
+    try {
+      await _postRepo.toggleReaction(widget.postId, type);
+      final already = _post!.myReactionType == type;
+      setState(() {
+        _post = _post!.copyWith(
+          reactionCount: already ? _post!.reactionCount - 1 : _post!.reactionCount + 1,
+          myReactionType: already ? null : type,
+          clearReaction: already,
+        );
+      });
+    } catch (_) {}
+  }
+
+  Future<void> _toggleBookmark() async {
+    if (_post == null) return;
+    try {
+      await _postRepo.toggleBookmark(widget.postId);
+      setState(() => _post = _post!.copyWith(isBookmarked: !_post!.isBookmarked));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(_post!.isBookmarked ? 'Bookmarked!' : 'Bookmark removed'),
+        behavior: SnackBarBehavior.floating,
+      ));
+    } catch (_) {}
+  }
+
+  Future<void> _reportPost() async {
+    final reason = await showModalBottomSheet<String>(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (_) => SafeArea(
+        child: Wrap(children: [
+          const ListTile(title: Text('Report this post', style: TextStyle(fontWeight: FontWeight.bold))),
+          ListTile(leading: const Icon(Icons.block), title: const Text('Spam'), onTap: () => Navigator.pop(context, 'spam')),
+          ListTile(leading: const Icon(Icons.warning_amber), title: const Text('Hate Speech'), onTap: () => Navigator.pop(context, 'hate_speech')),
+          ListTile(leading: const Icon(Icons.person_off), title: const Text('Harassment'), onTap: () => Navigator.pop(context, 'harassment')),
+          ListTile(leading: const Icon(Icons.info_outline), title: const Text('Misinformation'), onTap: () => Navigator.pop(context, 'misinformation')),
+        ]),
+      ),
+    );
+    if (reason != null) {
+      await _postRepo.reportPost(widget.postId, reason);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Report submitted. Thank you.'), behavior: SnackBarBehavior.floating));
+      }
+    }
   }
 
   @override
@@ -25,6 +90,24 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     final Color surfaceColor = const Color(0xFFf9f9ff);
     final Color onSurfaceVariant = const Color(0xFF434655);
     final Color outlineVariant = const Color(0xFFc3c6d7);
+
+    if (_isLoading) {
+      return Scaffold(
+        backgroundColor: surfaceColor,
+        body: const Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (_error != null || _post == null) {
+      return Scaffold(
+        backgroundColor: surfaceColor,
+        appBar: AppBar(backgroundColor: surfaceColor, elevation: 0,
+            leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => Navigator.pop(context))),
+        body: Center(child: Text(_error ?? 'Post not found.')),
+      );
+    }
+
+    final post = _post!;
 
     return Scaffold(
       backgroundColor: surfaceColor,
@@ -37,6 +120,10 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
         ),
         title: Text('Post', style: TextStyle(color: primaryColor, fontWeight: FontWeight.w600, fontSize: 20)),
         actions: [
+          IconButton(
+            icon: Icon(post.isBookmarked ? Icons.bookmark : Icons.bookmark_border, color: primaryColor),
+            onPressed: _toggleBookmark,
+          ),
           IconButton(
             icon: Icon(Icons.more_vert, color: onSurfaceVariant),
             onPressed: () => _showOptionsMenu(context),
@@ -74,66 +161,44 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Anonymous Author', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                              Text('2 hours ago • Technology', style: TextStyle(fontSize: 12, color: onSurfaceVariant)),
+                              Text(post.pseudonym, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                              Text(
+                                '${timeago.format(post.createdAt)}${post.category != null ? ' • ${post.category!.name}' : ''}',
+                                style: TextStyle(fontSize: 12, color: onSurfaceVariant),
+                              ),
                             ],
                           ),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      // Title
-                      const Text(
-                        'The unspoken anxiety of modern transparency.',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, height: 1.3),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'In an era where every action is tracked and every thought is broadcasted, the value of true anonymity has shifted from a luxury to a necessity for mental preservation. We find ourselves curating versions of our lives that fit the algorithms rather than our actual experiences.',
-                        style: TextStyle(fontSize: 16, color: onSurfaceVariant, height: 1.6),
-                      ),
-                      const SizedBox(height: 16),
-                      // Image placeholder
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Container(
-                          width: double.infinity,
-                          height: 220,
-                          color: const Color(0xFFdce2f7),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              const Icon(Icons.image, size: 64, color: Colors.black12),
-                              Positioned.fill(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [primaryColor.withOpacity(0.2), const Color(0xFF0058be).withOpacity(0.3)],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                      // Body
+                      Text(post.body, style: const TextStyle(fontSize: 16, height: 1.65)),
+                      if (post.mood != null) ...[
+                        const SizedBox(height: 12),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFf1f3ff), borderRadius: BorderRadius.circular(12)),
+                          child: Text(post.mood!, style: const TextStyle(fontSize: 13)),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'This platform, RAAZ, represents the friction against that trend. It\'s a space where the weight of identity is lifted, allowing for raw, unfiltered human connection without the fear of social repercussion.',
-                        style: TextStyle(fontSize: 16, color: onSurfaceVariant, height: 1.6),
-                      ),
+                      ],
                       Divider(color: outlineVariant.withOpacity(0.3), height: 32),
-                      // Reactions row
+                      // Reactions
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            _buildReactionChip(Icons.favorite, '$_likeCount Care', isActive: _isLiked, onTap: _toggleLike),
+                            _buildReactionChip(Icons.favorite, '${post.reactionCount} Care',
+                                isActive: post.myReactionType == 'care',
+                                onTap: () => _toggleReaction('care')),
                             const SizedBox(width: 8),
-                            _buildReactionChip(Icons.psychology, '18 Insightful', onTap: () {}),
+                            _buildReactionChip(Icons.psychology, 'Insightful',
+                                isActive: post.myReactionType == 'insightful',
+                                onTap: () => _toggleReaction('insightful')),
                             const SizedBox(width: 8),
-                            _buildReactionChip(Icons.volunteer_activism, '31 Support', onTap: () {}),
+                            _buildReactionChip(Icons.volunteer_activism, 'Support',
+                                isActive: post.myReactionType == 'support',
+                                onTap: () => _toggleReaction('support')),
                           ],
                         ),
                       ),
@@ -141,46 +206,22 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
 
-                // Comments section header
+                // Comments header
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Comments (12)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.sort, size: 16, color: primaryColor),
-                      label: Text('Newest', style: TextStyle(color: primaryColor, fontSize: 14)),
+                    Text('Comments (${post.commentCount})',
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => CommentsScreen(postId: post.id)));
+                      },
+                      child: Text('View all', style: TextStyle(color: primaryColor)),
                     ),
                   ],
-                ),
-                const SizedBox(height: 12),
-
-                // Comments
-                _buildComment(
-                  name: 'Anonymous User 1',
-                  nameColor: primaryColor,
-                  time: '45m ago',
-                  content: 'This resonates deeply. I feel like I\'m constantly performing for an audience that doesn\'t actually exist. Being able to just share a thought here without my face attached is a relief.',
-                  likes: '12',
-                  indented: false,
-                ),
-                _buildComment(
-                  name: 'Anonymous User 2',
-                  nameColor: const Color(0xFF0058be),
-                  time: '1h ago',
-                  content: 'The "algorithm curation" part is so true. Everything is optimized for engagement now, not authenticity. Thanks for putting this into words.',
-                  likes: '8',
-                  indented: true,
-                ),
-                _buildComment(
-                  name: 'Anonymous User 3',
-                  nameColor: const Color(0xFF006874),
-                  time: '1.5h ago',
-                  content: 'I often wonder if total transparency actually leads to less understanding because people are too afraid to be misunderstood.',
-                  likes: '5',
-                  indented: false,
                 ),
 
                 const SizedBox(height: 80),
@@ -188,24 +229,13 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             ),
           ),
 
-          // Share Sheet overlay
-          if (_showShareSheet) ...[
-            GestureDetector(
-              onTap: () => setState(() => _showShareSheet = false),
-              child: Container(color: Colors.black.withOpacity(0.2)),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _buildShareSheet(context, primaryColor),
-            ),
-          ],
-
-          // Floating Share button
+          // Floating share button
           Positioned(
             bottom: 80,
             right: 16,
             child: FloatingActionButton(
-              onPressed: () => setState(() => _showShareSheet = true),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const SharePostPreviewScreen())),
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
               child: const Icon(Icons.share),
@@ -215,7 +245,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       ),
       bottomNavigationBar: SafeArea(
         child: Container(
-          height: 60,
+          height: 64,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: surfaceColor.withOpacity(0.9),
@@ -224,34 +254,21 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
           child: Row(
             children: [
               Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFf1f3ff),
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: outlineVariant.withOpacity(0.3)),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Add a comment...',
-                            hintStyle: TextStyle(color: outlineVariant, fontSize: 14),
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                      Icon(Icons.alternate_email, color: primaryColor, size: 20),
-                    ],
+                child: GestureDetector(
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => CommentsScreen(postId: post.id))),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFf1f3ff),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: outlineVariant.withOpacity(0.3)),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Text('Add a comment...',
+                        style: TextStyle(color: outlineVariant, fontSize: 14)),
                   ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                width: 44, height: 44,
-                decoration: BoxDecoration(color: primaryColor, shape: BoxShape.circle),
-                child: const Icon(Icons.send, color: Colors.white, size: 20),
               ),
             ],
           ),
@@ -260,7 +277,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     );
   }
 
-  Widget _buildReactionChip(IconData icon, String label, {bool isActive = false, required VoidCallback onTap}) {
+  Widget _buildReactionChip(IconData icon, String label,
+      {required bool isActive, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -273,106 +291,15 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 18, color: isActive ? const Color(0xFF004ac6) : const Color(0xFF434655)),
+            Icon(icon, size: 18,
+                color: isActive ? const Color(0xFF004ac6) : const Color(0xFF434655)),
             const SizedBox(width: 6),
-            Text(label, style: TextStyle(fontSize: 14, color: isActive ? const Color(0xFF004ac6) : const Color(0xFF434655))),
+            Text(label,
+                style: TextStyle(
+                    fontSize: 13,
+                    color: isActive ? const Color(0xFF004ac6) : const Color(0xFF434655))),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildComment({required String name, required Color nameColor, required String time, required String content, required String likes, required bool indented}) {
-    return Container(
-      margin: EdgeInsets.only(left: indented ? 16 : 0, right: indented ? 0 : 16, bottom: 12),
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: indented ? Border(left: BorderSide(color: const Color(0xFF004ac6).withOpacity(0.3), width: 4)) : Border.all(color: const Color(0xFFe9edff).withOpacity(0.6)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(name, style: TextStyle(fontWeight: FontWeight.w600, color: nameColor, fontSize: 14)),
-              Text(time, style: const TextStyle(fontSize: 12, color: Color(0xFF737686))),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(content, style: const TextStyle(fontSize: 14, color: Color(0xFF434655), height: 1.5)),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Icon(Icons.thumb_up_outlined, size: 16, color: Colors.grey.shade400),
-              const SizedBox(width: 4),
-              Text(likes, style: TextStyle(fontSize: 12, color: Colors.grey.shade400)),
-              const SizedBox(width: 16),
-              Text('Reply', style: TextStyle(fontSize: 12, color: const Color(0xFF004ac6), fontWeight: FontWeight.w500)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildShareSheet(BuildContext context, Color primaryColor) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(width: 48, height: 4, decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2))),
-          const SizedBox(height: 20),
-          const Text('Share this RAAZ', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-          const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildShareOption(Icons.link, 'Link', () {}),
-              _buildShareOption(Icons.chat_bubble, 'Messenger', () {}),
-              _buildShareOption(Icons.send, 'WhatsApp', () {}),
-              _buildShareOption(Icons.more_horiz, 'More', () {}),
-            ],
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-            child: TextButton(
-              onPressed: () => setState(() => _showShareSheet = false),
-              style: TextButton.styleFrom(
-                backgroundColor: const Color(0xFFf1f3ff),
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              child: const Text('Close', style: TextStyle(fontSize: 16, color: Color(0xFF434655))),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildShareOption(IconData icon, String label, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Container(
-            width: 48, height: 48,
-            decoration: BoxDecoration(color: const Color(0xFFf1f3ff), shape: BoxShape.circle),
-            child: Icon(icon, color: const Color(0xFF004ac6)),
-          ),
-          const SizedBox(height: 6),
-          Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF434655))),
-        ],
       ),
     );
   }
@@ -380,15 +307,19 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   void _showOptionsMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (_) => SafeArea(
-        child: Wrap(
-          children: [
-            ListTile(leading: const Icon(Icons.bookmark_border), title: const Text('Bookmark'), onTap: () => Navigator.pop(context)),
-            ListTile(leading: const Icon(Icons.report_outlined), title: const Text('Report'), onTap: () => Navigator.pop(context)),
-            ListTile(leading: const Icon(Icons.block), title: const Text('Block'), onTap: () => Navigator.pop(context)),
-          ],
-        ),
+        child: Wrap(children: [
+          ListTile(
+              leading: const Icon(Icons.bookmark_border),
+              title: const Text('Bookmark'),
+              onTap: () { Navigator.pop(context); _toggleBookmark(); }),
+          ListTile(
+              leading: const Icon(Icons.report_outlined),
+              title: const Text('Report'),
+              onTap: () { Navigator.pop(context); _reportPost(); }),
+        ]),
       ),
     );
   }
