@@ -25,8 +25,46 @@ class RaazApp extends StatelessWidget {
     return MaterialApp(
       title: 'RAAZ',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF004ac6),
+          brightness: Brightness.light,
+        ),
         useMaterial3: true,
+        scaffoldBackgroundColor: const Color(0xFFf9f9ff),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFf9f9ff),
+          foregroundColor: Color(0xFF141B2B),
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Color(0xFF141B2B),
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Color(0xFF141B2B)),
+          bodyMedium: TextStyle(color: Color(0xFF141B2B)),
+          bodySmall: TextStyle(color: Color(0xFF434655)),
+          titleLarge: TextStyle(color: Color(0xFF141B2B), fontWeight: FontWeight.w700),
+          titleMedium: TextStyle(color: Color(0xFF141B2B), fontWeight: FontWeight.w600),
+          titleSmall: TextStyle(color: Color(0xFF141B2B), fontWeight: FontWeight.w500),
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: Colors.white,
+          indicatorColor: const Color(0xFFd8e2ff),
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(color: Color(0xFF004ac6), fontWeight: FontWeight.w600, fontSize: 12);
+            }
+            return const TextStyle(color: Color(0xFF434655), fontSize: 12);
+          }),
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const IconThemeData(color: Color(0xFF004ac6));
+            }
+            return const IconThemeData(color: Color(0xFF434655));
+          }),
+        ),
       ),
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
