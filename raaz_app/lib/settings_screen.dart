@@ -1,7 +1,146 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'core/pseudonym_generator.dart';
+import 'core/supabase_client.dart';
+import 'splash_screen.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  String _pseudonym = 'Loading...';
+  String _appVersion = 'v1.0.0';
+  bool _isLoadingName = true;
+  bool _isLoadingVersion = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPseudonym();
+    _loadAppVersion();
+  }
+
+  Future<void> _loadPseudonym() async {
+    setState(() {
+      _isLoadingName = true;
+    });
+    // First try to check the Supabase currentUser metadata
+    final currentUser = supabase.auth.currentUser;
+    String? name = currentUser?.userMetadata?['pseudonym'];
+
+    // Fallback to local storage/generation if not found
+    if (name == null || name.isEmpty) {
+      name = await PseudonymGenerator.generate();
+    } else {
+      // Sync it locally just in case
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user_pseudonym', name);
+    }
+
+    if (mounted) {
+      setState(() {
+        _pseudonym = name!;
+        _isLoadingName = false;
+      });
+    }
+  }
+
+  Future<void> _loadAppVersion() async {
+    setState(() {
+      _isLoadingVersion = true;
+    });
+    try {
+      // Fetch app version from database in real-time
+      final response = await supabase
+          .from('app_config')
+          .select('value')
+          .eq('key', 'app_version')
+          .maybeSingle();
+      if (response != null && response['value'] != null) {
+        if (mounted) {
+          setState(() {
+            _appVersion = response['value'] as String;
+            _isLoadingVersion = false;
+          });
+        }
+        return;
+      }
+    } catch (_) {
+      // Fallback if table or key doesn't exist
+    }
+    if (mounted) {
+      setState(() {
+        _appVersion = 'v1.0.0';
+        _isLoadingVersion = false;
+      });
+    }
+  }
+
+  Future<void> _regeneratePseudonym() async {
+    setState(() {
+      _isLoadingName = true;
+    });
+    final newName = await PseudonymGenerator.regenerate();
+    if (mounted) {
+      setState(() {
+        _pseudonym = newName;
+        _isLoadingName = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Pseudonym updated to: $newName'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
+  Future<void> _handleLogout() async {
+    final Color primaryColor = const Color(0xFF004ac6);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Secure Log Out'),
+          content: const Text(
+            'Are you sure you want to log out? Your anonymous session and all local preferences will be completely cleared.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context); // Close dialog
+                
+                // Clear onboarding completed & pseudonym locally
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.remove('onboarding_completed');
+                await prefs.remove('user_pseudonym');
+                
+                // Sign out of Supabase
+                await supabase.auth.signOut();
+                
+                if (mounted) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (_) => const SplashScreen()),
+                    (route) => false,
+                  );
+                }
+              },
+              child: const Text('Log Out', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +220,29 @@ class SettingsScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Anonymous User',
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: onSurface),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    _isLoadingName ? 'Loading...' : _pseudonym,
+                                    style: TextStyle(
+                                      fontSize: 20, 
+                                      fontWeight: FontWeight.w600, 
+                                      color: onSurface,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                                if (!_isLoadingName)
+                                  IconButton(
+                                    icon: Icon(Icons.refresh, size: 20, color: primaryColor),
+                                    tooltip: 'Regenerate Pseudonym',
+                                    onPressed: _regeneratePseudonym,
+                                  ),
+                              ],
                             ),
                             Text(
-                              'Active Security Shield: Enabled',
+                              'Anonymous User',
                               style: TextStyle(fontSize: 14, color: onSurfaceVariant),
                             ),
                           ],
@@ -118,7 +274,7 @@ class SettingsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Privacy Level: High', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: onSurfaceVariant)),
-                      Text('Upgrade Protection', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: primaryColor)),
+                      Text('Active Shield', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: primaryColor)),
                     ],
                   ),
                 ],
@@ -166,7 +322,15 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   _buildSettingItem(icon: Icons.description_outlined, title: 'Terms of Service', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
                   Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
-                  _buildSettingItem(icon: Icons.info_outline, title: 'About RAAZ', value: 'v2.4.1', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
+                  _buildSettingItem(
+                    icon: Icons.info_outline, 
+                    title: 'About RAAZ', 
+                    value: _appVersion, 
+                    color: onSurface, 
+                    onSurfaceVariant: onSurfaceVariant, 
+                    outlineVariant: outlineVariant,
+                    onTap: _loadAppVersion,
+                  ),
                   Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
                   _buildSettingItem(icon: Icons.mail_outline, title: 'Contact Us', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
                 ],
@@ -179,7 +343,7 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: _handleLogout,
                 icon: Icon(Icons.logout, color: onErrorContainer),
                 label: Text('Secure Log Out', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: onErrorContainer)),
                 style: ElevatedButton.styleFrom(
@@ -212,9 +376,10 @@ class SettingsScreen extends StatelessWidget {
     required Color color,
     required Color onSurfaceVariant,
     required Color outlineVariant,
+    VoidCallback? onTap,
   }) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap ?? () {},
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(

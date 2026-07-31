@@ -89,10 +89,12 @@ BEGIN
 
     -- Add some reactions
     INSERT INTO public.reactions (post_id, user_id, type)
-    VALUES (p_id, mock_users[1 + mod(abs(random()::int), 15)], 'care');
+    VALUES (p_id, mock_users[1 + mod(abs(random()::int), 15)], 'care')
+    ON CONFLICT (post_id, user_id) DO NOTHING;
 
     INSERT INTO public.reactions (post_id, user_id, type)
-    VALUES (p_id, mock_users[1 + mod(abs(random()::int), 15)], 'support');
+    VALUES (p_id, mock_users[1 + mod(abs(random()::int), 15)], 'support')
+    ON CONFLICT (post_id, user_id) DO NOTHING;
 
   END LOOP;
 

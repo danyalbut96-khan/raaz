@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'main.dart';
 import 'onboarding_screen.dart'; // To navigate to OnboardingScreen
 
 class SplashScreen extends StatefulWidget {
@@ -67,11 +69,20 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     });
 
     // Navigate to next screen after animations complete
-    Future.delayed(const Duration(milliseconds: 3500), () {
+    Future.delayed(const Duration(milliseconds: 3500), () async {
       if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const OnboardingScreen()),
-        );
+        final prefs = await SharedPreferences.getInstance();
+        final bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
+
+        if (onboardingCompleted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
+          );
+        } else {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const OnboardingScreen()),
+          );
+        }
       }
     });
   }

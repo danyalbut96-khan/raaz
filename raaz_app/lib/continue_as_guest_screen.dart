@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart'; // To navigate to MainNavigationScreen
 
 class ContinueAsGuestScreen extends StatefulWidget {
@@ -18,8 +19,11 @@ class _ContinueAsGuestScreenState extends State<ContinueAsGuestScreen> {
     });
     
     // Simulate network delay for guest login
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(const Duration(milliseconds: 1500), () async {
       if (mounted) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('onboarding_completed', true);
+
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
         );
