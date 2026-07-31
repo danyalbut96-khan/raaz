@@ -177,6 +177,7 @@ class PostRepository {
   // ─── Reactions ───────────────────────────────────────────────
   Future<void> toggleReaction(String postId, String reactionType) async {
     final userId = supabase.auth.currentUser!.id;
+    final pseudonym = await PseudonymGenerator.generate();
 
     // Check existing reaction
     final existing = await supabase
@@ -194,7 +195,10 @@ class PostRepository {
         // Different reaction — update it
         await supabase
             .from('reactions')
-            .update({'type': reactionType})
+            .update({
+              'type': reactionType,
+              'pseudonym': pseudonym,
+            })
             .eq('id', existing['id']);
       }
     } else {
@@ -203,6 +207,7 @@ class PostRepository {
         'post_id': postId,
         'user_id': userId,
         'type': reactionType,
+        'pseudonym': pseudonym,
       });
     }
   }

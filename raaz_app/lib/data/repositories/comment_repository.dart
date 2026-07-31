@@ -114,6 +114,7 @@ class CommentRepository {
   // ─── Toggle comment like ─────────────────────────────────────
   Future<void> toggleCommentLike(String commentId) async {
     final userId = supabase.auth.currentUser!.id;
+    final pseudonym = await PseudonymGenerator.generate();
 
     final existing = await supabase
         .from('comment_likes')
@@ -128,6 +129,7 @@ class CommentRepository {
       await supabase.from('comment_likes').insert({
         'comment_id': commentId,
         'user_id': userId,
+        'pseudonym': pseudonym,
       });
     }
   }

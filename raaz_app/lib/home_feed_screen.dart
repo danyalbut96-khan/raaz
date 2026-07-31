@@ -132,6 +132,63 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
     } catch (_) {}
   }
 
+  void _showReactionPicker(int index) {
+    final post = _posts[index];
+    final primaryColor = const Color(0xFF004ac6);
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (_) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('React to this post', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildPickerItem(index, Icons.favorite, 'Care', '❤️', 'care', post.myReactionType, primaryColor),
+                  _buildPickerItem(index, Icons.psychology, 'Insightful', '🧠', 'insightful', post.myReactionType, primaryColor),
+                  _buildPickerItem(index, Icons.volunteer_activism, 'Support', '🤝', 'support', post.myReactionType, primaryColor),
+                ],
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPickerItem(int index, IconData icon, String label, String emoji, String type, String? myReactionType, Color primaryColor) {
+    final isActive = myReactionType == type;
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+        _toggleReaction(index, type);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: isActive ? const Color(0xFFd8e2ff) : const Color(0xFFf1f3ff),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: isActive ? primaryColor : Colors.transparent, width: 2),
+        ),
+        child: Column(
+          children: [
+            Text(emoji, style: const TextStyle(fontSize: 28)),
+            const SizedBox(height: 4),
+            Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,
+                color: isActive ? primaryColor : const Color(0xFF434655))),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = const Color(0xFF004ac6);
@@ -337,7 +394,6 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
 
   Widget _buildPostCard(PostModel post, int index,
       {required Color onSurfaceVariant, required Color outlineVariant, required Color primaryColor}) {
-    final isLiked = post.myReactionType != null;
     return GestureDetector(
       onTap: () => Navigator.push(context,
           MaterialPageRoute(builder: (_) => PostDetailsScreen(postId: post.id))),
@@ -404,20 +460,29 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 14),
               child: Row(
                 children: [
+                  // Reaction button — tap to open picker
                   GestureDetector(
-                    onTap: () => _toggleReaction(index, 'care'),
-                    child: Row(children: [
-                      Icon(
-                        isLiked ? Icons.favorite : Icons.favorite_border,
-                        size: 20,
-                        color: isLiked ? Colors.red : onSurfaceVariant,
+                    onTap: () => _showReactionPicker(index),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: post.myReactionType != null ? const Color(0xFFd8e2ff) : Colors.transparent,
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      const SizedBox(width: 4),
-                      Text('${post.reactionCount}',
-                          style: TextStyle(fontSize: 13, color: onSurfaceVariant)),
-                    ]),
+                      child: Row(children: [
+                        Icon(
+                          _feedReactionIcon(post.myReactionType),
+                          size: 20,
+                          color: post.myReactionType != null ? const Color(0xFF004ac6) : onSurfaceVariant,
+                        ),
+                        const SizedBox(width: 4),
+                        Text('${post.reactionCount}',
+                            style: TextStyle(fontSize: 13, color: onSurfaceVariant)),
+                      ]),
+                    ),
                   ),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 16),
                   Row(children: [
                     Icon(Icons.chat_bubble_outline, size: 18, color: onSurfaceVariant),
                     const SizedBox(width: 4),
@@ -449,5 +514,14 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
         ],
       ),
     );
+  }
+
+  IconData _feedReactionIcon(String? type) {
+    switch (type) {
+      case 'care': return Icons.favorite;
+      case 'insightful': return Icons.psychology;
+      case 'support': return Icons.volunteer_activism;
+      default: return Icons.favorite_border;
+    }
   }
 }

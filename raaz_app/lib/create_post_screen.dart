@@ -3,6 +3,8 @@ import 'package:uuid/uuid.dart';
 import 'data/models/category_model.dart';
 import 'data/repositories/post_repository.dart';
 import 'services/draft_database_service.dart';
+import 'main.dart';
+
 
 class CreatePostScreen extends StatefulWidget {
   final Map<String, dynamic>? draft; // passed when restoring a draft
@@ -28,9 +30,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   List<CategoryModel> _categories = [];
   String? _draftId;
 
-  // PRD: 100–2000 chars
+  // PRD: 100–5000 chars
   static const int _minChars = 100;
-  static const int _maxChars = 2000;
+  static const int _maxChars = 5000;
+
 
   @override
   void initState() {
@@ -98,7 +101,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Post published! ✅'), behavior: SnackBarBehavior.floating));
-        Navigator.pop(context);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
+          (route) => false,
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -198,7 +205,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     TextField(
                       controller: _textController,
                       maxLines: 15,
-                      maxLength: 500,
+                      maxLength: _maxChars,
                       decoration: InputDecoration(
                         hintText: "What's on your mind?",
                         hintStyle: TextStyle(color: outlineVariant, fontSize: 16),
@@ -211,7 +218,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          '$_charCount / 500',
+                          '$_charCount / $_maxChars',
                           style: TextStyle(fontSize: 12, color: outlineVariant),
                         ),
                       ],
@@ -316,15 +323,29 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              IconButton(icon: Icon(Icons.image, color: onSurfaceVariant), onPressed: () {}),
-              IconButton(icon: Icon(Icons.alternate_email, color: onSurfaceVariant), onPressed: () {}),
-              IconButton(icon: Icon(Icons.mood, color: onSurfaceVariant), onPressed: () {}),
+              IconButton(
+                icon: Icon(Icons.image, color: onSurfaceVariant),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Picture uploads are coming soon!'),
+                    behavior: SnackBarBehavior.floating,
+                  ));
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.mood, color: _selectedMood != null ? primaryColor : onSurfaceVariant),
+                onPressed: () {
+                  _showEmojiPicker();
+                },
+              ),
+              if (_selectedMood != null)
+                Text(_selectedMood!, style: const TextStyle(fontSize: 20)),
               const Spacer(),
               SizedBox(
                 width: 24,
                 height: 24,
                 child: CircularProgressIndicator(
-                  value: _charCount / 500,
+                  value: _charCount / _maxChars,
                   backgroundColor: outlineVariant.withOpacity(0.3),
                   color: primaryColor,
                   strokeWidth: 2,
@@ -334,6 +355,37 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showEmojiPicker() {
+    final List<String> emojis = ['😊', '😂', '🥺', '😡', '😴', '😎', '🤔', '😭', '❤️', '🔥', '✨', '🎉'];
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (_) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              alignment: WrapAlignment.center,
+              children: emojis.map((emoji) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedMood = emoji;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text(emoji, style: const TextStyle(fontSize: 32)),
+                );
+              }).toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 }
