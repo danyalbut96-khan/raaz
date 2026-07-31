@@ -9,6 +9,8 @@ import 'appearance_screen.dart';
 import 'anonymous_profile_screen.dart';
 import 'my_posts_screen.dart';
 import 'bookmarks_screen.dart';
+import 'legal_screens.dart';
+import 'contact_us_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -354,23 +356,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
               decoration: BoxDecoration(
                 color: surfaceContainerLowest,
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 12, offset: const Offset(0, 4))],
               ),
               child: Column(
                 children: [
-                  _buildSettingItem(icon: Icons.description_outlined, title: 'Terms of Service', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
-                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
                   _buildSettingItem(
-                    icon: Icons.info_outline, 
-                    title: 'About RAAZ', 
-                    value: _appVersion, 
-                    color: onSurface, 
-                    onSurfaceVariant: onSurfaceVariant, 
-                    outlineVariant: outlineVariant,
+                    icon: Icons.description_outlined, title: 'Terms of Service',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TermsOfServiceScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.privacy_tip_outlined, title: 'Privacy Policy',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.mail_outline, title: 'Contact Us',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ContactUsScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.bug_report_outlined, title: 'Report a Bug',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => _showBugReport(context),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.info_outline, title: 'About RAAZ', value: _appVersion,
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
                     onTap: _loadAppVersion,
                   ),
-                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
-                  _buildSettingItem(icon: Icons.mail_outline, title: 'Contact Us', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
                 ],
               ),
             ),
@@ -407,6 +425,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  void _showBugReport(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      builder: (_) => const _BugReportSheet(),
+    );
+  }
+
   Widget _buildSettingItem({
     required IconData icon,
     required String title,
@@ -434,6 +461,108 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Icon(Icons.chevron_right, color: outlineVariant),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _BugReportSheet extends StatefulWidget {
+  const _BugReportSheet();
+  @override
+  State<_BugReportSheet> createState() => _BugReportSheetState();
+}
+
+class _BugReportSheetState extends State<_BugReportSheet> {
+  final _controller = TextEditingController();
+  bool _isSubmitting = false;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
+    setState(() => _isSubmitting = true);
+    try {
+      final userId = supabase.auth.currentUser?.id;
+      await supabase.from('bug_reports').insert({
+        'user_id': userId,
+        'description': text,
+      });
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Bug report submitted. Thank you! 🙏'),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Color(0xFF004ac6),
+        ));
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() => _isSubmitting = false);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Failed to submit. Please email bugs@raazapp.com'),
+          behavior: SnackBarBehavior.floating,
+        ));
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 20, right: 20, top: 20,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.bug_report, color: Color(0xFF004ac6)),
+              const SizedBox(width: 8),
+              const Text('Report a Bug', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+              const Spacer(),
+              IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Text('Describe what happened', style: TextStyle(fontSize: 13, color: Color(0xFF434655))),
+          const SizedBox(height: 16),
+          Container(
+            decoration: BoxDecoration(color: const Color(0xFFf1f3ff), borderRadius: BorderRadius.circular(12)),
+            child: TextField(
+              controller: _controller,
+              maxLines: 5,
+              decoration: const InputDecoration(
+                hintText: 'E.g. "When I tap on a post, the app crashes..."',
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(14),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: _isSubmitting ? null : _submit,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF004ac6),
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              child: _isSubmitting
+                  ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                  : const Text('Submit Report', style: TextStyle(fontWeight: FontWeight.w600)),
+            ),
+          ),
+        ],
       ),
     );
   }

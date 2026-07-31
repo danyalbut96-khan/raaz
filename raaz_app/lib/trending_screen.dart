@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'data/models/post_model.dart';
 import 'data/repositories/post_repository.dart';
+import 'core/supabase_client.dart';
 import 'post_details_screen.dart';
 import 'create_post_screen.dart';
 
@@ -18,7 +19,9 @@ class _TrendingScreenState extends State<TrendingScreen>
   late final TabController _tabController;
 
   List<PostModel> _trendingPosts = [];
+  List<Map<String, dynamic>> _categoryStats = []; // Real category data
   bool _isLoading = true;
+  bool _isCatsLoading = true;
   String? _error;
 
   static const Color _primary = Color(0xFF004ac6);
@@ -27,12 +30,10 @@ class _TrendingScreenState extends State<TrendingScreen>
   static const Color _onSurfaceVariant = Color(0xFF434655);
   static const Color _outlineVariant = Color(0xFFc3c6d7);
 
-  final List<Map<String, dynamic>> _trendingTopics = [
-    {'tag': '#WorkLife', 'count': '1.2k', 'color': const Color(0xFF004ac6)},
-    {'tag': '#Regrets', 'count': '850', 'color': const Color(0xFF6750a4)},
-    {'tag': '#NightLife', 'count': '640', 'color': const Color(0xFF006874)},
-    {'tag': '#Relationships', 'count': '2.1k', 'color': const Color(0xFF9c4221)},
-    {'tag': '#Confessions', 'count': '980', 'color': const Color(0xFF1a6b3c)},
+  // Colors per category index
+  static const List<Color> _catColors = [
+    Color(0xFF004ac6), Color(0xFF6750a4), Color(0xFF006874),
+    Color(0xFF9c4221), Color(0xFF1a6b3c), Color(0xFF7a2f8a),
   ];
 
   @override
@@ -40,6 +41,7 @@ class _TrendingScreenState extends State<TrendingScreen>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _loadTrending();
+    _loadCategoryStats();
   }
 
   @override
@@ -55,6 +57,39 @@ class _TrendingScreenState extends State<TrendingScreen>
       if (mounted) setState(() { _trendingPosts = posts; _isLoading = false; });
     } catch (e) {
       if (mounted) setState(() { _error = 'Could not load trending posts.'; _isLoading = false; });
+    }
+  }
+
+  Future<void> _loadCategoryStats() async {
+    setState(() => _isCatsLoading = true);
+    try {
+      // Get all categories with post counts
+      final res = await supabase
+          .from('categories')
+          .select('id, name, icon')
+          .order('sort_order');
+      final cats = (res as List).cast<Map<String, dynamic>>();
+
+      // For each category get post count
+      final List<Map<String, dynamic>> stats = [];
+      for (final cat in cats) {
+        final countRes = await supabase
+            .from('posts')
+            .select('id', const FetchOptions(count: CountOption.exact))
+            .eq('category_id', cat['id'])
+            .eq('is_deleted', false);
+        final count = countRes.count ?? 0;
+        stats.add({
+          'id': cat['id'],
+          'name': cat['name'],
+          'count': count,
+        });
+      }
+      // Sort by count desc
+      stats.sort((a, b) => (b['count'] as int).compareTo(a['count'] as int));
+      if (mounted) setState(() { _categoryStats = stats; _isCatsLoading = false; });
+    } catch (_) {
+      if (mounted) setState(() => _isCatsLoading = false);
     }
   }
 
@@ -143,13 +178,23 @@ class _TrendingScreenState extends State<TrendingScreen>
           SliverToBoxAdapter(
             child: SizedBox(
               height: 130,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: _trendingTopics.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 12),
-                itemBuilder: (_, i) => _buildTopicCard(_trendingTopics[i]),
-              ),
+              child: _categoryStats.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: _categoryStats.length,
+                      separatorBuilder: (_, __) => const SizedBox(width: 12),
+                      itemBuilder: (_, i) {
+                        final cat = _categoryStats[i];
+                        final color = _catColors[i % _catColors.length];
+                        return _buildTopicCard(
+                          tag: '#${(cat['name'] as String).replaceAll(' ', '')}',
+                          count: cat['count'] as int,
+                          color: color,
+                        );
+                      },
+                    ),
             ),
           ),
 
@@ -226,31 +271,69 @@ class _TrendingScreenState extends State<TrendingScreen>
   }
 
   Widget _buildCategoriesTab() {
-    final categories = [
-      {'name': 'Confessions', 'icon': Icons.lock_outline, 'color': const Color(0xFF004ac6), 'posts': '12.4k'},
-      {'name': 'Rants', 'icon': Icons.bolt_outlined, 'color': const Color(0xFFe85d04), 'posts': '8.7k'},
-      {'name': 'Questions', 'icon': Icons.help_outline, 'color': const Color(0xFF6750a4), 'posts': '5.2k'},
-      {'name': 'Advice', 'icon': Icons.lightbulb_outline, 'color': const Color(0xFF1a6b3c), 'posts': '3.8k'},
-      {'name': 'Relationships', 'icon': Icons.favorite_outline, 'color': const Color(0xFFc2185b), 'posts': '9.1k'},
-      {'name': 'Work Life', 'icon': Icons.work_outline, 'color': const Color(0xFF006874), 'posts': '6.3k'},
-      {'name': 'Deep Thoughts', 'icon': Icons.psychology_outlined, 'color': const Color(0xFF37474f), 'posts': '4.5k'},
-      {'name': 'Random', 'icon': Icons.shuffle, 'color': const Color(0xFF9c4221), 'posts': '7.2k'},
-    ];
+    if (_isCatsLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (_categoryStats.isEmpty) {
+      return const Center(child: Text('No categories found.', style: TextStyle(color: _onSurfaceVariant)));
+    }
 
-    return GridView.builder(
-      padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 1.3,
+    return RefreshIndicator(
+      color: _primary,
+      onRefresh: _loadCategoryStats,
+      child: GridView.builder(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 1.3,
+        ),
+        itemCount: _categoryStats.length,
+        itemBuilder: (_, i) {
+          final cat = _categoryStats[i];
+          final color = _catColors[i % _catColors.length];
+          final count = cat['count'] as int;
+          String countStr;
+          if (count >= 1000) {
+            countStr = '${(count / 1000).toStringAsFixed(1)}k';
+          } else {
+            countStr = '$count';
+          }
+          return GestureDetector(
+            onTap: () {},
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 10)],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(Icons.tag, color: color, size: 22),
+                  ),
+                  const Spacer(),
+                  Text(cat['name'] as String,
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _onSurface)),
+                  const SizedBox(height: 2),
+                  Text('$countStr shares',
+                      style: const TextStyle(fontSize: 11, color: _onSurfaceVariant)),
+                ],
+              ),
+            ),
+          );
+        },
       ),
-      itemCount: categories.length,
-      itemBuilder: (_, i) {
-        final cat = categories[i];
-        final color = cat['color'] as Color;
-        return GestureDetector(
-          onTap: () {},
+    );
+  }
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -285,8 +368,10 @@ class _TrendingScreenState extends State<TrendingScreen>
     );
   }
 
-  Widget _buildTopicCard(Map<String, dynamic> topic) {
-    final color = topic['color'] as Color;
+  Widget _buildTopicCard({required String tag, required int count, required Color color}) {
+    String countStr = count >= 1000
+        ? '${(count / 1000).toStringAsFixed(1)}k'
+        : '$count';
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -295,7 +380,7 @@ class _TrendingScreenState extends State<TrendingScreen>
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [color, color.withOpacity(0.7)],
+            colors: [color, color.withValues(alpha: 0.7)],
           ),
           borderRadius: BorderRadius.circular(14),
         ),
@@ -304,11 +389,11 @@ class _TrendingScreenState extends State<TrendingScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(topic['tag'] as String,
+              Text(tag,
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
               const Spacer(),
-              Text('${topic['count']} shared today',
-                  style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.85))),
+              Text('$countStr shares',
+                  style: TextStyle(fontSize: 11, color: Colors.white.withValues(alpha: 0.85))),
             ],
           ),
         ),

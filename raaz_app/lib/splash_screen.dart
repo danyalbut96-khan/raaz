@@ -161,7 +161,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   child: FadeTransition(
                     opacity: _taglineOpacity,
                     child: Text(
-                      'Share Your Secrets. Stay Anonymous.',
+                      'Share Secrets Secretly & Anonymously.',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

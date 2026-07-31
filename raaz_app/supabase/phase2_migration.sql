@@ -114,3 +114,20 @@ create policy "app_config_read_all" on public.app_config
 insert into public.app_config (key, value)
 values ('app_version', 'v1.0.0')
 on conflict (key) do update set value = excluded.value;
+
+
+-- ─── 6. bug_reports ──────────────────────────────────────────
+create table if not exists public.bug_reports (
+  id          uuid primary key default gen_random_uuid(),
+  user_id     uuid references auth.users(id) on delete set null,
+  description text not null,
+  created_at  timestamptz default now()
+);
+
+alter table public.bug_reports enable row level security;
+
+create policy "bug_reports_insert_own" on public.bug_reports
+  for insert with check (auth.uid() = user_id or user_id is null);
+
+create policy "bug_reports_read_own" on public.bug_reports
+  for select using (auth.uid() = user_id);

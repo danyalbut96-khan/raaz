@@ -30,8 +30,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   List<CategoryModel> _categories = [];
   String? _draftId;
 
-  // PRD: 100–5000 chars
-  static const int _minChars = 100;
+  // PRD: max 5000 chars, no minimum
   static const int _maxChars = 5000;
 
 
@@ -137,18 +136,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.black),
-          onPressed: () {
-            _textController.clear();
-            _selectedCategoryId = null;
-            _selectedMood = null;
-            _draftId = _uuid.v4();
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
-          'Share a Secret',
+          'Share Secretly & Anonymously',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -156,7 +150,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
             child: ElevatedButton(
-              onPressed: _charCount >= _minChars && _selectedCategoryId != null && !_isPublishing
+              onPressed: _textController.text.trim().isNotEmpty && _selectedCategoryId != null && !_isPublishing
                   ? _publish
                   : null,
               style: ElevatedButton.styleFrom(

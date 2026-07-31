@@ -47,6 +47,17 @@ class PostModel {
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
+    // Supabase returns embedded counts as [{"count": N}] when using reactions(count)
+    int _parseCount(dynamic val) {
+      if (val == null) return 0;
+      if (val is int) return val;
+      if (val is List && val.isNotEmpty) {
+        final first = val.first;
+        if (first is Map) return (first['count'] as int?) ?? 0;
+      }
+      return 0;
+    }
+
     return PostModel(
       id: json['id'] as String,
       userId: json['user_id'] as String,
@@ -64,8 +75,10 @@ class PostModel {
       isDeleted: json['is_deleted'] as bool? ?? false,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
-      reactionCount: json['reaction_count'] as int? ?? 0,
-      commentCount: json['comment_count'] as int? ?? 0,
+      reactionCount: json['reaction_count'] as int?
+          ?? _parseCount(json['reactions']),
+      commentCount: json['comment_count'] as int?
+          ?? _parseCount(json['comments']),
       myReactionType: json['my_reaction_type'] as String?,
       isBookmarked: json['is_bookmarked'] as bool? ?? false,
     );
