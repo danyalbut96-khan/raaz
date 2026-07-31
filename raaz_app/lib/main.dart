@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'core/supabase_config.dart';
 import 'splash_screen.dart';
 import 'settings_screen.dart';
 import 'home_feed_screen.dart';
 import 'create_post_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: SupabaseConfig.projectUrl,
+    anonKey: SupabaseConfig.anonKey,
+  );
+
   runApp(const RaazApp());
 }
 
