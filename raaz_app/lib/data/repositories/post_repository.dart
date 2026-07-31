@@ -125,7 +125,7 @@ class PostRepository {
     bool allowSharing = true,
   }) async {
     final userId = supabase.auth.currentUser!.id;
-    final pseudonym = PseudonymGenerator.generate();
+    final pseudonym = await PseudonymGenerator.generate();
 
     final res = await supabase
         .from('posts')
