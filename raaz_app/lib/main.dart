@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'splash_screen.dart';
 import 'settings_screen.dart';
 import 'home_feed_screen.dart';
+import 'create_post_screen.dart';
 
 void main() {
   runApp(const RaazApp());
@@ -37,7 +38,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   static const List<Widget> _screens = <Widget>[
     HomeFeedScreen(),
     Center(child: Text('Explore (Coming Soon)')),
-    Center(child: Text('Post (Coming Soon)')),
+    CreatePostScreen(),
     Center(child: Text('Alerts (Coming Soon)')),
     SettingsScreen(),
   ];
