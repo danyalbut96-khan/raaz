@@ -75,14 +75,14 @@ class _TrendingScreenState extends State<TrendingScreen>
       for (final cat in cats) {
         final countRes = await supabase
             .from('posts')
-            .select('id', const FetchOptions(count: CountOption.exact))
+            .select('id')
             .eq('category_id', cat['id'])
             .eq('is_deleted', false);
-        final count = countRes.count ?? 0;
+//final count = countRes.count ?? 0;
         stats.add({
           'id': cat['id'],
           'name': cat['name'],
-          'count': count,
+          //'count': count,
         });
       }
       // Sort by count desc
@@ -332,39 +332,6 @@ class _TrendingScreenState extends State<TrendingScreen>
           );
         },
       ),
-    );
-  }
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: color.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(cat['icon'] as IconData, color: color, size: 22),
-                  ),
-                  const Spacer(),
-                  Text(cat['name'] as String,
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _onSurface)),
-                  const SizedBox(height: 2),
-                  Text('${cat['posts']} shares',
-                      style: const TextStyle(fontSize: 11, color: _onSurfaceVariant)),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 
