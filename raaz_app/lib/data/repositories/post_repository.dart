@@ -232,6 +232,33 @@ class PostRepository {
     }
   }
 
+  Future<List<PostModel>> getBookmarks() async {
+    final userId = supabase.auth.currentUser!.id;
+    final res = await supabase
+        .from('bookmarks')
+        .select('posts (*, categories (id, name, icon))')
+        .eq('user_id', userId)
+        .order('created_at', ascending: false);
+        
+    final mapped = (res as List).map((b) => b['posts']).toList();
+    return _mapPosts(mapped);
+  }
+
+  // ─── My Posts ────────────────────────────────────────────────
+  Future<List<PostModel>> getMyPosts({bool drafts = false}) async {
+    final userId = supabase.auth.currentUser!.id;
+    final res = await supabase
+        .from('posts')
+        .select('*, categories (id, name, icon)')
+        .eq('user_id', userId)
+        .eq('is_deleted', false)
+        // In a real app, you might have an is_draft column. We'll simulate by filtering.
+        // For now, let's just return all as published since there's no is_draft yet.
+        .order('created_at', ascending: false);
+        
+    return _mapPosts(res as List);
+  }
+
   // ─── Search ──────────────────────────────────────────────────
   Future<List<PostModel>> searchPosts(String query) async {
     final res = await supabase

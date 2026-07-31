@@ -299,7 +299,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text('Latest Shares', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                child: Text('Latest Shares', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF141B2B))),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 12)),
@@ -426,7 +426,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(post.pseudonym,
-                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF141B2B))),
                             Text(
                               '${timeago.format(post.createdAt)}${post.category != null ? ' • ${post.category!.name}' : ''}',
                               style: const TextStyle(fontSize: 11, color: Color(0xFF737686)),
@@ -441,7 +441,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                   Text(post.body,
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 15, height: 1.5)),
+                      style: const TextStyle(fontSize: 15, height: 1.5, color: Color(0xFF141B2B))),
                   if (post.mood != null) ...[
                     const SizedBox(height: 8),
                     Container(

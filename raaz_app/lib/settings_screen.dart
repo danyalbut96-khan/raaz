@@ -4,6 +4,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'core/pseudonym_generator.dart';
 import 'core/supabase_client.dart';
 import 'splash_screen.dart';
+import 'privacy_center_screen.dart';
+import 'active_shield_screen.dart';
+import 'appearance_screen.dart';
+import 'anonymous_profile_screen.dart';
+import 'my_posts_screen.dart';
+import 'bookmarks_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -187,97 +193,106 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Profile Header Section (Bento Style Intro)
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: surfaceContainerLowest,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 64,
-                        height: 64,
-                        decoration: BoxDecoration(
-                          color: secondaryContainer,
-                          shape: BoxShape.circle,
+            GestureDetector(
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AnonymousProfileScreen())),
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: surfaceContainerLowest,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.04),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 64,
+                          height: 64,
+                          decoration: BoxDecoration(
+                            color: secondaryContainer,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.account_circle, size: 32, color: Colors.white),
+                          ),
                         ),
-                        child: const Center(
-                          child: Icon(Icons.account_circle, size: 32, color: Colors.white),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    _isLoadingName ? 'Loading...' : _pseudonym,
-                                    style: TextStyle(
-                                      fontSize: 20, 
-                                      fontWeight: FontWeight.w600, 
-                                      color: onSurface,
-                                      overflow: TextOverflow.ellipsis,
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      _isLoadingName ? 'Loading...' : _pseudonym,
+                                      style: TextStyle(
+                                        fontSize: 20, 
+                                        fontWeight: FontWeight.w600, 
+                                        color: onSurface,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                if (!_isLoadingName)
-                                  IconButton(
-                                    icon: Icon(Icons.refresh, size: 20, color: primaryColor),
-                                    tooltip: 'Regenerate Pseudonym',
-                                    onPressed: _regeneratePseudonym,
-                                  ),
-                              ],
-                            ),
-                            Text(
-                              'Anonymous User',
-                              style: TextStyle(fontSize: 14, color: onSurfaceVariant),
-                            ),
-                          ],
+                                  if (!_isLoadingName)
+                                    IconButton(
+                                      icon: Icon(Icons.refresh, size: 20, color: primaryColor),
+                                      tooltip: 'Regenerate Pseudonym',
+                                      onPressed: _regeneratePseudonym,
+                                    ),
+                                ],
+                              ),
+                              Text(
+                                'Anonymous User',
+                                style: TextStyle(fontSize: 14, color: onSurfaceVariant),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Container(
+                      height: 4,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFdce2f7),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: FractionallySizedBox(
+                        alignment: Alignment.centerLeft,
+                        widthFactor: 0.75,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    height: 4,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFdce2f7),
-                      borderRadius: BorderRadius.circular(4),
                     ),
-                    child: FractionallySizedBox(
-                      alignment: Alignment.centerLeft,
-                      widthFactor: 0.75,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: primaryColor,
-                          borderRadius: BorderRadius.circular(4),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyCenterScreen())),
+                          child: Text('Privacy Level: High', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: onSurfaceVariant)),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ActiveShieldScreen())),
+                          child: Text('Active Shield', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: primaryColor)),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Privacy Level: High', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: onSurfaceVariant)),
-                      Text('Active Shield', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: primaryColor)),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             
@@ -296,11 +311,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               child: Column(
                 children: [
-                  _buildSettingItem(icon: Icons.palette_outlined, title: 'Theme', value: 'System default', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
+                  _buildSettingItem(
+                    icon: Icons.palette_outlined, title: 'Theme', value: 'System default', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AppearanceScreen())),
+                  ),
                   Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
                   _buildSettingItem(icon: Icons.language, title: 'Language', value: 'English (US)', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
                   Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
-                  _buildSettingItem(icon: Icons.lock_outline, title: 'Privacy', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
+                  _buildSettingItem(
+                    icon: Icons.lock_outline, title: 'Privacy', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyCenterScreen())),
+                  ),
+                ],
+              ),
+            ),
+            
+            const SizedBox(height: 24),
+
+            // Content & Activity
+            Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 8),
+              child: Text('Content & Activity', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: primaryColor)),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: surfaceContainerLowest,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+              ),
+              child: Column(
+                children: [
+                  _buildSettingItem(
+                    icon: Icons.article_outlined, title: 'My Posts', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const MyPostsScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.bookmark_border, title: 'Saved Posts', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BookmarksScreen())),
+                  ),
+
                 ],
               ),
             ),
