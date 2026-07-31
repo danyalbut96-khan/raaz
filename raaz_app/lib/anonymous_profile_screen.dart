@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'core/pseudonym_generator.dart';
-import 'data/models/post_model.dart';
 import 'data/repositories/post_repository.dart';
 
 class AnonymousProfileScreen extends StatefulWidget {

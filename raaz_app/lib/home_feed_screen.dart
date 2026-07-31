@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'skeleton_loading_screen.dart';
 import 'post_details_screen.dart';
-import 'create_post_screen.dart';
 import 'data/models/post_model.dart';
 import 'data/models/category_model.dart';
 import 'data/repositories/post_repository.dart';

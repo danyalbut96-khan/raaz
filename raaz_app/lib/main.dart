@@ -5,6 +5,8 @@ import 'splash_screen.dart';
 import 'settings_screen.dart';
 import 'home_feed_screen.dart';
 import 'create_post_screen.dart';
+import 'trending_screen.dart';
+import 'notifications_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,24 +84,32 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _screens = <Widget>[
-    HomeFeedScreen(),
-    Center(child: Text('Explore (Coming Soon)')),
-    CreatePostScreen(),
-    Center(child: Text('Alerts (Coming Soon)')),
-    SettingsScreen(),
-  ];
-
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    // Post tab (index 2) opens as a full-screen push so returning to the feed
+    // preserves the previously selected tab state via IndexedStack.
+    if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const CreatePostScreen()),
+      );
+      return;
+    }
+    setState(() => _selectedIndex = index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: const [
+          HomeFeedScreen(),
+          TrendingScreen(),
+          SizedBox.shrink(), // Post tab — opens via push, never shown inline
+          NotificationsScreen(),
+          SettingsScreen(),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onItemTapped,
@@ -107,12 +117,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home),
-            label: 'Feed',
+            label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.search_outlined),
-            selectedIcon: Icon(Icons.search),
-            label: 'Explore',
+            icon: Icon(Icons.trending_up_outlined),
+            selectedIcon: Icon(Icons.trending_up),
+            label: 'Trending',
           ),
           NavigationDestination(
             icon: Icon(Icons.add_circle_outline),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'core/pseudonym_generator.dart';
 import 'core/supabase_client.dart';
 import 'splash_screen.dart';
@@ -22,7 +21,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _pseudonym = 'Loading...';
   String _appVersion = 'v1.0.0';
   bool _isLoadingName = true;
-  bool _isLoadingVersion = true;
 
   @override
   void initState() {
@@ -57,11 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _loadAppVersion() async {
-    setState(() {
-      _isLoadingVersion = true;
-    });
     try {
-      // Fetch app version from database in real-time
       final response = await supabase
           .from('app_config')
           .select('value')
@@ -69,10 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           .maybeSingle();
       if (response != null && response['value'] != null) {
         if (mounted) {
-          setState(() {
-            _appVersion = response['value'] as String;
-            _isLoadingVersion = false;
-          });
+          setState(() => _appVersion = response['value'] as String);
         }
         return;
       }
@@ -80,10 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       // Fallback if table or key doesn't exist
     }
     if (mounted) {
-      setState(() {
-        _appVersion = 'v1.0.0';
-        _isLoadingVersion = false;
-      });
+      setState(() => _appVersion = 'v1.0.0');
     }
   }
 
