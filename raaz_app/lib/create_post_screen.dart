@@ -132,9 +132,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           icon: const Icon(Icons.close, color: Colors.black),
           onPressed: () {
             _textController.clear();
-            setState(() {
-              _selectedCategory = '';
-            });
+            _selectedCategoryId = null;
+            _selectedMood = null;
+            _draftId = _uuid.v4();
           },
         ),
         title: const Text(
@@ -149,7 +149,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
             child: ElevatedButton(
-              onPressed: _charCount > 0 && _selectedCategory.isNotEmpty ? () {} : null,
+              onPressed: _charCount >= _minChars && _selectedCategoryId != null && !_isPublishing
+                  ? _publish
+                  : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFd8e2ff),
                 foregroundColor: const Color(0xFF001a41),
@@ -227,27 +229,32 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               ),
               const SizedBox(height: 12),
               SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _categories.map((category) {
-                    bool isSelected = _selectedCategory == category;
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: ActionChip(
-                        label: Text(category),
-                        labelStyle: TextStyle(
-                          color: isSelected ? Colors.white : onSurfaceVariant,
-                          fontSize: 14,
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: _categories.map((cat) {
+                    bool isSelected = _selectedCategoryId == cat.id;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedCategoryId = cat.id;
+                          _selectedCategoryName = cat.name;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: isSelected ? const Color(0xFFd8e2ff) : const Color(0xFFe9edff),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        backgroundColor: isSelected ? primaryColor : surfaceContainerLowest,
-                        side: BorderSide(
-                          color: isSelected ? primaryColor : outlineVariant,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.tag, size: 16, color: isSelected ? primaryColor : onSurfaceVariant),
+                            const SizedBox(width: 6),
+                            Text(cat.name, style: TextStyle(fontSize: 14, color: isSelected ? primaryColor : onSurfaceVariant, fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal)),
+                          ],
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _selectedCategory = category;
-                          });
-                        },
                       ),
                     );
                   }).toList(),
