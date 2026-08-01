@@ -3,28 +3,11 @@ import { AuthProvider } from './contexts/AuthContext'
 import Layout from './components/Layout'
 import Login from './pages/Login'
 import Register from './pages/Register'
-
-function DashboardHome() {
-  return (
-    <div>
-      <h2 className="text-3xl font-bold text-on-surface mb-6">Dashboard Overview</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="glass-panel p-6 rounded-2xl border border-outline-variant shadow-sm">
-          <p className="text-on-surface-variant font-medium">Total Users</p>
-          <p className="text-4xl font-bold text-primary mt-2">1,248</p>
-        </div>
-        <div className="glass-panel p-6 rounded-2xl border border-outline-variant shadow-sm">
-          <p className="text-on-surface-variant font-medium">Active Posts</p>
-          <p className="text-4xl font-bold text-primary mt-2">8,432</p>
-        </div>
-        <div className="glass-panel p-6 rounded-2xl border border-outline-variant shadow-sm">
-          <p className="text-on-surface-variant font-medium">Reports Pending</p>
-          <p className="text-4xl font-bold text-red-500 mt-2">24</p>
-        </div>
-      </div>
-    </div>
-  )
-}
+import DashboardOverview from './pages/DashboardOverview'
+import PostsManagement from './pages/PostsManagement'
+import AppSettings from './pages/AppSettings'
+import CategoriesManagement from './pages/CategoriesManagement'
+import DailyChallenges from './pages/DailyChallenges'
 
 function App() {
   return (
@@ -35,7 +18,11 @@ function App() {
         
         {/* Protected Routes */}
         <Route path="/" element={<Layout />}>
-          <Route index element={<DashboardHome />} />
+          <Route index element={<DashboardOverview />} />
+          <Route path="posts" element={<PostsManagement />} />
+          <Route path="categories" element={<CategoriesManagement />} />
+          <Route path="challenges" element={<DailyChallenges />} />
+          <Route path="settings" element={<AppSettings />} />
         </Route>
       </Routes>
     </AuthProvider>

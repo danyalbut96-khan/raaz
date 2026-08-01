@@ -24,19 +24,27 @@ export default function Layout() {
         </div>
         
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto" id="side-nav">
-          <Link to="/" className="flex items-center space-x-3 px-4 py-3 rounded-xl bg-primary/10 text-primary font-medium">
+          <Link to="/" className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-black/5 text-on-surface transition-colors">
             <LayoutDashboard size={20} />
             <span>Dashboard</span>
           </Link>
-          <Link to="/" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/posts" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <FileText size={20} />
             <span>Posts</span>
+          </Link>
+          <Link to="/categories" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+            <span className="material-symbols-outlined text-lg">category</span>
+            <span>Categories</span>
+          </Link>
+          <Link to="/challenges" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+            <span className="material-symbols-outlined text-lg">assignment</span>
+            <span>Challenges</span>
           </Link>
           <Link to="/" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <Users size={20} />
             <span>Users</span>
           </Link>
-          <Link to="/" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/settings" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <Settings size={20} />
             <span>Settings</span>
           </Link>
