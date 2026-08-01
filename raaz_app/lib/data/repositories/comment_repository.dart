@@ -3,6 +3,37 @@ import '../../core/supabase_client.dart';
 import '../../core/pseudonym_generator.dart';
 
 class CommentRepository {
+  // ─── Get a single comment by ID ──────────────────────────────
+  Future<CommentModel?> getComment(String commentId) async {
+    try {
+      final userId = supabase.auth.currentUser?.id;
+      final res = await supabase
+          .from('comments')
+          .select('*')
+          .eq('id', commentId)
+          .maybeSingle();
+      if (res == null) return null;
+      final json = Map<String, dynamic>.from(res as Map);
+      
+      final likeCount = await _getLikeCount(commentId);
+      bool isLikedByMe = false;
+      if (userId != null) {
+        final liked = await supabase
+            .from('comment_likes')
+            .select('id')
+            .eq('comment_id', commentId)
+            .eq('user_id', userId)
+            .maybeSingle();
+        isLikedByMe = liked != null;
+      }
+      json['like_count'] = likeCount;
+      json['is_liked_by_me'] = isLikedByMe;
+      return CommentModel.fromJson(json);
+    } catch (_) {
+      return null;
+    }
+  }
+
   // ─── Get top-level comments for a post ───────────────────────
   Future<List<CommentModel>> getComments(String postId) async {
     final userId = supabase.auth.currentUser?.id;

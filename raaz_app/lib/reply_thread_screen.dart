@@ -34,8 +34,15 @@ class _ReplyThreadScreenState extends State<ReplyThreadScreen> {
 
   Future<void> _loadThread() async {
     try {
+      final parentComment = await _commentRepo.getComment(widget.parentCommentId);
       final replies = await _commentRepo.getReplies(widget.parentCommentId);
-      if (mounted) setState(() { _replies = replies; _isLoading = false; });
+      if (mounted) {
+        setState(() {
+          _rootComment = parentComment;
+          _replies = replies;
+          _isLoading = false;
+        });
+      }
     } catch (_) {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -104,6 +111,21 @@ class _ReplyThreadScreenState extends State<ReplyThreadScreen> {
                     child: ListView(
                       padding: const EdgeInsets.all(16),
                       children: [
+                        if (_rootComment != null) ...[
+                          _buildRootCommentCard(_rootComment!, primaryColor),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Text(
+                                'Replies (${_replies.length})',
+                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF434655)),
+                              ),
+                              const SizedBox(width: 8),
+                              const Expanded(child: Divider()),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                        ],
                         // Replies
                         ..._replies.asMap().entries.map((e) => _buildReplyCard(e.key, e.value, primaryColor)),
                         if (_replies.isEmpty)
@@ -232,4 +254,78 @@ class _ReplyThreadScreenState extends State<ReplyThreadScreen> {
       ),
     );
   }
+
+  Widget _buildRootCommentCard(CommentModel root, Color primaryColor) {
+    const Color rootNameColor = Color(0xFF004ac6);
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: primaryColor.withOpacity(0.15)),
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 36, height: 36,
+                decoration: BoxDecoration(color: rootNameColor.withOpacity(0.1), shape: BoxShape.circle),
+                child: const Icon(Icons.forum_outlined, size: 18, color: rootNameColor),
+              ),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(root.pseudonym,
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF141B2B))),
+                  const SizedBox(height: 2),
+                  Text(timeago.format(root.createdAt),
+                      style: const TextStyle(fontSize: 11, color: Color(0xFF737686))),
+                ],
+              ),
+              const Spacer(),
+              const Icon(Icons.push_pin_outlined, color: rootNameColor, size: 18),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(root.body, style: const TextStyle(fontSize: 16, height: 1.5, color: Color(0xFF141B2B))),
+          const SizedBox(height: 12),
+          GestureDetector(
+            onTap: () async {
+              try {
+                await _commentRepo.toggleCommentLike(root.id);
+                setState(() {
+                  _rootComment = root.copyWith(
+                    likeCount: root.isLikedByMe ? root.likeCount - 1 : root.likeCount + 1,
+                    isLikedByMe: !root.isLikedByMe,
+                  );
+                });
+              } catch (_) {}
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: root.isLikedByMe ? const Color(0xFFd8e2ff) : const Color(0xFFf1f3ff),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(root.isLikedByMe ? Icons.favorite : Icons.favorite_border,
+                      size: 14,
+                      color: root.isLikedByMe ? Colors.red : const Color(0xFF434655)),
+                  const SizedBox(width: 6),
+                  Text('${root.likeCount}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
+

@@ -66,7 +66,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
                 ],
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (_) => const ContinueAsGuestScreen()),
+                  );
+                },
                 child: Text(
                   'Skip',
                   style: TextStyle(
@@ -167,7 +171,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'An anonymous space built on trust. Share your thoughts, feelings, and secrets without revealing your identity.',
+                            'Share secrets secretly and anonymously. Built on absolute trust.',
                             style: TextStyle(
                               fontSize: 16,
                               height: 1.5,
@@ -191,15 +195,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
                           Container(width: 24, height: 8, decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(4))),
                           const SizedBox(width: 8),
                           Container(width: 8, height: 8, decoration: BoxDecoration(color: outlineVariant, borderRadius: BorderRadius.circular(4))),
-                          const SizedBox(width: 8),
-                          Container(width: 8, height: 8, decoration: BoxDecoration(color: outlineVariant, borderRadius: BorderRadius.circular(4))),
                         ],
                       ),
                       const SizedBox(height: 32),
                       Row(
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                             style: TextButton.styleFrom(
                               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                             ),

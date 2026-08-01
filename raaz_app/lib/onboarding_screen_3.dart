@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'continue_as_guest_screen.dart';
+import 'legal_screens.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   const OnboardingScreen3({super.key});
@@ -176,8 +177,6 @@ class OnboardingScreen3 extends StatelessWidget {
                         children: [
                           Container(width: 8, height: 8, decoration: BoxDecoration(color: outlineVariant, borderRadius: BorderRadius.circular(4))),
                           const SizedBox(width: 8),
-                          Container(width: 8, height: 8, decoration: BoxDecoration(color: outlineVariant, borderRadius: BorderRadius.circular(4))),
-                          const SizedBox(width: 8),
                           Container(width: 24, height: 8, decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(4))),
                         ],
                       ),
@@ -214,9 +213,17 @@ class OnboardingScreen3 extends StatelessWidget {
                           text: 'By continuing, you agree to our ',
                           style: const TextStyle(fontSize: 12, color: Color(0xFF737686)),
                           children: [
-                            TextSpan(
-                              text: 'Terms of Privacy',
-                              style: TextStyle(color: primaryColor, fontWeight: FontWeight.w500),
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()));
+                                },
+                                child: Text(
+                                  'Privacy Policy & Terms',
+                                  style: TextStyle(color: primaryColor, fontWeight: FontWeight.w500, fontSize: 12),
+                                ),
+                              ),
                             ),
                           ],
                         ),

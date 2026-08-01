@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart'; // To navigate to MainNavigationScreen
+import 'legal_screens.dart'; // For TermsOfServiceScreen and PrivacyPolicyScreen
 
 class ContinueAsGuestScreen extends StatefulWidget {
   const ContinueAsGuestScreen({super.key});
@@ -240,7 +241,7 @@ class _ContinueAsGuestScreenState extends State<ContinueAsGuestScreen> {
                           WidgetSpan(
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => const Scaffold(body: Center(child: Text('Terms of Service Page')))));
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => const TermsOfServiceScreen()));
                               },
                               child: Text('Terms of Service', style: TextStyle(color: primaryColor, fontWeight: FontWeight.w500)),
                             ),
@@ -249,7 +250,7 @@ class _ContinueAsGuestScreenState extends State<ContinueAsGuestScreen> {
                           WidgetSpan(
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => const Scaffold(body: Center(child: Text('Privacy Policy Page')))));
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()));
                               },
                               child: Text('Privacy Policy', style: TextStyle(color: primaryColor, fontWeight: FontWeight.w500)),
                             ),

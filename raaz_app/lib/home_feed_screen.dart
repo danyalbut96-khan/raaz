@@ -199,35 +199,37 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
 
     return Scaffold(
       backgroundColor: surfaceColor,
-      appBar: AppBar(
-        backgroundColor: surfaceColor.withOpacity(0.85),
-        elevation: 0,
-        title: Row(
-          children: [
-            Icon(Icons.security, color: primaryColor),
-            const SizedBox(width: 8),
-            Text('RAAZ',
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    color: primaryColor,
-                    letterSpacing: -0.5)),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications_none, color: onSurfaceVariant),
-            onPressed: () {},
-          ),
-          const SizedBox(width: 8),
-        ],
-      ),
       body: RefreshIndicator(
         color: primaryColor,
         onRefresh: () => _loadFeed(reset: true),
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
+            SliverAppBar(
+              floating: true,
+              snap: true,
+              backgroundColor: surfaceColor.withOpacity(0.85),
+              elevation: 0,
+              title: Row(
+                children: [
+                  Icon(Icons.security, color: primaryColor),
+                  const SizedBox(width: 8),
+                  Text('RAAZ',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: primaryColor,
+                          letterSpacing: -0.5)),
+                ],
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.notifications_none, color: onSurfaceVariant),
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
             // ── Category chips ────────────────────────────────
             SliverToBoxAdapter(
               child: SingleChildScrollView(
