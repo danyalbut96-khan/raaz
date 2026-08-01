@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'continue_as_guest_screen.dart';
-import 'main.dart';
 import 'onboarding_screen_3.dart';
 
 class OnboardingScreen extends StatefulWidget {

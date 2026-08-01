@@ -11,6 +11,18 @@ import 'my_posts_screen.dart';
 import 'bookmarks_screen.dart';
 import 'legal_screens.dart';
 import 'contact_us_screen.dart';
+import 'language_screen.dart';
+import 'notification_settings_screen.dart';
+import 'data_storage_screen.dart';
+import 'help_center_screen.dart';
+import 'about_screen.dart';
+import 'permissions_center_screen.dart';
+import 'community_guidelines_screen.dart';
+import 'achievements_screen.dart';
+import 'daily_challenge_screen.dart';
+import 'reported_posts_status_screen.dart';
+import 'rate_share_app_screen.dart';
+import 'admob_integration_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -172,7 +184,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.help_outline, color: onSurfaceVariant),
-            onPressed: () {},
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const HelpCenterScreen()),
+            ),
           ),
         ],
       ),
@@ -305,7 +320,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AppearanceScreen())),
                   ),
                   Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
-                  _buildSettingItem(icon: Icons.language, title: 'Language', value: 'English (US)', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant),
+                  _buildSettingItem(
+                    icon: Icons.language, title: 'Language', value: 'English (US)', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LanguageScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.notifications_outlined, title: 'Notifications', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const NotificationSettingsScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.storage_outlined, title: 'Data & Storage', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DataStorageScreen())),
+                  ),
                   Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
                   _buildSettingItem(
                     icon: Icons.lock_outline, title: 'Privacy', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
@@ -339,7 +367,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: Icons.bookmark_border, title: 'Saved Posts', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BookmarksScreen())),
                   ),
-
+                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.emoji_events_outlined, title: 'Achievements', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.local_fire_department_outlined, title: 'Daily Challenge', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DailyChallengeScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withOpacity(0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.flag_outlined, title: 'Reported Posts', color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ReportedPostsStatusScreen())),
+                  ),
                 ],
               ),
             ),
@@ -360,6 +402,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 children: [
                   _buildSettingItem(
+                    icon: Icons.help_outline, title: 'Help Center',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const HelpCenterScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.gavel_outlined, title: 'Community Guidelines',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CommunityGuidelinesScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.admin_panel_settings_outlined, title: 'Permissions',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PermissionsCenterScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
                     icon: Icons.description_outlined, title: 'Terms of Service',
                     color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TermsOfServiceScreen())),
@@ -378,6 +438,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
                   _buildSettingItem(
+                    icon: Icons.star_outline, title: 'Rate & Share',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RateShareAppScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
+                    icon: Icons.ad_units_outlined, title: 'Ad Preferences',
+                    color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdmobIntegrationScreen())),
+                  ),
+                  Divider(height: 1, color: outlineVariant.withValues(alpha: 0.3), indent: 16, endIndent: 16),
+                  _buildSettingItem(
                     icon: Icons.bug_report_outlined, title: 'Report a Bug',
                     color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
                     onTap: () => _showBugReport(context),
@@ -386,7 +458,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildSettingItem(
                     icon: Icons.info_outline, title: 'About RAAZ', value: _appVersion,
                     color: onSurface, onSurfaceVariant: onSurfaceVariant, outlineVariant: outlineVariant,
-                    onTap: _loadAppVersion,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutScreen())),
                   ),
                 ],
               ),

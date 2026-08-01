@@ -3,6 +3,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'data/models/post_model.dart';
 import 'data/repositories/post_repository.dart';
 import 'post_details_screen.dart';
+import 'draft_manager_screen.dart';
 
 class MyPostsScreen extends StatefulWidget {
   const MyPostsScreen({super.key});
@@ -203,8 +204,30 @@ class _MyPostsScreenState extends State<MyPostsScreen> with SingleTickerProvider
   }
 
   Widget _buildDraftsTab() {
-    return const Center(
-      child: Text('No drafts yet', style: TextStyle(color: _onSurfaceVariant)),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.edit_note, size: 48, color: _outlineVariant),
+          const SizedBox(height: 16),
+          const Text('Manage your saved drafts', style: TextStyle(color: _onSurfaceVariant)),
+          const SizedBox(height: 16),
+          ElevatedButton.icon(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const DraftManagerScreen()),
+            ),
+            icon: const Icon(Icons.folder_open),
+            label: const Text('Open Draft Manager'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _primary,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

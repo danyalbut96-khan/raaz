@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'main.dart'; // To navigate to MainNavigationScreen
+import 'main.dart';
+import 'services/auth_service.dart';
 import 'legal_screens.dart'; // For TermsOfServiceScreen and PrivacyPolicyScreen
 
 class ContinueAsGuestScreen extends StatefulWidget {
@@ -14,22 +15,25 @@ class ContinueAsGuestScreen extends StatefulWidget {
 class _ContinueAsGuestScreenState extends State<ContinueAsGuestScreen> {
   bool _isLoading = false;
 
-  void _handleContinue() {
-    setState(() {
-      _isLoading = true;
-    });
-    
-    // Simulate network delay for guest login
-    Future.delayed(const Duration(milliseconds: 1500), () async {
+  Future<void> _handleContinue() async {
+    setState(() => _isLoading = true);
+    try {
+      await AuthService.ensureSignedIn();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('onboarding_completed', true);
       if (mounted) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setBool('onboarding_completed', true);
-
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
         );
       }
-    });
+    } catch (_) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not connect. Please try again.')),
+        );
+      }
+    }
   }
 
   @override

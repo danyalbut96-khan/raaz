@@ -279,8 +279,9 @@ class PostRepository {
 
   // ─── Report ──────────────────────────────────────────────────
   Future<void> reportPost(String postId, String reason) async {
-    await supabase.from('reports').insert({
-      'reporter_id': supabase.auth.currentUser!.id,
+    final userId = supabase.auth.currentUser!.id;
+    await supabase.from('reported_posts').insert({
+      'reporter_id': userId,
       'post_id': postId,
       'reason': reason,
     });

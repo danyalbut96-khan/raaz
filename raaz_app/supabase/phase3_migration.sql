@@ -160,3 +160,9 @@ where not exists (
 
 -- ─── 9. Realtime (optional) ──────────────────────────────────
 alter publication supabase_realtime add table public.reported_posts;
+
+-- ─── 10. Maintenance mode config ─────────────────────────────
+insert into public.app_config (key, value) values
+  ('maintenance_mode', 'false'),
+  ('maintenance_message', 'We are performing scheduled maintenance to improve your experience.')
+on conflict (key) do nothing;

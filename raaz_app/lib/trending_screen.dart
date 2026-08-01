@@ -5,6 +5,8 @@ import 'data/repositories/post_repository.dart';
 import 'core/supabase_client.dart';
 import 'post_details_screen.dart';
 import 'create_post_screen.dart';
+import 'daily_challenge_screen.dart';
+import 'notifications_screen.dart';
 
 class TrendingScreen extends StatefulWidget {
   const TrendingScreen({super.key});
@@ -125,8 +127,19 @@ class _TrendingScreenState extends State<TrendingScreen>
         ),
         actions: [
           IconButton(
+            icon: const Icon(Icons.local_fire_department_outlined, color: _onSurfaceVariant),
+            tooltip: 'Daily Challenge',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const DailyChallengeScreen()),
+            ),
+          ),
+          IconButton(
             icon: const Icon(Icons.notifications_none_outlined, color: _onSurfaceVariant),
-            onPressed: () {},
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const NotificationsScreen()),
+            ),
           ),
           const SizedBox(width: 4),
         ],

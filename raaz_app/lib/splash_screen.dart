@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
-import 'onboarding_screen.dart'; // To navigate to OnboardingScreen
+import 'onboarding_screen.dart';
+import 'maintenance_mode_screen.dart';
+import 'services/auth_service.dart';
+import 'core/supabase_client.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -70,19 +73,38 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
     // Navigate to next screen after animations complete
     Future.delayed(const Duration(milliseconds: 3500), () async {
-      if (mounted) {
-        final prefs = await SharedPreferences.getInstance();
-        final bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
+      if (!mounted) return;
 
-        if (onboardingCompleted) {
+      try {
+        final maintenance = await supabase
+            .from('app_config')
+            .select('value')
+            .eq('key', 'maintenance_mode')
+            .maybeSingle();
+        if (maintenance?['value'] == 'true') {
+          if (mounted) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const MaintenanceModeScreen()),
+            );
+          }
+          return;
+        }
+      } catch (_) {}
+
+      final prefs = await SharedPreferences.getInstance();
+      final bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
+
+      if (onboardingCompleted) {
+        await AuthService.ensureSignedIn();
+        if (mounted) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
           );
-        } else {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => const OnboardingScreen()),
-          );
         }
+      } else if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const OnboardingScreen()),
+        );
       }
     });
   }

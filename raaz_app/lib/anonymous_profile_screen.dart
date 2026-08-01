@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'core/pseudonym_generator.dart';
 import 'core/supabase_client.dart';
 import 'data/repositories/post_repository.dart';
+import 'achievements_screen.dart';
 
 class AnonymousProfileScreen extends StatefulWidget {
   const AnonymousProfileScreen({super.key});
@@ -173,7 +174,27 @@ class _AnonymousProfileScreenState extends State<AnonymousProfileScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const AchievementsScreen()),
+                          ),
+                          icon: const Icon(Icons.emoji_events_outlined, color: _primary),
+                          label: const Text('View All Achievements', style: TextStyle(color: _primary)),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            side: const BorderSide(color: _primary),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
 
                     // Info card
                     Padding(

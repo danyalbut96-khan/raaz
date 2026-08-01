@@ -224,8 +224,18 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
               ),
               actions: [
                 IconButton(
+                  icon: Icon(Icons.search, color: onSurfaceVariant),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SearchScreen()),
+                  ),
+                ),
+                IconButton(
                   icon: Icon(Icons.notifications_none, color: onSurfaceVariant),
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const NotificationsScreen()),
+                  ),
                 ),
                 const SizedBox(width: 8),
               ],

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'data/models/post_model.dart';
-import 'data/repositories/post_repository.dart';
-import 'post_details_screen.dart';
+import 'search_results_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -13,13 +11,9 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final _searchController = TextEditingController();
-  final _postRepo = PostRepository();
   final FocusNode _focusNode = FocusNode();
 
   List<String> _recentSearches = [];
-  List<PostModel> _results = [];
-  bool _isSearching = false;
-  bool _hasSearched = false;
 
   static const Color _primary = Color(0xFF004ac6);
   static const Color _surface = Color(0xFFf9f9ff);
@@ -79,14 +73,12 @@ class _SearchScreenState extends State<SearchScreen> {
   Future<void> _performSearch(String query) async {
     if (query.trim().isEmpty) return;
     await _saveSearch(query.trim());
-    setState(() { _isSearching = true; _hasSearched = true; });
     _focusNode.unfocus();
-    try {
-      final results = await _postRepo.searchPosts(query.trim());
-      if (mounted) setState(() { _results = results; _isSearching = false; });
-    } catch (_) {
-      if (mounted) setState(() { _results = []; _isSearching = false; });
-    }
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => SearchResultsScreen(query: query.trim())),
+    );
   }
 
   @override
@@ -144,10 +136,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (_searchController.text.isNotEmpty)
                     IconButton(
                       icon: const Icon(Icons.close, size: 18, color: _onSurfaceVariant),
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() { _hasSearched = false; _results = []; });
-                      },
+                      onPressed: () => _searchController.clear(),
                     )
                   else
                     IconButton(
@@ -158,9 +147,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
           ),
-          Expanded(
-            child: _hasSearched ? _buildResults() : _buildDiscovery(),
-          ),
+          Expanded(child: _buildDiscovery()),
         ],
       ),
     );
@@ -323,99 +310,6 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildResults() {
-    if (_isSearching) {
-      return const Center(child: CircularProgressIndicator());
-    }
-    if (_results.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.search_off, size: 64, color: _outlineVariant),
-            const SizedBox(height: 16),
-            const Text('No secrets found', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: _onSurface)),
-            const SizedBox(height: 8),
-            Text('Try searching with different keywords',
-                style: const TextStyle(color: _onSurfaceVariant)),
-          ],
-        ),
-      );
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-          child: Text('${_results.length} results found',
-              style: const TextStyle(fontSize: 14, color: _onSurfaceVariant)),
-        ),
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: _results.length,
-            itemBuilder: (_, i) => _buildResultCard(_results[i]),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildResultCard(PostModel post) {
-    return GestureDetector(
-      onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (_) => PostDetailsScreen(postId: post.id))),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10)],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 30, height: 30,
-                  decoration: BoxDecoration(color: _primary.withOpacity(0.1), shape: BoxShape.circle),
-                  child: const Icon(Icons.security, size: 16, color: _primary),
-                ),
-                const SizedBox(width: 8),
-                Text(post.pseudonym,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _onSurface)),
-                if (post.category != null) ...[
-                  const SizedBox(width: 6),
-                  Text('• ${post.category!.name}',
-                      style: const TextStyle(fontSize: 12, color: _onSurfaceVariant)),
-                ],
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(post.body,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 14, height: 1.5, color: _onSurface)),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                const Icon(Icons.favorite_border, size: 14, color: _onSurfaceVariant),
-                const SizedBox(width: 4),
-                Text('${post.reactionCount}', style: const TextStyle(fontSize: 12, color: _onSurfaceVariant)),
-                const SizedBox(width: 12),
-                const Icon(Icons.chat_bubble_outline, size: 14, color: _onSurfaceVariant),
-                const SizedBox(width: 4),
-                Text('${post.commentCount}', style: const TextStyle(fontSize: 12, color: _onSurfaceVariant)),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }
