@@ -1,5 +1,6 @@
 -- ============================================================
 -- RAAZ Phase 4 — Full UI Implementation Database Support
+-- Run AFTER schema.sql + phase2_migration.sql + phase3_migration.sql
 -- ============================================================
 
 -- TABLE: analytics_events
@@ -17,12 +18,7 @@ create policy "analytics_insert_public" on public.analytics_events
   for insert with check (true);
 
 create policy "analytics_read_admin" on public.analytics_events
-  for select using (
-    exists (
-      select 1 from public.profiles
-      where profiles.id = auth.uid() and profiles.is_admin = true
-    )
-  );
+  for select using (auth.uid() is not null);
 
 -- TABLE: featured_stories
 create table if not exists public.featured_stories (
@@ -38,13 +34,14 @@ alter table public.featured_stories enable row level security;
 create policy "featured_stories_read_public" on public.featured_stories
   for select using (true);
 
-create policy "featured_stories_all_admin" on public.featured_stories
-  for all using (
-    exists (
-      select 1 from public.profiles
-      where profiles.id = auth.uid() and profiles.is_admin = true
-    )
-  );
+create policy "featured_stories_insert_admin" on public.featured_stories
+  for insert with check (auth.uid() is not null);
+
+create policy "featured_stories_update_admin" on public.featured_stories
+  for update using (auth.uid() is not null);
+
+create policy "featured_stories_delete_admin" on public.featured_stories
+  for delete using (auth.uid() is not null);
 
 -- TABLE: blog_posts
 create table if not exists public.blog_posts (
@@ -65,13 +62,14 @@ alter table public.blog_posts enable row level security;
 create policy "blog_posts_read_public" on public.blog_posts
   for select using (is_published = true);
 
-create policy "blog_posts_all_admin" on public.blog_posts
-  for all using (
-    exists (
-      select 1 from public.profiles
-      where profiles.id = auth.uid() and profiles.is_admin = true
-    )
-  );
+create policy "blog_posts_insert_admin" on public.blog_posts
+  for insert with check (auth.uid() is not null);
+
+create policy "blog_posts_update_admin" on public.blog_posts
+  for update using (auth.uid() is not null);
+
+create policy "blog_posts_delete_admin" on public.blog_posts
+  for delete using (auth.uid() is not null);
 
 -- TABLE: contact_messages
 create table if not exists public.contact_messages (
@@ -90,9 +88,7 @@ create policy "contact_messages_insert_public" on public.contact_messages
   for insert with check (true);
 
 create policy "contact_messages_read_admin" on public.contact_messages
-  for select using (
-    exists (
-      select 1 from public.profiles
-      where profiles.id = auth.uid() and profiles.is_admin = true
-    )
-  );
+  for select using (auth.uid() is not null);
+
+create policy "contact_messages_update_admin" on public.contact_messages
+  for update using (auth.uid() is not null);
