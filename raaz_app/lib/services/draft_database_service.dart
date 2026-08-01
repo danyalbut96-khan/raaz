@@ -1,6 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'dart:convert';
 
 /// Local SQLite storage for drafts only.
 /// PRD Section 10: Drafts are NEVER synced to Supabase until published.

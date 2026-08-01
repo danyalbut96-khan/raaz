@@ -97,7 +97,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _handleLogout() async {
-    final Color primaryColor = const Color(0xFF004ac6);
     showDialog(
       context: context,
       builder: (BuildContext context) {

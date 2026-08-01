@@ -1,7 +1,11 @@
 -- ============================================================
--- RAAZ Phase 2 — Additional Tables Migration
--- Run this in the Supabase SQL Editor
+-- RAAZ Phase 2 — Additional Tables Migration (IDEMPOTENT)
+-- Safe to run multiple times. Run in the Supabase SQL Editor.
 -- ============================================================
+
+-- ─── Helper: drop a policy safely ────────────────────────────
+-- (Postgres has no DROP POLICY IF EXISTS before v15, so we use DO blocks)
+
 
 -- ─── 1. notifications ────────────────────────────────────────
 create table if not exists public.notifications (
@@ -15,21 +19,31 @@ create table if not exists public.notifications (
   created_at timestamptz default now()
 );
 
--- RLS
 alter table public.notifications enable row level security;
 
-create policy "notifications_read_own" on public.notifications
-  for select using (auth.uid() = user_id);
+do $$ begin
+  create policy "notifications_read_own" on public.notifications
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "notifications_update_own" on public.notifications
-  for update using (auth.uid() = user_id);
+do $$ begin
+  create policy "notifications_update_own" on public.notifications
+    for update using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
--- Allow service role to insert notifications (e.g., from Edge Functions)
-create policy "notifications_insert_service" on public.notifications
-  for insert with check (true);
+do $$ begin
+  create policy "notifications_insert_service" on public.notifications
+    for insert with check (true);
+exception when duplicate_object then null;
+end $$;
 
--- Realtime
-alter publication supabase_realtime add table public.notifications;
+-- Realtime (safe to call multiple times)
+do $$ begin
+  alter publication supabase_realtime add table public.notifications;
+exception when others then null;
+end $$;
 
 
 -- ─── 2. user_settings ────────────────────────────────────────
@@ -46,14 +60,23 @@ create table if not exists public.user_settings (
 
 alter table public.user_settings enable row level security;
 
-create policy "user_settings_read_own" on public.user_settings
-  for select using (auth.uid() = user_id);
+do $$ begin
+  create policy "user_settings_read_own" on public.user_settings
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "user_settings_insert_own" on public.user_settings
-  for insert with check (auth.uid() = user_id);
+do $$ begin
+  create policy "user_settings_insert_own" on public.user_settings
+    for insert with check (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "user_settings_update_own" on public.user_settings
-  for update using (auth.uid() = user_id);
+do $$ begin
+  create policy "user_settings_update_own" on public.user_settings
+    for update using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
 
 -- ─── 3. profiles (anonymous reputation) ──────────────────────
@@ -66,17 +89,26 @@ create table if not exists public.profiles (
 
 alter table public.profiles enable row level security;
 
-create policy "profiles_read_all" on public.profiles
-  for select using (true);
+do $$ begin
+  create policy "profiles_read_all" on public.profiles
+    for select using (true);
+exception when duplicate_object then null;
+end $$;
 
-create policy "profiles_insert_own" on public.profiles
-  for insert with check (auth.uid() = user_id);
+do $$ begin
+  create policy "profiles_insert_own" on public.profiles
+    for insert with check (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "profiles_update_own" on public.profiles
-  for update using (auth.uid() = user_id);
+do $$ begin
+  create policy "profiles_update_own" on public.profiles
+    for update using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
 
--- ─── 4. Auto-create profile on new user sign-up ──────────────
+-- ─── 4. Auto-create profile & settings on new user sign-up ───
 create or replace function public.handle_new_user()
 returns trigger as $$
 begin
@@ -92,7 +124,6 @@ begin
 end;
 $$ language plpgsql security definer;
 
--- Drop existing trigger if present, then recreate
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
@@ -108,8 +139,11 @@ create table if not exists public.app_config (
 
 alter table public.app_config enable row level security;
 
-create policy "app_config_read_all" on public.app_config
-  for select using (true);
+do $$ begin
+  create policy "app_config_read_all" on public.app_config
+    for select using (true);
+exception when duplicate_object then null;
+end $$;
 
 insert into public.app_config (key, value)
 values ('app_version', 'v1.0.0')
@@ -126,8 +160,14 @@ create table if not exists public.bug_reports (
 
 alter table public.bug_reports enable row level security;
 
-create policy "bug_reports_insert_own" on public.bug_reports
-  for insert with check (auth.uid() = user_id or user_id is null);
+do $$ begin
+  create policy "bug_reports_insert_own" on public.bug_reports
+    for insert with check (auth.uid() = user_id or user_id is null);
+exception when duplicate_object then null;
+end $$;
 
-create policy "bug_reports_read_own" on public.bug_reports
-  for select using (auth.uid() = user_id);
+do $$ begin
+  create policy "bug_reports_read_own" on public.bug_reports
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;

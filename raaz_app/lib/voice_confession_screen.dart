@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class VoiceConfessionScreen extends StatefulWidget {
   const VoiceConfessionScreen({super.key});

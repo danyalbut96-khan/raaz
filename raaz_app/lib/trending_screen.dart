@@ -63,26 +63,26 @@ class _TrendingScreenState extends State<TrendingScreen>
   Future<void> _loadCategoryStats() async {
     setState(() => _isCatsLoading = true);
     try {
-      // Get all categories with post counts
+      // Get all categories
       final res = await supabase
           .from('categories')
-          .select('id, name, icon')
+          .select('id, name')
           .order('sort_order');
       final cats = (res as List).cast<Map<String, dynamic>>();
 
-      // For each category get post count
+      // For each category, count posts via separate query
       final List<Map<String, dynamic>> stats = [];
       for (final cat in cats) {
-        final countRes = await supabase
+        final postsRes = await supabase
             .from('posts')
             .select('id')
-            .eq('category_id', cat['id'])
+            .eq('category_id', cat['id'] as String)
             .eq('is_deleted', false);
-//final count = countRes.count ?? 0;
+        final count = (postsRes as List).length;
         stats.add({
           'id': cat['id'],
           'name': cat['name'],
-          //'count': count,
+          'count': count,
         });
       }
       // Sort by count desc
