@@ -8,6 +8,8 @@ import PostsManagement from './pages/PostsManagement'
 import AppSettings from './pages/AppSettings'
 import CategoriesManagement from './pages/CategoriesManagement'
 import DailyChallenges from './pages/DailyChallenges'
+import AdsManagement from './pages/AdsManagement'
+import PushNotifications from './pages/PushNotifications'
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="posts" element={<PostsManagement />} />
           <Route path="categories" element={<CategoriesManagement />} />
           <Route path="challenges" element={<DailyChallenges />} />
+          <Route path="ads" element={<AdsManagement />} />
+          <Route path="notifications" element={<PushNotifications />} />
           <Route path="settings" element={<AppSettings />} />
         </Route>
       </Routes>

@@ -40,14 +40,19 @@ export default function Layout() {
             <span className="material-symbols-outlined text-lg">assignment</span>
             <span>Challenges</span>
           </Link>
-          <Link to="/" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
-            <Users size={20} />
-            <span>Users</span>
+          <Link to="/ads" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+            <span className="material-symbols-outlined text-lg">campaign</span>
+            <span>Ads Manager</span>
+          </Link>
+          <Link to="/notifications" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+            <span className="material-symbols-outlined text-lg">notifications</span>
+            <span>Push Notifications</span>
           </Link>
           <Link to="/settings" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
-            <Settings size={20} />
+            <span className="material-symbols-outlined text-lg">settings</span>
             <span>Settings</span>
           </Link>
+
         </nav>
 
         <div className="p-4 border-t border-outline-variant">
