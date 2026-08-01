@@ -1,7 +1,7 @@
 import { Navigate, Outlet, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
-import { LogOut, LayoutDashboard, Settings, Users, FileText } from 'lucide-react'
+import { LogOut, LayoutDashboard, FileText } from 'lucide-react'
 
 export default function Layout() {
   const { user } = useAuth()
@@ -24,35 +24,42 @@ export default function Layout() {
         </div>
         
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto" id="side-nav">
-          <Link to="/" className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-black/5 text-on-surface transition-colors">
+          <Link to="/admin" className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-black/5 text-on-surface transition-colors">
             <LayoutDashboard size={20} />
             <span>Dashboard</span>
           </Link>
-          <Link to="/posts" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/admin/analytics" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+            <span className="material-symbols-outlined text-lg">trending_up</span>
+            <span>Analytics</span>
+          </Link>
+          <Link to="/admin/posts" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <FileText size={20} />
             <span>Posts</span>
           </Link>
-          <Link to="/categories" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/admin/featured-stories" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+            <span className="material-symbols-outlined text-lg">star</span>
+            <span>Featured Stories</span>
+          </Link>
+          <Link to="/admin/categories" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <span className="material-symbols-outlined text-lg">category</span>
             <span>Categories</span>
           </Link>
-          <Link to="/challenges" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/admin/challenges" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <span className="material-symbols-outlined text-lg">assignment</span>
             <span>Challenges</span>
           </Link>
-          <Link to="/ads" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/admin/ads" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <span className="material-symbols-outlined text-lg">campaign</span>
             <span>Ads Manager</span>
           </Link>
-          <Link to="/notifications" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/admin/notifications" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <span className="material-symbols-outlined text-lg">notifications</span>
             <span>Push Notifications</span>
           </Link>
-          <Link to="/settings" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+          <Link to="/admin/settings" className="flex items-center space-x-3 px-4 py-3 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <span className="material-symbols-outlined text-lg">settings</span>
             <span>Settings</span>
           </Link>
-
         </nav>
 
         <div className="p-4 border-t border-outline-variant">
