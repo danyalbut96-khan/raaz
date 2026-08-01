@@ -14,6 +14,10 @@ import PushNotifications from './pages/PushNotifications'
 import AnalyticsDashboard from './pages/AnalyticsDashboard'
 import FeaturedStoriesManagement from './pages/FeaturedStoriesManagement'
 
+import BugReports from './pages/BugReports'
+import ReportsManagement from './pages/ReportsManagement'
+import UsersManagement from './pages/UsersManagement'
+
 // Public Pages
 import LandingPage from './pages/LandingPage'
 import AboutUs from './pages/AboutUs'
@@ -60,6 +64,9 @@ function App() {
           <Route path="analytics" element={<AnalyticsDashboard />} />
           <Route path="posts" element={<PostsManagement />} />
           <Route path="featured-stories" element={<FeaturedStoriesManagement />} />
+          <Route path="users" element={<UsersManagement />} />
+          <Route path="reports" element={<ReportsManagement />} />
+          <Route path="bugs" element={<BugReports />} />
           <Route path="categories" element={<CategoriesManagement />} />
           <Route path="challenges" element={<DailyChallenges />} />
           <Route path="ads" element={<AdsManagement />} />
