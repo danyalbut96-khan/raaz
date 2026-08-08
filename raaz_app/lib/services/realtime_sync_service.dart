@@ -108,12 +108,12 @@ class RealtimeSyncService {
     const darwinDetails = DarwinNotificationDetails();
     const details = NotificationDetails(android: androidDetails, iOS: darwinDetails);
 
-    await _localNotifications.show(
-      DateTime.now().millisecond,
-      title,
-      body,
-      details,
-    );
+    // // await _localNotifications.show(
+    //   DateTime.now().millisecond,
+    //   title,
+    //   body,
+    //   details,
+    // );
   }
 
   void _forceMaintenanceMode(String message) {
