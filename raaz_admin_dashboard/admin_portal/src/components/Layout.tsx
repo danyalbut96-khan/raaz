@@ -79,6 +79,10 @@ export default function Layout() {
             <span className="material-symbols-outlined text-[18px]">notifications</span>
             <span className="text-sm">Push Notifications</span>
           </Link>
+          <Link to="/admin/blog" className="flex items-center space-x-3 px-4 py-2.5 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
+            <span className="material-symbols-outlined text-[18px]">article</span>
+            <span className="text-sm">Blog Posts</span>
+          </Link>
           <Link to="/admin/settings" className="flex items-center space-x-3 px-4 py-2.5 rounded-xl text-on-surface hover:bg-black/5 transition-colors">
             <span className="material-symbols-outlined text-[18px]">settings</span>
             <span className="text-sm">App Settings</span>

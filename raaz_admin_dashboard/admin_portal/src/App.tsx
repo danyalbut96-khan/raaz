@@ -13,6 +13,7 @@ import AdsManagement from './pages/AdsManagement'
 import PushNotifications from './pages/PushNotifications'
 import AnalyticsDashboard from './pages/AnalyticsDashboard'
 import FeaturedStoriesManagement from './pages/FeaturedStoriesManagement'
+import BlogManagement from './pages/BlogManagement'
 
 import BugReports from './pages/BugReports'
 import ReportsManagement from './pages/ReportsManagement'
@@ -71,6 +72,7 @@ function App() {
           <Route path="challenges" element={<DailyChallenges />} />
           <Route path="ads" element={<AdsManagement />} />
           <Route path="notifications" element={<PushNotifications />} />
+          <Route path="blog" element={<BlogManagement />} />
           <Route path="settings" element={<AppSettings />} />
         </Route>
       </Routes>
