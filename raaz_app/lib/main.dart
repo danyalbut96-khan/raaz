@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'core/supabase_config.dart';
 import 'splash_screen.dart';
 import 'settings_screen.dart';
@@ -7,6 +9,7 @@ import 'home_feed_screen.dart';
 import 'create_post_screen.dart';
 import 'trending_screen.dart';
 import 'notifications_screen.dart';
+import 'services/realtime_sync_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +18,13 @@ Future<void> main() async {
     url: SupabaseConfig.projectUrl,
     anonKey: SupabaseConfig.anonKey,
   );
+
+  // Initialize Ads and Realtime Sync
+  await MobileAds.instance.initialize();
+  await RealtimeSyncService().initialize();
+
+  // Request Notification Permissions
+  await Permission.notification.request();
 
   runApp(const RaazApp());
 }
@@ -25,6 +35,7 @@ class RaazApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: RealtimeSyncService().navigatorKey,
       title: 'RAAZ',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
