@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 export default function PushNotifications() {
   const [title, setTitle] = useState('')
@@ -11,15 +12,21 @@ export default function PushNotifications() {
     
     setSending(true)
     
-    // In a real implementation, this would insert a row into a 'notifications' table
-    // or trigger a Supabase Edge Function that calls FCM/APNs.
-    // For now, we simulate the delay.
-    setTimeout(() => {
-      setSending(false)
+    // Insert into global_notifications (Flutter app should listen to this table via Realtime)
+    const { error } = await supabase.from('global_notifications').insert({
+      title,
+      message
+    })
+
+    setSending(false)
+
+    if (error) {
+      alert(`Error sending notification: ${error.message}`)
+    } else {
       setTitle('')
       setMessage('')
-      alert('Push notification dispatched successfully!')
-    }, 1500)
+      alert('Push notification dispatched globally! All connected users will receive it instantly.')
+    }
   }
 
   return (

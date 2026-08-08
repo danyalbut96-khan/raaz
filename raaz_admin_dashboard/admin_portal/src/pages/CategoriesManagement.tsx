@@ -1,145 +1,176 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
+type Category = {
+  id: string
+  name: string
+  icon: string
+  sort_order: number
+  description: string
+  is_hidden: boolean
+  post_count?: number
+}
+
 export default function CategoriesManagement() {
-  const [categories, setCategories] = useState<any[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
-  const [isAdding, setIsAdding] = useState(false)
-  const [newCatName, setNewCatName] = useState('')
-  const [newCatDesc, setNewCatDesc] = useState('')
+  const [editingId, setEditingId] = useState<string | null>(null)
+  
+  // Edit Form State
+  const [editName, setEditName] = useState('')
+  const [editDesc, setEditDesc] = useState('')
+  const [editIcon, setEditIcon] = useState('')
+  const [editHidden, setEditHidden] = useState(false)
 
   useEffect(() => {
     fetchCategories()
+
+    const channel = supabase
+      .channel('categories_changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'categories' }, fetchCategories)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' }, fetchCategories) // refetch for post count updates
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
   }, [])
 
   async function fetchCategories() {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('categories')
-      .select('*')
-      .order('created_at', { ascending: false })
+    // Fetch categories
+    const { data: catData } = await supabase.from('categories').select('*').order('sort_order', { ascending: true })
+    
+    if (catData) {
+      // Fetch post counts per category
+      const { data: postData } = await supabase.from('posts').select('category_id')
       
-    if (!error && data) {
-      setCategories(data)
+      const counts: Record<string, number> = {}
+      postData?.forEach(p => {
+        if (p.category_id) counts[p.category_id] = (counts[p.category_id] || 0) + 1
+      })
+
+      const enriched = catData.map(c => ({
+        ...c,
+        post_count: counts[c.id] || 0
+      })) as Category[]
+      
+      setCategories(enriched)
     }
     setLoading(false)
   }
 
-  const handleAddCategory = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!newCatName) return
-
-    const { error } = await supabase
-      .from('categories')
-      .insert([{ 
-        name: newCatName, 
-        description: newCatDesc, 
-        is_active: true,
-        icon_url: 'forum' // Default icon
-      }])
-
-    if (!error) {
-      setNewCatName('')
-      setNewCatDesc('')
-      setIsAdding(false)
-      fetchCategories()
-    } else {
-      alert('Failed to add category: ' + error.message)
-    }
+  const startEdit = (cat: Category) => {
+    setEditingId(cat.id)
+    setEditName(cat.name)
+    setEditDesc(cat.description || '')
+    setEditIcon(cat.icon)
+    setEditHidden(cat.is_hidden || false)
   }
 
-  const toggleStatus = async (id: string, currentStatus: boolean) => {
-    const { error } = await supabase
-      .from('categories')
-      .update({ is_active: !currentStatus })
-      .eq('id', id)
-
-    if (!error) {
-      setCategories(categories.map(c => 
-        c.id === id ? { ...c, is_active: !currentStatus } : c
-      ))
-    }
+  const saveEdit = async () => {
+    if (!editingId) return
+    await supabase.from('categories').update({
+      name: editName,
+      description: editDesc,
+      icon: editIcon,
+      is_hidden: editHidden
+    }).eq('id', editingId)
+    
+    setEditingId(null)
+    fetchCategories()
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-on-surface">Categories Management</h2>
-          <p className="text-on-surface-variant mt-2">Manage confession categories and topics.</p>
+          <h2 className="text-3xl font-bold text-on-surface">Categories</h2>
+          <p className="text-on-surface-variant mt-1">Manage discussion spaces, their visibility, and descriptions.</p>
         </div>
-        <button 
-          onClick={() => setIsAdding(!isAdding)}
-          className="bg-primary text-white px-4 py-2 rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center shadow-sm"
-        >
-          <span className="material-symbols-outlined mr-2">{isAdding ? 'close' : 'add'}</span>
-          {isAdding ? 'Cancel' : 'Add Category'}
-        </button>
       </div>
 
-      {isAdding && (
-        <div className="glass-panel p-6 rounded-2xl border border-outline-variant shadow-sm mb-6 animate-in fade-in slide-in-from-top-4">
-          <h3 className="font-semibold text-lg mb-4">Create New Category</h3>
-          <form onSubmit={handleAddCategory} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-on-surface mb-1">Name</label>
-              <input 
-                required
-                value={newCatName}
-                onChange={e => setNewCatName(e.target.value)}
-                className="w-full rounded-xl border border-outline px-4 py-2 bg-surface focus:ring-2 focus:ring-primary focus:outline-none" 
-                placeholder="e.g. Work Life" 
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-on-surface mb-1">Description</label>
-              <input 
-                value={newCatDesc}
-                onChange={e => setNewCatDesc(e.target.value)}
-                className="w-full rounded-xl border border-outline px-4 py-2 bg-surface focus:ring-2 focus:ring-primary focus:outline-none" 
-                placeholder="e.g. Confessions from the office..." 
-              />
-            </div>
-            <button type="submit" className="bg-primary text-white px-6 py-2 rounded-xl font-medium hover:opacity-90">
-              Save Category
-            </button>
-          </form>
-        </div>
-      )}
+      <div className="glass-panel rounded-2xl border border-outline-variant shadow-sm overflow-hidden">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="bg-black/[0.03] border-b border-outline-variant/30 text-on-surface-variant text-sm">
+              <th className="p-4 font-semibold">Category</th>
+              <th className="p-4 font-semibold">Description</th>
+              <th className="p-4 font-semibold">Live Posts</th>
+              <th className="p-4 font-semibold">Visibility</th>
+              <th className="p-4 font-semibold text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading && categories.length === 0 ? (
+              <tr><td colSpan={5} className="p-10 text-center">Loading categories...</td></tr>
+            ) : categories.map(cat => (
+              <tr key={cat.id} className="border-b border-outline-variant/20 hover:bg-black/[0.02] transition-colors">
+                <td className="p-4">
+                  {editingId === cat.id ? (
+                    <div className="space-y-2">
+                      <input value={editName} onChange={e => setEditName(e.target.value)} className="border border-outline px-2 py-1 rounded text-sm w-full" placeholder="Name" />
+                      <input value={editIcon} onChange={e => setEditIcon(e.target.value)} className="border border-outline px-2 py-1 rounded text-sm w-full" placeholder="Icon (emoji)" />
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-xl">
+                        {cat.icon}
+                      </div>
+                      <span className="font-semibold text-on-surface">{cat.name}</span>
+                    </div>
+                  )}
+                </td>
+                
+                <td className="p-4 max-w-xs">
+                  {editingId === cat.id ? (
+                    <textarea value={editDesc} onChange={e => setEditDesc(e.target.value)} className="border border-outline px-2 py-1 rounded text-sm w-full" rows={2} placeholder="Description..." />
+                  ) : (
+                    <p className="text-sm text-on-surface-variant line-clamp-2">{cat.description || <span className="italic opacity-50">No description</span>}</p>
+                  )}
+                </td>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {loading ? (
-          <div className="col-span-full text-center p-8 text-on-surface-variant">Loading categories...</div>
-        ) : categories.length === 0 ? (
-          <div className="col-span-full text-center p-8 text-on-surface-variant">No categories found.</div>
-        ) : (
-          categories.map(category => (
-            <div key={category.id} className="glass-panel p-6 rounded-2xl border border-outline-variant shadow-sm flex flex-col">
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3">
-                    <span className="material-symbols-outlined">{category.icon_url || 'forum'}</span>
-                  </div>
-                  <h3 className="font-bold text-lg text-on-surface">{category.name}</h3>
-                </div>
-                <button 
-                  onClick={() => toggleStatus(category.id, category.is_active)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    category.is_active 
-                      ? 'bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-700' 
-                      : 'bg-red-100 text-red-700 hover:bg-green-100 hover:text-green-700'
-                  } transition-colors`}
-                >
-                  {category.is_active ? 'Active' : 'Hidden'}
-                </button>
-              </div>
-              <p className="text-on-surface-variant text-sm flex-1">{category.description || 'No description provided.'}</p>
-              <div className="mt-4 pt-4 border-t border-outline-variant/30 text-xs text-on-surface-variant flex justify-between">
-                <span>Created {new Date(category.created_at).toLocaleDateString()}</span>
-              </div>
-            </div>
-          ))
-        )}
+                <td className="p-4">
+                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
+                    {cat.post_count?.toLocaleString()}
+                  </span>
+                </td>
+
+                <td className="p-4">
+                  {editingId === cat.id ? (
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" checked={editHidden} onChange={e => setEditHidden(e.target.checked)} className="rounded" />
+                      <span className="text-sm">Hidden</span>
+                    </label>
+                  ) : (
+                    cat.is_hidden ? (
+                      <span className="flex items-center text-xs text-red-600 bg-red-50 px-2 py-1 rounded-full w-fit">
+                        <span className="material-symbols-outlined text-[14px] mr-1">visibility_off</span> Hidden
+                      </span>
+                    ) : (
+                      <span className="flex items-center text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full w-fit">
+                        <span className="material-symbols-outlined text-[14px] mr-1">visibility</span> Visible
+                      </span>
+                    )
+                  )}
+                </td>
+
+                <td className="p-4 text-right">
+                  {editingId === cat.id ? (
+                    <div className="flex justify-end gap-2">
+                      <button onClick={saveEdit} className="text-primary hover:bg-primary/10 p-2 rounded-lg"><span className="material-symbols-outlined">save</span></button>
+                      <button onClick={() => setEditingId(null)} className="text-on-surface-variant hover:bg-black/5 p-2 rounded-lg"><span className="material-symbols-outlined">close</span></button>
+                    </div>
+                  ) : (
+                    <button onClick={() => startEdit(cat)} className="text-on-surface-variant hover:text-primary p-2 rounded-lg transition-colors">
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   )
