@@ -30,7 +30,14 @@ CREATE POLICY "Admins can manage blog posts"
     USING (
         EXISTS (
             SELECT 1 FROM public.profiles
-            WHERE profiles.id = auth.uid()
+            WHERE profiles.user_id = auth.uid()
+            AND profiles.role = 'admin'
+        )
+    )
+    WITH CHECK (
+        EXISTS (
+            SELECT 1 FROM public.profiles
+            WHERE profiles.user_id = auth.uid()
             AND profiles.role = 'admin'
         )
     );

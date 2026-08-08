@@ -51,9 +51,9 @@ export default function LandingPage() {
 
     const fetchStats = async () => {
       const [{ count: users }, { count: posts }, { count: categories }] = await Promise.all([
-        supabase.from('profiles').select('*', { count: 'exact', head: true }),
-        supabase.from('posts').select('*', { count: 'exact', head: true }).eq('is_deleted', false),
-        supabase.from('categories').select('*', { count: 'exact', head: true }),
+        supabase.from('profiles').select('user_id', { count: 'exact', head: true }),
+        supabase.from('posts').select('id', { count: 'exact', head: true }).eq('is_deleted', false),
+        supabase.from('categories').select('id', { count: 'exact', head: true }),
       ])
       setStats({
         users: users ?? 0,
