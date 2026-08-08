@@ -68,7 +68,7 @@ class _TrendingScreenState extends State<TrendingScreen>
       // Get all categories
       final res = await supabase
           .from('categories')
-          .select('id, name')
+          .select('id, name, icon')
           .order('sort_order');
       final cats = (res as List).cast<Map<String, dynamic>>();
 
@@ -84,6 +84,7 @@ class _TrendingScreenState extends State<TrendingScreen>
         stats.add({
           'id': cat['id'],
           'name': cat['name'],
+          'icon': cat['icon'] ?? '📁',
           'count': count,
         });
       }
@@ -202,7 +203,7 @@ class _TrendingScreenState extends State<TrendingScreen>
                         final cat = _categoryStats[i];
                         final color = _catColors[i % _catColors.length];
                         return _buildTopicCard(
-                          tag: '#${(cat['name'] as String).replaceAll(' ', '')}',
+                          tag: '${cat['icon']} ${(cat['name'] as String)}',
                           count: cat['count'] as int,
                           color: color,
                         );
@@ -331,7 +332,7 @@ class _TrendingScreenState extends State<TrendingScreen>
                       color: color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(Icons.tag, color: color, size: 22),
+                    child: Text(cat['icon'] as String, style: const TextStyle(fontSize: 22)),
                   ),
                   const Spacer(),
                   Text(cat['name'] as String,

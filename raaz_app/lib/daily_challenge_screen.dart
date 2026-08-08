@@ -10,8 +10,10 @@ class DailyChallengeScreen extends StatefulWidget {
 
 class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
   final _supabase = Supabase.instance.client;
+  RealtimeChannel? _challengesChannel;
   bool _isLoading = true;
   List<Map<String, dynamic>> _challenges = [];
+  List<String> _completedTitles = [];
 
   static const Color _primary = Color(0xFF004ac6);
   static const Color _surface = Color(0xFFf9f9ff);
@@ -24,19 +26,54 @@ class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
   void initState() {
     super.initState();
     _loadChallenges();
+    _setupRealtime();
+  }
+
+  void _setupRealtime() {
+    _challengesChannel = _supabase.channel('public:daily_challenges').onPostgresChanges(
+      event: PostgresChangeEvent.all,
+      schema: 'public',
+      table: 'daily_challenges',
+      callback: (payload) => _loadChallenges(),
+    )
+    .onPostgresChanges(
+      event: PostgresChangeEvent.all,
+      schema: 'public',
+      table: 'user_challenges',
+      filter: PostgresChangeFilter(
+        type: PostgresChangeFilterType.eq,
+        column: 'user_id',
+        value: _supabase.auth.currentUser?.id ?? '',
+      ),
+      callback: (payload) => _loadChallenges(),
+    )
+    ..subscribe();
+  }
+
+  @override
+  void dispose() {
+    _challengesChannel?.unsubscribe();
+    super.dispose();
   }
 
   Future<void> _loadChallenges() async {
     try {
+      final userId = _supabase.auth.currentUser?.id;
       final data = await _supabase
           .from('daily_challenges')
           .select()
           .order('date', ascending: false)
-          .limit(5);
+          .limit(10);
       
+      final completedData = userId != null ? await _supabase
+          .from('user_challenges')
+          .select('challenge_title')
+          .eq('user_id', userId) : [];
+
       if (mounted) {
         setState(() {
           _challenges = List<Map<String, dynamic>>.from(data);
+          _completedTitles = (completedData as List).map((c) => c['challenge_title'] as String).toList();
           _isLoading = false;
         });
       }
@@ -49,6 +86,10 @@ class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int total = _challenges.length;
+    int completed = _challenges.where((c) => _completedTitles.contains(c['title'])).length;
+    double progress = total > 0 ? (completed / total) * 100 : 0;
+
     return Scaffold(
       backgroundColor: _surface,
       appBar: AppBar(
@@ -68,18 +109,26 @@ class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildProgressSection(),
+                  _buildProgressSection(completed, total, progress),
                   const SizedBox(height: 24),
                   _buildAchievementsStrip(),
                   const SizedBox(height: 24),
                   const Text('Active Challenges',
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: _onSurfaceVariant)),
                   const SizedBox(height: 16),
-                  _buildCompletedCard(),
-                  const SizedBox(height: 16),
-                  _buildActiveCard(),
-                  const SizedBox(height: 16),
-                  _buildUpcomingCard(),
+                  
+                  if (_challenges.isEmpty)
+                    const Center(child: Text('No daily challenges available.'))
+                  else
+                    ..._challenges.map((c) {
+                      final isCompleted = _completedTitles.contains(c['title']);
+                      if (isCompleted) {
+                        return _buildCompletedCard(c);
+                      } else {
+                        return _buildActiveCard(c);
+                      }
+                    }),
+                  
                   const SizedBox(height: 32),
                 ],
               ),
@@ -87,7 +136,7 @@ class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
     );
   }
 
-  Widget _buildProgressSection() {
+  Widget _buildProgressSection(int completed, int total, double progress) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -188,8 +237,9 @@ class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
     );
   }
 
-  Widget _buildCompletedCard() {
+  Widget _buildCompletedCard(Map<String, dynamic> challenge) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.8),
@@ -209,10 +259,10 @@ class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Share one positive memory', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: _onSurface)),
-                SizedBox(height: 2),
-                Text('Completed • 50 XP earned', style: TextStyle(fontSize: 13, color: _onSurfaceVariant)),
+              children: [
+                Text(challenge['title'] ?? '', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: _onSurface)),
+                const SizedBox(height: 2),
+                Text('Completed • ${challenge['xp_reward'] ?? 50} XP earned', style: const TextStyle(fontSize: 13, color: _onSurfaceVariant)),
               ],
             ),
           ),
@@ -222,11 +272,12 @@ class _DailyChallengeScreenState extends State<DailyChallengeScreen> {
     );
   }
 
-  Widget _buildActiveCard() {
-    final title = _challenges.isNotEmpty ? _challenges[0]['title'] : 'Confess something anonymously';
-    final desc = _challenges.isNotEmpty ? _challenges[0]['description'] : 'Let go of a secret that\'s been weighing on you. Your identity is 100% protected.';
+  Widget _buildActiveCard(Map<String, dynamic> challenge) {
+    final title = challenge['title'] ?? '';
+    final desc = challenge['description'] ?? '';
 
     return Container(
+      margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
