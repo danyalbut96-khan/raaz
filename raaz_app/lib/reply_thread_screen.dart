@@ -15,6 +15,7 @@ class ReplyThreadScreen extends StatefulWidget {
 class _ReplyThreadScreenState extends State<ReplyThreadScreen> {
   final _commentRepo = CommentRepository();
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
   CommentModel? _rootComment;
   List<CommentModel> _replies = [];
   bool _isLoading = true;
@@ -29,6 +30,7 @@ class _ReplyThreadScreenState extends State<ReplyThreadScreen> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -162,6 +164,7 @@ class _ReplyThreadScreenState extends State<ReplyThreadScreen> {
                         Expanded(
                           child: TextField(
                             controller: _controller,
+                            focusNode: _focusNode,
                             decoration: InputDecoration(
                               hintText: 'Add a reply...',
                               hintStyle: TextStyle(color: outlineVariant, fontSize: 14),
@@ -244,7 +247,15 @@ class _ReplyThreadScreenState extends State<ReplyThreadScreen> {
                       ]),
                     ),
                     const SizedBox(width: 16),
-                    Text('Reply', style: TextStyle(fontSize: 12, color: primaryColor, fontWeight: FontWeight.w500)),
+                    GestureDetector(
+                      onTap: () {
+                        _focusNode.requestFocus();
+                        _controller.text = '@${reply.pseudonym} ';
+                        _controller.selection = TextSelection.fromPosition(
+                            TextPosition(offset: _controller.text.length));
+                      },
+                      child: Text('Reply', style: TextStyle(fontSize: 12, color: primaryColor, fontWeight: FontWeight.w500)),
+                    ),
                   ]),
                 ],
               ),
