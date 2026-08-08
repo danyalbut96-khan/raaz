@@ -22,7 +22,7 @@ class RealtimeSyncService {
     const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
     const darwinInit = DarwinInitializationSettings();
     const initSettings = InitializationSettings(android: androidInit, iOS: darwinInit);
-    await _localNotifications.initialize(initSettings);
+    // await _localNotifications.initialize(initSettings);
 
     // Initial Fetch for config
     await _fetchInitialConfig();
