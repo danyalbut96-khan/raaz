@@ -15,7 +15,24 @@ export default function ReportsManagement() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'pending' | 'reviewed' | 'dismissed'>('all')
 
-  useEffect(() => { fetchReports() }, [filter])
+  useEffect(() => { 
+    fetchReports() 
+
+    const channel = supabase
+      .channel('reported_posts_changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'reported_posts' },
+        () => {
+          fetchReports()
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [filter])
 
   async function fetchReports() {
     setLoading(true)

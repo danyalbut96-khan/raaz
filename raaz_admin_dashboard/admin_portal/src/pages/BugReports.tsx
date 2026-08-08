@@ -17,7 +17,25 @@ export default function BugReports() {
   const [filter, setFilter] = useState<'all' | 'open' | 'resolved'>('all')
   const [selected, setSelected] = useState<BugReport | null>(null)
 
-  useEffect(() => { fetchReports() }, [filter])
+  useEffect(() => { 
+    fetchReports() 
+
+    // Real-time subscription
+    const channel = supabase
+      .channel('bug_reports_changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'bug_reports' },
+        () => {
+          fetchReports()
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [filter])
 
   async function fetchReports() {
     setLoading(true)

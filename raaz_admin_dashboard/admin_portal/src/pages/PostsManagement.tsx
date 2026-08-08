@@ -22,7 +22,24 @@ export default function PostsManagement() {
   const [page, setPage] = useState(0)
   const PAGE_SIZE = 20
 
-  useEffect(() => { fetchPosts() }, [page, filter])
+  useEffect(() => { 
+    fetchPosts() 
+
+    const channel = supabase
+      .channel('posts_changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'posts' },
+        () => {
+          fetchPosts()
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [page, filter])
 
   async function fetchPosts() {
     setLoading(true)

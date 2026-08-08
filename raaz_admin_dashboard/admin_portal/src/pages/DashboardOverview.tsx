@@ -42,8 +42,22 @@ export default function DashboardOverview() {
   const [recentReports, setRecentReports] = useState<RecentReport[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchAll()
+  useEffect(() => { 
+    fetchAll() 
+
+    const channel = supabase
+      .channel('dashboard_changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' }, () => fetchAll())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => fetchAll())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'reported_posts' }, () => fetchAll())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'bug_reports' }, () => fetchAll())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'comments' }, () => fetchAll())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'reactions' }, () => fetchAll())
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
   }, [])
 
   async function fetchAll() {
