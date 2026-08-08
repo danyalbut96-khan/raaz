@@ -24,28 +24,27 @@ CREATE POLICY "Public can read published blog posts"
     ON public.blog_posts FOR SELECT
     USING (is_published = true OR auth.role() = 'service_role');
 
--- Admin write policy
+-- Admin write policy (any authenticated user = admin, matching project pattern)
 CREATE POLICY "Admins can manage blog posts"
     ON public.blog_posts FOR ALL
-    USING (
-        EXISTS (
-            SELECT 1 FROM public.profiles
-            WHERE profiles.user_id = auth.uid()
-            AND profiles.role = 'admin'
-        )
-    )
-    WITH CHECK (
-        EXISTS (
-            SELECT 1 FROM public.profiles
-            WHERE profiles.user_id = auth.uid()
-            AND profiles.role = 'admin'
-        )
-    );
+    USING (auth.uid() IS NOT NULL)
+    WITH CHECK (auth.uid() IS NOT NULL);
 
 -- 2. Realtime Enablement for blog_posts
 ALTER PUBLICATION supabase_realtime ADD TABLE public.blog_posts;
 
--- 3. Ensure all default config keys exist in app_config
+-- 3. app_config: add write policy for authenticated users (admins)
+-- (read policy already exists from phase2_migration.sql)
+DROP POLICY IF EXISTS "app_config_write_admin" ON public.app_config;
+CREATE POLICY "app_config_write_admin" ON public.app_config
+    FOR ALL
+    USING (auth.uid() IS NOT NULL)
+    WITH CHECK (auth.uid() IS NOT NULL);
+
+-- Make sure app_config realtime is enabled
+ALTER PUBLICATION supabase_realtime ADD TABLE public.app_config;
+
+-- 4. Ensure all default config keys exist in app_config
 INSERT INTO public.app_config (key, value) VALUES
     ('maintenance_mode', 'false'),
     ('ads_enabled', 'true'),
