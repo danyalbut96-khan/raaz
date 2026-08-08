@@ -362,12 +362,26 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                                 )
                               : const SizedBox(height: 80);
                         }
-                        return _buildPostCard(
+                        
+                        final postCard = _buildPostCard(
                           _posts[i], i,
                           onSurfaceVariant: onSurfaceVariant,
                           outlineVariant: outlineVariant,
                           primaryColor: primaryColor,
                         );
+
+                        // Inject Ad logic
+                        final syncService = RealtimeSyncService();
+                        if (syncService.adsEnabled && i > 0 && i % syncService.adFrequency == 0) {
+                          return Column(
+                            children: [
+                              const BannerAdWidget(),
+                              postCard,
+                            ],
+                          );
+                        }
+
+                        return postCard;
                       },
                       childCount: _posts.length + 1,
                     ),
