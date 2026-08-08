@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'skeleton_loading_screen.dart';
 import 'post_details_screen.dart';
@@ -8,6 +9,9 @@ import 'data/models/post_model.dart';
 import 'data/models/category_model.dart';
 import 'data/repositories/post_repository.dart';
 import 'services/auth_service.dart';
+import 'services/realtime_sync_service.dart';
+import 'services/banner_ad_widget.dart';
+import 'core/supabase_client.dart';
 
 class HomeFeedScreen extends StatefulWidget {
   const HomeFeedScreen({super.key});
@@ -19,6 +23,7 @@ class HomeFeedScreen extends StatefulWidget {
 class _HomeFeedScreenState extends State<HomeFeedScreen> {
   final _postRepo = PostRepository();
   final _scrollController = ScrollController();
+  RealtimeChannel? _postsChannel;
 
   List<PostModel> _posts = [];
   List<PostModel> _featured = [];
@@ -37,10 +42,36 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
     super.initState();
     _init();
     _scrollController.addListener(_onScroll);
+    _setupRealtime();
+  }
+
+  void _setupRealtime() {
+    _postsChannel = supabase.channel('public:posts').onPostgresChanges(
+      event: PostgresChangeEvent.update,
+      schema: 'public',
+      table: 'posts',
+      callback: (payload) {
+        if (!mounted) return;
+        final updatedId = payload.newRecord['id'];
+        final reactionCount = payload.newRecord['reaction_count'] ?? 0;
+        final commentCount = payload.newRecord['comment_count'] ?? 0;
+        
+        setState(() {
+          final index = _posts.indexWhere((p) => p.id == updatedId);
+          if (index != -1) {
+            _posts[index] = _posts[index].copyWith(
+              reactionCount: reactionCount,
+              commentCount: commentCount,
+            );
+          }
+        });
+      },
+    )..subscribe();
   }
 
   @override
   void dispose() {
+    _postsChannel?.unsubscribe();
     _scrollController.dispose();
     super.dispose();
   }
